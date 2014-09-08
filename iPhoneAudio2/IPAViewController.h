@@ -1,0 +1,26 @@
+//
+//  IPAViewController.h
+//  iPhoneAudio2
+//
+//  Created by Chris on 22/02/2014.
+//  Copyright (c) 2014 ccr. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+@class AudioController;
+
+@interface IPAViewController : UIViewController
+
+@property (nonatomic, strong) AudioController *audioController;
+@property (nonatomic, strong) IBOutlet UISlider *osc1freq;
+@property (nonatomic, strong) IBOutlet UISlider *osc2freq;
+@property (nonatomic, strong) IBOutlet UISlider *oscBalance;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *osc1Wave;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *osc2Wave;
+
+@property (nonatomic, strong) IBOutlet UISlider *masterVolume;
+
+
+@property (nonatomic, strong) IBOutlet UISwitch *engineSwitch;
+
+@end
