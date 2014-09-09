@@ -14,25 +14,21 @@
 typedef enum Waveform {
     Sin,
     Saw,
-    Square
+    Square,
 } Waveform;
 
 @interface oscillator : NSObject
 
-
 @property float freq;
-@property (nonatomic) double fund;
-//@property (readonly) double ff;
-
 @property float amp;
 
-@property Waveform waveform;
+@property (readonly) Waveform waveform;
 
 -(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform;
--(void)retrigger;
--(void)incrementPhase:(float)phaseIncrement;
+-(void)setWaveform:(Waveform)waveform;
 -(void)avoidOverflow;
--(double)getPhase:(int)harmonic;
--(int)harmonics;
+-(SInt16) getNextSampleAndIncrementPhaseBy:(float)increment ;
+-(void)incrementPhase:(float)phaseIncrement;
+
 
 @end

@@ -30,10 +30,11 @@
     
 	// Do any additional setup after loading the view.
     self.audioController = [[AudioController alloc] init];
-    [self.audioController initializeComponents];
 
     [self.audioController initializeAUGraph];
-    //[self.audioController startAUGraph];
+    [self.audioController startAUGraph];
+    
+    _controller.delegate = self;
     
     [self updateParameters:nil];
     
@@ -57,19 +58,14 @@
 }
 
 -(IBAction)updateParameters:(id)sender {
+       
+    if (sender == self.osc1Wave || !sender) {
+        [_audioController.osc1 setWaveform:(Waveform)_osc1Wave.selectedSegmentIndex];
+    }
     
-    float freq1 = 220.0 + (440.0 * self.osc1freq.value);
-    float freq2 = 220.0 + (440.0 * self.osc2freq.value);
-    [_audioController.osc1 setFreq:freq1];
-    [_audioController.osc2 setFreq:freq2];
     
-    [_audioController.osc1 setWaveform:(Waveform)_osc1Wave.selectedSegmentIndex];
     [_audioController.osc2 setWaveform:(Waveform)_osc2Wave.selectedSegmentIndex];
     
-    //float amp1 = 1 - self.oscBalance.value;
-    //float amp2 = self.oscBalance.value;
-    //[_audioController.osc1 setAmp:amp1];
-    //[_audioController.osc2 setAmp:amp2];
     [_audioController setMixerInputChannel:0 toLevel:1.0 - self.oscBalance.value];
     [_audioController setMixerInputChannel:1 toLevel:self.oscBalance.value];
     
@@ -87,6 +83,16 @@
     
         [_audioController stopAUGraph];
     }
+}
+
+#pragma mark ControllerViewDelegates
+
+-(void)noteOff {
+    [_audioController noteOff];
+}
+
+-(void)noteOn:(float)frequency {
+    [_audioController noteOn:frequency];
 }
 
 @end

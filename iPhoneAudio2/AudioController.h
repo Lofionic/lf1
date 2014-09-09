@@ -11,6 +11,7 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import "CAStreamBasicDescription.h"
 #import "oscillator.h"
+#import "analog_oscillator.h"
 
 @interface AudioController : NSObject {
 
@@ -30,11 +31,13 @@
 @property oscillator *osc2;
 
 -(void)initializeAUGraph;
--(void)initializeComponents;
 -(void)startAUGraph;
 -(void)stopAUGraph;
 
 -(void)setMixerInputChannel:(int)channel toLevel:(float)level;
 -(void)setMixerOutputLevel:(float)level;
+
+-(void)noteOn:(float)frequency;
+-(void)noteOff;
 
 @end

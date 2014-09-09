@@ -7,19 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "controllerView.h"
+
 @class AudioController;
 
-@interface IPAViewController : UIViewController
+@interface IPAViewController : UIViewController <ControllerViewDelegate>
 
 @property (nonatomic, strong) AudioController *audioController;
-@property (nonatomic, strong) IBOutlet UISlider *osc1freq;
-@property (nonatomic, strong) IBOutlet UISlider *osc2freq;
 @property (nonatomic, strong) IBOutlet UISlider *oscBalance;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc1Wave;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc2Wave;
 
 @property (nonatomic, strong) IBOutlet UISlider *masterVolume;
 
+@property (nonatomic, strong) IBOutlet controllerView *controller;
 
 @property (nonatomic, strong) IBOutlet UISwitch *engineSwitch;
 

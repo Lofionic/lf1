@@ -21,8 +21,6 @@ const Float64 kGraphSampleRate = 44100.0;
     OSStatus result = AUGraphIsRunning(mGraph, &isRunning);
     
     if (!isRunning) {
-        [_osc1 retrigger];
-        [_osc2 retrigger];
         result = AUGraphStart(mGraph);
         
         // Print the result
@@ -49,81 +47,25 @@ static OSStatus renderOsc(void *inRefCon, AudioUnitRenderActionFlags *ioActionFl
 {
     // Renders Oscillator object that has been passed in inRefCon
     
+    // Get the oscillator from inRefCon
     oscillator *osc = (__bridge oscillator*)inRefCon;
     
+     // phaseIncrement is the amount the phase changes in a single sample
+    float phaseIncrement = M_PI * osc.freq / kGraphSampleRate;
+    
+    // outA is a pointer to the buffer that will be filled
     AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
     
-    float freq = osc.freq;
-    
-    // phaseIncrement is the amount the phase changes in a single sample
-    float phaseIncrement = M_PI * freq / kGraphSampleRate;
-
     // Fill the Output buffer
     for (UInt32 i = 0; i < inNumberFrames; ++i) {
-        
- 
-        
-        switch (osc.waveform) {
-            case Sin:
-                outA[i] = calculateSin(osc);
-                break;
-            case Saw:
-                outA[i] = calculateSaw(osc);
-                break;
-            case Square:
-                outA[i] = calculateSquare(osc);
-                break;
-            default:
-                break;
-        }
-        
-        osc.fund += phaseIncrement;
-        if (osc.fund >= M_PI * 2.0) {
-            osc.fund -= (M_PI * 2.0);
-        }
- 
-        [osc incrementPhase:phaseIncrement];
-        
-     }
+        outA[i] = [osc getNextSampleAndIncrementPhaseBy:phaseIncrement];
+    }
 
-    //[osc avoidOverflow];
+    // Prevent oscillator overflow
+    [osc avoidOverflow];
     
     return noErr;
-    
 }
-
-SInt16 calculateSin(oscillator* osc) {
-    return (SInt16)(sin([osc getPhase:0]) * 32767.0f * 1.0f);
-}
-
-SInt16 calculateSaw(oscillator * osc) {
-    
-    SInt16 result = 0;
-    float amp = 0.5f;
-    
-    for (int i = 0; i < [osc harmonics]; i++) {
-        result += (SInt16)(sin([osc getPhase:i]) * 32767.0f * amp);
-        amp /= 2.0;
-    }
-    
-    return result;
-}
-
-SInt16 calculateSquare(oscillator * osc) {
-    
-    long result = 0;
-    float count = 0;
-    
-    for (int i = 0; i < [osc harmonics]; i += 2) {
-        result += (SInt16)(sin([osc getPhase:i]) * 32767.0f);
-        count ++;
-    }
-    
-    result /= count;
-    
-    return (SInt16)result;
-}
-
 
 /*
 OSStatus RenderTone(
@@ -168,6 +110,11 @@ OSStatus RenderTone(
 */
 
 -(void)initializeAUGraph {
+    
+    // Create components
+    self.osc1 = [[oscillator alloc] initWithFrequency:440 withWaveform:Saw];
+    self.osc2 = [[oscillator alloc] initWithFrequency:880 withWaveform:Sin];
+    
     // Error checking result
     OSStatus result = noErr;
     
@@ -260,7 +207,7 @@ OSStatus RenderTone(
         desc.mFramesPerPacket = 1;
         desc.mBytesPerFrame = (desc.mBitsPerChannel / 8) * desc.mChannelsPerFrame;
         desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
-        
+  
         // Apply the modified AudioStreamBasicDescription to the mixer input bus
         result = AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, i, &desc, sizeof(desc));
     }
@@ -285,11 +232,6 @@ OSStatus RenderTone(
     result = AUGraphInitialize(mGraph);
 }
 
--(void)initializeComponents {
-    self.osc1 = [[oscillator alloc] initWithFrequency:440 withWaveform:Saw];
-    self.osc2 = [[oscillator alloc] initWithFrequency:880 withWaveform:Sin];
-}
-
 -(void)setMixerInputChannel:(int)channel toLevel:(float)level {
 
     AudioUnitSetParameter(mMixer, kMultiChannelMixerParam_Volume, kAudioUnitScope_Input, channel, level, 0);
@@ -300,6 +242,19 @@ OSStatus RenderTone(
     
     AudioUnitSetParameter(mMixer, kMultiChannelMixerParam_Volume, kAudioUnitScope_Output, 0, level, 0);
     
+}
+
+-(void)noteOn:(float)frequency {
+    [_osc1 setFreq:frequency];
+    [_osc2 setFreq:frequency / 2.0];
+    
+    [_osc1 setAmp:1.0];
+    [_osc2 setAmp:1.0];
+}
+
+-(void)noteOff {
+    [_osc1 setAmp:0.0];
+    [_osc2 setAmp:0.0];
 }
 
 

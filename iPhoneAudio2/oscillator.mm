@@ -10,64 +10,88 @@
 
 @implementation oscillator
 {
-    double phase[10];
+    Waveform nextWaveform;
+    double phase;
+    bool prevResultPositive;
+    
+    SInt16 prevResult;
 }
 
-const int harmonics = 5;
+const int harmonics = 1;
 
 -(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform {
     
     if (self = [super init]) {
         self.freq = freq;
-        self.amp = 1;
+        self.amp = 0;
 
-        self.fund = 0;
-        self.waveform = waveform;
+        _waveform = waveform;
+        nextWaveform = waveform;
         
-        for (int x = 0; x < harmonics; x++) {
-            phase[x] = 0;
-        }
-        
+        phase = 0;
      }
     
     return self;
 }
 
--(void)retrigger {
-    
-    //self.phase = 0.0;
-    
+-(void)setWaveform:(Waveform)waveform {
+    nextWaveform = waveform;
 }
 
--(void)incrementPhase:(float)phaseIncrement {
+-(SInt16) getNextSampleAndIncrementPhaseBy:(float)increment {
+
+    SInt16 result = [self getNextSample];
     
-    for (int x = 0; x < harmonics; x++) {
-        phase[x] += (phaseIncrement * (x + 1));
-        if (phase[x] >= M_PI * 2.0) {
-            phase[x] -= (M_PI * 2.0);
+    [self incrementPhase:increment];
+    
+    // Change waveform on zero crossover
+    if ((result > 0) != prevResultPositive || result == 0) {
+        if (_waveform != nextWaveform) {
+            _waveform = nextWaveform;
+            phase = 0;
         }
     }
 
+    prevResultPositive = result > 0;
+    return result;
+}
+
+-(SInt16) getNextSample {
+    
+    switch (_waveform) {
+        case Sin:
+            // Sin generator
+            return (SInt16)(sin(phase) * 32767.0f * _amp);
+            break;
+        case Saw: {
+            double modPhase = fmod(phase, M_PI * 2.0);
+            return (SInt16)((modPhase / M_PI - 0.5f) * 32767.0 * _amp);
+        }
+            break;
+        case Square: {
+            if (sin(phase) > 0.5) {
+                return _amp * 32767.0f;
+            } else {
+                return -_amp * 32767.0f;
+            }
+        }
+            break;
+        default:
+            return 0;
+    }
+}
+
+
+-(void)incrementPhase:(float)phaseIncrement {
+    for (int x = 0; x < harmonics; x++) {
+        phase += (phaseIncrement * (x + 1));
+    }
 }
 
 -(void)avoidOverflow {
-    
-    for (int x = 0; x < harmonics; x++) {
-        
-        if (phase[x] >= M_PI * 2.0) {
-            phase[x] -= (M_PI * 2.0);
-        }
+    if (phase >= M_PI * 2.0) {
+        phase -= (M_PI * 2.0);
     }
-
-}
-
-
--(double)getPhase:(int)harmonic {
-    return phase[harmonic];
-}
-
--(int)harmonics {
-    return harmonics;
 }
 
 @end
