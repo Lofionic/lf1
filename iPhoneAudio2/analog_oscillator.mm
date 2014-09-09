@@ -27,10 +27,12 @@
 
 -(SInt16) getNextSample {
     
+    float env = [self getEnvelopePoint];
+    
     switch ([self waveform]) {
         case Sin:
             // Sin generator
-            return (SInt16)(sin(phase[0]) * 32767.0f * [self amp]);
+            return (SInt16)(sin(phase[0]) * 32767.0f * [self amp] * env);
             break;
         case Saw: {
             
@@ -41,7 +43,7 @@
                 result += sin(phase[i]) * amp;
                 amp /= 2.0;
             }
-            return (SInt16)(result * 32767.0f * [self amp]);
+            return (SInt16)(result * 32767.0f * [self amp] * env);
         }
             break;
         case Square: {
@@ -56,7 +58,7 @@
             }
             
             sum /= count;
-            return (SInt16)(sum * 32767.0f * [self amp]);
+            return (SInt16)(sum * 32767.0f * [self amp] * env);
             
         }
             break;

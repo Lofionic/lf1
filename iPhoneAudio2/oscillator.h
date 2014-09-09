@@ -29,8 +29,8 @@ typedef enum Waveform {
 -(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform;
 -(void)setWaveform:(Waveform)waveform;
 -(void)avoidOverflow;
--(SInt16) getNextSampleAndIncrementPhaseBy:(float)increment ;
--(void)incrementPhase:(float)phaseIncrement;
-
+-(SInt16) getNextSampleForSampleRate:(Float64)sampleRate;
+-(void)trigger;
+-(float)getEnvelopePoint;
 
 @end

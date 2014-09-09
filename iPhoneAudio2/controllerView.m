@@ -52,7 +52,7 @@
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self touchesBegan:touches withEvent:event];
+    //[self touchesBegan:touches withEvent:event];
 }
 
 /*

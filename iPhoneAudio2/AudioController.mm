@@ -49,16 +49,13 @@ static OSStatus renderOsc(void *inRefCon, AudioUnitRenderActionFlags *ioActionFl
     
     // Get the oscillator from inRefCon
     oscillator *osc = (__bridge oscillator*)inRefCon;
-    
-     // phaseIncrement is the amount the phase changes in a single sample
-    float phaseIncrement = M_PI * osc.freq / kGraphSampleRate;
-    
+        
     // outA is a pointer to the buffer that will be filled
     AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
     
     // Fill the Output buffer
     for (UInt32 i = 0; i < inNumberFrames; ++i) {
-        outA[i] = [osc getNextSampleAndIncrementPhaseBy:phaseIncrement];
+        outA[i] = [osc getNextSampleForSampleRate:kGraphSampleRate];
     }
 
     // Prevent oscillator overflow
@@ -112,8 +109,8 @@ OSStatus RenderTone(
 -(void)initializeAUGraph {
     
     // Create components
-    self.osc1 = [[analog_oscillator alloc] initWithFrequency:440 withWaveform:Saw];
-    self.osc2 = [[analog_oscillator alloc] initWithFrequency:880 withWaveform:Sin];
+    self.osc1 = [[oscillator alloc] initWithFrequency:440 withWaveform:Saw];
+    self.osc2 = [[oscillator alloc] initWithFrequency:880 withWaveform:Sin];
     
     // Error checking result
     OSStatus result = noErr;
@@ -140,10 +137,6 @@ OSStatus RenderTone(
     output_desc.componentFlags = 0;
     output_desc.componentFlagsMask = 0;
     output_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
-    
-    // Setup envelope component description
-    AudioComponentDescription cust_desc;
-    cust_desc.componentType = kAudioUnitType_RemoteEffect;
     
     // Add nodes to the graph to hold our AudioUnits
     result = AUGraphAddNode(mGraph, &mixer_desc, &mixerNode);
@@ -250,6 +243,9 @@ OSStatus RenderTone(
     
     [_osc1 setAmp:1.0];
     [_osc2 setAmp:1.0];
+    
+    [_osc1 trigger];
+    [_osc2 trigger];
 }
 
 -(void)noteOff {
