@@ -112,8 +112,8 @@ OSStatus RenderTone(
 -(void)initializeAUGraph {
     
     // Create components
-    self.osc1 = [[oscillator alloc] initWithFrequency:440 withWaveform:Saw];
-    self.osc2 = [[oscillator alloc] initWithFrequency:880 withWaveform:Sin];
+    self.osc1 = [[analog_oscillator alloc] initWithFrequency:440 withWaveform:Saw];
+    self.osc2 = [[analog_oscillator alloc] initWithFrequency:880 withWaveform:Sin];
     
     // Error checking result
     OSStatus result = noErr;

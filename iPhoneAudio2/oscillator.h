@@ -15,6 +15,8 @@ typedef enum Waveform {
     Sin,
     Saw,
     Square,
+    AnalogSaw,
+    AnalogSquare
 } Waveform;
 
 @interface oscillator : NSObject

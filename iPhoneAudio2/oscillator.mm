@@ -76,6 +76,7 @@ const int harmonics = 1;
             }
         }
             break;
+            
         default:
             return 0;
     }
