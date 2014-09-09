@@ -104,6 +104,7 @@ const int harmonics = 1;
 
 -(void)trigger {
     // Trigger envelope from start
+    phase = 0;
     envelopePosition = 0;
     envelopeTriggered = true;
 }
