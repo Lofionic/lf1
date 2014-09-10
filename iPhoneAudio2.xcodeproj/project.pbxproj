@@ -10,6 +10,9 @@
 		6C863E5919BF1D170056D43D /* analog_oscillator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* analog_oscillator.mm */; };
 		6C863E5C19BF30B60056D43D /* controllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* controllerView.m */; };
 		6C983BCA19BBAA2C005543D8 /* IPAView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C983BC919BBAA2C005543D8 /* IPAView.xib */; };
+		6CE06BB519C0ABFB005AB92F /* CCRRotaryControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE06BB419C0ABFB005AB92F /* CCRRotaryControl.m */; };
+		6CE06BB919C0ADB8005AB92F /* cog.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE06BB719C0ADB8005AB92F /* cog.png */; };
+		6CE06BBA19C0ADB8005AB92F /* cog highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE06BB819C0ADB8005AB92F /* cog highlight.png */; };
 		834FA80618B95FA800923F29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80518B95FA800923F29 /* Foundation.framework */; };
 		834FA80818B95FA800923F29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80718B95FA800923F29 /* CoreGraphics.framework */; };
 		834FA80A18B95FA800923F29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80918B95FA800923F29 /* UIKit.framework */; };
@@ -46,6 +49,10 @@
 		6C863E5A19BF30B60056D43D /* controllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controllerView.h; sourceTree = "<group>"; };
 		6C863E5B19BF30B60056D43D /* controllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = controllerView.m; sourceTree = "<group>"; };
 		6C983BC919BBAA2C005543D8 /* IPAView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPAView.xib; sourceTree = "<group>"; };
+		6CE06BB319C0ABFB005AB92F /* CCRRotaryControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRRotaryControl.h; path = ../CCRRotaryControl.h; sourceTree = "<group>"; };
+		6CE06BB419C0ABFB005AB92F /* CCRRotaryControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRRotaryControl.m; path = ../CCRRotaryControl.m; sourceTree = "<group>"; };
+		6CE06BB719C0ADB8005AB92F /* cog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cog.png; sourceTree = "<group>"; };
+		6CE06BB819C0ADB8005AB92F /* cog highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cog highlight.png"; sourceTree = "<group>"; };
 		834FA80218B95FA800923F29 /* iPhoneAudio2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneAudio2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834FA80518B95FA800923F29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		834FA80718B95FA800923F29 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -104,6 +111,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6CE06BB619C0AD9E005AB92F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6CE06BB719C0ADB8005AB92F /* cog.png */,
+				6CE06BB819C0ADB8005AB92F /* cog highlight.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		834FA7F918B95FA800923F29 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +155,9 @@
 		834FA80B18B95FA800923F29 /* iPhoneAudio2 */ = {
 			isa = PBXGroup;
 			children = (
+				6CE06BB619C0AD9E005AB92F /* Resources */,
+				6CE06BB319C0ABFB005AB92F /* CCRRotaryControl.h */,
+				6CE06BB419C0ABFB005AB92F /* CCRRotaryControl.m */,
 				834FA81418B95FA800923F29 /* IPAAppDelegate.h */,
 				834FA81518B95FA800923F29 /* IPAAppDelegate.m */,
 				834FA81718B95FA800923F29 /* Images.xcassets */,
@@ -275,6 +294,8 @@
 				834FA81018B95FA800923F29 /* InfoPlist.strings in Resources */,
 				834FA81818B95FA800923F29 /* Images.xcassets in Resources */,
 				6C983BCA19BBAA2C005543D8 /* IPAView.xib in Resources */,
+				6CE06BBA19C0ADB8005AB92F /* cog highlight.png in Resources */,
+				6CE06BB919C0ADB8005AB92F /* cog.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +318,7 @@
 				834FA81618B95FA800923F29 /* IPAAppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* controllerView.m in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
+				6CE06BB519C0ABFB005AB92F /* CCRRotaryControl.m in Sources */,
 				83AFC397192ABB8E00851413 /* oscillator.mm in Sources */,
 				834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */,
 				6C863E5919BF1D170056D43D /* analog_oscillator.mm in Sources */,
@@ -423,7 +445,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPhoneAudio2/iPhoneAudio2-Prefix.pch";
 				INFOPLIST_FILE = "iPhoneAudio2/iPhoneAudio2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -437,7 +461,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iPhoneAudio2/iPhoneAudio2-Prefix.pch";
 				INFOPLIST_FILE = "iPhoneAudio2/iPhoneAudio2-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

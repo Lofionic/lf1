@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "controllerView.h"
+#import "CCRRotaryControl.h"
 
 @class AudioController;
 
 @interface IPAViewController : UIViewController <ControllerViewDelegate>
 
 @property (nonatomic, strong) AudioController *audioController;
-@property (nonatomic, strong) IBOutlet UISlider *oscBalance;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *osc1Vol;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *osc2Vol;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc1Wave;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc2Wave;
 
-@property (nonatomic, strong) IBOutlet UISlider *masterVolume;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *masterVolume;
 
 @property (nonatomic, strong) IBOutlet controllerView *controller;
 
