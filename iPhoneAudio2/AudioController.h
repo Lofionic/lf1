@@ -12,8 +12,9 @@
 #import "CAStreamBasicDescription.h"
 #import "oscillator.h"
 #import "analog_oscillator.h"
+#import "OscillatorControlView.h"
 
-@interface AudioController : NSObject {
+@interface AudioController : NSObject <OscillatorViewDelegate> {
 
     AUGraph mGraph;
     AudioUnit mMixer;
@@ -26,9 +27,6 @@
 }
 
 @property bool IsRunning;
-
-@property oscillator *osc1;
-@property oscillator *osc2;
 
 -(void)initializeAUGraph;
 -(void)startAUGraph;

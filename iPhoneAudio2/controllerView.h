@@ -12,6 +12,7 @@
 
 @protocol ControllerViewDelegate <NSObject>
 
+@optional
 -(void)noteOn:(float)frequency;
 -(void)noteOff;
 

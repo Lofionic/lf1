@@ -10,7 +10,13 @@
 
 const Float64 kGraphSampleRate = 44100.0;
 
-@implementation AudioController
+@implementation AudioController {
+    
+    NSArray *oscillators;
+    float noteFreq;
+    float osc2Freq;
+    
+}
 
 -(void)startAUGraph {
     
@@ -109,8 +115,13 @@ OSStatus RenderTone(
 -(void)initializeAUGraph {
     
     // Create components
-    self.osc1 = [[oscillator alloc] initWithFrequency:440 withWaveform:Saw];
-    self.osc2 = [[oscillator alloc] initWithFrequency:880 withWaveform:Sin];
+    
+    oscillators = @[
+                   [[oscillator alloc] initWithFrequency:440 withWaveform:Sin],
+                   [[oscillator alloc] initWithFrequency:440 withWaveform:Sin]
+                   ];
+
+    osc2Freq = 1.0f;
     
     // Error checking result
     OSStatus result = noErr;
@@ -173,10 +184,10 @@ OSStatus RenderTone(
         
         switch (i) {
             case 0:
-                renderCallbackStruct.inputProcRefCon = (__bridge void*)self.osc1;
+                renderCallbackStruct.inputProcRefCon = (__bridge void*)oscillators[0];
                 break;
             case 1:
-                renderCallbackStruct.inputProcRefCon = (__bridge void*)self.osc2;
+                renderCallbackStruct.inputProcRefCon = (__bridge void*)oscillators[1];
                 break;
             default:
                 break;
@@ -238,20 +249,36 @@ OSStatus RenderTone(
 }
 
 -(void)noteOn:(float)frequency {
-    [_osc1 setFreq:frequency];
-    [_osc2 setFreq:frequency / 2.0];
     
-    [_osc1 setAmp:1.0];
-    [_osc2 setAmp:1.0];
+    noteFreq = frequency;
     
-    [_osc1 trigger];
-    [_osc2 trigger];
+    [oscillators[0] setFreq:noteFreq];
+    [oscillators[1] setFreq:noteFreq * osc2Freq];
+    
+    [oscillators[0] setAmp:1.0];
+    [oscillators[1] setAmp:1.0];
+    
+    [oscillators[0] trigger];
+    [oscillators[1] trigger];
 }
 
 -(void)noteOff {
-    [_osc1 setAmp:0.0];
-    [_osc2 setAmp:0.0];
+    [oscillators[0] setAmp:0.0];
+    [oscillators[1] setAmp:0.0];
 }
 
+// ControllerProtocols
+-(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId VolumeChangedTo:(float)value {
+    [self setMixerInputChannel:oscillatorId toLevel:value];
+}
+
+-(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId FreqChangedTo:(float)value {
+    osc2Freq = value;
+    [oscillators[1] setFreq:noteFreq * osc2Freq];
+}
+
+-(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value {
+    [oscillators[oscillatorId] setWaveform:(Waveform)value];
+}
 
 @end

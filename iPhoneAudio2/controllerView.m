@@ -33,12 +33,15 @@
         CGPoint touchLocation = [touch locationInView:self];
         CGFloat touchNormalized = touchLocation.x / self.bounds.size.width;
         
-        NSInteger key = floor(touchNormalized * 13);
-                
-        float frequency = 220.0 + ((key / 12.0) * 660.0);
+        NSInteger key = floor(touchNormalized * 25);
+
+        float frequency = (powf(powf(2, (1.0 / 12.0)), key)) * 220.0;
+        
+        NSLog(@"Key %i Freq %.2f", key, frequency);
         
         [_delegate noteOn:frequency];
     }
+    
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {

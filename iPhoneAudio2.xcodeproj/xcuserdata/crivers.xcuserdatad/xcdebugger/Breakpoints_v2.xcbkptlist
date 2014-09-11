@@ -9,29 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CCRRotaryControl.m"
-            timestampString = "432058673.694555"
+            filePath = "iPhoneAudio2/AudioController.mm"
+            timestampString = "432128928.604646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
-            landmarkName = "-doubleTap:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CCRRotaryControl.m"
-            timestampString = "432058673.694555"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
-            landmarkName = "-doubleTap:"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-oscillatorControlView:oscillator:FreqChangedTo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

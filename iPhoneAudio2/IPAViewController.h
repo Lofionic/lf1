@@ -9,21 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "controllerView.h"
 #import "CCRRotaryControl.h"
+#import "OscillatorControlView.h"
 
 @class AudioController;
 
 @interface IPAViewController : UIViewController <ControllerViewDelegate>
 
 @property (nonatomic, strong) AudioController *audioController;
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *osc1Vol;
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *osc2Vol;
-@property (nonatomic, strong) IBOutlet UISegmentedControl *osc1Wave;
-@property (nonatomic, strong) IBOutlet UISegmentedControl *osc2Wave;
 
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *masterVolume;
+// Parameter controls
 
 @property (nonatomic, strong) IBOutlet controllerView *controller;
 
-@property (nonatomic, strong) IBOutlet UISwitch *engineSwitch;
+@property (nonatomic, strong) OscillatorControlView *oscView;
+@property (nonatomic, strong) IBOutlet UIView *controlsView;
 
 @end
