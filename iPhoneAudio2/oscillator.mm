@@ -110,6 +110,7 @@ const int harmonics = 1;
 }
 
 -(float)getEnvelopePoint {
+
     // Return the current value of the envelope
     if (envelopePosition < 10.0) {
         return envelopePosition / 10.0;

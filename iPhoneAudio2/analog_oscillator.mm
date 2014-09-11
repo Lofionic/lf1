@@ -11,13 +11,13 @@
 @implementation analog_oscillator {
 
     int harmonics;
-    double phase[10];
+    double phase[20];
 }
 
 -(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform {
     self = [super initWithFrequency:freq withWaveform:waveform];
     if (self) {
-        harmonics = 10;
+        harmonics = 15;
         for (int x = 0; x < harmonics; x++) {
             phase[x] = 0;
         }
@@ -65,6 +65,15 @@
         default:
             return 0;
     }
+}
+
+-(void)trigger {
+    for (int x = 0; x < harmonics; x++) {
+        phase[x] = 0;
+    }
+    
+    
+    [super trigger];
 }
 
 -(void)incrementPhase:(float)phaseIncrement {

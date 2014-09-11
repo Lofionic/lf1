@@ -42,7 +42,7 @@
     NSInteger tag = control.tag;
     
     if (_delegate) {
-        [_delegate oscillatorControlView:self oscillator:tag VolumeChangedTo:control.value];
+        [_delegate oscillatorControlView:self oscillator:(int)tag VolumeChangedTo:control.value];
     }
 }
 
@@ -51,17 +51,11 @@
         CCRRotaryControl *control = (CCRRotaryControl*)sender;
         NSInteger tag = control.tag;
         
-        float inValue = control.value;
+        float inValue = (control.value * 2.0) - 1.0;
         
-        inValue = (control.value * 2.0) - 1.0;
+        float outValue = (powf(powf(2, (1.0 / 12.0)), inValue * 7));
         
-        float frequency = (powf(powf(2, (1.0 / 12.0)), inValue * 7));
-        
-        float outValue = frequency;
-        
-        NSLog(@"In: %.5f Out: %.5f", inValue, outValue);
-        
-        [_delegate oscillatorControlView:self oscillator:tag FreqChangedTo:outValue];
+        [_delegate oscillatorControlView:self oscillator:(int)tag FreqChangedTo:outValue];
     }
 }
 
@@ -70,7 +64,7 @@
     NSInteger tag = control.tag;
     
     if (_delegate) {
-        [_delegate oscillatorControlView:self oscillator:tag WaveformChangedTo:control.selectedSegmentIndex];
+        [_delegate oscillatorControlView:self oscillator:(int)tag WaveformChangedTo:(int)control.selectedSegmentIndex];
     }
 }
 

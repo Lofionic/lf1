@@ -49,7 +49,7 @@ const Float64 kGraphSampleRate = 44100.0;
 }
 
 // the render callback procedure
-static OSStatus renderOsc(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
+static OSStatus renderOscillator(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
 {
     // Renders Oscillator object that has been passed in inRefCon
     
@@ -118,7 +118,7 @@ OSStatus RenderTone(
     
     oscillators = @[
                    [[oscillator alloc] initWithFrequency:440 withWaveform:Sin],
-                   [[oscillator alloc] initWithFrequency:440 withWaveform:Sin]
+                   [[oscillator  alloc] initWithFrequency:440 withWaveform:Sin]
                    ];
 
     osc2Freq = 1.0f;
@@ -180,7 +180,7 @@ OSStatus RenderTone(
         
         // Setup render callback struct
         AURenderCallbackStruct renderCallbackStruct;
-        renderCallbackStruct.inputProc = &renderOsc;
+        renderCallbackStruct.inputProc = &renderOscillator;
         
         switch (i) {
             case 0:
@@ -253,7 +253,7 @@ OSStatus RenderTone(
     noteFreq = frequency;
     
     [oscillators[0] setFreq:noteFreq];
-    [oscillators[1] setFreq:noteFreq * osc2Freq];
+    [oscillators[1] setFreq:noteFreq * osc2Freq * 0.5];
     
     [oscillators[0] setAmp:1.0];
     [oscillators[1] setAmp:1.0];
@@ -274,7 +274,7 @@ OSStatus RenderTone(
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId FreqChangedTo:(float)value {
     osc2Freq = value;
-    [oscillators[1] setFreq:noteFreq * osc2Freq];
+    [oscillators[1] setFreq:noteFreq * osc2Freq * 0.5];
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value {
