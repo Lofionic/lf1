@@ -22,15 +22,21 @@ typedef enum Waveform {
 @interface oscillator : NSObject
 
 @property float freq;
-@property float amp;
+@property float envelopeAttack;
+@property float envelopeDecay;
+@property float envelopeSustain;
+@property float envelopeRelease;
 
-@property (readonly) Waveform waveform;
+@property Waveform waveform;
+@property NSInteger octave;
 
--(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform;
 -(void)setWaveform:(Waveform)waveform;
 -(void)avoidOverflow;
 -(SInt16) getNextSampleForSampleRate:(Float64)sampleRate;
 -(void)trigger;
+-(void)noteRelease;
 -(float)getEnvelopePoint;
+
+
 
 @end

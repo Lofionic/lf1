@@ -37,19 +37,37 @@
     
     _controller.delegate = self;
 
+    [_controlsView setContentInset:UIEdgeInsetsZero];
+    
     // Create oscillator controller view
-    NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"OscillatorControlView" owner:self options:0];
+    NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"OscillatorControlView" owner:self options:nil];
     _oscView = oscNib[0];
     _oscView.delegate = _audioController;
     [_oscView initializeParameters];
+
+    [_controlsView addSubview:_oscView];
     
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipe:)];
-    [swipe setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.controlsView addGestureRecognizer:swipe];
+    NSArray *envNib = [[NSBundle mainBundle] loadNibNamed:@"EnvelopeControlView" owner:self options:nil];
+    _envView = envNib[0];
+    _envView.delegate = _audioController;
+    [_envView initializeParameters];
+
+    [_controlsView addSubview:_envView];
     
-    [self changeControlsView:_oscView];
+    [_controlsView setContentSize:CGSizeMake(_controlsView.frame.size.width * 2, _controlsView.frame.size.height)];
+}
+-(void)viewWillLayoutSubviews {
+    _oscView.frame = CGRectMake(0,
+                                0,
+                                _controlsView.frame.size.width,
+                                _controlsView.frame.size.height);
     
+    _envView.frame = CGRectMake(_controlsView.frame.size.width,
+                                0,
+                                _controlsView.frame.size.width,
+                                _controlsView.frame.size.height);
     
+    [_controlsView setContentSize:CGSizeMake(_controlsView.frame.size.width * 2, _controlsView.frame.size.height)];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {

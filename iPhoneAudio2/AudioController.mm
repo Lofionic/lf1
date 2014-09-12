@@ -7,6 +7,8 @@
 //
 
 #import "AudioController.h"
+//#define USE_ANALOG;
+
 
 const Float64 kGraphSampleRate = 44100.0;
 
@@ -15,6 +17,9 @@ const Float64 kGraphSampleRate = 44100.0;
     NSArray *oscillators;
     float noteFreq;
     float osc2Freq;
+    
+    float osc1octave;
+    float osc2octave;
     
 }
 
@@ -116,11 +121,16 @@ OSStatus RenderTone(
     
     // Create components
     
+    
     oscillators = @[
-                   [[oscillator alloc] initWithFrequency:440 withWaveform:Sin],
-                   [[oscillator  alloc] initWithFrequency:440 withWaveform:Sin]
-                   ];
-
+#ifdef USE_ANALOG
+                    [[analog_oscillator alloc] init],
+                    [[analog_oscillator  alloc] init]
+#else
+                    [[oscillator alloc] init],
+                    [[oscillator alloc] init]
+#endif
+    ];
     osc2Freq = 1.0f;
     
     // Error checking result
@@ -249,22 +259,28 @@ OSStatus RenderTone(
 }
 
 -(void)noteOn:(float)frequency {
-    
-    noteFreq = frequency;
-    
-    [oscillators[0] setFreq:noteFreq];
-    [oscillators[1] setFreq:noteFreq * osc2Freq * 0.5];
-    
-    [oscillators[0] setAmp:1.0];
-    [oscillators[1] setAmp:1.0];
-    
+
+    [self setFrequencies:frequency];
+
     [oscillators[0] trigger];
     [oscillators[1] trigger];
 }
 
+
 -(void)noteOff {
-    [oscillators[0] setAmp:0.0];
-    [oscillators[1] setAmp:0.0];
+    [oscillators[0] noteRelease];
+    [oscillators[1] noteRelease];
+}
+
+
+
+-(void)setFrequencies:(float)frequency {
+
+    noteFreq = frequency;
+
+    [oscillators[0] setFreq:frequency];
+    [oscillators[1] setFreq:frequency * osc2Freq];
+    
 }
 
 // ControllerProtocols
@@ -274,11 +290,38 @@ OSStatus RenderTone(
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId FreqChangedTo:(float)value {
     osc2Freq = value;
-    [oscillators[1] setFreq:noteFreq * osc2Freq * 0.5];
+    [self setFrequencies:noteFreq];
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value {
     [oscillators[oscillatorId] setWaveform:(Waveform)value];
 }
 
+-(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId OctaveChangedTo:(int)value {
+    [oscillators[oscillatorId] setOctave:value];
+}
+
+-(void)envelopeControlView:(EnvelopeControlView *)view didChangeParameter:(ADSRParameter)parameter toValue:(float)value {
+
+    switch (parameter) {
+        case Attack:
+            [oscillators[0] setEnvelopeAttack:value];
+            [oscillators[1] setEnvelopeAttack:value];
+            break;
+        case Decay:
+            [oscillators[0] setEnvelopeDecay:value];
+            [oscillators[1] setEnvelopeDecay:value];
+            break;
+        case Release:
+            [oscillators[0] setEnvelopeRelease:value];
+            [oscillators[1] setEnvelopeRelease:value];
+            break;
+        case Sustain:
+            [oscillators[0] setEnvelopeSustain:value];
+            [oscillators[1] setEnvelopeSustain:value];
+            break;
+        default:
+            break;
+    }
+}
 @end

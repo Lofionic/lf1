@@ -35,6 +35,13 @@
     _osc2vol.defaultValue = 0.5;
     _osc2wave.selectedSegmentIndex = 2;
     [self oscillatorWaveformChanged:_osc2wave];
+    
+    _osc1octave.selectedSegmentIndex = 1;
+    [self oscillatorOctaveChanged:_osc1octave];
+    
+    _osc2octave.selectedSegmentIndex = 2;
+    [self oscillatorOctaveChanged:_osc2octave];
+    
 }
 
 -(IBAction)oscillatorVolumeChanged:(id)sender {
@@ -68,5 +75,12 @@
     }
 }
 
+-(IBAction)oscillatorOctaveChanged:(id)sender {
+    UISegmentedControl *control = (UISegmentedControl*)sender;
+    NSInteger tag = control.tag;
 
+    if (_delegate) {
+        [_delegate oscillatorControlView:self oscillator:(int)tag OctaveChangedTo:(int)control.selectedSegmentIndex];
+    }
+}
 @end

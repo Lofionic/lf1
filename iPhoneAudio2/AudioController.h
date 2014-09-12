@@ -13,8 +13,9 @@
 #import "oscillator.h"
 #import "analog_oscillator.h"
 #import "OscillatorControlView.h"
+#import "EnvelopeControlView.h"
 
-@interface AudioController : NSObject <OscillatorViewDelegate> {
+@interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate> {
 
     AUGraph mGraph;
     AudioUnit mMixer;

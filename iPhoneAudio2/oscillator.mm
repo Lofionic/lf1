@@ -10,40 +10,67 @@
 
 @implementation oscillator
 {
+    bool noteOn;
+    
+    bool noteWaiting;
+    
     Waveform nextWaveform;
+    float nextFreq;
+    
     double phase;
     bool prevResultPositive;
 
+    float prevEnv;
+    
     double envelopePosition;
     bool envelopeTriggered;
-    
-    AudioTimeStamp envelopeTriggerTime;
-    
+    float envelopeDecayFrom;
+
     SInt16 prevResult;
 }
 
-const int harmonics = 1;
-
--(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform {
+-(id)init {
     
     if (self = [super init]) {
-        self.freq = freq;
-        self.amp = 0;
-
-        _waveform = waveform;
-        nextWaveform = waveform;
+        _freq = 0;
+        _octave = 1;
         
+        _waveform = Sin;
+        nextWaveform = Sin;
         phase = 0;
      
-        envelopePosition = 0;
         envelopeTriggered = false;
+        envelopeDecayFrom = 0;
+        prevEnv = 0;
+        noteOn = false;
+        
+        _envelopeAttack = 500;
+        _envelopeDecay = 2000;
+        _envelopeSustain = 1;
+        _envelopeRelease = 2000;
     }
     
     return self;
 }
 
+@synthesize waveform = _waveform;
+
 -(void)setWaveform:(Waveform)waveform {
     nextWaveform = waveform;
+}
+
+-(Waveform)waveform {
+    return _waveform;
+}
+
+@synthesize freq = _freq;
+
+-(void)setFreq:(float)freq {
+    _freq = freq;
+}
+
+-(float)freq {
+    return _freq;
 }
 
 -(SInt16) getNextSampleForSampleRate:(Float64)sampleRate {
@@ -51,8 +78,10 @@ const int harmonics = 1;
     // Calculate the next sample
     SInt16 result = [self getNextSample];
 
+    // Smooth out result
+    
     // phaseIncrement is the amount the phase changes in a single sample
-    float phaseIncrement = M_PI * _freq / sampleRate;
+    float phaseIncrement = M_PI * _freq * powf(2, _octave) / sampleRate;
     [self incrementPhase:phaseIncrement];
     
     // timeIncrement is the amount the envelope moves in a single sample
@@ -60,13 +89,16 @@ const int harmonics = 1;
     [self incrementEnvelope:timeIncrement];
     
     // Change waveform on zero crossover
-    if ((result > 0) != prevResultPositive || result == 0) {
+    if ((result > 0) != (prevResult < 0) || result == 0) {
         if (_waveform != nextWaveform) {
             _waveform = nextWaveform;
             phase = 0;
         }
+        
+
     }
 
+    prevResult = result;
     prevResultPositive = result > 0;
     
     return result;
@@ -75,55 +107,99 @@ const int harmonics = 1;
 -(SInt16) getNextSample {
     
     float env = [self getEnvelopePoint];
-    
-    switch (_waveform) {
-        case Sin:
-            // Sin generator
-            return (SInt16)(sin(phase) * 32767.0f * _amp * env);
-            break;
-        case Saw: {
-            double modPhase = fmod(phase, M_PI * 2.0);
-            float a = (modPhase / (M_PI)) - 1.0f;
-            
-            return (SInt16)(a * 32767.0f * _amp * env);
-        }
-            break;
-        case Square: {
-            if (sin(phase) > 0.5) {
-                return _amp * 32767.0f * env;
-            } else {
-                return -_amp * 32767.0f * env;
+    if (env > 0) {
+        switch (_waveform) {
+            case Sin:
+                // Sin generator
+                return (SInt16)(sin(phase) * 32767.0f * env);
+                break;
+            case Saw: {
+                double modPhase = fmod(phase, M_PI * 2.0);
+                float a = (modPhase / (M_PI)) - 1.0f;
+                return (SInt16)(a * 32767.0f * env);
             }
+                break;
+            case Square: {
+                if (sin(phase) > 0.5) {
+                    return (SInt16)(32767.0f * env);
+                } else {
+                    return (SInt16)(32767.0f * -env);
+                }
+            }
+                break;
+            default:
+                return 0;
         }
-            break;
-            
-        default:
-            return 0;
+    } else {
+        return 0;
     }
 }
 
 -(void)trigger {
+    noteOn = true;
+    
     // Trigger envelope from start
-    phase = 0;
     envelopePosition = 0;
+    envelopeDecayFrom = 0;
     envelopeTriggered = true;
+}
+
+-(void)noteRelease {
+    noteOn = false;
+    envelopePosition = 0;
 }
 
 -(float)getEnvelopePoint {
 
+    float result = 0;
+    
     // Return the current value of the envelope
-    if (envelopePosition < 10.0) {
-        return envelopePosition / 10.0;
+    if (noteOn) {
+        if (envelopePosition <= _envelopeAttack) {
+            // Envelope is _envelopeAttacking
+            result = envelopePosition / _envelopeAttack;
+        } else if (envelopePosition <= _envelopeAttack + _envelopeDecay) {
+            // Envelope is decaying
+            result = 1 - ((envelopePosition - _envelopeAttack) / (_envelopeDecay) * (1 - _envelopeSustain));
+        } else {
+            // Envelope is sustaining
+            result = envelopeDecayFrom;
+        }
+    
+    envelopeDecayFrom = result;
+
     } else {
-            return 1.0;
+        if (envelopePosition <= _envelopeRelease) {
+            // Envelope is releasing
+            result = envelopeDecayFrom - (envelopePosition / _envelopeRelease) * envelopeDecayFrom;
+        } else {
+            // Envelope has finished
+            result = 0;
+            envelopePosition = 0;
+            envelopeDecayFrom = 0;
+            envelopeTriggered = false;
+        }
     }
+    
+    // Limit the change of envelope amp per sample
+    // Reduces clicks
+    float delta = result - prevEnv;
+    if (fabs(delta) > 0.005) {
+        result = prevEnv + (0.005  * ((delta < 0) ? -1 : 1));
+    }
+    
+    prevEnv = result;
+    
+    //NSLog(@"Env: %.4f", delta);
+    
+    return result;
 }
 
 -(void)incrementPhase:(float)phaseIncrement {
     // Increment the phase of the oscillator
-    for (int x = 0; x < harmonics; x++) {
-        phase += (phaseIncrement * (x + 1));
-    }
+
+    phase += (phaseIncrement);
+    
 }
 
 -(void)incrementEnvelope:(float)milliseconds {
@@ -136,7 +212,6 @@ const int harmonics = 1;
 -(void)avoidOverflow {
     // Prevent phase from overloading
     phase = fmod(phase, M_PI * 2.0);
-
 }
 
 @end

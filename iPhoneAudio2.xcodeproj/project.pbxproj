@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6C01140819C1938800D3C802 /* CCRRotaryControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C01140719C1938800D3C802 /* CCRRotaryControl.m */; };
 		6C01140A19C19C3600D3C802 /* OscillatorControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C01140919C19C3600D3C802 /* OscillatorControlView.xib */; };
 		6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C01140C19C19C6500D3C802 /* OscillatorControlView.m */; };
 		6C863E5919BF1D170056D43D /* analog_oscillator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* analog_oscillator.mm */; };
-		6C863E5C19BF30B60056D43D /* controllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* controllerView.m */; };
+		6C863E5C19BF30B60056D43D /* keyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* keyboardView.m */; };
 		6C983BCA19BBAA2C005543D8 /* IPAView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C983BC919BBAA2C005543D8 /* IPAView.xib */; };
+		6CBB934219C22B6D00F40AC1 /* CCRRotaryControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934119C22B6D00F40AC1 /* CCRRotaryControl.m */; };
+		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
+		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
 		6CE06BB919C0ADB8005AB92F /* cog.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE06BB719C0ADB8005AB92F /* cog.png */; };
 		6CE06BBA19C0ADB8005AB92F /* cog highlight.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE06BB819C0ADB8005AB92F /* cog highlight.png */; };
 		834FA80618B95FA800923F29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80518B95FA800923F29 /* Foundation.framework */; };
@@ -46,16 +48,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6C01140619C1938800D3C802 /* CCRRotaryControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRRotaryControl.h; path = "../../../Projects/iphone-rotary-control/CCRRotaryControl.h"; sourceTree = "<group>"; };
-		6C01140719C1938800D3C802 /* CCRRotaryControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRRotaryControl.m; path = "../../../Projects/iphone-rotary-control/CCRRotaryControl.m"; sourceTree = "<group>"; };
 		6C01140919C19C3600D3C802 /* OscillatorControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatorControlView.xib; sourceTree = "<group>"; };
 		6C01140B19C19C6500D3C802 /* OscillatorControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscillatorControlView.h; sourceTree = "<group>"; };
 		6C01140C19C19C6500D3C802 /* OscillatorControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OscillatorControlView.m; sourceTree = "<group>"; };
 		6C863E5719BF1D170056D43D /* analog_oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analog_oscillator.h; sourceTree = "<group>"; };
 		6C863E5819BF1D170056D43D /* analog_oscillator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = analog_oscillator.mm; sourceTree = "<group>"; };
-		6C863E5A19BF30B60056D43D /* controllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = controllerView.h; sourceTree = "<group>"; };
-		6C863E5B19BF30B60056D43D /* controllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = controllerView.m; sourceTree = "<group>"; };
+		6C863E5A19BF30B60056D43D /* keyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keyboardView.h; sourceTree = "<group>"; };
+		6C863E5B19BF30B60056D43D /* keyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = keyboardView.m; sourceTree = "<group>"; };
 		6C983BC919BBAA2C005543D8 /* IPAView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPAView.xib; sourceTree = "<group>"; };
+		6CBB934019C22B6D00F40AC1 /* CCRRotaryControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRRotaryControl.h; path = "../../iphone-rotary-control/CCRRotaryControl.h"; sourceTree = "<group>"; };
+		6CBB934119C22B6D00F40AC1 /* CCRRotaryControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRRotaryControl.m; path = "../../iphone-rotary-control/CCRRotaryControl.m"; sourceTree = "<group>"; };
+		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
+		6CBB934519C23BAE00F40AC1 /* EnvelopeControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeControlView.h; sourceTree = "<group>"; };
+		6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvelopeControlView.m; sourceTree = "<group>"; };
 		6CE06BB719C0ADB8005AB92F /* cog.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cog.png; sourceTree = "<group>"; };
 		6CE06BB819C0ADB8005AB92F /* cog highlight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cog highlight.png"; sourceTree = "<group>"; };
 		834FA80218B95FA800923F29 /* iPhoneAudio2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPhoneAudio2.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,14 +132,19 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
-		6C01140E19C1A37400D3C802 /* ControlViews */ = {
+		6C01140E19C1A37400D3C802 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				6C863E5A19BF30B60056D43D /* keyboardView.h */,
+				6C863E5B19BF30B60056D43D /* keyboardView.m */,
 				6C01140919C19C3600D3C802 /* OscillatorControlView.xib */,
 				6C01140B19C19C6500D3C802 /* OscillatorControlView.h */,
 				6C01140C19C19C6500D3C802 /* OscillatorControlView.m */,
+				6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */,
+				6CBB934519C23BAE00F40AC1 /* EnvelopeControlView.h */,
+				6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */,
 			);
-			name = ControlViews;
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
@@ -182,19 +192,17 @@
 			isa = PBXGroup;
 			children = (
 				6C01140219C18E6000D3C802 /* Components */,
-				6C01140E19C1A37400D3C802 /* ControlViews */,
+				6C01140E19C1A37400D3C802 /* Subviews */,
 				834FA80C18B95FA800923F29 /* Supporting Files */,
 				6CE06BB619C0AD9E005AB92F /* Resources */,
-				6C01140619C1938800D3C802 /* CCRRotaryControl.h */,
-				6C01140719C1938800D3C802 /* CCRRotaryControl.m */,
+				6CBB934019C22B6D00F40AC1 /* CCRRotaryControl.h */,
+				6CBB934119C22B6D00F40AC1 /* CCRRotaryControl.m */,
 				834FA81418B95FA800923F29 /* IPAAppDelegate.h */,
 				834FA81518B95FA800923F29 /* IPAAppDelegate.m */,
 				834FA81718B95FA800923F29 /* Images.xcassets */,
 				834FA83618B95FD200923F29 /* IPAViewController.h */,
 				834FA83718B95FD200923F29 /* IPAViewController.mm */,
 				6C983BC919BBAA2C005543D8 /* IPAView.xib */,
-				6C863E5A19BF30B60056D43D /* controllerView.h */,
-				6C863E5B19BF30B60056D43D /* controllerView.m */,
 				834FA83918B9602A00923F29 /* AudioController.h */,
 				834FA83A18B9602A00923F29 /* AudioController.mm */,
 			);
@@ -319,6 +327,7 @@
 				834FA81818B95FA800923F29 /* Images.xcassets in Resources */,
 				6C983BCA19BBAA2C005543D8 /* IPAView.xib in Resources */,
 				6CE06BBA19C0ADB8005AB92F /* cog highlight.png in Resources */,
+				6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */,
 				6C01140A19C19C3600D3C802 /* OscillatorControlView.xib in Resources */,
 				6CE06BB919C0ADB8005AB92F /* cog.png in Resources */,
 			);
@@ -339,12 +348,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CBB934219C22B6D00F40AC1 /* CCRRotaryControl.m in Sources */,
+				6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */,
 				6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */,
 				834FA81218B95FA800923F29 /* main.m in Sources */,
 				834FA81618B95FA800923F29 /* IPAAppDelegate.m in Sources */,
-				6C863E5C19BF30B60056D43D /* controllerView.m in Sources */,
+				6C863E5C19BF30B60056D43D /* keyboardView.m in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
-				6C01140819C1938800D3C802 /* CCRRotaryControl.m in Sources */,
 				83AFC397192ABB8E00851413 /* oscillator.mm in Sources */,
 				834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */,
 				6C863E5919BF1D170056D43D /* analog_oscillator.mm in Sources */,

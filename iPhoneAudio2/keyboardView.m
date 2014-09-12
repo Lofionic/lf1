@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "controllerView.h"
+#import "keyboardView.h"
 
-@implementation controllerView {
+@implementation keyboardView {
  
     int octaves;
     CGRect keys[88];
@@ -21,6 +21,7 @@
     if (self) {
         // Initialization code
         self.userInteractionEnabled = YES;
+        self.multipleTouchEnabled = YES;
         self.backgroundColor = [UIColor redColor];
         [self initKeys];
     }
@@ -36,12 +37,12 @@
 
 -(void)initKeys {
     
-    octaves = 2;
+    octaves = 1;
     
     CGFloat keyWidth = 1.0 / ((octaves * 7.0) + 1);
     CGFloat keyHeight = 1;
     CGFloat blackKeyHeight = 1 * 0.5;
-    CGFloat blackKeyWidth = keyWidth / 2.0;
+    CGFloat blackKeyWidth = keyWidth / 1.5;
     
     int thisKey = 0;
     
@@ -109,7 +110,7 @@
             }
         }
         
-        float frequency = (powf(powf(2, (1.0 / 12.0)), key)) * 220.0;
+        float frequency = (powf(powf(2, (1.0 / 12.0)), key)) * 110.0;
         
         [_delegate noteOn:frequency];
     }

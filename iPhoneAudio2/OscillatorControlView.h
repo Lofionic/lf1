@@ -16,6 +16,7 @@
 -(void)oscillatorControlView:(OscillatorControlView*)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value;
 -(void)oscillatorControlView:(OscillatorControlView*)view oscillator:(int)oscillatorId VolumeChangedTo:(float)value;
 -(void)oscillatorControlView:(OscillatorControlView*)view oscillator:(int)oscillatorId FreqChangedTo:(float)value;
+-(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId OctaveChangedTo:(int)value;
 
 @end
 
@@ -29,6 +30,9 @@
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc1wave;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc2wave;
+
+@property (nonatomic, strong) IBOutlet UISegmentedControl *osc1octave;
+@property (nonatomic, strong) IBOutlet UISegmentedControl *osc2octave;
 
 -(void)initializeParameters;
 

@@ -14,8 +14,8 @@
     double phase[20];
 }
 
--(id)initWithFrequency:(float)freq withWaveform:(Waveform)waveform {
-    self = [super initWithFrequency:freq withWaveform:waveform];
+-(id)init {
+    self = [super init];
     if (self) {
         harmonics = 15;
         for (int x = 0; x < harmonics; x++) {
@@ -32,7 +32,7 @@
     switch ([self waveform]) {
         case Sin:
             // Sin generator
-            return (SInt16)(sin(phase[0]) * 32767.0f * [self amp] * env);
+            return (SInt16)(sin(phase[0]) * 32767.0f * env);
             break;
         case Saw: {
             
@@ -43,7 +43,7 @@
                 result += sin(phase[i]) * amp;
                 amp /= 2.0;
             }
-            return (SInt16)(result * 32767.0f * [self amp] * env);
+            return (SInt16)(result * 32767.0f * env);
         }
             break;
         case Square: {
@@ -58,22 +58,13 @@
             }
             
             sum /= count;
-            return (SInt16)(sum * 32767.0f * [self amp] * env);
+            return (SInt16)(sum * 32767.0f * env);
             
         }
             break;
         default:
             return 0;
     }
-}
-
--(void)trigger {
-    for (int x = 0; x < harmonics; x++) {
-        phase[x] = 0;
-    }
-    
-    
-    [super trigger];
 }
 
 -(void)incrementPhase:(float)phaseIncrement {
