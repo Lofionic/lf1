@@ -7,8 +7,7 @@
 //
 
 #import "AudioController.h"
-//#define USE_ANALOG;
-
+#define USE_ANALOG
 
 const Float64 kGraphSampleRate = 44100.0;
 
