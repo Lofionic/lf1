@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "oscillator.h"
+#import "Oscillator.h"
 
-@implementation oscillator
+@implementation Oscillator
 {
     bool noteOn;
     
@@ -94,8 +94,6 @@
             _waveform = nextWaveform;
             phase = 0;
         }
-        
-
     }
 
     prevResult = result;
@@ -173,11 +171,9 @@
             // Envelope is releasing
             result = envelopeDecayFrom - (envelopePosition / _envelopeRelease) * envelopeDecayFrom;
         } else {
-            // Envelope has finished
+            
             result = 0;
-            envelopePosition = 0;
-            envelopeDecayFrom = 0;
-            envelopeTriggered = false;
+
         }
     }
     
@@ -189,6 +185,14 @@
     }
     
     prevEnv = result;
+    
+    if (result <= 0 && envelopePosition > 0) {
+        // Envelope has finished
+        envelopePosition = 0;
+        envelopeDecayFrom = 0;
+        envelopeTriggered = false;
+        result = 0;
+    }
     
     //NSLog(@"Env: %.4f", delta);
     

@@ -8,6 +8,7 @@
 
 #import "analog_oscillator.h"
 
+
 @implementation analog_oscillator {
 
     int harmonics;

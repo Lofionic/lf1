@@ -19,7 +19,7 @@ typedef enum Waveform {
     AnalogSquare
 } Waveform;
 
-@interface oscillator : NSObject
+@interface Oscillator : NSObject
 
 @property float freq;
 @property float envelopeAttack;

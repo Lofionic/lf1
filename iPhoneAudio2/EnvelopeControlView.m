@@ -37,6 +37,16 @@
 
 -(void)initializeParameters {
     
+    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
+    _attackControl.spriteSheet = moogA;
+    _attackControl.spriteSize = CGSizeMake(140, 140);
+    _decayControl.spriteSheet = moogA;
+    _decayControl.spriteSize = CGSizeMake(140, 140);
+    _sustainControl.spriteSheet = moogA;
+    _sustainControl.spriteSize = CGSizeMake(140, 140);
+    _releaseControl.spriteSheet = moogA;
+    _releaseControl.spriteSize = CGSizeMake(140, 140);
+    
     _attackControl.value = 0.7;
     _decayControl.value = 0.5;
     _sustainControl.value = 1.0;

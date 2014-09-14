@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "keyboardView.h"
+#import "KeyboardView.h"
 #import "CCRRotaryControl.h"
 #import "OscillatorControlView.h"
 #import "EnvelopeControlView.h"
-
+#import "FilterControlView.h"
 
 @class AudioController;
 
@@ -21,10 +21,15 @@
 
 // Parameter controls
 
-@property (nonatomic, strong) IBOutlet keyboardView *controller;
+@property (nonatomic, strong) IBOutlet KeyboardView *controller;
 
 @property (nonatomic, strong) OscillatorControlView *oscView;
 @property (nonatomic, strong) EnvelopeControlView *envView;
-@property (nonatomic, strong) IBOutlet UIScrollView *controlsView;
+@property (nonatomic, strong) FilterControlView *filterView;
+
+@property (nonatomic, strong) IBOutlet UIScrollView *iPhoneControlsView;
+@property (nonatomic, strong) IBOutlet UIView *iPadControlsView1;
+@property (nonatomic, strong) IBOutlet UIView *iPadControlsView2;
+@property (nonatomic, strong) IBOutlet UIView *iPadControlsView3;
 
 @end

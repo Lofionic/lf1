@@ -37,55 +37,61 @@
     
     _controller.delegate = self;
 
-    [_controlsView setContentInset:UIEdgeInsetsZero];
-    
     // Create oscillator controller view
     NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"OscillatorControlView" owner:self options:nil];
     _oscView = oscNib[0];
     _oscView.delegate = _audioController;
     [_oscView initializeParameters];
-
-    [_controlsView addSubview:_oscView];
     
     NSArray *envNib = [[NSBundle mainBundle] loadNibNamed:@"EnvelopeControlView" owner:self options:nil];
     _envView = envNib[0];
     _envView.delegate = _audioController;
     [_envView initializeParameters];
-
-    [_controlsView addSubview:_envView];
     
-    [_controlsView setContentSize:CGSizeMake(_controlsView.frame.size.width * 2, _controlsView.frame.size.height)];
+    NSArray *filterNib = [[NSBundle mainBundle] loadNibNamed:@"FilterControlView" owner:self options:nil];
+    _filterView = filterNib[0];
+    _filterView.delegate = _audioController;
+    [_filterView initializeParameters];
+    
+    if (_iPhoneControlsView) {
+        // iPhone - add control views
+        [_iPhoneControlsView setContentInset:UIEdgeInsetsZero];
+        
+        [_iPhoneControlsView addSubview:_oscView];
+        [_iPhoneControlsView addSubview:_envView];
+        [_iPhoneControlsView setContentSize:CGSizeMake(_iPhoneControlsView.frame.size.width * 2, _iPhoneControlsView.frame.size.height)];
+    } else {
+        // iPad - add control views
+        [_iPadControlsView1 addSubview:_oscView];
+        [_iPadControlsView2 addSubview:_envView];
+        [_iPadControlsView3 addSubview:_filterView];
+    }
 }
 -(void)viewWillLayoutSubviews {
-    _oscView.frame = CGRectMake(0,
-                                0,
-                                _controlsView.frame.size.width,
-                                _controlsView.frame.size.height);
     
-    _envView.frame = CGRectMake(_controlsView.frame.size.width,
-                                0,
-                                _controlsView.frame.size.width,
-                                _controlsView.frame.size.height);
     
-    [_controlsView setContentSize:CGSizeMake(_controlsView.frame.size.width * 2, _controlsView.frame.size.height)];
+    if (_iPhoneControlsView) {
+        // iPhone - layout control views
+        _oscView.frame = CGRectMake(0,
+                                    0,
+                                    _iPhoneControlsView.frame.size.width,
+                                    _iPhoneControlsView.frame.size.height);
+        
+        _envView.frame = CGRectMake(_iPhoneControlsView.frame.size.width,
+                                    0,
+                                    _iPhoneControlsView.frame.size.width,
+                                    _iPhoneControlsView.frame.size.height);
+        
+        [_iPhoneControlsView setContentSize:CGSizeMake(_iPhoneControlsView.frame.size.width * 2, _iPhoneControlsView.frame.size.height)];
+    } else {
+        // iPad - layout control views
+        _oscView.frame = [_oscView superview].bounds;
+        _envView.frame = [_envView superview].bounds;
+    }
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
-}
-
--(void)swipe:(UIGestureRecognizer*)gesture {
-    NSLog(@"swipe");
-}
-
--(void)changeControlsView:(UIView *)newControlsView {
-    
-    if ([_controlsView.subviews count] > 0) {
-        [_controlsView.subviews[0] removeFromSuperview];
-    }
-    
-    [newControlsView setFrame:_controlsView.bounds];
-    [_controlsView addSubview:newControlsView];
 }
 
 -(void)viewDidDisappear:(BOOL)animated

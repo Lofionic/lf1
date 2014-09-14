@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "keyboardView.h"
+#import "KeyboardView.h"
+#import "BuildSettings.h"
 
-@implementation keyboardView {
+@implementation KeyboardView {
  
     int octaves;
     CGRect keys[88];
@@ -37,7 +38,11 @@
 
 -(void)initKeys {
     
-    octaves = 1;
+    if (IS_IPAD()) {
+        octaves = 2;
+    } else {
+        octaves = 1;
+    }
     
     CGFloat keyWidth = 1.0 / ((octaves * 7.0) + 1);
     CGFloat keyHeight = 1;

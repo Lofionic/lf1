@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>08DFAEB8-DB67-4B98-9F39-811AF81F5082</string>
+	<key>IDESourceControlProjectName</key>
+	<string>iPhoneAudio2</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0311B5C7-F94C-4CF6-A6A7-D14D81F83FAF</key>
+		<string>ssh://bitbucket.org/chris_rivers/iphoneaudio2.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>iPhoneAudio2.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0311B5C7-F94C-4CF6-A6A7-D14D81F83FAF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://bitbucket.org/chris_rivers/iphoneaudio2.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0311B5C7-F94C-4CF6-A6A7-D14D81F83FAF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0311B5C7-F94C-4CF6-A6A7-D14D81F83FAF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>iphoneaudio2</string>
+		</dict>
+	</array>
+</dict>
+</plist>

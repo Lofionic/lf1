@@ -33,7 +33,6 @@ typedef enum ADSRParameter {
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *sustainControl;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *releaseControl;
 
-
 -(void)initializeParameters;
 
 @end

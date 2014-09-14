@@ -19,13 +19,32 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+-(void)initializeParameters {
+    
+    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
+    _freqControl.spriteSheet = moogA;
+    _freqControl.spriteSize = CGSizeMake(140, 140);
+    _resControl.spriteSheet = moogA;
+    _resControl.spriteSize = CGSizeMake(140, 140);
+
+    _freqControl.value = 0.5;
+    _freqControl.defaultValue = 0.5;
+    _resControl.value = 0;
+    _resControl.defaultValue = 0;
+    
 }
-*/
+
+-(IBAction)valueChanged:(id)sender {
+    
+    CCRRotaryControl *control = (CCRRotaryControl*)sender;
+    
+    if (_delegate) {
+        if (control == _freqControl) {
+            [_delegate filterControlView:self didChangeFrequencyTo:control.value];
+        } else if (sender == _resControl) {
+            [_delegate filterControlView:self didChangeResonanceTo:control.value];
+        }
+    }
+}
 
 @end

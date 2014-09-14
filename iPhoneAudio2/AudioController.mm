@@ -7,7 +7,7 @@
 //
 
 #import "AudioController.h"
-#define USE_ANALOG
+#import "BuildSettings.h"
 
 const Float64 kGraphSampleRate = 44100.0;
 
@@ -19,11 +19,14 @@ const Float64 kGraphSampleRate = 44100.0;
     
     float osc1octave;
     float osc2octave;
-    
+
+    float filterFreq;
 }
 
 -(void)startAUGraph {
     
+    LFOFreq = 1;
+
     // Start the AUGraph
     Boolean isRunning = false;
     
@@ -58,7 +61,7 @@ static OSStatus renderOscillator(void *inRefCon, AudioUnitRenderActionFlags *ioA
     // Renders Oscillator object that has been passed in inRefCon
     
     // Get the oscillator from inRefCon
-    oscillator *osc = (__bridge oscillator*)inRefCon;
+    Oscillator *osc = (__bridge Oscillator*)inRefCon;
         
     // outA is a pointer to the buffer that will be filled
     AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
@@ -120,16 +123,18 @@ OSStatus RenderTone(
     
     // Create components
     
+    if (USE_ANALOG > 0) {
+        oscillators = @[
+            [[analog_oscillator alloc] init],
+            [[analog_oscillator  alloc] init]
+            ];
+    } else {
+        oscillators = @[
+            [[Oscillator alloc] init],
+            [[Oscillator alloc] init]
+        ];
+    }
     
-    oscillators = @[
-#ifdef USE_ANALOG
-                    [[analog_oscillator alloc] init],
-                    [[analog_oscillator  alloc] init]
-#else
-                    [[oscillator alloc] init],
-                    [[oscillator alloc] init]
-#endif
-    ];
     osc2Freq = 1.0f;
     
     // Error checking result
@@ -141,6 +146,8 @@ OSStatus RenderTone(
     // AUNodes represent Audio Units on the AUGraph
     AUNode outputNode;
     AUNode mixerNode;
+    AUNode converterNode;
+    AUNode filterNode;
     
     // Setup Mixer component description
     AudioComponentDescription mixer_desc;
@@ -149,6 +156,22 @@ OSStatus RenderTone(
     mixer_desc.componentFlags = 0;
     mixer_desc.componentFlagsMask = 0;
     mixer_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
+    
+    // Set up converter component description
+    AudioComponentDescription converter_desc;
+    converter_desc.componentType = kAudioUnitType_FormatConverter;
+    converter_desc.componentSubType = kAudioUnitSubType_AUConverter;
+    converter_desc.componentFlags = 0;
+    converter_desc.componentFlagsMask = 0;
+    converter_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
+    
+    // Setup Filter component description
+    AudioComponentDescription filter_desc;
+    filter_desc.componentType = kAudioUnitType_Effect;
+    filter_desc.componentSubType = kAudioUnitSubType_LowPassFilter;
+    filter_desc.componentFlags = 0;
+    filter_desc.componentFlagsMask = 0;
+    filter_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
     
     // Setup output component description
     AudioComponentDescription output_desc;
@@ -160,16 +183,33 @@ OSStatus RenderTone(
     
     // Add nodes to the graph to hold our AudioUnits
     result = AUGraphAddNode(mGraph, &mixer_desc, &mixerNode);
+    result = AUGraphAddNode(mGraph, &converter_desc, &converterNode);
+    result = AUGraphAddNode(mGraph, &filter_desc, &filterNode);
     result = AUGraphAddNode(mGraph, &output_desc, &outputNode);
     
+    
     // Connect Mixer Node's output to the RemoteIO node's input
-    result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, outputNode, 0);
+    // result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, outputNode, 0);
+
+    // Connect Mixer Node's output to the Filter node's input
+    result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, converterNode, 0);
+    
+    // Connect Converter Node's outout to the Filter node's input
+    result = AUGraphConnectNodeInput(mGraph, converterNode, 0, filterNode, 0);
+    
+    // Connect FIlter Node's output to RemoteIO node's input
+    result = AUGraphConnectNodeInput(mGraph, filterNode, 0, outputNode, 0);
     
     // Open the graph - AudioUnits are opened but not initialized
     result = AUGraphOpen(mGraph);
     
     // Get a link to the mixer AU so we can talk to it later
     result = AUGraphNodeInfo(mGraph, mixerNode, NULL, &mMixer);
+    
+    result = AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter);
+    
+    // Get a linke to the filter AU so we can talk to it later
+    result = AUGraphNodeInfo(mGraph, filterNode, NULL, &mFilter);
     
     // Get a link to the output AU so we can talk to it later
     result = AUGraphNodeInfo(mGraph, outputNode, NULL, &mOutput);
@@ -228,8 +268,21 @@ OSStatus RenderTone(
     // Apply the modified AudioStream description to the mixer output bus
     result = AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, sizeof(desc));
     
+    // Apply AudioStream description to convert input bus
+    result = AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc));
+
     // *** Setup the Audio Output Stream **
     
+    // Grab Filter's native stream
+    AudioStreamBasicDescription filterStreamDesc = { 0 };
+    size = sizeof(filterStreamDesc);
+    
+    result = AudioUnitGetProperty(mFilter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,  0,  &(filterStreamDesc), &size);
+    
+    // Set stream of converter output
+    result = AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &(filterStreamDesc), size);
+    
+
     // Get a stream description form the output audio unit
     result = AudioUnitGetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, &size);
     
@@ -240,9 +293,43 @@ OSStatus RenderTone(
     desc.SetAUCanonical(1, true);
     desc.mSampleRate = kGraphSampleRate;
     
-    result= AudioUnitSetProperty(mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, sizeof(desc));
+    // Set audiostream format of filter output
+    result = AudioUnitSetProperty(mFilter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, sizeof(desc));
+    
+    // Print graph setup
+    CAShow(mGraph);
+    
+    result = AudioUnitSetParameter(mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, 200, 0);
+    
+    result = AUGraphAddRenderNotify(mGraph, renderNotify, (__bridge void*)self);
     
     result = AUGraphInitialize(mGraph);
+}
+
+
+float LFOPhase;
+float LFOFreq;
+
+static OSStatus renderNotify (void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData) {
+    
+    AudioController *ac = (__bridge AudioController*)inRefCon;
+ 
+    
+    float result = sin(LFOPhase);
+    [ac setLfo:result];
+    
+    float phaseIncrement = M_PI * LFOFreq * (1.5 / 44.1);
+    LFOPhase += phaseIncrement;
+    
+    return noErr;
+}
+
+-(void)setLfo:(float)value {
+    
+    //[self setFrequencies:220 + (110 * value)];
+    value += 1;
+    value /= 2;
+    AudioUnitSetParameter(mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, (value * 8000) + filterFreq, 0);
 }
 
 -(void)setMixerInputChannel:(int)channel toLevel:(float)level {
@@ -263,6 +350,8 @@ OSStatus RenderTone(
 
     [oscillators[0] trigger];
     [oscillators[1] trigger];
+    
+    LFOPhase = 0;
 }
 
 
@@ -323,4 +412,14 @@ OSStatus RenderTone(
             break;
     }
 }
+
+-(void)filterControlView:(FilterControlView *)view didChangeFrequencyTo:(float)value {
+    AudioUnitSetParameter(mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, (value * 15980) + 20, 0);
+    filterFreq = (value * 15980);
+}
+
+-(void)filterControlView:(FilterControlView *)view didChangeResonanceTo:(float)value {
+    AudioUnitSetParameter(mFilter, kLowPassParam_Resonance, kAudioUnitScope_Global, 0, (value * 60.0) - 20, 0);
+}
+
 @end

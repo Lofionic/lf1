@@ -8,7 +8,6 @@
 
 #import "OscillatorControlView.h"
 
-
 @implementation OscillatorControlView
 
 - (id)initWithFrame:(CGRect)frame
@@ -16,12 +15,23 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        
+
     }
     return self;
 }
 
 -(void)initializeParameters {
+    
+    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
+    UIImage *moogB = [UIImage imageNamed:@"moog_b"];
+    _osc1vol.spriteSheet = moogA;
+    _osc1vol.spriteSize = CGSizeMake(140, 140);
+    
+    _osc2vol.spriteSheet = moogA;
+    _osc2vol.spriteSize = CGSizeMake(140, 140);
+    
+    _osc2freq.spriteSheet = moogB;
+    _osc2freq.spriteSize = CGSizeMake(140, 140);
     
     _osc2freq.value = 1.0;
     _osc2freq.defaultValue = 0.5;

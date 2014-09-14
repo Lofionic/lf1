@@ -18,7 +18,7 @@
 
 @end
 
-@interface keyboardView : UIView
+@interface KeyboardView : UIView
 
 @property (nonatomic, weak) id<ControllerViewDelegate> delegate;
 

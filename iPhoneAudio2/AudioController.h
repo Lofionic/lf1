@@ -14,12 +14,15 @@
 #import "analog_oscillator.h"
 #import "OscillatorControlView.h"
 #import "EnvelopeControlView.h"
+#import "FilterControlView.h"
 
-@interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate> {
+@interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate, FilterControlViewDelegate> {
 
     AUGraph mGraph;
     AudioUnit mMixer;
     AudioUnit mOutput;
+    AudioUnit mConverter;
+    AudioUnit mFilter;
     
     CAStreamBasicDescription outputASBD;
 
