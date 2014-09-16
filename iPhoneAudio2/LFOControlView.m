@@ -12,12 +12,12 @@
 
 -(void)initializeParameters {
     
-    _amountControl1.value = 0.2;
-    _rateControl1.value = 0.25;
-    _destinationControl1 = 0;
+    _amountControl1.value = 0.75;
+    _rateControl1.value = 0.8;
+    _destinationControl1.selectedSegmentIndex = 1;
     [self changeDestination:_destinationControl1];
     
-    _waveformControl1 = 0;
+    _waveformControl1.selectedSegmentIndex = 2;
     [self changeWaveform:_waveformControl1];
     
     UIImage *moogA = [UIImage imageNamed:@"moog_a"];

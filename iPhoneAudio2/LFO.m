@@ -35,7 +35,7 @@
 
         outA[i] = value * _amp;
         
-        phase += (M_PI * _freq * (_waveform == LFOSampleHold ? 2 : 1)) / self.sampleRate;
+        phase += (M_PI * _freq) / self.sampleRate;
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
@@ -47,6 +47,9 @@
     }
     
     // Prevent phase from overloading
+    if (phase > M_PI * 2.0) {
+        sampleHold = arc4random_uniform(32767) / 32767.0;
+    }
     phase = fmod(phase, M_PI * 2.0);
 }
 
@@ -72,12 +75,7 @@
         }
             break;
         case LFOSampleHold: {
-            if (phase < sampleHoldPhase) {
-                sampleHold = arc4random_uniform(32767) / 32767.0;
-            }
-            sampleHoldPhase = phase;
             return sampleHold;
-            
         }
         default:
             return 0;

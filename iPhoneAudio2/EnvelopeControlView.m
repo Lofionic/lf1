@@ -62,7 +62,7 @@
     _oscSustainControl.value = 1.0;
     _oscReleaseControl.value = 0.75;
     
-    _filterAttackControl.value = 0.0;
+    _filterAttackControl.value = 0.8;
     _filterDecayControl.value = 0.0;
     _filterSustainControl.value = 1.0;
     _filterReleaseControl.value = 0.75;
