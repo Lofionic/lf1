@@ -13,6 +13,6 @@
 
 @interface Generator : SynthComponent
 
--(void)fillBuffer:(AudioSignalType*)outA with:(int)numFrames;
+-(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames;
 
 @end

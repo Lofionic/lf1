@@ -96,7 +96,7 @@
     return result;
 }
 
--(void) fillEnvelopeBuffer:(AudioSignalType*)outA with:(int)numFrames {
+-(void) fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     
     // Fill a buffer with envelope samples
     for (int i = 0; i < numFrames; i++) {

@@ -23,7 +23,6 @@
 @interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate, FilterControlViewDelegate> {
 
     AUGraph mGraph;
-    
     AudioUnit mOutput;
     AudioUnit mConverter;
     
@@ -32,9 +31,6 @@
 }
 
 @property bool IsRunning;
-
-@property AudioUnit mFilter;
-@property AudioUnit mMixer;
 
 // Synth Components
 @property NSArray *oscillators;
@@ -49,9 +45,6 @@
 -(void)initializeAUGraph;
 -(void)startAUGraph;
 -(void)stopAUGraph;
-
--(void)setMixerInputChannel:(int)channel toLevel:(float)level;
--(void)setMixerOutputLevel:(float)level;
 
 -(void)noteOn:(float)frequency;
 -(void)noteOff;

@@ -13,7 +13,7 @@
 
 @interface Filter : SynthComponent
 
--(void)processBuffer:(AudioSignalType*)outA with:(int)numFrames envelope:(AudioSignalType*)envelope;
+-(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(AudioSignalType*)envelope;
 
 @property float cutoff;
 @property float resonance;

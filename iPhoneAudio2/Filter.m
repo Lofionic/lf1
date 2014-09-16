@@ -30,7 +30,7 @@
     
 }
 
--(void)processBuffer:(AudioSignalType*)outA with:(int)numFrames envelope:(AudioSignalType*)envelope {
+-(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(AudioSignalType*)envelope {
     
     // DSP ! http://www.musicdsp.org/showArchiveComment.php?ArchiveID=25
     
@@ -38,27 +38,31 @@
         
         float valueIn = (float)outA[i];
         
-        if (valueIn != NAN) {
-            
-            float envCutoff = _cutoff * envelope[i];
-
-            q = 1.0f - envCutoff;
-            p = envCutoff + 0.8f * envCutoff * q;
-            f = p + p - 1.0f;
-            q = _resonance * (1.0f + 0.5f * q * (1.0f - q + 5.6f * q * q));
-            
-            valueIn -= q * b4; //feedback
-            
-            t1 = b1;  b1 = (valueIn + b0) * p - b1 * f;
-            t2 = b2;  b2 = (b1 + t1) * p - b2 * f;
-            t1 = b3;  b3 = (b2 + t2) * p - b3 * f;
-            b4 = (b3 + t1) * p - b4 * f;
-            b4 = b4 - b4 * b4 * b4 * 0.166667f;    //clipping
-            b0 = valueIn;
-            
-            outA[i] = (AudioSignalType)b4;
-        
+        if (valueIn > 1) {
+            valueIn = 1;
+        } else if (valueIn < -1) {
+            valueIn = -1;
         }
+        
+
+        float envCutoff = _cutoff * envelope[i];
+
+        q = 1.0f - envCutoff;
+        p = envCutoff + 0.8f * envCutoff * q;
+        f = p + p - 1.0f;
+        q = _resonance * (1.0f + 0.5f * q * (1.0f - q + 5.6f * q * q));
+        
+        valueIn -= q * b4; //feedback
+        
+        t1 = b1;  b1 = (valueIn + b0) * p - b1 * f;
+        t2 = b2;  b2 = (b1 + t1) * p - b2 * f;
+        t1 = b3;  b3 = (b2 + t2) * p - b3 * f;
+        b4 = (b3 + t1) * p - b4 * f;
+        b4 = b4 - b4 * b4 * b4 * 0.166667f;    //clipping
+        b0 = valueIn;
+        
+        outA[i] = (AudioSignalType)b4;
+    
         
     }
 }

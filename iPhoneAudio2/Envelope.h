@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "SynthComponent.h"
+#import "Generator.h"
 
-@interface Envelope : SynthComponent
+@interface Envelope : Generator
 
 @property float envelopeAttack;
 @property float envelopeDecay;
@@ -19,6 +20,6 @@
 
 -(void)triggerNote;
 -(void)releaseNote;
--(void)fillEnvelopeBuffer:(AudioSignalType*)outA with:(int)numFrames;
+
 
 @end

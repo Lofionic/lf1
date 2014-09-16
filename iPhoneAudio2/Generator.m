@@ -10,7 +10,7 @@
 
 @implementation Generator
 
--(void)fillBuffer:(AudioSignalType*)outA with:(int)numFrames {
+-(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     for (int i = 0; i < numFrames; i++) {
         outA[i] = 0;
     }
