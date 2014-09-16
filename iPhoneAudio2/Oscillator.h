@@ -10,6 +10,7 @@
 #import <CoreAudio/CoreAudioTypes.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "CAStreamBasicDescription.h"
+#import "Envelope.h"
 
 typedef enum Waveform {
     Sin,
@@ -22,21 +23,13 @@ typedef enum Waveform {
 @interface Oscillator : NSObject
 
 @property float freq;
-@property float envelopeAttack;
-@property float envelopeDecay;
-@property float envelopeSustain;
-@property float envelopeRelease;
-
 @property Waveform waveform;
 @property NSInteger octave;
+@property Envelope *envelope;
 
 -(void)setWaveform:(Waveform)waveform;
 -(void)avoidOverflow;
 -(SInt16) getNextSampleForSampleRate:(Float64)sampleRate;
--(void)trigger;
--(void)noteRelease;
--(float)getEnvelopePoint;
-
 
 
 @end

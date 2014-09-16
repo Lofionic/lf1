@@ -8,6 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface Envelope : UIView
+@interface Envelope : NSObject
+
+@property float envelopeAttack;
+@property float envelopeDecay;
+@property float envelopeSustain;
+@property float envelopeRelease;
+@property float clickless;
+
+-(void)triggerNote;
+-(void)releaseNote;
+-(float)getEnvelopePoint;
+-(void)incrementEnvelopeBy:(float)milliseconds;
 
 @end

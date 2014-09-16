@@ -11,21 +11,13 @@
 @implementation Oscillator
 {
     bool noteOn;
-    
     bool noteWaiting;
     
     Waveform nextWaveform;
     float nextFreq;
     
     double phase;
-    bool prevResultPositive;
-
-    float prevEnv;
     
-    double envelopePosition;
-    bool envelopeTriggered;
-    float envelopeDecayFrom;
-
     SInt16 prevResult;
 }
 
@@ -39,15 +31,9 @@
         nextWaveform = Sin;
         phase = 0;
      
-        envelopeTriggered = false;
-        envelopeDecayFrom = 0;
-        prevEnv = 0;
-        noteOn = false;
-        
-        _envelopeAttack = 500;
-        _envelopeDecay = 2000;
-        _envelopeSustain = 1;
-        _envelopeRelease = 2000;
+        _envelope = [[Envelope alloc] init];
+        _envelope.clickless = 0.01;
+
     }
     
     return self;
@@ -81,12 +67,12 @@
     // Smooth out result
     
     // phaseIncrement is the amount the phase changes in a single sample
-    float phaseIncrement = M_PI * _freq * powf(2, _octave) / sampleRate;
+    float phaseIncrement = (M_PI * _freq * powf(2, _octave)) / sampleRate;
     [self incrementPhase:phaseIncrement];
     
     // timeIncrement is the amount the envelope moves in a single sample
     float timeIncrement = 1000 / sampleRate;
-    [self incrementEnvelope:timeIncrement];
+    [_envelope incrementEnvelopeBy:timeIncrement];
     
     // Change waveform on zero crossover
     if ((result > 0) != (prevResult < 0) || result == 0) {
@@ -97,14 +83,14 @@
     }
 
     prevResult = result;
-    prevResultPositive = result > 0;
     
     return result;
 }
 
 -(SInt16) getNextSample {
     
-    float env = [self getEnvelopePoint];
+    float env = [_envelope getEnvelopePoint];
+    //env = 1;
     if (env > 0) {
         switch (_waveform) {
             case Sin:
@@ -133,84 +119,9 @@
     }
 }
 
--(void)trigger {
-    noteOn = true;
-    
-    // Trigger envelope from start
-    envelopePosition = 0;
-    envelopeDecayFrom = 0;
-    envelopeTriggered = true;
-}
-
--(void)noteRelease {
-    noteOn = false;
-    envelopePosition = 0;
-}
-
--(float)getEnvelopePoint {
-
-    float result = 0;
-    
-    // Return the current value of the envelope
-    if (noteOn) {
-        if (envelopePosition <= _envelopeAttack) {
-            // Envelope is _envelopeAttacking
-            result = envelopePosition / _envelopeAttack;
-        } else if (envelopePosition <= _envelopeAttack + _envelopeDecay) {
-            // Envelope is decaying
-            result = 1 - ((envelopePosition - _envelopeAttack) / (_envelopeDecay) * (1 - _envelopeSustain));
-        } else {
-            // Envelope is sustaining
-            result = envelopeDecayFrom;
-        }
-    
-    envelopeDecayFrom = result;
-
-    } else {
-        if (envelopePosition <= _envelopeRelease) {
-            // Envelope is releasing
-            result = envelopeDecayFrom - (envelopePosition / _envelopeRelease) * envelopeDecayFrom;
-        } else {
-            
-            result = 0;
-
-        }
-    }
-    
-    // Limit the change of envelope amp per sample
-    // Reduces clicks
-    float delta = result - prevEnv;
-    if (fabs(delta) > 0.005) {
-        result = prevEnv + (0.005  * ((delta < 0) ? -1 : 1));
-    }
-    
-    prevEnv = result;
-    
-    if (result <= 0 && envelopePosition > 0) {
-        // Envelope has finished
-        envelopePosition = 0;
-        envelopeDecayFrom = 0;
-        envelopeTriggered = false;
-        result = 0;
-    }
-    
-    //NSLog(@"Env: %.4f", delta);
-    
-    return result;
-}
-
 -(void)incrementPhase:(float)phaseIncrement {
     // Increment the phase of the oscillator
-
     phase += (phaseIncrement);
-    
-}
-
--(void)incrementEnvelope:(float)milliseconds {
-    // Increment the position of the envelope
-    if (envelopeTriggered) {
-        envelopePosition += milliseconds;
-    }
 }
 
 -(void)avoidOverflow {

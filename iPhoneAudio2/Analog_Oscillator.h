@@ -8,6 +8,6 @@
 
 #import "oscillator.h"
 
-@interface analog_oscillator : Oscillator
+@interface Analog_Oscillator : Oscillator
 
 @end

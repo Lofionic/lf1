@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		6C01140A19C19C3600D3C802 /* OscillatorControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C01140919C19C3600D3C802 /* OscillatorControlView.xib */; };
 		6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C01140C19C19C6500D3C802 /* OscillatorControlView.m */; };
-		6C863E5919BF1D170056D43D /* analog_oscillator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* analog_oscillator.mm */; };
+		6C7E9B4719C7793300DAB5B9 /* Envelope.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.mm */; };
+		6C863E5919BF1D170056D43D /* Analog_Oscillator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.mm */; };
 		6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* KeyboardView.m */; };
 		6C983BCA19BBAA2C005543D8 /* IPAView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C983BC919BBAA2C005543D8 /* IPAView~iphone.xib */; };
 		6CB5E13319C45F0B008B9AC3 /* IPAView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* IPAView.xib */; };
@@ -54,8 +55,10 @@
 		6C01140919C19C3600D3C802 /* OscillatorControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatorControlView.xib; sourceTree = "<group>"; };
 		6C01140B19C19C6500D3C802 /* OscillatorControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscillatorControlView.h; sourceTree = "<group>"; };
 		6C01140C19C19C6500D3C802 /* OscillatorControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OscillatorControlView.m; sourceTree = "<group>"; };
-		6C863E5719BF1D170056D43D /* analog_oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = analog_oscillator.h; sourceTree = "<group>"; };
-		6C863E5819BF1D170056D43D /* analog_oscillator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = analog_oscillator.mm; sourceTree = "<group>"; };
+		6C7E9B4519C7793300DAB5B9 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
+		6C7E9B4619C7793300DAB5B9 /* Envelope.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Envelope.mm; sourceTree = "<group>"; };
+		6C863E5719BF1D170056D43D /* Analog_Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analog_Oscillator.h; sourceTree = "<group>"; };
+		6C863E5819BF1D170056D43D /* Analog_Oscillator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Analog_Oscillator.mm; sourceTree = "<group>"; };
 		6C863E5A19BF30B60056D43D /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
 		6C863E5B19BF30B60056D43D /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
 		6C983BC919BBAA2C005543D8 /* IPAView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "IPAView~iphone.xib"; sourceTree = "<group>"; };
@@ -134,8 +137,10 @@
 			children = (
 				83AFC395192ABB8E00851413 /* Oscillator.h */,
 				83AFC396192ABB8E00851413 /* Oscillator.mm */,
-				6C863E5719BF1D170056D43D /* analog_oscillator.h */,
-				6C863E5819BF1D170056D43D /* analog_oscillator.mm */,
+				6C863E5719BF1D170056D43D /* Analog_Oscillator.h */,
+				6C863E5819BF1D170056D43D /* Analog_Oscillator.mm */,
+				6C7E9B4519C7793300DAB5B9 /* Envelope.h */,
+				6C7E9B4619C7793300DAB5B9 /* Envelope.mm */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -370,10 +375,11 @@
 				834FA81218B95FA800923F29 /* main.m in Sources */,
 				834FA81618B95FA800923F29 /* IPAAppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
+				6C7E9B4719C7793300DAB5B9 /* Envelope.mm in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
 				83AFC397192ABB8E00851413 /* Oscillator.mm in Sources */,
 				834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */,
-				6C863E5919BF1D170056D43D /* analog_oscillator.mm in Sources */,
+				6C863E5919BF1D170056D43D /* Analog_Oscillator.mm in Sources */,
 				83A616EA18B970FB0068AD08 /* CAStreamBasicDescription.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

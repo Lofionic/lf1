@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "analog_oscillator.h"
+#import "Analog_Oscillator.h"
 
 
-@implementation analog_oscillator {
+@implementation Analog_Oscillator {
 
     int harmonics;
     double phase[20];
@@ -28,7 +28,7 @@
 
 -(SInt16) getNextSample {
     
-    float env = [self getEnvelopePoint];
+    float env = [[self envelope] getEnvelopePoint];
     
     switch ([self waveform]) {
         case Sin:

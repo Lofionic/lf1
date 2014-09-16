@@ -29,7 +29,7 @@
 
     _freqControl.value = 0.5;
     _freqControl.defaultValue = 0.5;
-    _resControl.value = 0;
+    _resControl.value = 0.5;
     _resControl.defaultValue = 0;
     
 }

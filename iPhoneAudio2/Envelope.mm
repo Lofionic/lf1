@@ -8,24 +8,102 @@
 
 #import "Envelope.h"
 
-@implementation Envelope
+@implementation Envelope {
+    
+    double envelopePosition;
+    bool envelopeTriggered;
+    float envelopeDecayFrom;
+    float prevEnv;
+    bool noteOn;
+}
 
-- (id)initWithFrame:(CGRect)frame
+- (id)init
 {
-    self = [super initWithFrame:frame];
+    self = [super init];
     if (self) {
-        // Initialization code
+        envelopeTriggered = false;
+        envelopeDecayFrom = 0;
+        prevEnv = 0;
+        noteOn = false;
+        
+        _envelopeAttack = 1000;
+        _envelopeDecay = 2000;
+        _envelopeSustain = 1;
+        _envelopeRelease = 1000;
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+-(void)triggerNote {
+    envelopePosition = 0;
+    envelopeDecayFrom = 0;
+    envelopeTriggered = true;
+    noteOn = true;
 }
-*/
+
+-(void)releaseNote {
+    noteOn = false;
+    envelopePosition = 0;
+}
+
+-(float)getEnvelopePoint {
+    
+    float result = 0;
+    
+    // Return the current value of the envelope
+    if (noteOn) {
+        if (envelopePosition <= _envelopeAttack) {
+            // Envelope is _envelopeAttacking
+            result = envelopePosition / _envelopeAttack;
+        } else if (envelopePosition <= _envelopeAttack + _envelopeDecay) {
+            // Envelope is decaying
+            result = 1 - ((envelopePosition - _envelopeAttack) / (_envelopeDecay) * (1 - _envelopeSustain));
+        } else {
+            // Envelope is sustaining
+            result = _envelopeSustain;
+        }
+        
+        envelopeDecayFrom = result;
+        
+    } else {
+        if (envelopePosition <= _envelopeRelease) {
+            // Envelope is releasing
+            result = envelopeDecayFrom - (envelopePosition / _envelopeRelease) * envelopeDecayFrom;
+        } else {
+            
+            result = 0;
+            
+        }
+    }
+    
+    // Limit the change of envelope amp per sample
+    // Reduces clicks
+    //if (_clickless > 0) {
+    float delta = result - prevEnv;
+        if (fabs(delta) > 0.01) {
+           result = prevEnv + (0.01 * ((delta < 0) ? -1 : 1));
+       }
+     //}
+    
+    prevEnv = result;
+    
+    if (result <= 0 && envelopePosition > 0) {
+        // Envelope has finished
+        envelopePosition = 0;
+        envelopeDecayFrom = 0;
+        envelopeTriggered = false;
+        result = 0;
+    }
+    
+    return result;
+}
+
+-(void)incrementEnvelopeBy:(float)milliseconds {
+    // Increment the position of the envelope
+    if (envelopeTriggered) {
+        envelopePosition += milliseconds;
+    }
+}
+
 
 @end

@@ -19,48 +19,60 @@
     return self;
 }
 
--(IBAction)valueChanged:(id)sender {
+-(IBAction)oscValueChanged:(id)sender {
     if (_delegate) {
         CCRRotaryControl *control = (CCRRotaryControl*)sender;
         NSInteger tag = control.tag;
         if (tag == 2) {
-            
-            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag toValue:control.value];
+            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:0 toValue:control.value];
         } else {
-
-            
-            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag toValue:powf(10000, control.value)];
+            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:0 toValue:powf(10000, control.value) + 10];
         }
     }
 }
 
+-(IBAction)filterValueChanged:(id)sender {
+    if (_delegate) {
+        CCRRotaryControl *control = (CCRRotaryControl*)sender;
+        NSInteger tag = control.tag;
+        if (tag == 2) {
+            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:1 toValue:control.value];
+        } else {
+            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:1 toValue:powf(10000, control.value) + 10];
+        }
+    }
+}
 
 -(void)initializeParameters {
     
     UIImage *moogA = [UIImage imageNamed:@"moog_a"];
-    _attackControl.spriteSheet = moogA;
-    _attackControl.spriteSize = CGSizeMake(140, 140);
-    _decayControl.spriteSheet = moogA;
-    _decayControl.spriteSize = CGSizeMake(140, 140);
-    _sustainControl.spriteSheet = moogA;
-    _sustainControl.spriteSize = CGSizeMake(140, 140);
-    _releaseControl.spriteSheet = moogA;
-    _releaseControl.spriteSize = CGSizeMake(140, 140);
+    _oscAttackControl.spriteSheet = moogA;
+    _oscAttackControl.spriteSize = CGSizeMake(140, 140);
+    _oscDecayControl.spriteSheet = moogA;
+    _oscDecayControl.spriteSize = CGSizeMake(140, 140);
+    _oscSustainControl.spriteSheet = moogA;
+    _oscSustainControl.spriteSize = CGSizeMake(140, 140);
+    _oscReleaseControl.spriteSheet = moogA;
+    _oscReleaseControl.spriteSize = CGSizeMake(140, 140);
     
-    _attackControl.value = 0.7;
-    _decayControl.value = 0.5;
-    _sustainControl.value = 1.0;
-    _releaseControl.value = 0.7;
+    _filterAttackControl.spriteSheet = moogA;
+    _filterAttackControl.spriteSize = CGSizeMake(140, 140);
+    _filterDecayControl.spriteSheet = moogA;
+    _filterDecayControl.spriteSize = CGSizeMake(140, 140);
+    _filterSustainControl.spriteSheet = moogA;
+    _filterSustainControl.spriteSize = CGSizeMake(140, 140);
+    _filterReleaseControl.spriteSheet = moogA;
+    _filterReleaseControl.spriteSize = CGSizeMake(140, 140);
     
+    _oscAttackControl.value = 0.0;
+    _oscDecayControl.value = 0.0;
+    _oscSustainControl.value = 1.0;
+    _oscReleaseControl.value = 0.75;
+    
+    _filterAttackControl.value = 0.0;
+    _filterDecayControl.value = 0.0;
+    _filterSustainControl.value = 1.0;
+    _filterReleaseControl.value = 0.75;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

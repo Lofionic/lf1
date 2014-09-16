@@ -20,7 +20,7 @@ typedef enum ADSRParameter {
 
 @protocol EnvelopeControlViewDelegate
 
--(void)envelopeControlView:(EnvelopeControlView*)view didChangeParameter:(ADSRParameter)parameter toValue:(float)value;
+-(void)envelopeControlView:(EnvelopeControlView*)view didChangeParameter:(ADSRParameter)parameter forEnvelopeId:(int)envelopeId toValue:(float)value;
 
 @end
 
@@ -28,10 +28,15 @@ typedef enum ADSRParameter {
 
 @property (nonatomic, weak) id<EnvelopeControlViewDelegate> delegate;
 
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *attackControl;
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *decayControl;
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *sustainControl;
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *releaseControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *oscAttackControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *oscDecayControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *oscSustainControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *oscReleaseControl;
+
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *filterAttackControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *filterDecayControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *filterSustainControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *filterReleaseControl;
 
 -(void)initializeParameters;
 
