@@ -17,7 +17,6 @@
 		6CB5E13319C45F0B008B9AC3 /* IPAView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* IPAView.xib */; };
 		6CB5E14419C4C784008B9AC3 /* moog_b.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E14319C4C784008B9AC3 /* moog_b.png */; };
 		6CB5E14619C4CCBF008B9AC3 /* moog_a.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E14519C4CCBF008B9AC3 /* moog_a.png */; };
-		6CBB934219C22B6D00F40AC1 /* CCRRotaryControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934119C22B6D00F40AC1 /* CCRRotaryControl.m */; };
 		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
 		6CC18F2219C83625000894AB /* SynthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC18F2119C83625000894AB /* SynthComponent.m */; };
@@ -25,6 +24,7 @@
 		6CC18F2B19C85DA4000894AB /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC18F2A19C85DA4000894AB /* Filter.m */; };
 		6CD5B68B19C8DED8002E835C /* LFOControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CD5B68A19C8DED8002E835C /* LFOControlView.xib */; };
 		6CD5B68E19C8DFCD002E835C /* LFOControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5B68D19C8DFCD002E835C /* LFOControlView.m */; };
+		6CD5B69119C8F411002E835C /* CCRRotaryControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5B69019C8F411002E835C /* CCRRotaryControl.m */; };
 		6CF53BC619C5D56E00C63B1C /* FilterControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CF53BC519C5D56E00C63B1C /* FilterControlView.xib */; };
 		6CF53BC919C5D64200C63B1C /* FilterControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF53BC819C5D64200C63B1C /* FilterControlView.m */; };
 		834FA80618B95FA800923F29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80518B95FA800923F29 /* Foundation.framework */; };
@@ -74,8 +74,6 @@
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
 		6CB5E14319C4C784008B9AC3 /* moog_b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moog_b.png; sourceTree = "<group>"; };
 		6CB5E14519C4CCBF008B9AC3 /* moog_a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moog_a.png; sourceTree = "<group>"; };
-		6CBB934019C22B6D00F40AC1 /* CCRRotaryControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCRRotaryControl.h; path = "../../iphone-rotary-control/CCRRotaryControl.h"; sourceTree = "<group>"; };
-		6CBB934119C22B6D00F40AC1 /* CCRRotaryControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCRRotaryControl.m; path = "../../iphone-rotary-control/CCRRotaryControl.m"; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
 		6CBB934519C23BAE00F40AC1 /* EnvelopeControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeControlView.h; sourceTree = "<group>"; };
 		6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvelopeControlView.m; sourceTree = "<group>"; };
@@ -88,6 +86,8 @@
 		6CD5B68A19C8DED8002E835C /* LFOControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LFOControlView.xib; sourceTree = "<group>"; };
 		6CD5B68C19C8DFCD002E835C /* LFOControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFOControlView.h; sourceTree = "<group>"; };
 		6CD5B68D19C8DFCD002E835C /* LFOControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFOControlView.m; sourceTree = "<group>"; };
+		6CD5B68F19C8F411002E835C /* CCRRotaryControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCRRotaryControl.h; sourceTree = "<group>"; };
+		6CD5B69019C8F411002E835C /* CCRRotaryControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCRRotaryControl.m; sourceTree = "<group>"; };
 		6CF53BC519C5D56E00C63B1C /* FilterControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterControlView.xib; sourceTree = "<group>"; };
 		6CF53BC719C5D64200C63B1C /* FilterControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterControlView.h; sourceTree = "<group>"; };
 		6CF53BC819C5D64200C63B1C /* FilterControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterControlView.m; sourceTree = "<group>"; };
@@ -237,13 +237,13 @@
 		834FA80B18B95FA800923F29 /* iPhoneAudio2 */ = {
 			isa = PBXGroup;
 			children = (
+				6CD5B68F19C8F411002E835C /* CCRRotaryControl.h */,
+				6CD5B69019C8F411002E835C /* CCRRotaryControl.m */,
 				6CB5E13419C4659B008B9AC3 /* BuildSettings.h */,
 				6C01140219C18E6000D3C802 /* Components */,
 				6C01140E19C1A37400D3C802 /* Subviews */,
 				834FA80C18B95FA800923F29 /* Supporting Files */,
 				6CE06BB619C0AD9E005AB92F /* Resources */,
-				6CBB934019C22B6D00F40AC1 /* CCRRotaryControl.h */,
-				6CBB934119C22B6D00F40AC1 /* CCRRotaryControl.m */,
 				834FA81418B95FA800923F29 /* IPAAppDelegate.h */,
 				834FA81518B95FA800923F29 /* IPAAppDelegate.m */,
 				834FA81718B95FA800923F29 /* Images.xcassets */,
@@ -398,7 +398,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6CF53BC919C5D64200C63B1C /* FilterControlView.m in Sources */,
-				6CBB934219C22B6D00F40AC1 /* CCRRotaryControl.m in Sources */,
 				6CC18F2219C83625000894AB /* SynthComponent.m in Sources */,
 				6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */,
 				6CC18F2519C842E9000894AB /* Generator.m in Sources */,
@@ -411,6 +410,7 @@
 				6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
 				83AFC397192ABB8E00851413 /* Oscillator.m in Sources */,
+				6CD5B69119C8F411002E835C /* CCRRotaryControl.m in Sources */,
 				834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */,
 				6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */,
 				6CD5B68E19C8DFCD002E835C /* LFOControlView.m in Sources */,

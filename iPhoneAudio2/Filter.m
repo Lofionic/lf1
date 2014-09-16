@@ -50,7 +50,7 @@
         if (envelope) {
             cutoff *= envelope.buffer[i];
         }
-        §
+        
         if (_lfo) {
             cutoff *= powf(0.5, -_lfo.buffer[i]);
             if (cutoff > 1) {
