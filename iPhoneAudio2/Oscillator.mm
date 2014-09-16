@@ -38,7 +38,7 @@
 @synthesize waveform = _waveform;
 
 -(void)setWaveform:(Waveform)waveform {
-    nextWaveform = waveform;
+    _nextWaveform = waveform;
 }
 
 -(Waveform)waveform {
@@ -58,8 +58,8 @@
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
-            if (_waveform != nextWaveform) {
-                _waveform = nextWaveform;
+            if (_waveform != _nextWaveform) {
+                _waveform = _nextWaveform;
                 phase = 0;
             }
         }

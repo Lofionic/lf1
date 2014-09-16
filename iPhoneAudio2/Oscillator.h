@@ -24,6 +24,7 @@ typedef enum Waveform {
 
 @property float freq;
 @property Waveform waveform;
+@property (readonly) Waveform nextWaveform;
 @property NSInteger octave;
 
 -(void)setWaveform:(Waveform)waveform;

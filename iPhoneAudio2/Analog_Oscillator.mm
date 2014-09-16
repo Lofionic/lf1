@@ -12,6 +12,7 @@
 @implementation Analog_Oscillator {
 
     double phase[ANALOG_HARMONICS];
+    AudioSignalType prevResult;
 }
 
 -(id)init {
@@ -24,12 +25,39 @@
     return self;
 }
 
--(SInt16) getNextSample {
+-(void) fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+    
+    // Fill a buffer with oscillator samples
+    for (int i = 0; i < numFrames; i++) {
+        AudioSignalType value = [self getNextSample];
+        outA[i] = value;
+        
+        // Increment Phase
+        for (int j = 0; j < ANALOG_HARMONICS; j++) {
+            phase[j] += ((M_PI * self.freq * powf(2, self.octave)) / self.sampleRate) * (j + 1);
+            if (phase[j] > M_PI * 2.0) {
+                phase[j] -= M_PI * 2.0;
+            }
+        }
+        // Change waveform on zero crossover
+        if ((value > 0) != (prevResult < 0) || value == 0) {
+            if (self.waveform != self.nextWaveform) {
+                //self.waveform = self.nextWaveform;
+                for (int j = 0; j <ANALOG_HARMONICS; j++) {
+                    //phase[j] = 0;
+                }
+            }
+        }
+    }
+
+}
+
+-(AudioSignalType) getNextSample {
     
     switch ([self waveform]) {
         case Sin:
             // Sin generator
-            return (SInt16)(sin(phase[0]) * 32767.0f);
+            return (AudioSignalType)sin(phase[0]);
             break;
         case Saw: {
             
@@ -40,7 +68,7 @@
                 result += sin(phase[i]) * amp;
                 amp /= 2.0;
             }
-            return (SInt16)(result * 32767.0f);
+            return (AudioSignalType)result;
         }
             break;
         case Square: {
@@ -55,7 +83,7 @@
             }
             
             sum /= count;
-            return (SInt16)(sum * 32767.0f);
+            return (AudioSignalType)sum;
             
         }
             break;
