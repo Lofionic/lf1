@@ -7,9 +7,6 @@
 //
 
 #import "SynthComponent.h"
-#import <Foundation/Foundation.h>
-#import <CoreAudio/CoreAudioTypes.h>
-#import <AudioToolbox/AudioToolbox.h>
 
 @interface Generator : SynthComponent
 

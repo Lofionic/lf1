@@ -10,6 +10,7 @@
                 <outlet property="iPadControlsView1" destination="KLo-Pj-TPe" id="hzW-CT-eKu"/>
                 <outlet property="iPadControlsView2" destination="zur-Od-iVT" id="YBP-HI-LzW"/>
                 <outlet property="iPadControlsView3" destination="CZ5-mR-Wzv" id="IYX-8T-44L"/>
+                <outlet property="iPadControlsView4" destination="YvS-Li-Olr" id="urr-7v-OYK"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Flc-gi-arS"/>
             </connections>
         </placeholder>

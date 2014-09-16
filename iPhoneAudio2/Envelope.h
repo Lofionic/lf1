@@ -18,8 +18,10 @@
 @property float envelopeRelease;
 @property float clickless;
 
+@property AudioSignalType* buffer;
+
 -(void)triggerNote;
 -(void)releaseNote;
 
-
 @end
+

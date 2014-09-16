@@ -8,6 +8,7 @@
 
 #import "Filter.h"
 
+
 @implementation Filter {
     
     float f, p, q;             //filter coefficients
@@ -30,7 +31,7 @@
     
 }
 
--(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(AudioSignalType*)envelope {
+-(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(Envelope*)envelope {
     
     // DSP ! http://www.musicdsp.org/showArchiveComment.php?ArchiveID=25
     
@@ -43,12 +44,22 @@
         } else if (valueIn < -1) {
             valueIn = -1;
         }
+
+        float cutoff = _cutoff;
         
-
-        float envCutoff = _cutoff * envelope[i];
-
-        q = 1.0f - envCutoff;
-        p = envCutoff + 0.8f * envCutoff * q;
+        if (envelope) {
+            cutoff *= envelope.buffer[i];
+        }
+        
+        if (_lfo) {
+            cutoff *= powf(0.5, -_lfo.buffer[i]);
+            if (cutoff > 1) {
+                cutoff = 1;
+            }
+        }
+        
+        q = 1.0f - cutoff;
+        p = cutoff + 0.8f * cutoff * q;
         f = p + p - 1.0f;
         q = _resonance * (1.0f + 0.5f * q * (1.0f - q + 5.6f * q * q));
         

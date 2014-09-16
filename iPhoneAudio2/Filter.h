@@ -10,12 +10,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import <AudioToolbox/AudioToolbox.h>
+#import "Envelope.h"
+#import "LFO.h"
 
 @interface Filter : SynthComponent
 
--(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(AudioSignalType*)envelope;
+-(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(Envelope*)envelope;
 
 @property float cutoff;
 @property float resonance;
+@property (weak) LFO *lfo;
 
 @end

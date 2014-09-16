@@ -6,27 +6,24 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreAudio/CoreAudioTypes.h>
-#import <AudioToolbox/AudioToolbox.h>
-#import "CAStreamBasicDescription.h"
 #import "Generator.h"
+#import "LFO.h"
 
-typedef enum Waveform {
+typedef enum OscillatorWaveform {
     Sin,
     Saw,
-    Square,
-    AnalogSaw,
-    AnalogSquare
-} Waveform;
+    Square
+} OscillatorWaveform;
 
 @interface Oscillator : Generator
 
 @property float freq;
-@property Waveform waveform;
-@property (readonly) Waveform nextWaveform;
+@property OscillatorWaveform waveform;
+@property (readonly) OscillatorWaveform nextWaveform;
 @property NSInteger octave;
 
--(void)setWaveform:(Waveform)waveform;
+-(void)setWaveform:(OscillatorWaveform)waveform;
+
+@property (weak) LFO* lfo;
 
 @end

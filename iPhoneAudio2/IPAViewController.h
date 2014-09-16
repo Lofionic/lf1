@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "KeyboardView.h"
-#import "CCRRotaryControl.h"
 #import "OscillatorControlView.h"
 #import "EnvelopeControlView.h"
 #import "FilterControlView.h"
+#import "LFOControlView.h"
 
 @class AudioController;
 
@@ -26,10 +26,12 @@
 @property (nonatomic, strong) OscillatorControlView *oscView;
 @property (nonatomic, strong) EnvelopeControlView *envView;
 @property (nonatomic, strong) FilterControlView *filterView;
+@property (nonatomic, strong) LFOControlView *lfoView;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *iPhoneControlsView;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView1;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView2;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView3;
+@property (nonatomic, strong) IBOutlet UIView *iPadControlsView4;
 
 @end

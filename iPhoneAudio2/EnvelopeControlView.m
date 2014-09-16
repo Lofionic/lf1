@@ -23,11 +23,8 @@
     if (_delegate) {
         CCRRotaryControl *control = (CCRRotaryControl*)sender;
         NSInteger tag = control.tag;
-        if (tag == 2) {
-            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:0 toValue:control.value];
-        } else {
-            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:0 toValue:powf(10000, control.value) + 10];
-        }
+        [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:0 toValue:control.value];
+
     }
 }
 
@@ -35,11 +32,7 @@
     if (_delegate) {
         CCRRotaryControl *control = (CCRRotaryControl*)sender;
         NSInteger tag = control.tag;
-        if (tag == 2) {
-            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:1 toValue:control.value];
-        } else {
-            [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:1 toValue:powf(10000, control.value) + 10];
-        }
+        [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:1 toValue:control.value];
     }
 }
 

@@ -20,21 +20,25 @@ const Float64 kGraphSampleRate = 44100.0;
     
     // initialize components
     if (USE_ANALOG > 0) {
-        _oscillators = @[
-                        [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate],
-                        [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate]
-                        ];
+        _osc1 = [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        _osc2 = [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate];
+        
     } else {
-        _oscillators = @[
-                        [[Oscillator alloc] initWithSampleRate:kGraphSampleRate],
-                        [[Oscillator alloc] initWithSampleRate:kGraphSampleRate]
-                        ];
+        _osc1 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        _osc2 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+                       
     }
     
     _filter = [[Filter alloc] initWithSampleRate:kGraphSampleRate];
-    
     _vcoEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
     _filterEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
+    _lfo1 = [[LFO alloc] initWithSampleRate:kGraphSampleRate];
+    
+    [_lfo1 setFreq:30];
+    [_lfo1 setAmp:0.2];
+    [_lfo1 setWaveform:LFOSin];
+    
+    [_filter setLfo:_lfo1];
     
     osc2Freq = 1.0f;
     _osc1vol = 0.5f;
@@ -153,33 +157,36 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
  
     // Get reference to audio controller from inRefCon
     AudioController *ac = (__bridge AudioController*)inRefCon;
+
+    // Generate VCO envelope buffer
+    ac.vcoEnvelope.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    [ac.vcoEnvelope fillBuffer:ac.vcoEnvelope.buffer samples:inNumberFrames];
+    
+    // Generate VCF envelope buffer
+    ac.filterEnvelope.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    [ac.filterEnvelope fillBuffer:ac.filterEnvelope.buffer samples:inNumberFrames];
+    
+    ac.lfo1.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    [ac.lfo1 fillBuffer:ac.lfo1.buffer samples:inNumberFrames];
     
     // Generate buffer for oscillator 1
     AudioSignalType *osc1 = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
-    [ac.oscillators[0] fillBuffer:osc1 samples:inNumberFrames];
+    [ac.osc1 fillBuffer:osc1 samples:inNumberFrames];
     
     // Generate buffer for oscillator 2
     AudioSignalType *osc2 = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
-    [ac.oscillators[1] fillBuffer:osc2 samples:inNumberFrames];
+    [ac.osc2 fillBuffer:osc2 samples:inNumberFrames];
 
-    // Generate VCO envelope buffer
-    AudioSignalType *vcoEnvelope = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
-    [ac.vcoEnvelope fillBuffer:vcoEnvelope samples:inNumberFrames];
-    
-    // Generate VCF envelope buffer
-    AudioSignalType *filterEnvelope = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
-    [ac.filterEnvelope fillBuffer:filterEnvelope samples:inNumberFrames];
-    
     // Mix oscillator 1 + 2
     AudioSignalType *mixedSignal = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
     
     for (int i = 0; i < inNumberFrames;i++) {
         mixedSignal[i] = ((osc1[i] * ac.osc1vol) + (osc2[i] * ac.osc2vol) / 2.0);
-        mixedSignal[i] = mixedSignal[i] * vcoEnvelope[i];
+        mixedSignal[i] = mixedSignal[i] * ac.vcoEnvelope.buffer[i];
     }
     
     // Filter
-    [ac.filter processBuffer:mixedSignal samples:inNumberFrames envelope:filterEnvelope];
+    [ac.filter processBuffer:mixedSignal samples:inNumberFrames envelope:ac.filterEnvelope];
 
     // Send signal to audio buffer
     // outA is a pointer to the buffer that will be filled
@@ -191,8 +198,6 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     
     free (osc1);
     free (osc2);
-    free (vcoEnvelope);
-    free (filterEnvelope);
     free (mixedSignal);
     
     return noErr;
@@ -245,7 +250,7 @@ OSStatus RenderTone(
     [self setFrequencies:frequency];
     [_vcoEnvelope triggerNote];
     [_filterEnvelope triggerNote];
-
+    [_lfo1 reset];
 }
 
 
@@ -260,8 +265,8 @@ OSStatus RenderTone(
 
     noteFreq = frequency;
 
-    [_oscillators[0] setFreq:frequency];
-    [_oscillators[1] setFreq:frequency * osc2Freq];
+    [_osc1 setFreq:frequency];
+    [_osc2 setFreq:frequency * osc2Freq];
     
 }
 
@@ -276,16 +281,28 @@ OSStatus RenderTone(
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId FreqChangedTo:(float)value {
-    osc2Freq = value;
+    
+    float inValue = (value * 2.0) - 1.0;
+    
+    osc2Freq = (powf(powf(2, (1.0 / 12.0)), inValue * 7));
+    
     [self setFrequencies:noteFreq];
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value {
-    [_oscillators[oscillatorId] setWaveform:(Waveform)value];
+    if (oscillatorId == 0) {
+        [_osc1 setWaveform:(OscillatorWaveform)value];
+    } else {
+        [_osc2 setWaveform:(OscillatorWaveform)value];
+    }
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId OctaveChangedTo:(int)value {
-    [_oscillators[oscillatorId] setOctave:value];
+    if (oscillatorId == 0) {
+        [_osc1 setOctave:value];
+    } else {
+        [_osc2 setOctave:value];
+    }
 }
 
 -(void)envelopeControlView:(EnvelopeControlView *)view didChangeParameter:(ADSRParameter)parameter forEnvelopeId:(int)envelopeId toValue:(float)value {
@@ -293,13 +310,13 @@ OSStatus RenderTone(
     if (envelopeId == 0) {
         switch (parameter) {
             case Attack:
-                [_vcoEnvelope setEnvelopeAttack:value];
+                [_vcoEnvelope setEnvelopeAttack:powf(10000, value) + 10];
                 break;
             case Decay:
-                [_vcoEnvelope setEnvelopeDecay:value];
+                [_vcoEnvelope setEnvelopeDecay:powf(10000, value) + 10];
                 break;
             case Release:
-                [_vcoEnvelope setEnvelopeRelease:value];
+                [_vcoEnvelope setEnvelopeRelease:powf(10000, value) + 10];
                 break;
             case Sustain:
                 [_vcoEnvelope setEnvelopeSustain:value];
@@ -311,13 +328,13 @@ OSStatus RenderTone(
     } else {
         switch (parameter) {
             case Attack:
-                [_filterEnvelope setEnvelopeAttack:value];
+                [_filterEnvelope setEnvelopeAttack:powf(10000, value) + 10];
                 break;
             case Decay:
-                [_filterEnvelope setEnvelopeDecay:value];
+                [_filterEnvelope setEnvelopeDecay:powf(10000, value) + 10];
                 break;
             case Release:
-                [_filterEnvelope setEnvelopeRelease:value];
+                [_filterEnvelope setEnvelopeRelease:powf(10000, value) + 10];
                 break;
             case Sustain:
                 [_filterEnvelope setEnvelopeSustain:value];
@@ -334,6 +351,26 @@ OSStatus RenderTone(
 
 -(void)filterControlView:(FilterControlView *)view didChangeResonanceTo:(float)value {
     _filter.resonance = value;
+}
+
+-(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeRateTo:(float)value {
+    _lfo1.freq = (powf(1000, value) / 10);
+}
+
+-(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeAmountTo:(float)value {
+    _lfo1.amp = (powf(value, 2));
+}
+
+-(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeDestinationTo:(NSInteger)value {
+    _osc1.lfo = (value == 0) ? _lfo1 : 0;
+    _osc2.lfo = (value == 0 || value == 1) ? _lfo1 : 0;
+    _filter.lfo = (value = 2) ? _lfo1 : 0;
+}
+
+-(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeWaveformTo:(NSInteger)value {
+    
+    _lfo1.waveform = (LFOWaveform)value;
+    
 }
 
 @end

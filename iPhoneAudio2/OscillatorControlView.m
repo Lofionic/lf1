@@ -68,11 +68,9 @@
         CCRRotaryControl *control = (CCRRotaryControl*)sender;
         NSInteger tag = control.tag;
         
-        float inValue = (control.value * 2.0) - 1.0;
+
         
-        float outValue = (powf(powf(2, (1.0 / 12.0)), inValue * 7));
-        
-        [_delegate oscillatorControlView:self oscillator:(int)tag FreqChangedTo:outValue];
+        [_delegate oscillatorControlView:self oscillator:(int)tag FreqChangedTo:control.value];
     }
 }
 

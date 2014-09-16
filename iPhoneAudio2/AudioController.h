@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
+#import "BuildSettings.h"
 #import <Foundation/Foundation.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "CAStreamBasicDescription.h"
 #import "oscillator.h"
 #import "analog_oscillator.h"
+#import "Envelope.h"
+#import "Filter.h"
 #import "OscillatorControlView.h"
 #import "EnvelopeControlView.h"
 #import "FilterControlView.h"
-#import "Envelope.h"
-#import "Filter.h"
-#import "BuildSettings.h"
-#import "SynthComponent.h"
+#import "LFOControlView.h"
 
-@interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate, FilterControlViewDelegate> {
+@interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate, FilterControlViewDelegate, LFOControlViewDelegate> {
 
     AUGraph mGraph;
     AudioUnit mOutput;
@@ -33,10 +33,12 @@
 @property bool IsRunning;
 
 // Synth Components
-@property NSArray *oscillators;
-@property Filter *filter;
+@property (nonatomic, strong) Oscillator *osc1;
+@property (nonatomic, strong) Oscillator *osc2;
+@property (nonatomic, strong) Filter *filter;
 @property (nonatomic, strong) Envelope *filterEnvelope;
 @property (nonatomic, strong) Envelope *vcoEnvelope;
+@property (nonatomic, strong) LFO *lfo1;
 
 @property float osc1vol;
 @property float osc2vol;

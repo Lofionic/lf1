@@ -53,18 +53,25 @@
     _filterView.delegate = _audioController;
     [_filterView initializeParameters];
     
+    NSArray *lfoNib = [[NSBundle mainBundle] loadNibNamed:@"LFOControlView" owner:self options:nil];
+    _lfoView = lfoNib[0];
+    _lfoView.delegate = _audioController;
+    [_lfoView initializeParameters];
+    
     if (_iPhoneControlsView) {
         // iPhone - add control views
         [_iPhoneControlsView setContentInset:UIEdgeInsetsZero];
-        
         [_iPhoneControlsView addSubview:_oscView];
         [_iPhoneControlsView addSubview:_envView];
-        [_iPhoneControlsView setContentSize:CGSizeMake(_iPhoneControlsView.frame.size.width * 2, _iPhoneControlsView.frame.size.height)];
+        [_iPhoneControlsView addSubview:_filterView];
+        [_iPhoneControlsView addSubview:_lfoView];
+        [_iPhoneControlsView setContentSize:CGSizeMake(_iPhoneControlsView.frame.size.width * 4, _iPhoneControlsView.frame.size.height)];
     } else {
         // iPad - add control views
         [_iPadControlsView1 addSubview:_oscView];
         [_iPadControlsView2 addSubview:_envView];
         [_iPadControlsView3 addSubview:_filterView];
+        [_iPadControlsView4 addSubview:_lfoView];
     }
 }
 -(void)viewWillLayoutSubviews {
@@ -81,12 +88,24 @@
                                     0,
                                     _iPhoneControlsView.frame.size.width,
                                     _iPhoneControlsView.frame.size.height);
+        _filterView.frame = CGRectMake(_iPhoneControlsView.frame.size.width * 2,
+                                    0,
+                                    _iPhoneControlsView.frame.size.width,
+                                    _iPhoneControlsView.frame.size.height);
         
-        [_iPhoneControlsView setContentSize:CGSizeMake(_iPhoneControlsView.frame.size.width * 2, _iPhoneControlsView.frame.size.height)];
+        _lfoView.frame = CGRectMake(_iPhoneControlsView.frame.size.width * 3,
+                                       0,
+                                       _iPhoneControlsView.frame.size.width,
+                                       _iPhoneControlsView.frame.size.height);
+        
+        
+        [_iPhoneControlsView setContentSize:CGSizeMake(_iPhoneControlsView.frame.size.width * 4, _iPhoneControlsView.frame.size.height)];
     } else {
         // iPad - layout control views
         _oscView.frame = [_oscView superview].bounds;
         _envView.frame = [_envView superview].bounds;
+        _filterView.frame = [_filterView superview].bounds;
+        _lfoView.frame = [_lfoView superview].bounds;
     }
 }
 

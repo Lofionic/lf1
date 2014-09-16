@@ -1,60 +1,41 @@
 //
-//  oscillator.m
+//  LFO.m
 //  iPhoneAudio2
 //
-//  Created by Chris on 19/05/2014.
+//  Created by Chris on 16/09/2014.
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "Oscillator.h"
+#import "LFO.h"
 
-@implementation Oscillator
-{
-    bool noteOn;
-    bool noteWaiting;
-    
-    Waveform nextWaveform;
-    float nextFreq;
-    
+@implementation LFO {
     double phase;
+    AudioSignalType prevResult;
     
-    SInt16 prevResult;
-}
-
--(id)initWithSampleRate:(Float64)graphSampleRate {
-    
-    if (self = [super initWithSampleRate:graphSampleRate]) {
-        _freq = 0;
-        _octave = 1;
-        
-        _waveform = Sin;
-        nextWaveform = Sin;
-        phase = 0;
-         }
-    
-    return self;
+    double sampleHoldPhase;
+    float sampleHold;
 }
 
 @synthesize waveform = _waveform;
 
--(void)setWaveform:(Waveform)waveform {
+-(void)setWaveform:(LFOWaveform)waveform {
     _nextWaveform = waveform;
 }
 
--(Waveform)waveform {
+-(LFOWaveform)waveform {
     return _waveform;
 }
 
 
--(void) fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+-(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
         float value = [self getNextSample];
-        outA[i] = value;
+
+        outA[i] = value * _amp;
         
-        // Increment Phase
-        phase += (M_PI * _freq * powf(2, _octave)) / self.sampleRate;
+        phase += (M_PI * _freq * (_waveform == LFOSampleHold ? 2 : 1)) / self.sampleRate;
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
@@ -69,31 +50,44 @@
     phase = fmod(phase, M_PI * 2.0);
 }
 
-
--(float) getNextSample {
+-(AudioSignalType)getNextSample {
     
     switch (_waveform) {
-        case Sin:
+        case LFOSin:
             // Sin generator
             return (float)(sin(phase * 2));
             break;
-        case Saw: {
+        case LFOSaw: {
             double modPhase = fmod(phase, M_PI * 2.0);
             float a = (modPhase / (M_PI)) - 1.0f;
             return (float)(a);
         }
             break;
-        case Square: {
-            if (sin(phase) > 0.5) {
+        case LFOSquare: {
+            if (sin(phase) > 0) {
                 return 1.0;
             } else {
-                return -0.1;
+                return -1.0;
             }
         }
             break;
+        case LFOSampleHold: {
+            if (phase < sampleHoldPhase) {
+                sampleHold = arc4random_uniform(32767) / 32767.0;
+            }
+            sampleHoldPhase = phase;
+            return sampleHold;
+            
+        }
         default:
             return 0;
     }
+}
+
+-(void)reset {
+    
+    phase = 0;
+    
 }
 
 @end
