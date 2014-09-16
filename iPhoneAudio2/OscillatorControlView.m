@@ -33,7 +33,7 @@
     _osc2freq.spriteSheet = moogB;
     _osc2freq.spriteSize = CGSizeMake(140, 140);
     
-    _osc2freq.value = 1.0;
+    _osc2freq.value = 0.0;
     _osc2freq.defaultValue = 0.5;
     
     _osc1vol.value = 0.5;
@@ -46,7 +46,7 @@
     _osc2wave.selectedSegmentIndex = 2;
     [self oscillatorWaveformChanged:_osc2wave];
     
-    _osc1octave.selectedSegmentIndex = 1;
+    _osc1octave.selectedSegmentIndex = 0;
     [self oscillatorOctaveChanged:_osc1octave];
     
     _osc2octave.selectedSegmentIndex = 2;

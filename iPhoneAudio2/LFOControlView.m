@@ -12,7 +12,7 @@
 
 -(void)initializeParameters {
     
-    _amountControl1.value = 0.75;
+    _amountControl1.value = 1.0;
     _rateControl1.value = 0.8;
     _destinationControl1.selectedSegmentIndex = 1;
     [self changeDestination:_destinationControl1];
