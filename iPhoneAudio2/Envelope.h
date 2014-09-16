@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SynthComponent.h"
 
-@interface Envelope : NSObject
+@interface Envelope : SynthComponent
 
 @property float envelopeAttack;
 @property float envelopeDecay;
@@ -18,7 +19,6 @@
 
 -(void)triggerNote;
 -(void)releaseNote;
--(float)getEnvelopePoint;
--(void)incrementEnvelopeBy:(float)milliseconds;
+-(void)fillEnvelopeBuffer:(AudioSignalType*)outA with:(int)numFrames;
 
 @end

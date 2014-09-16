@@ -10,7 +10,7 @@
 #import <CoreAudio/CoreAudioTypes.h>
 #import <AudioToolbox/AudioToolbox.h>
 #import "CAStreamBasicDescription.h"
-#import "Envelope.h"
+#import "Generator.h"
 
 typedef enum Waveform {
     Sin,
@@ -20,16 +20,12 @@ typedef enum Waveform {
     AnalogSquare
 } Waveform;
 
-@interface Oscillator : NSObject
+@interface Oscillator : Generator
 
 @property float freq;
 @property Waveform waveform;
 @property NSInteger octave;
-@property Envelope *envelope;
 
 -(void)setWaveform:(Waveform)waveform;
--(void)avoidOverflow;
--(SInt16) getNextSampleForSampleRate:(Float64)sampleRate;
-
 
 @end

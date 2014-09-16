@@ -21,20 +21,16 @@
     SInt16 prevResult;
 }
 
--(id)init {
+-(id)initWithSampleRate:(Float64)graphSampleRate {
     
-    if (self = [super init]) {
+    if (self = [super initWithSampleRate:graphSampleRate]) {
         _freq = 0;
         _octave = 1;
         
         _waveform = Sin;
         nextWaveform = Sin;
         phase = 0;
-     
-        _envelope = [[Envelope alloc] init];
-        _envelope.clickless = 0.01;
-
-    }
+         }
     
     return self;
 }
@@ -49,84 +45,55 @@
     return _waveform;
 }
 
-@synthesize freq = _freq;
 
--(void)setFreq:(float)freq {
-    _freq = freq;
-}
-
--(float)freq {
-    return _freq;
-}
-
--(SInt16) getNextSampleForSampleRate:(Float64)sampleRate {
-
-    // Calculate the next sample
-    SInt16 result = [self getNextSample];
-
-    // Smooth out result
+-(void) fillBuffer:(AudioSignalType*)outA with:(int)numFrames {
     
-    // phaseIncrement is the amount the phase changes in a single sample
-    float phaseIncrement = (M_PI * _freq * powf(2, _octave)) / sampleRate;
-    [self incrementPhase:phaseIncrement];
-    
-    // timeIncrement is the amount the envelope moves in a single sample
-    float timeIncrement = 1000 / sampleRate;
-    [_envelope incrementEnvelopeBy:timeIncrement];
-    
-    // Change waveform on zero crossover
-    if ((result > 0) != (prevResult < 0) || result == 0) {
-        if (_waveform != nextWaveform) {
-            _waveform = nextWaveform;
-            phase = 0;
+    // Fill a buffer with oscillator samples
+    for (int i = 0; i < numFrames; i++) {
+        float value = [self getNextSample];
+        outA[i] = value;
+        
+        // Increment Phase
+        phase += (M_PI * _freq * powf(2, _octave)) / self.sampleRate;
+        
+        // Change waveform on zero crossover
+        if ((value > 0) != (prevResult < 0) || value == 0) {
+            if (_waveform != nextWaveform) {
+                _waveform = nextWaveform;
+                phase = 0;
+            }
         }
     }
-
-    prevResult = result;
     
-    return result;
-}
-
--(SInt16) getNextSample {
-    
-    float env = [_envelope getEnvelopePoint];
-    //env = 1;
-    if (env > 0) {
-        switch (_waveform) {
-            case Sin:
-                // Sin generator
-                return (SInt16)(sin(phase) * 32767.0f * env);
-                break;
-            case Saw: {
-                double modPhase = fmod(phase, M_PI * 2.0);
-                float a = (modPhase / (M_PI)) - 1.0f;
-                return (SInt16)(a * 32767.0f * env);
-            }
-                break;
-            case Square: {
-                if (sin(phase) > 0.5) {
-                    return (SInt16)(32767.0f * env);
-                } else {
-                    return (SInt16)(32767.0f * -env);
-                }
-            }
-                break;
-            default:
-                return 0;
-        }
-    } else {
-        return 0;
-    }
-}
-
--(void)incrementPhase:(float)phaseIncrement {
-    // Increment the phase of the oscillator
-    phase += (phaseIncrement);
-}
-
--(void)avoidOverflow {
     // Prevent phase from overloading
     phase = fmod(phase, M_PI * 2.0);
+}
+
+
+-(float) getNextSample {
+    
+    switch (_waveform) {
+        case Sin:
+            // Sin generator
+            return (float)(sin(phase * 2));
+            break;
+        case Saw: {
+            double modPhase = fmod(phase, M_PI * 2.0);
+            float a = (modPhase / (M_PI)) - 1.0f;
+            return (float)(a);
+        }
+            break;
+        case Square: {
+            if (sin(phase) > 0.5) {
+                return 1.0;
+            } else {
+                return -0.1;
+            }
+        }
+            break;
+        default:
+            return 0;
+    }
 }
 
 @end

@@ -16,6 +16,9 @@
 #import "EnvelopeControlView.h"
 #import "FilterControlView.h"
 #import "Envelope.h"
+#import "Filter.h"
+#import "BuildSettings.h"
+#import "SynthComponent.h"
 
 @interface AudioController : NSObject <OscillatorViewDelegate, EnvelopeControlViewDelegate, FilterControlViewDelegate> {
 
@@ -24,23 +27,24 @@
     AudioUnit mOutput;
     AudioUnit mConverter;
     
-    
-    NSArray *oscillators;
-
     CAStreamBasicDescription outputASBD;
-
-    double sinPhase;
-    
-    NSTimer *timer;
 
 }
 
 @property bool IsRunning;
-@property (nonatomic, strong) Envelope *filterEnvelope;
-@property float filterFreq;
 
 @property AudioUnit mFilter;
 @property AudioUnit mMixer;
+
+// Synth Components
+@property NSArray *oscillators;
+@property Filter *filter;
+@property (nonatomic, strong) Envelope *filterEnvelope;
+@property (nonatomic, strong) Envelope *vcoEnvelope;
+
+@property float osc1vol;
+@property float osc2vol;
+
 
 -(void)initializeAUGraph;
 -(void)startAUGraph;

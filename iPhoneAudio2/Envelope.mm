@@ -26,10 +26,10 @@
         prevEnv = 0;
         noteOn = false;
         
-        _envelopeAttack = 1000;
-        _envelopeDecay = 2000;
+        _envelopeAttack = 10;
+        _envelopeDecay = 10;
         _envelopeSustain = 1;
-        _envelopeRelease = 1000;
+        _envelopeRelease = 10;
     }
     return self;
 }
@@ -46,9 +46,9 @@
     envelopePosition = 0;
 }
 
--(float)getEnvelopePoint {
+-(AudioSignalType)getEnvelopePoint {
     
-    float result = 0;
+    AudioSignalType result = 0;
     
     // Return the current value of the envelope
     if (noteOn) {
@@ -66,13 +66,11 @@
         envelopeDecayFrom = result;
         
     } else {
-        if (envelopePosition <= _envelopeRelease) {
+        if (_envelopeRelease > 0 && envelopePosition <= _envelopeRelease) {
             // Envelope is releasing
-            result = envelopeDecayFrom - (envelopePosition / _envelopeRelease) * envelopeDecayFrom;
+            result = MAX(envelopeDecayFrom - (envelopePosition / _envelopeRelease) * envelopeDecayFrom, 0);
         } else {
-            
             result = 0;
-            
         }
     }
     
@@ -98,12 +96,17 @@
     return result;
 }
 
--(void)incrementEnvelopeBy:(float)milliseconds {
-    // Increment the position of the envelope
-    if (envelopeTriggered) {
-        envelopePosition += milliseconds;
+-(void) fillEnvelopeBuffer:(AudioSignalType*)outA with:(int)numFrames {
+    
+    // Fill a buffer with envelope samples
+    for (int i = 0; i < numFrames; i++) {
+        
+        outA[i]= [self getEnvelopePoint];
+        
+        // Increment the position of the envelope
+        if (envelopeTriggered) {
+            envelopePosition += 1000 / self.sampleRate;
+        }
     }
 }
-
-
 @end

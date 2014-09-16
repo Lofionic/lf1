@@ -7,39 +7,38 @@
 //
 
 #import "AudioController.h"
-#import "BuildSettings.h"
+
 
 const Float64 kGraphSampleRate = 44100.0;
-const float kFilterUpdateRate = 1000;
 @implementation AudioController {
-    
     float noteFreq;
     float osc2Freq;
-    
-    
 }
 
 
 -(void)initializeAUGraph {
     
-    // Create components
-    
+    // initialize components
     if (USE_ANALOG > 0) {
-        oscillators = @[
-                        [[Analog_Oscillator alloc] init],
-                        [[Analog_Oscillator  alloc] init]
+        _oscillators = @[
+                        [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate],
+                        [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate]
                         ];
     } else {
-        oscillators = @[
-                        [[Oscillator alloc] init],
-                        [[Oscillator alloc] init]
+        _oscillators = @[
+                        [[Oscillator alloc] initWithSampleRate:kGraphSampleRate],
+                        [[Oscillator alloc] initWithSampleRate:kGraphSampleRate]
                         ];
     }
     
-    _filterEnvelope = [[Envelope alloc] init];
-    //_filterEnvelope.clickless = 0.01;
+    _filter = [[Filter alloc] initWithSampleRate:kGraphSampleRate];
+    
+    _vcoEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
+    _filterEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
     
     osc2Freq = 1.0f;
+    _osc1vol = 0.5f;
+    _osc2vol = 0.5f;
     
     // Error checking result
     OSStatus result = noErr;
@@ -92,16 +91,16 @@ const float kFilterUpdateRate = 1000;
     result = AUGraphAddNode(mGraph, &output_desc, &outputNode);
     
     // Connect Mixer Node's output to the RemoteIO node's input
-    //result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, outputNode, 0);
+    result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, outputNode, 0);
     
     // Connect Mixer Node's output to the Filter node's input
-    result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, converterNode, 0);
+    // result = AUGraphConnectNodeInput(mGraph, mixerNode, 0, converterNode, 0);
     
     // Connect Converter Node's outout to the Filter node's input
-    result = AUGraphConnectNodeInput(mGraph, converterNode, 0, filterNode, 0);
+    // result = AUGraphConnectNodeInput(mGraph, converterNode, 0, filterNode, 0);
     
     // Connect FIlter Node's output to RemoteIO node's input
-    result = AUGraphConnectNodeInput(mGraph, filterNode, 0, outputNode, 0);
+    // result = AUGraphConnectNodeInput(mGraph, filterNode, 0, outputNode, 0);
     
     // Open the graph - AudioUnits are opened but not initialized
     result = AUGraphOpen(mGraph);
@@ -120,7 +119,7 @@ const float kFilterUpdateRate = 1000;
     // *** Make Connections to the Mixer Unit's INputs ***
     
     // Set the number of input busses on the mixer
-    UInt32 numbuses = 2;
+    UInt32 numbuses = 1;
     UInt32 size = sizeof(numbuses);
     result = AudioUnitSetProperty(_mMixer, kAudioUnitProperty_ElementCount, kAudioUnitScope_Input, 0, &numbuses, size);
     
@@ -132,14 +131,14 @@ const float kFilterUpdateRate = 1000;
         
         // Setup render callback struct
         AURenderCallbackStruct renderCallbackStruct;
-        renderCallbackStruct.inputProc = &renderOscillator;
+        renderCallbackStruct.inputProc = &renderAudio;
         
         switch (i) {
             case 0:
-                renderCallbackStruct.inputProcRefCon = (__bridge void*)oscillators[0];
+                renderCallbackStruct.inputProcRefCon = (__bridge void*)self;
                 break;
             case 1:
-                renderCallbackStruct.inputProcRefCon = (__bridge void*)oscillators[1];
+                renderCallbackStruct.inputProcRefCon = (__bridge void*)self;
                 break;
             default:
                 break;
@@ -179,12 +178,10 @@ const float kFilterUpdateRate = 1000;
     // Grab Filter's native stream
     AudioStreamBasicDescription filterStreamDesc = { 0 };
     size = sizeof(filterStreamDesc);
-    
     result = AudioUnitGetProperty(_mFilter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input,  0,  &(filterStreamDesc), &size);
     
     // Set stream of converter output
     result = AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &(filterStreamDesc), size);
-    
     
     // Get a stream description form the output audio unit
     result = AudioUnitGetProperty(_mMixer, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, &size);
@@ -200,22 +197,12 @@ const float kFilterUpdateRate = 1000;
     result = AudioUnitSetProperty(_mFilter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Output, 0, &desc, sizeof(desc));
     
     // Print graph setup
-
-    
-    result = AudioUnitSetParameter(_mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, 200, 0);
-    
-    result = AUGraphAddRenderNotify(mGraph, renderFilter, (__bridge void*)self);
-        
-    
     CAShow(mGraph);
     result = AUGraphInitialize(mGraph);
-    
 }
 
 
 -(void)startAUGraph {
-    
-    LFOFreq = 10;
 
     // Start the AUGraph
     Boolean isRunning = false;
@@ -229,9 +216,6 @@ const float kFilterUpdateRate = 1000;
         // Print the result
         if (result) { printf("AUGraphStart result %d %08X %4.4s\n", (int)result, (int)result, (char*)&result); return; }
     }
-    
-    // Start update timer
-    // [NSTimer scheduledTimerWithTimeInterval:(1 / kFilterUpdateRate) target:self selector:@selector(updateFilter) userInfo:nil repeats:YES];
 }
 
 
@@ -248,95 +232,66 @@ const float kFilterUpdateRate = 1000;
     if (isRunning) {
         result = AUGraphStop(mGraph);
     }
-    
-    //[NSTimer cancelPreviousPerformRequestsWithTarget:self];
+
 }
 
 
 
-void MyAUInputSamplesInOutputCallback (
-                                       void                  *inRefCon,
-                                       const AudioTimeStamp  *inOutputTimeStamp,
-                                       Float64               inInputSample,
-                                       Float64               inNumberInputSamples
-                                       )
-{
-    
-    printf("Hello");
-}
-
-
-static OSStatus renderFilter(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData) {
-
-
-    if (inBusNumber == 0 && (*ioActionFlags & kAudioUnitRenderAction_PreRender) ) {
-
-        AudioController *ac = (__bridge AudioController*)inRefCon;
-        
-        Float32 filterStart = [ac.filterEnvelope getEnvelopePoint] * ac.filterFreq;
-        
-        [ac.filterEnvelope incrementEnvelopeBy:(1000 * inNumberFrames) / kGraphSampleRate];
-        
-        Float32 filterEnd = [ac.filterEnvelope getEnvelopePoint] * ac.filterFreq;
-        
-        //AudioUnitSetParameter(ac.mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, filterStart, 0);
-        
-        AudioUnitParameterEvent parameterEvents[inNumberFrames];
-        
-        // Schedule changes over render
-        for (int i = 0; i < inNumberFrames; i++) {
-            
-            float timeIncrement = 1000.0 / kGraphSampleRate;
-            [ac.filterEnvelope incrementEnvelopeBy:timeIncrement];
-            
-            Float32 value = [ac.filterEnvelope getEnvelopePoint] * ac.filterFreq;
-            
-            parameterEvents[i].scope = kAudioUnitScope_Global;
-            parameterEvents[i].element = 0;
-            parameterEvents[i].parameter = kLowPassParam_CutoffFrequency;
-            parameterEvents[i].eventType = kParameterEvent_Immediate;
-            parameterEvents[i].eventValues.immediate.bufferOffset = i;
-            parameterEvents[i].eventValues.immediate.value = value;
-           
-        }
-        
-        const AudioUnitParameterEvent *parameterPointer  = parameterEvents;
-        
-        AudioUnitScheduleParameters(ac.mFilter, parameterPointer, inNumberFrames);
-        
-        
-        /*
-        parameterEvent.eventType = kParameterEvent_Ramped;
-        parameterEvent.eventValues.ramp.startValue = (AudioUnitParameterValue)filterStart;
-        parameterEvent.eventValues.ramp.endValue = (AudioUnitParameterValue)filterEnd;
-        parameterEvent.eventValues.ramp.startBufferOffset = (SInt32)0;
-        parameterEvent.eventValues.ramp.durationInFrames = inNumberFrames;
-        */
-
-        
-    }
-    return noErr;
-}
 
 // the render callback procedure
-static OSStatus renderOscillator(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
+static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
 {
-    // Renders Oscillator object that has been passed in inRefCon
+    // DSP!
+    // Renders synth
     
-    // Get the oscillator from inRefCon
-    Oscillator *osc = (__bridge Oscillator*)inRefCon;
+    if (inBusNumber == 0) {
+    
+        // Get reference to audio controller from inRefCon
+        AudioController *ac = (__bridge AudioController*)inRefCon;
         
-    // outA is a pointer to the buffer that will be filled
-    AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
-    
-    // Fill the Output buffer
-    for (UInt32 i = 0; i < inNumberFrames; ++i) {
-        outA[i] = [osc getNextSampleForSampleRate:kGraphSampleRate];
-    }
+        // Generate buffer for oscillator 1
+        AudioSignalType *osc1 = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
+        [ac.oscillators[0] fillBuffer:osc1 with:inNumberFrames];
+        
+        // Generate buffer for oscillator 2
+        AudioSignalType *osc2 = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
+        [ac.oscillators[1] fillBuffer:osc2 with:inNumberFrames];
 
-    // Prevent oscillator overflow
-    [osc avoidOverflow];
-    
+        // Generate VCO envelope buffer
+        AudioSignalType *vcoEnvelope = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+        [ac.vcoEnvelope fillEnvelopeBuffer:vcoEnvelope with:inNumberFrames];
+        
+        // Generate VCF envelope buffer
+        AudioSignalType *filterEnvelope = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+        [ac.filterEnvelope fillEnvelopeBuffer:filterEnvelope with:inNumberFrames];
+        
+        // Mix oscillator 1 * 2
+        AudioSignalType *mixedSignal = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
+        
+        for (int i = 0; i < inNumberFrames;i++) {
+            mixedSignal[i] = ((osc1[i] * ac.osc1vol) + (osc2[i] * ac.osc2vol) / 2.0);
+            mixedSignal[i] = mixedSignal[i] * vcoEnvelope[i];
+        }
+        
+        // Filter
+        [ac.filter processBuffer:mixedSignal with:inNumberFrames envelope:filterEnvelope];
+
+        // Fill audio buffer
+        
+        // outA is a pointer to the buffer that will be filled
+        AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
+        
+        for (int i = 0; i < inNumberFrames; i++) {
+            //printf("%.3f\n", osc1[i]);
+            outA[i] = mixedSignal[i] * 32767.0f;
+        }
+        
+        free (osc1);
+        free (osc2);
+        free (vcoEnvelope);
+        free (filterEnvelope);
+        free (mixedSignal);
+    }
     return noErr;
 }
 
@@ -383,86 +338,18 @@ OSStatus RenderTone(
 */
 
 
-double LFOPhase;
-float LFOFreq;
-
-float currentFilterLevel;
-
--(void)updateFilter {
-    
-    /*
-    float result = sin(LFOPhase);
-    [self setLfo:result];
-    
-    float phaseIncrement = M_PI * 2 * (1 / kFilterUpdateRate) * LFOFreq;
-    LFOPhase += phaseIncrement;
-    
-    LFOPhase = fmod(LFOPhase, M_PI * 2.0);
-    */
-    
-    // Update filter envelope
-    
-    float filterEnv = [_filterEnvelope getEnvelopePoint];
-    float newFilterLevel = filterEnv * _filterFreq;
-    
-    //AudioUnitSetParameter(mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, newFilterLevel, 0);
-    
-    // Schedule changes over render
-    AudioUnitParameterEvent parameterEvent;
-    parameterEvent.scope = kAudioUnitScope_Global;
-    parameterEvent.element = 0;
-    parameterEvent.parameter = kLowPassParam_CutoffFrequency;
-    parameterEvent.eventType = kParameterEvent_Ramped;
-    parameterEvent.eventValues.ramp.startValue = currentFilterLevel;
-    parameterEvent.eventValues.ramp.endValue = newFilterLevel;
-    parameterEvent.eventValues.ramp.startBufferOffset = 0;
-    parameterEvent.eventValues.ramp.durationInFrames = 1024;
-    
-    AudioUnitScheduleParameters(_mFilter, &parameterEvent, 1);
-    
-    currentFilterLevel = newFilterLevel;
-    
-    float x = (1.0 / kFilterUpdateRate) * 1000;
-    
-    [_filterEnvelope incrementEnvelopeBy:x];
-}
-
-
--(void)setLfo:(float)value {
-    
-    //[self setFrequencies:220 + (110 * value)];
-    value += 1;
-    value /= 2;
-    AudioUnitSetParameter(_mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, (value * 8000) + _filterFreq, 0);
-}
-
--(void)setMixerInputChannel:(int)channel toLevel:(float)level {
-
-    AudioUnitSetParameter(_mMixer, kMultiChannelMixerParam_Volume, kAudioUnitScope_Input, channel, level, 0);
-    
-}
-
--(void)setMixerOutputLevel:(float)level {
-    
-    AudioUnitSetParameter(_mMixer, kMultiChannelMixerParam_Volume, kAudioUnitScope_Output, 0, level, 0);
-    
-}
 
 -(void)noteOn:(float)frequency {
 
     [self setFrequencies:frequency];
-
-    [[oscillators[0] envelope] triggerNote];
-    [[oscillators[1] envelope] triggerNote];
+    [_vcoEnvelope triggerNote];
     [_filterEnvelope triggerNote];
-    
-    LFOPhase = 0;
+
 }
 
 
 -(void)noteOff {
-    [[oscillators[0] envelope] releaseNote];
-    [[oscillators[1] envelope] releaseNote];
+    [_vcoEnvelope releaseNote];
     [_filterEnvelope releaseNote];
 }
 
@@ -472,14 +359,19 @@ float currentFilterLevel;
 
     noteFreq = frequency;
 
-    [oscillators[0] setFreq:frequency];
-    [oscillators[1] setFreq:frequency * osc2Freq];
+    [_oscillators[0] setFreq:frequency];
+    [_oscillators[1] setFreq:frequency * osc2Freq];
     
 }
 
 // ControllerProtocols
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId VolumeChangedTo:(float)value {
-    [self setMixerInputChannel:oscillatorId toLevel:value];
+    //[self setMixerInputChannel:oscillatorId toLevel:value];
+    if (oscillatorId == 0) {
+        _osc1vol = value;
+    } else {
+        _osc2vol = value;
+    }
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId FreqChangedTo:(float)value {
@@ -488,11 +380,11 @@ float currentFilterLevel;
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value {
-    [oscillators[oscillatorId] setWaveform:(Waveform)value];
+    [_oscillators[oscillatorId] setWaveform:(Waveform)value];
 }
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId OctaveChangedTo:(int)value {
-    [oscillators[oscillatorId] setOctave:value];
+    [_oscillators[oscillatorId] setOctave:value];
 }
 
 -(void)envelopeControlView:(EnvelopeControlView *)view didChangeParameter:(ADSRParameter)parameter forEnvelopeId:(int)envelopeId toValue:(float)value {
@@ -500,20 +392,17 @@ float currentFilterLevel;
     if (envelopeId == 0) {
         switch (parameter) {
             case Attack:
-                [[oscillators[0] envelope] setEnvelopeAttack:value];
-                [[oscillators[1] envelope] setEnvelopeAttack:value];
+                [_vcoEnvelope setEnvelopeAttack:value];
                 break;
             case Decay:
-                [[oscillators[0] envelope]setEnvelopeDecay:value];
-                [[oscillators[1] envelope] setEnvelopeDecay:value];
+                [_vcoEnvelope setEnvelopeDecay:value];
                 break;
             case Release:
-                [[oscillators[0] envelope] setEnvelopeRelease:value];
-                [[oscillators[1] envelope] setEnvelopeRelease:value];
+                [_vcoEnvelope setEnvelopeRelease:value];
                 break;
             case Sustain:
-                [[oscillators[0] envelope] setEnvelopeSustain:value];
-                [[oscillators[1] envelope] setEnvelopeSustain:value];
+                [_vcoEnvelope setEnvelopeSustain:value];
+
                 break;
             default:
                 break;
@@ -539,12 +428,11 @@ float currentFilterLevel;
 }
 
 -(void)filterControlView:(FilterControlView *)view didChangeFrequencyTo:(float)value {
-    AudioUnitSetParameter(_mFilter, kLowPassParam_CutoffFrequency, kAudioUnitScope_Global, 0, (value * 15980) + 20, 0);
-    _filterFreq = (value * 15980) + 20;
+    _filter.cutoff = value;
 }
 
 -(void)filterControlView:(FilterControlView *)view didChangeResonanceTo:(float)value {
-    AudioUnitSetParameter(_mFilter, kLowPassParam_Resonance, kAudioUnitScope_Global, 0, (value * 60.0) - 20, 0);
+    _filter.resonance = value;
 }
 
 @end
