@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "CCRRotaryControl.h"
+#import "ControlView.h"
 
 typedef enum ADSRParameter {
     Attack,
@@ -24,7 +23,7 @@ typedef enum ADSRParameter {
 
 @end
 
-@interface EnvelopeControlView : UIView
+@interface EnvelopeControlView : ControlView
 
 @property (nonatomic, weak) id<EnvelopeControlViewDelegate> delegate;
 
@@ -37,7 +36,5 @@ typedef enum ADSRParameter {
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *filterDecayControl;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *filterSustainControl;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *filterReleaseControl;
-
--(void)initializeParameters;
 
 @end

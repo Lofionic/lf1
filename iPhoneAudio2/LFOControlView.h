@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "CCRRotaryControl.h"
+#import "ControlView.h"
 
 @class LFOControlView;
 
@@ -20,7 +19,7 @@
 
 @end
 
-@interface LFOControlView : UIView
+@interface LFOControlView : ControlView
 
 @property (nonatomic, weak) id<LFOControlViewDelegate> delegate;
 
@@ -28,7 +27,5 @@
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *amountControl1;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *destinationControl1;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *waveformControl1;
-
--(void)initializeParameters;
 
 @end

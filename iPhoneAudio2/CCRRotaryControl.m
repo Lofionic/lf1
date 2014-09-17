@@ -60,17 +60,17 @@
     _rotaryOffset = (1.0 - _rotaryRange) / 2.0;
     _defaultValue = _value;
     _precisionModeScale = 4.0;
-    _lineWidth = 2.0;
-    _rotaryHighlightSegments = 0.0;
 
     _precisionModeEnabled = false;
     _zoomEnabled = true;
     
     _changeByRotating = USE_ROTARY_MOTION > 0;
     // style
+    
+    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
+    _spriteSheet = moogA;
+    _spriteSize = CGSizeMake(140, 140);
     self.backgroundColor = [UIColor clearColor];
-    self.dialBackgroundColor = [UIColor darkGrayColor];
-    self.dialSelectedBackgroundColor = [UIColor lightGrayColor];
     
     self.userInteractionEnabled = true;
     self.multipleTouchEnabled = true;
@@ -222,7 +222,7 @@
                 }
                 else {
                     
-                    CGFloat delta = (thisTouchLocation.y - previousTrackingTouchLocation.y) / 400.0;
+                    CGFloat delta = (thisTouchLocation.y - previousTrackingTouchLocation.y) / 200.0;
                     _value -= delta;
                 }
                 
@@ -268,103 +268,10 @@
 }
 
 - (void)drawRect:(CGRect)rect
-{    
-    // draw control
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGPoint center = CGPointMake(self.frame.size.width  / 2, self.frame.size.height / 2);
-    
-    CGFloat offsetAngle = (_rotaryOffset + 0.25) * (M_PI * 2.0);
-    CGFloat angleInRadians = ((M_PI * 2.0 * _value) * _rotaryRange) + offsetAngle;
-    
-    CGFloat radius = center.y;
-    if (center.x < center.y) {
-        radius = center.x;
-    }
-    
-    if (!_dialImage && !_spriteSheet) {
-        
-        // draw vector based representation
-        _lineWidth = radius / 16.0;
-        
-        // draw background highlight if tracking
-
-        CGContextAddArc(ctx,
-                        center.x,
-                        center.y,
-                        radius,
-                        0,
-                        M_PI * 2.0,
-                        0);
-        
-
-        
-        if (precisionMode && _dialPrecisionBackroundColor) {
-            // make background yellow in precision mode
-           [_dialPrecisionBackroundColor setFill];
-        } else if (tracking && _dialSelectedBackgroundColor) {
-            // grey in tracking mode
-            [_dialSelectedBackgroundColor setFill];
-        } else {
-            [_dialBackgroundColor setFill];
-        }
-        
-        CGContextFillPath(ctx);
-
-        // draw black inner arc
-        CGContextAddArc(ctx,
-                        center.x,
-                        center.y,
-                        radius - (_lineWidth * 2.0) - 1,
-                        offsetAngle,
-                        (M_PI * 2.0 * _rotaryRange) + offsetAngle,
-                        0);
-        
-        [self.tintColor setStroke];
-        [[UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1] setFill];
-        CGContextSetLineWidth(ctx, _lineWidth);
-        CGContextSetLineCap(ctx, kCGLineCapButt);
-
-        CGContextDrawPath(ctx, kCGPathStroke);
-        
-        // draw tinted outer arc
-        CGContextAddArc(ctx,
-                        center.x,
-                        center.y,
-                        radius - _lineWidth,
-                        offsetAngle,
-                        angleInRadians,
-                        0);
-        
-        [self.tintColor setStroke];
-        CGContextSetLineWidth(ctx, _lineWidth);
-        CGContextSetLineCap(ctx, kCGLineCapButt);
-        CGContextDrawPath(ctx, kCGPathStroke);
-        
-        // draw indicator needle
-        CGPoint point1 = CGPointMake(
-                                     center.x + ((radius - (_lineWidth * 2.0)) * cos(angleInRadians)),
-                                     center.y + ((radius - (_lineWidth * 2.0)) * sin(angleInRadians))
-                                     );
-        CGContextMoveToPoint(ctx, point1.x, point1.y);
-        
-        CGPoint point2 = center;
-        CGContextAddLineToPoint(ctx, point2.x, point2.y);
-        
-        [self.tintColor setStroke];
-        CGContextSetLineWidth(ctx, _lineWidth);
-        CGContextDrawPath(ctx, kCGPathStroke);
-        
-        // draw center
-        CGContextAddArc(ctx,
-                        center.x,
-                        center.y,
-                        _lineWidth * 2.0,
-                        0,
-                        (M_PI * 2.0),
-                        0);
-        CGContextDrawPath(ctx, kCGPathFillStroke);
-
-    } else if (_spriteSheet) {
+{
+    if (_spriteSheet) {
+        // draw control
+        CGContextRef ctx = UIGraphicsGetCurrentContext();
         int sprites = (_spriteSheet.size.height / _spriteSize.height) - 1;
         int frame = (_value * sprites);
         CGRect sourceRect = CGRectMake(0, frame * _spriteSize.height, _spriteSize.width, _spriteSize.height);
@@ -374,47 +281,6 @@
         CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), drawImage);
         CGImageRelease(drawImage);
         CGContextRestoreGState(ctx);
-    } else {
-    
-        // draw bitmap representation
-        CGContextSaveGState(ctx);
-        
-        CGContextTranslateCTM(ctx, center.x, center.y);
-        
-        CGContextRotateCTM(ctx, angleInRadians + M_PI_2);
-        CGContextScaleCTM(ctx, 1.0, -1.0);
-        CGRect dialImageRect = CGRectMake(-radius, -radius, radius * 2.0, radius * 2.0);
-
-        //CGContextDrawImage(ctx, dialImageRect, dialImage);
-        CGContextRestoreGState(ctx);
-        
-        if (_dialHighlightImage) {
-            // Draw fading highlight rotated to match segment offset
-            CGContextSaveGState(ctx);
-            CGContextTranslateCTM(ctx, center.x, center.y);
-            
-            if (_rotaryHighlightSegments > 0) {
-                double rotationalDivision = (M_PI * 2.0) / _rotaryHighlightSegments;
-                double highlightRotationalOffset = fmod(angleInRadians, rotationalDivision);
-                
-                CGContextRotateCTM(ctx, highlightRotationalOffset);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextSetAlpha(ctx, 1 - (highlightRotationalOffset / rotationalDivision));
-                CGContextDrawImage(ctx, dialImageRect, [_dialHighlightImage CGImage]);
-                
-                CGContextSetAlpha(ctx, (highlightRotationalOffset / rotationalDivision));
-                CGContextRotateCTM(ctx, rotationalDivision);
-                CGContextDrawImage(ctx, dialImageRect, [_dialHighlightImage CGImage]);
-                CGContextRestoreGState(ctx);
-            }
-            } else {
-                CGContextRotateCTM(ctx, angleInRadians + M_PI_2);
-                CGContextScaleCTM(ctx, 1.0, -1.0);
-                CGContextDrawImage(ctx, dialImageRect, [_dialHighlightImage CGImage]);
-                CGContextRestoreGState(ctx);
-            }
-        }
-    
+    }
 }
-
 @end

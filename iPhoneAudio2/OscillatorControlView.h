@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "CCRRotaryControl.h"
+#import "ControlView.h"
 
 @class OscillatorControlView;
 
@@ -20,9 +19,9 @@
 
 @end
 
-@interface OscillatorControlView : UIView
+@interface OscillatorControlView : ControlView
 
-@property (nonatomic, strong) IBOutlet id<OscillatorViewDelegate> delegate;
+@property (nonatomic, strong) id<OscillatorViewDelegate> delegate;
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *osc1vol;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *osc2vol;
@@ -33,7 +32,5 @@
 
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc1octave;
 @property (nonatomic, strong) IBOutlet UISegmentedControl *osc2octave;
-
--(void)initializeParameters;
 
 @end

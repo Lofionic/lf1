@@ -158,6 +158,8 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     // Get reference to audio controller from inRefCon
     AudioController *ac = (__bridge AudioController*)inRefCon;
 
+    // Initialize buffer in render call since we don't know what the buffer size will be until now
+    
     // Generate VCO envelope buffer
     ac.vcoEnvelope.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
     [ac.vcoEnvelope fillBuffer:ac.vcoEnvelope.buffer samples:inNumberFrames];
@@ -196,6 +198,10 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         outA[i] = mixedSignal[i] * 32767.0f;
     }
     
+    // Free up the buffers we have initialized to avoid memory leaks
+    free (ac.vcoEnvelope.buffer);
+    free (ac.filterEnvelope.buffer);
+    free (ac.lfo1.buffer);
     free (osc1);
     free (osc2);
     free (mixedSignal);

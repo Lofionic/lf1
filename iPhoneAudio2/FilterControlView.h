@@ -6,8 +6,7 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "CCRRotaryControl.h"
+#import "ControlView.h"
 
 @class FilterControlView;
 @protocol FilterControlViewDelegate <NSObject>
@@ -17,12 +16,10 @@
 
 @end
 
-@interface FilterControlView : UIView
+@interface FilterControlView : ControlView
 
 @property (nonatomic, weak) id<FilterControlViewDelegate> delegate;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *freqControl;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *resControl;
-
--(void)initializeParameters;
 
 @end
