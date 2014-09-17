@@ -70,7 +70,7 @@
     UIImage *moogA = [UIImage imageNamed:@"moog_a"];
     _spriteSheet = moogA;
     _spriteSize = CGSizeMake(140, 140);
-    self.backgroundColor = [UIColor clearColor];
+    //self.backgroundColor = [UIColor clearColor];
     
     self.userInteractionEnabled = true;
     self.multipleTouchEnabled = true;
