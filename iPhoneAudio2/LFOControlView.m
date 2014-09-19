@@ -12,19 +12,21 @@
 
 -(void)initializeParameters {
     
+    UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
+    _amountControl1.backgroundImage = zeroTenBackground;
+ 
+    UIImage *LFORateBackground = [UIImage imageNamed:@"LFORate_Background"];
+    _rateControl1.backgroundImage = LFORateBackground;
+
+    UIImage *chicken4 = [UIImage imageNamed:@"ChickenKnob_4way"];
+    _waveformControl1.spriteSheet = chicken4;
+    _waveformControl1.segments = 4;
+    _waveformControl1.selectedSegmentIndex = 2;
+    
     _amountControl1.value = 1.0;
     _rateControl1.value = 0.8;
     _destinationControl1.selectedSegmentIndex = 1;
-    [self changeDestination:_destinationControl1];
-    
-    _waveformControl1.selectedSegmentIndex = 2;
-    [self changeWaveform:_waveformControl1];
-    
-    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
-    _amountControl1.spriteSheet = moogA;
-    _amountControl1.spriteSize = CGSizeMake(140, 140);
-    _rateControl1.spriteSheet = moogA;
-    _rateControl1.spriteSize = CGSizeMake(140, 140);
+
 }
 
 -(IBAction)changeRate:(id)sender {
@@ -49,8 +51,10 @@
 
 -(IBAction)changeDestination:(id)sender {
     
-    UISegmentedControl *control = (UISegmentedControl*)sender;
+    CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
+    
+    NSLog(@"%li", (long)control.selectedSegmentIndex);
     
     if (_delegate) {
         [_delegate LFOControlView:self LFOID:tag didChangeDestinationTo:control.selectedSegmentIndex];
@@ -59,7 +63,7 @@
 
 -(IBAction)changeWaveform:(id)sender {
     
-    UISegmentedControl *control = (UISegmentedControl*)sender;
+    CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
     
     if (_delegate) {

@@ -7,26 +7,40 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="09L-db-1By" customClass="LFOControlView">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="512" height="220"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RATE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WST-h3-1ky">
-                    <rect key="frame" x="144" y="14" width="90" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="169" y="157" width="90" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AMT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XeW-6A-VEo">
-                    <rect key="frame" x="242" y="14" width="90" height="21"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
+                    <rect key="frame" x="275" y="157" width="90" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESTINATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LF5-d6-0Zw">
+                    <rect key="frame" x="380" y="162" width="100" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SOURCE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Kdu-X2-Fdg">
+                    <rect key="frame" x="52" y="157" width="100" height="21"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="0vh-fx-PNc" customClass="CCRRotaryControl">
-                    <rect key="frame" x="144" y="28" width="90" height="90"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="169" y="59" width="90" height="90"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -34,47 +48,36 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="veY-6v-pBS" customClass="CCRRotaryControl">
-                    <rect key="frame" x="242" y="28" width="90" height="90"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="275" y="59" width="90" height="90"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="changeAmount:" destination="09L-db-1By" eventType="valueChanged" id="8Ld-HF-wM3"/>
                     </connections>
                 </view>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="1DV-TK-oc5">
-                    <rect key="frame" x="122" y="152" width="236" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <segments>
-                        <segment title="OSC"/>
-                        <segment title="OSC2"/>
-                        <segment title="Filter"/>
-                    </segments>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <view contentMode="scaleToFill" id="UdO-Qm-22q" customClass="CCRSegmentedRotaryControl">
+                    <rect key="frame" x="52" y="54" width="100" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="changeDestination:" destination="09L-db-1By" eventType="valueChanged" id="XnF-co-grf"/>
+                        <action selector="changeWaveform:" destination="09L-db-1By" eventType="valueChanged" id="nAu-UO-UEp"/>
                     </connections>
-                </segmentedControl>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="3T2-Q2-a9V">
-                    <rect key="frame" x="122" y="116" width="236" height="29"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <segments>
-                        <segment title="Sin"/>
-                        <segment title="Saw"/>
-                        <segment title="Square"/>
-                        <segment title="S+H"/>
-                    </segments>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" id="wiP-PR-uOA" customClass="CCRSegmentedRotaryControl">
+                    <rect key="frame" x="380" y="54" width="100" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
-                        <action selector="changeWaveform:" destination="09L-db-1By" eventType="valueChanged" id="HLR-dh-Rli"/>
+                        <action selector="changeDestination:" destination="09L-db-1By" eventType="valueChanged" id="7vU-g2-sd7"/>
                     </connections>
-                </segmentedControl>
+                </view>
             </subviews>
             <connections>
                 <outlet property="amountControl1" destination="veY-6v-pBS" id="1Dv-1W-Lth"/>
-                <outlet property="destinationControl1" destination="1DV-TK-oc5" id="j9n-6y-JOZ"/>
+                <outlet property="destinationControl1" destination="wiP-PR-uOA" id="65L-Lw-dow"/>
                 <outlet property="rateControl1" destination="0vh-fx-PNc" id="8gl-PP-IyX"/>
-                <outlet property="waveformControl1" destination="3T2-Q2-a9V" id="ccu-lW-5wn"/>
+                <outlet property="waveformControl1" destination="UdO-Qm-22q" id="q6o-At-xzC"/>
             </connections>
         </view>
     </objects>

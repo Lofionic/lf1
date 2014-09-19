@@ -115,7 +115,7 @@
             }
         }
         
-        float frequency = (powf(powf(2, (1.0 / 12.0)), key)) * 110.0;
+        float frequency = (powf(powf(2, (1.0 / 12.0)), key)) * 55.0;
         
         [_delegate noteOn:frequency];
     }

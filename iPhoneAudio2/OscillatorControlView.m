@@ -22,35 +22,33 @@
 
 -(void)initializeParameters {
     
-    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
-    UIImage *moogB = [UIImage imageNamed:@"moog_b"];
-    _osc1vol.spriteSheet = moogA;
-    _osc1vol.spriteSize = CGSizeMake(140, 140);
+    UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
+    _osc1vol.backgroundImage = zeroTenBackground;
+    _osc2vol.backgroundImage = zeroTenBackground;
     
-    _osc2vol.spriteSheet = moogA;
-    _osc2vol.spriteSize = CGSizeMake(140, 140);
-    
-    _osc2freq.spriteSheet = moogB;
-    _osc2freq.spriteSize = CGSizeMake(140, 140);
+    UIImage *osc2FreqBackground = [UIImage imageNamed:@"Osc2Freq_Background"];
+    _osc2freq.backgroundImage = osc2FreqBackground;
+    _osc2freq.enableDefaultValue = true;
     
     _osc2freq.value = 0.0;
     _osc2freq.defaultValue = 0.5;
-    
+
     _osc1vol.value = 0.5;
     _osc1vol.defaultValue = 0.5;
     _osc1wave.selectedSegmentIndex = 1;
-    [self oscillatorWaveformChanged:_osc1wave];
     
     _osc2vol.value = 0.5;
     _osc2vol.defaultValue = 0.5;
     _osc2wave.selectedSegmentIndex = 2;
-    [self oscillatorWaveformChanged:_osc2wave];
     
+    UIImage *chicken4 = [UIImage imageNamed:@"ChickenKnob_4way"];
+    _osc1octave.spriteSheet = chicken4;
+    _osc1octave.segments = 4;
     _osc1octave.selectedSegmentIndex = 0;
-    [self oscillatorOctaveChanged:_osc1octave];
     
+    _osc2octave.spriteSheet = chicken4;
+    _osc2octave.segments = 4;
     _osc2octave.selectedSegmentIndex = 2;
-    [self oscillatorOctaveChanged:_osc2octave];
     
 }
 
@@ -68,15 +66,15 @@
         CCRRotaryControl *control = (CCRRotaryControl*)sender;
         NSInteger tag = control.tag;
         
-
-        
         [_delegate oscillatorControlView:self oscillator:(int)tag FreqChangedTo:control.value];
     }
 }
 
 -(IBAction)oscillatorWaveformChanged:(id)sender {
-    UISegmentedControl *control = (UISegmentedControl*)sender;
+    CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
+    
+    
     
     if (_delegate) {
         [_delegate oscillatorControlView:self oscillator:(int)tag WaveformChangedTo:(int)control.selectedSegmentIndex];
@@ -84,7 +82,7 @@
 }
 
 -(IBAction)oscillatorOctaveChanged:(id)sender {
-    UISegmentedControl *control = (UISegmentedControl*)sender;
+    CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
 
     if (_delegate) {

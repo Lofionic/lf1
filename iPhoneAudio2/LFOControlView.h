@@ -25,7 +25,7 @@
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *rateControl1;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *amountControl1;
-@property (nonatomic, strong) IBOutlet UISegmentedControl *destinationControl1;
-@property (nonatomic, strong) IBOutlet UISegmentedControl *waveformControl1;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *destinationControl1;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *waveformControl1;
 
 @end

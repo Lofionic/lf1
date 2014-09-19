@@ -38,24 +38,19 @@
 
 -(void)initializeParameters {
     
-    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
-    _oscAttackControl.spriteSheet = moogA;
-    _oscAttackControl.spriteSize = CGSizeMake(140, 140);
-    _oscDecayControl.spriteSheet = moogA;
-    _oscDecayControl.spriteSize = CGSizeMake(140, 140);
-    _oscSustainControl.spriteSheet = moogA;
-    _oscSustainControl.spriteSize = CGSizeMake(140, 140);
-    _oscReleaseControl.spriteSheet = moogA;
-    _oscReleaseControl.spriteSize = CGSizeMake(140, 140);
+    UIImage *envBackground = [UIImage imageNamed:@"Env_Background"];
+    _oscAttackControl.backgroundImage = envBackground;
+    _oscDecayControl.backgroundImage = envBackground;
+    _oscReleaseControl.backgroundImage = envBackground;
     
-    _filterAttackControl.spriteSheet = moogA;
-    _filterAttackControl.spriteSize = CGSizeMake(140, 140);
-    _filterDecayControl.spriteSheet = moogA;
-    _filterDecayControl.spriteSize = CGSizeMake(140, 140);
-    _filterSustainControl.spriteSheet = moogA;
-    _filterSustainControl.spriteSize = CGSizeMake(140, 140);
-    _filterReleaseControl.spriteSheet = moogA;
-    _filterReleaseControl.spriteSize = CGSizeMake(140, 140);
+    
+    _filterAttackControl.backgroundImage = envBackground;
+    _filterDecayControl.backgroundImage = envBackground;
+    _filterReleaseControl.backgroundImage = envBackground;
+    
+    UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
+    _oscSustainControl.backgroundImage = zeroTenBackground;
+    _filterSustainControl.backgroundImage = zeroTenBackground;
     
     _oscAttackControl.value = 0.0;
     _oscDecayControl.value = 0.0;

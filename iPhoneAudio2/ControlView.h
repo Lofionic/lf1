@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CCRRotaryControl.h"
+#import "CCRSegmentedRotaryControl.h"
 
 @interface ControlView : UIView
 

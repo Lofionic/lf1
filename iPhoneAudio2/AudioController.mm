@@ -352,7 +352,7 @@ OSStatus RenderTone(
 }
 
 -(void)filterControlView:(FilterControlView *)view didChangeFrequencyTo:(float)value {
-    _filter.cutoff = value;
+    _filter.cutoff = powf(200, value) / 200;
 }
 
 -(void)filterControlView:(FilterControlView *)view didChangeResonanceTo:(float)value {
@@ -360,7 +360,7 @@ OSStatus RenderTone(
 }
 
 -(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeRateTo:(float)value {
-    _lfo1.freq = (powf(1000, value) / 10);
+    _lfo1.freq = (powf(1800, value) / 10);
 }
 
 -(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeAmountTo:(float)value {
@@ -368,9 +368,13 @@ OSStatus RenderTone(
 }
 
 -(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeDestinationTo:(NSInteger)value {
-    _osc1.lfo = (value == 0) ? _lfo1 : 0;
-    _osc2.lfo = (value == 0 || value == 1) ? _lfo1 : 0;
-    _filter.lfo = (value = 2) ? _lfo1 : 0;
+    NSLog(@"Value: %@", [NSNumber numberWithInteger:value]);
+    
+    _osc1.lfo = (value == 0) ? _lfo1 : nil;
+    _osc2.lfo = (value == 0 || value == 1) ? _lfo1 : nil;
+    _filter.lfo = (value == 2) ? _lfo1 : nil;
+    
+    NSLog(@"LFOs: OSC1:%@ OSC2:%@ VCF:%@", _osc1.lfo, _osc2.lfo, _filter.lfo);
 }
 
 -(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeWaveformTo:(NSInteger)value {

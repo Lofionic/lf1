@@ -20,13 +20,14 @@
 }
 
 -(void)initializeParameters {
-    
-    UIImage *moogA = [UIImage imageNamed:@"moog_a"];
-    _freqControl.spriteSheet = moogA;
-    _freqControl.spriteSize = CGSizeMake(140, 140);
-    _resControl.spriteSheet = moogA;
-    _resControl.spriteSize = CGSizeMake(140, 140);
 
+    UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
+    _resControl.backgroundImage = zeroTenBackground;
+
+    UIImage *cutoffKnob = [UIImage imageNamed:@"CutoffKnob"];
+    _freqControl.spriteSheet = cutoffKnob;
+    _freqControl.spriteSize = CGSizeMake(150 * SCREEN_SCALE, 150 * SCREEN_SCALE);
+    
     _freqControl.value = 0.5;
     _freqControl.defaultValue = 0.5;
     _resControl.value = 0.75;

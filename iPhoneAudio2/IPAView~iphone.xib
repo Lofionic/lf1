@@ -24,7 +24,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" id="Ebm-w0-UQT" customClass="KeyboardView">
-                    <rect key="frame" x="64" y="200" width="504" height="120"/>
+                    <rect key="frame" x="64" y="200" width="484" height="120"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -33,7 +33,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="0.10039487092391308" green="0.10039487092391308" blue="0.10039487092391308" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.11892361110000001" green="0.1151555623" blue="0.1180474363" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

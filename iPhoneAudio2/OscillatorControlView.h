@@ -27,10 +27,10 @@
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *osc2vol;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *osc2freq;
 
-@property (nonatomic, strong) IBOutlet UISegmentedControl *osc1wave;
-@property (nonatomic, strong) IBOutlet UISegmentedControl *osc2wave;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *osc1wave;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *osc2wave;
 
-@property (nonatomic, strong) IBOutlet UISegmentedControl *osc1octave;
-@property (nonatomic, strong) IBOutlet UISegmentedControl *osc2octave;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *osc1octave;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *osc2octave;
 
 @end

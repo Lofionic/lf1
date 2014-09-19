@@ -5,23 +5,19 @@
 //  Created by Chris on 09/09/2014.
 //  Copyright (c) 2014 Chris RIvers. All rights reserved.
 //
-
+#import "BuildSettings.h"
 #import <UIKit/UIKit.h>
 
 @interface CCRRotaryControl : UIControl
 
 @property float value;
-@property (assign) float rotaryRange;
-@property (assign) float rotaryOffset;
+@property int sensitivity;
 @property (assign) float defaultValue;
-@property (assign) float precisionModeScale;
+@property bool enableDefaultValue;
 @property (nonatomic, strong) UIImage *spriteSheet;
+@property (nonatomic, strong) UIImage *backgroundImage;
 @property CGSize spriteSize;
 
-@property bool zoomEnabled;
-@property bool precisionModeEnabled;
 @property bool changeByRotating;
-
-
 
 @end
