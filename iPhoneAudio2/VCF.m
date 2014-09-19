@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "Filter.h"
+#import "VCF.h"
 
 
-@implementation Filter {
+@implementation VCF {
     
     float f, p, q;             //filter coefficients
     float b0, b1, b2, b3, b4;  //filter buffers (beware denormals!)
@@ -31,7 +31,7 @@
     
 }
 
--(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames envelope:(Envelope*)envelope {
+-(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     
     // DSP ! http://www.musicdsp.org/showArchiveComment.php?ArchiveID=25
     
@@ -47,8 +47,8 @@
 
         float cutoff = _cutoff;
         
-        if (envelope) {
-            cutoff *= envelope.buffer[i];
+        if (_envelope) {
+            cutoff *= _envelope.buffer[i];
         }
         
         if (_lfo) {

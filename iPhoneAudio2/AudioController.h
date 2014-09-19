@@ -14,7 +14,7 @@
 #import "oscillator.h"
 #import "analog_oscillator.h"
 #import "Envelope.h"
-#import "Filter.h"
+#import "VCF.h"
 #import "OscillatorControlView.h"
 #import "EnvelopeControlView.h"
 #import "FilterControlView.h"
@@ -35,7 +35,7 @@
 // Synth Components
 @property (nonatomic, strong) Oscillator *osc1;
 @property (nonatomic, strong) Oscillator *osc2;
-@property (nonatomic, strong) Filter *filter;
+@property (nonatomic, strong) VCF *filter;
 @property (nonatomic, strong) Envelope *filterEnvelope;
 @property (nonatomic, strong) Envelope *vcoEnvelope;
 @property (nonatomic, strong) LFO *lfo1;

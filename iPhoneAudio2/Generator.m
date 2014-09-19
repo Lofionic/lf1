@@ -11,9 +11,7 @@
 @implementation Generator
 
 -(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
-    for (int i = 0; i < numFrames; i++) {
-        outA[i] = 0;
-    }
+    NSLog(@"%@ Warning: fillBuffer method not implemented", self.description);
 }
 
 

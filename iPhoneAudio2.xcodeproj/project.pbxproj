@@ -16,6 +16,7 @@
 		6C3F314C19C9D7A7003BF83F /* control_view_frame_right.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3F314619C9D7A7003BF83F /* control_view_frame_right.png */; };
 		6C3F314D19C9D7A7003BF83F /* control_view_frame_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3F314719C9D7A7003BF83F /* control_view_frame_left@2x.png */; };
 		6C3F314E19C9D7A7003BF83F /* control_view_frame_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3F314819C9D7A7003BF83F /* control_view_frame_left.png */; };
+		6C406FCE19CC244A0096672F /* Processor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FCD19CC244A0096672F /* Processor.m */; };
 		6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.m */; };
 		6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.m */; };
 		6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* KeyboardView.m */; };
@@ -26,7 +27,7 @@
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
 		6CC18F2219C83625000894AB /* SynthComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC18F2119C83625000894AB /* SynthComponent.m */; };
 		6CC18F2519C842E9000894AB /* Generator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC18F2419C842E9000894AB /* Generator.m */; };
-		6CC18F2B19C85DA4000894AB /* Filter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC18F2A19C85DA4000894AB /* Filter.m */; };
+		6CC18F2B19C85DA4000894AB /* VCF.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC18F2A19C85DA4000894AB /* VCF.m */; };
 		6CD5B68B19C8DED8002E835C /* LFOControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CD5B68A19C8DED8002E835C /* LFOControlView.xib */; };
 		6CD5B68E19C8DFCD002E835C /* LFOControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5B68D19C8DFCD002E835C /* LFOControlView.m */; };
 		6CD5B69119C8F411002E835C /* CCRRotaryControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CD5B69019C8F411002E835C /* CCRRotaryControl.m */; };
@@ -97,6 +98,8 @@
 		6C3F314619C9D7A7003BF83F /* control_view_frame_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = control_view_frame_right.png; sourceTree = "<group>"; };
 		6C3F314719C9D7A7003BF83F /* control_view_frame_left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "control_view_frame_left@2x.png"; sourceTree = "<group>"; };
 		6C3F314819C9D7A7003BF83F /* control_view_frame_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = control_view_frame_left.png; sourceTree = "<group>"; };
+		6C406FCC19CC244A0096672F /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
+		6C406FCD19CC244A0096672F /* Processor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Processor.m; sourceTree = "<group>"; };
 		6C7E9B4519C7793300DAB5B9 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
 		6C7E9B4619C7793300DAB5B9 /* Envelope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Envelope.m; sourceTree = "<group>"; };
 		6C863E5719BF1D170056D43D /* Analog_Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analog_Oscillator.h; sourceTree = "<group>"; };
@@ -115,8 +118,8 @@
 		6CC18F2119C83625000894AB /* SynthComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SynthComponent.m; sourceTree = "<group>"; };
 		6CC18F2319C842E9000894AB /* Generator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Generator.h; sourceTree = "<group>"; };
 		6CC18F2419C842E9000894AB /* Generator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Generator.m; sourceTree = "<group>"; };
-		6CC18F2919C85DA4000894AB /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
-		6CC18F2A19C85DA4000894AB /* Filter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filter.m; sourceTree = "<group>"; };
+		6CC18F2919C85DA4000894AB /* VCF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCF.h; sourceTree = "<group>"; };
+		6CC18F2A19C85DA4000894AB /* VCF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCF.m; sourceTree = "<group>"; };
 		6CD5B68A19C8DED8002E835C /* LFOControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LFOControlView.xib; sourceTree = "<group>"; };
 		6CD5B68C19C8DFCD002E835C /* LFOControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFOControlView.h; sourceTree = "<group>"; };
 		6CD5B68D19C8DFCD002E835C /* LFOControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFOControlView.m; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				6CC18F2119C83625000894AB /* SynthComponent.m */,
 				6CC18F2319C842E9000894AB /* Generator.h */,
 				6CC18F2419C842E9000894AB /* Generator.m */,
+				6C406FCC19CC244A0096672F /* Processor.h */,
+				6C406FCD19CC244A0096672F /* Processor.m */,
 				6C9A9B5819C8C04700DFA51A /* LFO.h */,
 				6C9A9B5919C8C04700DFA51A /* LFO.m */,
 				83AFC395192ABB8E00851413 /* Oscillator.h */,
@@ -224,8 +229,8 @@
 				6C863E5819BF1D170056D43D /* Analog_Oscillator.m */,
 				6C7E9B4519C7793300DAB5B9 /* Envelope.h */,
 				6C7E9B4619C7793300DAB5B9 /* Envelope.m */,
-				6CC18F2919C85DA4000894AB /* Filter.h */,
-				6CC18F2A19C85DA4000894AB /* Filter.m */,
+				6CC18F2919C85DA4000894AB /* VCF.h */,
+				6CC18F2A19C85DA4000894AB /* VCF.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -522,11 +527,12 @@
 				834FA81218B95FA800923F29 /* main.m in Sources */,
 				834FA81618B95FA800923F29 /* IPAAppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
-				6CC18F2B19C85DA4000894AB /* Filter.m in Sources */,
+				6CC18F2B19C85DA4000894AB /* VCF.m in Sources */,
 				6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
 				83AFC397192ABB8E00851413 /* Oscillator.m in Sources */,
 				6CD5B69119C8F411002E835C /* CCRRotaryControl.m in Sources */,
+				6C406FCE19CC244A0096672F /* Processor.m in Sources */,
 				834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */,
 				6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */,
 				6CD5B68E19C8DFCD002E835C /* LFOControlView.m in Sources */,

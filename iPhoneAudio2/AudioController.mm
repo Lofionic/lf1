@@ -18,31 +18,7 @@ const Float64 kGraphSampleRate = 44100.0;
 
 -(void)initializeAUGraph {
     
-    // initialize components
-    if (USE_ANALOG > 0) {
-        _osc1 = [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate];
-        _osc2 = [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate];
-        
-    } else {
-        _osc1 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
-        _osc2 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
-                       
-    }
-    
-    _filter = [[Filter alloc] initWithSampleRate:kGraphSampleRate];
-    _vcoEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
-    _filterEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
-    _lfo1 = [[LFO alloc] initWithSampleRate:kGraphSampleRate];
-    
-    [_lfo1 setFreq:30];
-    [_lfo1 setAmp:0.2];
-    [_lfo1 setWaveform:LFOSin];
-    
-    [_filter setLfo:_lfo1];
-    
-    osc2Freq = 1.0f;
-    _osc1vol = 0.5f;
-    _osc2vol = 0.5f;
+    [self initializeSynthComponents];
     
     // Error checking result
     // OSStatus result = noErr;
@@ -118,6 +94,39 @@ const Float64 kGraphSampleRate = 44100.0;
     AUGraphInitialize(mGraph);
 }
 
+-(void)initializeSynthComponents {
+    
+    // initialize oscillators
+    if (USE_ANALOG > 0) {
+        _osc1 = [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        _osc2 = [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate];
+        
+    } else {
+        _osc1 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        _osc2 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        
+    }
+    
+    // Initialize VCO envelope
+    _vcoEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
+    
+    // Initialize filter & vcf envelope
+    _filter = [[VCF alloc] initWithSampleRate:kGraphSampleRate];
+    _filterEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
+    [_filter setEnvelope:_filterEnvelope];
+    
+    // Initialize LFO
+    _lfo1 = [[LFO alloc] initWithSampleRate:kGraphSampleRate];
+    [_lfo1 setFreq:30];
+    [_lfo1 setAmp:0.2];
+    [_lfo1 setWaveform:LFOSin];
+    
+    // Initial settings
+    osc2Freq = 1.0f;
+    _osc1vol = 0.5f;
+    _osc2vol = 0.5f;
+   
+}
 
 -(void)startAUGraph {
     // Start the AUGraph
@@ -188,7 +197,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     }
     
     // Filter
-    [ac.filter processBuffer:mixedSignal samples:inNumberFrames envelope:ac.filterEnvelope];
+    [ac.filter processBuffer:mixedSignal samples:inNumberFrames];
 
     // Send signal to audio buffer
     // outA is a pointer to the buffer that will be filled
