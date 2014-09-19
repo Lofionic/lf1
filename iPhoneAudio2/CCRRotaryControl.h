@@ -11,6 +11,7 @@
 @interface CCRRotaryControl : UIControl
 
 @property float value;
+@property int exponent;
 @property int sensitivity;
 @property (assign) float defaultValue;
 @property bool enableDefaultValue;

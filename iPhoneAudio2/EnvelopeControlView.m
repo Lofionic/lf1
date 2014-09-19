@@ -106,15 +106,6 @@
     _oscSustainControl.backgroundImage = zeroTenBackground;
     _filterSustainControl.backgroundImage = zeroTenBackground;
     
-    _oscAttackControl.value = 0.0;
-    _oscDecayControl.value = 1.0;
-    _oscSustainControl.value = 1.0;
-    _oscReleaseControl.value = 0.5;
-    
-    _filterAttackControl.value = 0.3;
-    _filterDecayControl.value = 1.0;
-    _filterSustainControl.value = 1.0;
-    _filterReleaseControl.value = 0.5;
 }
 
 @end

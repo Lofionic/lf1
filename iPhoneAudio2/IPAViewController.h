@@ -13,6 +13,8 @@
 #import "FilterControlView.h"
 #import "LFOControlView.h"
 
+#import "PresetController.h"
+
 @class AudioController;
 
 @interface IPAViewController : UIViewController
@@ -33,5 +35,7 @@
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView2;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView3;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView4;
+
+@property (nonatomic, strong) PresetController *presetController;
 
 @end

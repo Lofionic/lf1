@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "IPAViewController.h"
 #import "AudioController.h"
+#import "IPAViewController.h"
 
 @interface IPAViewController ()
 
@@ -38,6 +38,10 @@
     [self.audioController initializeAUGraph];
     [self setupControllers];
     [self.audioController startAUGraph];
+       
+    _presetController = [[PresetController alloc] initWithViewController:self];
+
+    [_presetController restorePresetAtIndex:0];
 }
 
 -(void)setupControllers {
@@ -71,7 +75,7 @@
     _lfoView.osc2 = _audioController.osc2;
     _lfoView.vcf = _audioController.vcf;
     [_lfoView initializeParameters];
-    
+
     if (_iPhoneControlsView) {
         // iPhone - add control views
         [_iPhoneControlsView setContentInset:UIEdgeInsetsZero];
@@ -88,7 +92,6 @@
         [_iPadControlsView3 addSubview:_filterView];
         [_iPadControlsView4 addSubview:_lfoView];
     }
-    
 }
 
 -(void)viewWillLayoutSubviews {

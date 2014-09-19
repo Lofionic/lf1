@@ -19,10 +19,9 @@
 @property (nonatomic, weak) Oscillator *osc1;
 @property (nonatomic, weak) Oscillator *osc2;
 @property (nonatomic, weak) VCF *vcf;
-
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *rateControl1;
-@property (nonatomic, strong) IBOutlet CCRRotaryControl *amountControl1;
-@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *destinationControl1;
-@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *waveformControl1;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *rateControl;
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *amountControl;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *destinationControl;
+@property (nonatomic, strong) IBOutlet CCRSegmentedRotaryControl *waveformControl;
 
 @end

@@ -29,26 +29,14 @@
     UIImage *osc2FreqBackground = [UIImage imageNamed:@"Osc2Freq_Background"];
     _osc2freq.backgroundImage = osc2FreqBackground;
     _osc2freq.enableDefaultValue = true;
-    
-    _osc2freq.value = 0.0;
     _osc2freq.defaultValue = 0.5;
-
-    _osc1vol.value = 0.5;
-    _osc1vol.defaultValue = 0.5;
-    _osc1wave.selectedSegmentIndex = 1;
-    
-    _osc2vol.value = 0.5;
-    _osc2vol.defaultValue = 0.5;
-    _osc2wave.selectedSegmentIndex = 2;
     
     UIImage *chicken4 = [UIImage imageNamed:@"ChickenKnob_4way"];
     _osc1octave.spriteSheet = chicken4;
     _osc1octave.segments = 4;
-    _osc1octave.selectedSegmentIndex = 0;
     
     _osc2octave.spriteSheet = chicken4;
     _osc2octave.segments = 4;
-    _osc2octave.selectedSegmentIndex = 2;
     
 }
 
@@ -85,7 +73,7 @@
 -(IBAction)oscillatorWaveformChanged:(id)sender {
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
-    NSInteger value = control.selectedSegmentIndex;
+    NSInteger value = control.index;
     
     switch (tag) {
         case 0:
@@ -105,7 +93,7 @@
 -(IBAction)oscillatorOctaveChanged:(id)sender {
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
-    NSInteger value = control.selectedSegmentIndex;
+    NSInteger value = control.index;
     
     switch (tag) {
         case 0:

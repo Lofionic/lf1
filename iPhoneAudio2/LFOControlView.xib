@@ -74,10 +74,10 @@
                 </view>
             </subviews>
             <connections>
-                <outlet property="amountControl1" destination="veY-6v-pBS" id="1Dv-1W-Lth"/>
-                <outlet property="destinationControl1" destination="wiP-PR-uOA" id="65L-Lw-dow"/>
-                <outlet property="rateControl1" destination="0vh-fx-PNc" id="8gl-PP-IyX"/>
-                <outlet property="waveformControl1" destination="UdO-Qm-22q" id="q6o-At-xzC"/>
+                <outlet property="amountControl" destination="veY-6v-pBS" id="MdS-pa-6i5"/>
+                <outlet property="destinationControl" destination="wiP-PR-uOA" id="tzO-4O-jYN"/>
+                <outlet property="rateControl" destination="0vh-fx-PNc" id="77E-gl-Btk"/>
+                <outlet property="waveformControl" destination="UdO-Qm-22q" id="NyU-1L-nYK"/>
             </connections>
         </view>
     </objects>

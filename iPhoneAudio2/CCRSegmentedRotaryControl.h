@@ -12,7 +12,7 @@
 
 @interface CCRSegmentedRotaryControl : UIControl
 
-@property NSInteger selectedSegmentIndex;
+@property NSInteger index;
 @property NSInteger segments;
 @property (nonatomic, strong) UIImage *spriteSheet;
 @property (nonatomic, strong) UIImage *backgroundImage;

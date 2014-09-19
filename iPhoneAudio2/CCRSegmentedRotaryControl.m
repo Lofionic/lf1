@@ -33,7 +33,7 @@
 -(void) initialize {
     
     // Initialize default properties
-    _selectedSegmentIndex = 1;
+    _index = 0;
     _segments = 3;
     
     UIImage *knobImage = [UIImage imageNamed:@"ChickenKnob_3way"];
@@ -44,18 +44,18 @@
     self.userInteractionEnabled = true;
 }
 
-@synthesize selectedSegmentIndex = _selectedSegmentIndex;
+@synthesize index = _index;
 
--(void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex {
+-(void)setIndex:(NSInteger)index {
     
-    _selectedSegmentIndex = selectedSegmentIndex;
+    _index = index;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
     
 }
 
--(NSInteger)selectedSegmentIndex {
-    return _selectedSegmentIndex;
+-(NSInteger)index {
+    return _index;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -64,7 +64,7 @@
     UITouch *thisTouch = [touches anyObject];
     tracking = true;
     firstTouchLocation = [thisTouch locationInView:self];
-    firstTouchIndex = _selectedSegmentIndex;
+    firstTouchIndex = _index;
     [self becomeFirstResponder];
 }
 
@@ -77,18 +77,18 @@
         
         CGFloat delta = ((thisTouchLocation.y - firstTouchLocation.y)) / (100.0 / _segments);
 
-        NSInteger currentIndex = _selectedSegmentIndex;
+        NSInteger currentIndex = _index;
 
-        _selectedSegmentIndex =  firstTouchIndex-(int)delta;
+        _index =  firstTouchIndex-(int)delta;
         
         // Clamp value
-        if (_selectedSegmentIndex >= _segments) {
-            _selectedSegmentIndex = _segments - 1;
-        } else if (_selectedSegmentIndex < 0) {
-            _selectedSegmentIndex = 0;
+        if (_index >= _segments) {
+            _index = _segments - 1;
+        } else if (_index < 0) {
+            _index = 0;
         }
 
-        if (_selectedSegmentIndex != currentIndex) {
+        if (_index != currentIndex) {
             [self sendActionsForControlEvents:UIControlEventValueChanged];
             [self setNeedsDisplay];
         }
@@ -119,7 +119,7 @@
         }
         
         int sprites = ((_spriteSheet.size.height / _spriteSize.height) * SCREEN_SCALE);
-        int frame = ((float)_selectedSegmentIndex / _segments) * sprites;
+        int frame = ((float)_index / _segments) * sprites;
         CGRect sourceRect = CGRectMake(0, frame * _spriteSize.height, _spriteSize.width, _spriteSize.height);
         CGImageRef drawImage = CGImageCreateWithImageInRect([_spriteSheet CGImage], sourceRect);
         
