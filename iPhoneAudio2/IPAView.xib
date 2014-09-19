@@ -6,11 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPAViewController">
             <connections>
-                <outlet property="controller" destination="dDc-zW-m3s" id="rz2-I5-IfQ"/>
                 <outlet property="iPadControlsView1" destination="KLo-Pj-TPe" id="hzW-CT-eKu"/>
                 <outlet property="iPadControlsView2" destination="zur-Od-iVT" id="YBP-HI-LzW"/>
                 <outlet property="iPadControlsView3" destination="CZ5-mR-Wzv" id="IYX-8T-44L"/>
                 <outlet property="iPadControlsView4" destination="YvS-Li-Olr" id="urr-7v-OYK"/>
+                <outlet property="keyboardView" destination="dDc-zW-m3s" id="2YC-Pc-Irn"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Flc-gi-arS"/>
             </connections>
         </placeholder>
@@ -28,17 +28,17 @@
                     <rect key="frame" x="0.0" y="20" width="256" height="440"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
+                <view contentMode="scaleToFill" id="YvS-Li-Olr">
+                    <rect key="frame" x="512" y="282" width="492" height="172"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </view>
                 <view contentMode="scaleToFill" id="CZ5-mR-Wzv">
-                    <rect key="frame" x="256" y="20" width="256" height="440"/>
+                    <rect key="frame" x="256" y="20" width="256" height="300"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="zur-Od-iVT" userLabel="Controller View 3">
                     <rect key="frame" x="512" y="20" width="512" height="260"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                </view>
-                <view contentMode="scaleToFill" id="YvS-Li-Olr">
-                    <rect key="frame" x="512" y="288" width="512" height="172"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.11892361110000001" green="0.1151555623" blue="0.1180474363" alpha="1" colorSpace="calibratedRGB"/>

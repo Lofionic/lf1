@@ -30,42 +30,60 @@
 }
 
 -(IBAction)changeRate:(id)sender {
-    
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
-    NSInteger tag = control.tag;
+    float value = control.value;
     
-    if (_delegate) {
-        [_delegate LFOControlView:self LFOID:tag didChangeRateTo:control.value];
+    if (_lfo) {
+        // Scale value
+        value = (value * 0.999) + 0.001;
+        
+        // Return exponential value
+        [_lfo setFreq:(powf(value, 4))];
     }
 }
 
 -(IBAction)changeAmount:(id)sender {
-    
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
-    NSInteger tag = control.tag;
+    float value = control.value;
     
-    if (_delegate) {
-        [_delegate LFOControlView:self LFOID:tag didChangeAmountTo:control.value];
+    if (_lfo) {
+        // Return exponential value
+        [_lfo setAmp:(powf(value, 2))];
     }
 }
 
 -(IBAction)changeDestination:(id)sender {
     
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
-    NSInteger tag = control.tag;
-
-    if (_delegate) {
-        [_delegate LFOControlView:self LFOID:tag didChangeDestinationTo:control.selectedSegmentIndex];
+    if (_lfo) {
+        switch (control.selectedSegmentIndex) {
+            case 0:
+                [_osc1 setLfo:_lfo];
+                [_osc2 setLfo:_lfo];
+                [_vcf setLfo:nil];
+                break;
+            case 1:
+                [_osc1 setLfo:nil];
+                [_osc2 setLfo:_lfo];
+                [_vcf setLfo:nil];
+                break;
+            case 2:
+                [_osc1 setLfo:nil];
+                [_osc2 setLfo:nil];
+                [_vcf setLfo:_lfo];
+            default:
+                break;
+        }
     }
+    
 }
 
 -(IBAction)changeWaveform:(id)sender {
-    
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
-    NSInteger tag = control.tag;
+    NSInteger value = control.selectedSegmentIndex;
     
-    if (_delegate) {
-        [_delegate LFOControlView:self LFOID:tag didChangeWaveformTo:control.selectedSegmentIndex];
+    if (_lfo) {
+        [_lfo setWaveform:(LFOWaveform)value];
     }
 }
 

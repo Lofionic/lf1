@@ -48,7 +48,6 @@
 
 -(void)setSelectedSegmentIndex:(NSInteger)selectedSegmentIndex {
     
-    NSInteger currentIndex = _selectedSegmentIndex;
     _selectedSegmentIndex = selectedSegmentIndex;
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];

@@ -3,5 +3,6 @@
 #define USE_ANALOG 0
 #define ANALOG_HARMONICS 15
 #define ROTARY_CONTROLS 0
+#define CV_FREQUENCY_RANGE 5000
 
 #define SCREEN_SCALE [[UIScreen mainScreen] scale]

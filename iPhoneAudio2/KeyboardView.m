@@ -99,7 +99,7 @@
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (_delegate) {
+    if (_cvController) {
         
         UITouch *touch = [touches anyObject];
         CGPoint touchLocation = [touch locationInView:self];
@@ -115,16 +115,16 @@
             }
         }
         
-        float frequency = (powf(powf(2, (1.0 / 12.0)), key)) * 55.0;
-        
-        [_delegate noteOn:frequency];
+        [_cvController playNote:key];
+        [_cvController openGate];
+
     }
     
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (_delegate) {
-        [_delegate noteOff];
+    if (_cvController) {
+        [_cvController closeGate];
     }
 }
 

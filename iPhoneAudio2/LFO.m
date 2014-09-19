@@ -11,7 +11,6 @@
 @implementation LFO {
     double phase;
     AudioSignalType prevResult;
-    
     double sampleHoldPhase;
     float sampleHold;
 }
@@ -26,8 +25,19 @@
     return _waveform;
 }
 
+- (instancetype)initWithSampleRate:(Float64)graphSampleRate
+{
+    self = [super initWithSampleRate:(Float64)graphSampleRate];
+    if (self) {
+        _amp = FLT_MIN;
+        _freq = FLT_MIN;
+        _waveform = LFOSin;
+        _nextWaveform = LFOSin;
+    }
+    return self;
+}
 
--(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+-(void)renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
@@ -35,7 +45,7 @@
 
         outA[i] = value * _amp;
         
-        phase += (M_PI * _freq) / self.sampleRate;
+        phase += (M_PI * _freq * 180) / self.sampleRate;
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
@@ -48,7 +58,7 @@
     
     // Prevent phase from overloading
     if (phase > M_PI * 2.0) {
-        sampleHold = arc4random_uniform(32767) / 32767.0;
+        sampleHold = (arc4random_uniform(32767) / 16385.0) - 1;
     }
     phase = fmod(phase, M_PI * 2.0);
 }
@@ -82,10 +92,13 @@
     }
 }
 
--(void)reset {
-    
+-(void)CVControllerDidOpenGate:(CVController *)cvController {
+    // Re-trigger LFO
     phase = 0;
-    
+}
+
+-(void)CVControllerDidCloseGate:(CVController *)cvController {
+    // Nothing to do here
 }
 
 @end

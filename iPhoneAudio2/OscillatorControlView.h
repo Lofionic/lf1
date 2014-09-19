@@ -7,21 +7,23 @@
 //
 
 #import "ControlView.h"
+#import "Oscillator.h"
 
 @class OscillatorControlView;
 
 @protocol OscillatorViewDelegate <NSObject>
 
--(void)oscillatorControlView:(OscillatorControlView*)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value;
 -(void)oscillatorControlView:(OscillatorControlView*)view oscillator:(int)oscillatorId VolumeChangedTo:(float)value;
--(void)oscillatorControlView:(OscillatorControlView*)view oscillator:(int)oscillatorId FreqChangedTo:(float)value;
--(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId OctaveChangedTo:(int)value;
 
 @end
 
 @interface OscillatorControlView : ControlView
 
+// TODO: Replace osc volume controls with mixer module to remove need for this delegate
 @property (nonatomic, strong) id<OscillatorViewDelegate> delegate;
+
+@property (nonatomic, weak) Oscillator* osc1;
+@property (nonatomic, weak) Oscillator* osc2;
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *osc1vol;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *osc2vol;

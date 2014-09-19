@@ -10,7 +10,16 @@
 
 @implementation Generator
 
--(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+- (instancetype)initWithSampleRate:(Float64)graphSampleRate
+{
+    self = [super initWithSampleRate:(Float64)graphSampleRate];
+    if (self) {
+        _buffer = nil;
+    }
+    return self;
+}
+
+-(void)renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     NSLog(@"%@ Warning: fillBuffer method not implemented", self.description);
 }
 

@@ -17,6 +17,7 @@
 		6C3F314D19C9D7A7003BF83F /* control_view_frame_left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3F314719C9D7A7003BF83F /* control_view_frame_left@2x.png */; };
 		6C3F314E19C9D7A7003BF83F /* control_view_frame_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3F314819C9D7A7003BF83F /* control_view_frame_left.png */; };
 		6C406FCE19CC244A0096672F /* Processor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FCD19CC244A0096672F /* Processor.m */; };
+		6C406FD119CC5B1F0096672F /* CVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FD019CC5B1F0096672F /* CVController.m */; };
 		6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.m */; };
 		6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.m */; };
 		6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* KeyboardView.m */; };
@@ -100,6 +101,8 @@
 		6C3F314819C9D7A7003BF83F /* control_view_frame_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = control_view_frame_left.png; sourceTree = "<group>"; };
 		6C406FCC19CC244A0096672F /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
 		6C406FCD19CC244A0096672F /* Processor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Processor.m; sourceTree = "<group>"; };
+		6C406FCF19CC5B1F0096672F /* CVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVController.h; sourceTree = "<group>"; };
+		6C406FD019CC5B1F0096672F /* CVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVController.m; sourceTree = "<group>"; };
 		6C7E9B4519C7793300DAB5B9 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
 		6C7E9B4619C7793300DAB5B9 /* Envelope.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Envelope.m; sourceTree = "<group>"; };
 		6C863E5719BF1D170056D43D /* Analog_Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Analog_Oscillator.h; sourceTree = "<group>"; };
@@ -231,6 +234,8 @@
 				6C7E9B4619C7793300DAB5B9 /* Envelope.m */,
 				6CC18F2919C85DA4000894AB /* VCF.h */,
 				6CC18F2A19C85DA4000894AB /* VCF.m */,
+				6C406FCF19CC5B1F0096672F /* CVController.h */,
+				6C406FD019CC5B1F0096672F /* CVController.m */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				834FA81618B95FA800923F29 /* IPAAppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
 				6CC18F2B19C85DA4000894AB /* VCF.m in Sources */,
+				6C406FD119CC5B1F0096672F /* CVController.m in Sources */,
 				6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
 				83AFC397192ABB8E00851413 /* Oscillator.m in Sources */,

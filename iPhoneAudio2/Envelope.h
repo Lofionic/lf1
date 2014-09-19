@@ -9,17 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "SynthComponent.h"
 #import "Generator.h"
+#import "CVController.h"
 
-@interface Envelope : Generator
+@interface Envelope : Generator <CVControllerDelegate>
 
 @property float envelopeAttack;
 @property float envelopeDecay;
 @property float envelopeSustain;
 @property float envelopeRelease;
-@property float clickless;
-
--(void)triggerNote;
--(void)releaseNote;
 
 @end
 

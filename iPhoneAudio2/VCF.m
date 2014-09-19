@@ -17,18 +17,18 @@
     
 }
 
-
 -(instancetype)initWithSampleRate:(Float64)graphSampleRate {
     
     if (self = [super initWithSampleRate:graphSampleRate]) {
-        _cutoff = 0.5;
-        _resonance = 0.5;
+        _cutoff = 0;
+        _resonance = 0;
+        _lfo = nil;
+        _envelope = nil;
         
         f = p = q = b0 = b1 = b2 = b3 = b4 = t1 = t2 = 0;
     }
 
     return self;
-    
 }
 
 -(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames {
@@ -74,7 +74,6 @@
         
         outA[i] = (AudioSignalType)b4;
     
-        
     }
 }
 

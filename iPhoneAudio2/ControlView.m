@@ -30,11 +30,6 @@
 }
 
 -(void)layoutSubviews {
-
-    UIImage *controlViewFrameImage = [UIImage imageNamed:@"control_view_frame"];
-    UIEdgeInsets insets = UIEdgeInsetsMake(16.0, 36.0, 16.0, 24.0);
-    controlViewFrameImage = [controlViewFrameImage resizableImageWithCapInsets:insets];
-    _backgroundView.image = controlViewFrameImage;
     
     _backgroundView.frame = self.bounds;
     [self sendSubviewToBack:_backgroundView];

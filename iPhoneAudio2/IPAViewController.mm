@@ -36,30 +36,40 @@
     self.audioController = [[AudioController alloc] init];
 
     [self.audioController initializeAUGraph];
+    [self setupControllers];
     [self.audioController startAUGraph];
-    
-    _controller.delegate = self;
+}
 
+-(void)setupControllers {
+    
+    // Connect keyboard controller to CVController
+    _keyboardView.cvController = _audioController.cvController;
+    
     // Create oscillator controller view
     NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"OscillatorControlView" owner:self options:nil];
     _oscView = oscNib[0];
     _oscView.delegate = _audioController;
-    //_oscView.backgroundView.image = controlViewFrameImage;
+    _oscView.osc1 = _audioController.osc1;
+    _oscView.osc2 = _audioController.osc2;
     [_oscView initializeParameters];
     
     NSArray *envNib = [[NSBundle mainBundle] loadNibNamed:@"EnvelopeControlView" owner:self options:nil];
     _envView = envNib[0];
-    _envView.delegate = _audioController;
+    _envView.VCFEnvelope = _audioController.vcfEnvelope;
+    _envView.VCOEnvelope = _audioController.vcoEnvelope;
     [_envView initializeParameters];
     
     NSArray *filterNib = [[NSBundle mainBundle] loadNibNamed:@"FilterControlView" owner:self options:nil];
     _filterView = filterNib[0];
-    _filterView.delegate = _audioController;
+    _filterView.vcf = _audioController.vcf;
     [_filterView initializeParameters];
     
     NSArray *lfoNib = [[NSBundle mainBundle] loadNibNamed:@"LFOControlView" owner:self options:nil];
     _lfoView = lfoNib[0];
-    _lfoView.delegate = _audioController;
+    _lfoView.lfo = _audioController.lfo1;
+    _lfoView.osc1 = _audioController.osc1;
+    _lfoView.osc2 = _audioController.osc2;
+    _lfoView.vcf = _audioController.vcf;
     [_lfoView initializeParameters];
     
     if (_iPhoneControlsView) {
@@ -78,7 +88,9 @@
         [_iPadControlsView3 addSubview:_filterView];
         [_iPadControlsView4 addSubview:_lfoView];
     }
+    
 }
+
 -(void)viewWillLayoutSubviews {
     
     if (_iPhoneControlsView) {
@@ -148,14 +160,5 @@
     return true;
 }
 
-#pragma mark ControllerViewDelegates
-
--(void)noteOff {
-    [_audioController noteOff];
-}
-
--(void)noteOn:(float)frequency {
-    [_audioController noteOn:frequency];
-}
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ControlView.h"
+#import "Envelope.h"
 
 typedef enum ADSRParameter {
     Attack,
@@ -17,15 +18,10 @@ typedef enum ADSRParameter {
 
 @class EnvelopeControlView;
 
-@protocol EnvelopeControlViewDelegate
-
--(void)envelopeControlView:(EnvelopeControlView*)view didChangeParameter:(ADSRParameter)parameter forEnvelopeId:(int)envelopeId toValue:(float)value;
-
-@end
-
 @interface EnvelopeControlView : ControlView
 
-@property (nonatomic, weak) id<EnvelopeControlViewDelegate> delegate;
+@property (nonatomic, weak) Envelope *VCOEnvelope;
+@property (nonatomic, weak) Envelope *VCFEnvelope;
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *oscAttackControl;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *oscDecayControl;

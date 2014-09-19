@@ -38,12 +38,18 @@
 -(IBAction)valueChanged:(id)sender {
     
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
+    float value = control.value;
     
-    if (_delegate) {
+    if (_vcf) {
         if (control == _freqControl) {
-            [_delegate filterControlView:self didChangeFrequencyTo:control.value];
+            // Scale value
+            value = (value * 0.8) + 0.2;
+            
+            // Return exponential value
+            [_vcf setCutoff:powf(value, 4)];
+            
         } else if (sender == _resControl) {
-            [_delegate filterControlView:self didChangeResonanceTo:control.value];
+            [_vcf setResonance:value];
         }
     }
 }

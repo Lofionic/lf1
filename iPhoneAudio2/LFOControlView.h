@@ -7,21 +7,18 @@
 //
 
 #import "ControlView.h"
+#import "LFO.h"
+#import "Oscillator.h"
+#import "VCF.h"
 
 @class LFOControlView;
 
-@protocol LFOControlViewDelegate <NSObject>
-
--(void)LFOControlView:(LFOControlView*)view LFOID:(NSInteger)id didChangeRateTo:(float)value;
--(void)LFOControlView:(LFOControlView*)view LFOID:(NSInteger)id didChangeAmountTo:(float)value;
--(void)LFOControlView:(LFOControlView*)view LFOID:(NSInteger)id didChangeDestinationTo:(NSInteger)value;
--(void)LFOControlView:(LFOControlView*)view LFOID:(NSInteger)id didChangeWaveformTo:(NSInteger)value;
-
-@end
-
 @interface LFOControlView : ControlView
 
-@property (nonatomic, weak) id<LFOControlViewDelegate> delegate;
+@property (nonatomic, weak) LFO* lfo;
+@property (nonatomic, weak) Oscillator *osc1;
+@property (nonatomic, weak) Oscillator *osc2;
+@property (nonatomic, weak) VCF *vcf;
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *rateControl1;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *amountControl1;

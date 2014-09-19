@@ -25,7 +25,7 @@
     return self;
 }
 
--(void) fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+-(void) renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
@@ -34,7 +34,7 @@
         
         // Increment Phase
         for (int j = 0; j < ANALOG_HARMONICS; j++) {
-            phase[j] += ((M_PI * self.freq * powf(2, self.octave)) / self.sampleRate) * (j + 1);
+            //phase[j] += ((M_PI * self.freq * powf(2, self.octave)) / self.sampleRate) * (j + 1);
             if (phase[j] > M_PI * 2.0) {
                 phase[j] -= M_PI * 2.0;
             }

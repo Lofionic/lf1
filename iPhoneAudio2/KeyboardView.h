@@ -7,19 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-
-
-@protocol ControllerViewDelegate <NSObject>
-
-@optional
--(void)noteOn:(float)frequency;
--(void)noteOff;
-
-@end
+#import "CVController.h"
 
 @interface KeyboardView : UIView
 
-@property (nonatomic, weak) id<ControllerViewDelegate> delegate;
+@property (nonatomic, weak) CVController *cvController;
 
 @end

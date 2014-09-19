@@ -15,13 +15,13 @@
 
 @class AudioController;
 
-@interface IPAViewController : UIViewController <ControllerViewDelegate>
+@interface IPAViewController : UIViewController
 
 @property (nonatomic, strong) AudioController *audioController;
 
 // Parameter controls
 
-@property (nonatomic, strong) IBOutlet KeyboardView *controller;
+@property (nonatomic, strong) IBOutlet KeyboardView *keyboardView;
 
 @property (nonatomic, strong) OscillatorControlView *oscView;
 @property (nonatomic, strong) EnvelopeControlView *envView;

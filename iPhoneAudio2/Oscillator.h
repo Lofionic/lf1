@@ -8,6 +8,7 @@
 
 #import "Generator.h"
 #import "LFO.h"
+#import "CVController.h"
 
 typedef enum OscillatorWaveform {
     Sin,
@@ -17,7 +18,6 @@ typedef enum OscillatorWaveform {
 
 @interface Oscillator : Generator
 
-@property float freq;
 @property float freq_adjust;
 @property OscillatorWaveform waveform;
 @property (readonly) OscillatorWaveform nextWaveform;
@@ -26,5 +26,6 @@ typedef enum OscillatorWaveform {
 -(void)setWaveform:(OscillatorWaveform)waveform;
 
 @property (weak) LFO* lfo;
+@property (weak) CVController* cvController;
 
 @end

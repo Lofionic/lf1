@@ -8,6 +8,8 @@
 
 #import "EnvelopeControlView.h"
 
+#define EXPONENTIAL_CONTROL_VALUE 8
+
 @implementation EnvelopeControlView
 
 - (id)initWithFrame:(CGRect)frame
@@ -20,19 +22,72 @@
 }
 
 -(IBAction)oscValueChanged:(id)sender {
-    if (_delegate) {
-        CCRRotaryControl *control = (CCRRotaryControl*)sender;
-        NSInteger tag = control.tag;
-        [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:0 toValue:control.value];
-
+    
+    CCRRotaryControl *control = (CCRRotaryControl*)sender;
+    float value = control.value;
+    
+    if (_VCOEnvelope) {
+        switch (control.tag) {
+            case Attack:
+                // Limit range
+                value = (value * 0.7) + 0.3;
+                // Return exponential value
+                value = powf(value, EXPONENTIAL_CONTROL_VALUE);
+                [_VCOEnvelope setEnvelopeAttack:value];
+                break;
+            case Decay:
+                // Limit range
+                value = (value * 0.7) + 0.3;
+                // Return exponential value
+                value = powf(value, EXPONENTIAL_CONTROL_VALUE);
+                [_VCOEnvelope setEnvelopeDecay:value];
+                break;
+            case Release:
+                // Limit range
+                value = (value * 0.7) + 0.3;
+                // Return exponential value
+                value = powf(value, EXPONENTIAL_CONTROL_VALUE);
+                [_VCOEnvelope setEnvelopeRelease:value];
+                break;
+            case Sustain:
+                [_VCOEnvelope setEnvelopeSustain:value];
+                break;
+            default:
+                break;
+        }
     }
 }
 
 -(IBAction)filterValueChanged:(id)sender {
-    if (_delegate) {
-        CCRRotaryControl *control = (CCRRotaryControl*)sender;
-        NSInteger tag = control.tag;
-        [_delegate envelopeControlView:self didChangeParameter:(ADSRParameter)tag forEnvelopeId:1 toValue:control.value];
+    CCRRotaryControl *control = (CCRRotaryControl*)sender;
+    float value = control.value;
+    
+    if (_VCFEnvelope) {
+        switch (control.tag) {
+            case Attack:// Limit range
+                value = (value * 0.7) + 0.3;
+                // Return exponential value
+                value = powf(value, EXPONENTIAL_CONTROL_VALUE);
+                [_VCFEnvelope setEnvelopeAttack:value];
+                break;
+            case Decay:// Limit range
+                value = (value * 0.7) + 0.3;
+                // Return exponential value
+                value = powf(value, EXPONENTIAL_CONTROL_VALUE);
+                [_VCFEnvelope setEnvelopeDecay:value];
+                break;
+            case Release:
+                value = (value * 0.7) + 0.3;
+                // Return exponential value
+                value = powf(value, EXPONENTIAL_CONTROL_VALUE);
+                [_VCFEnvelope setEnvelopeRelease:value];
+                break;
+            case Sustain:
+                [_VCFEnvelope setEnvelopeSustain:value];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -42,7 +97,6 @@
     _oscAttackControl.backgroundImage = envBackground;
     _oscDecayControl.backgroundImage = envBackground;
     _oscReleaseControl.backgroundImage = envBackground;
-    
     
     _filterAttackControl.backgroundImage = envBackground;
     _filterDecayControl.backgroundImage = envBackground;

@@ -62,31 +62,63 @@
 }
 
 -(IBAction)oscillatorFreqChanged:(id)sender {
-    if (_delegate) {
-        CCRRotaryControl *control = (CCRRotaryControl*)sender;
-        NSInteger tag = control.tag;
-        
-        [_delegate oscillatorControlView:self oscillator:(int)tag FreqChangedTo:control.value];
+    
+    CCRRotaryControl *control = (CCRRotaryControl*)sender;
+    NSInteger tag = control.tag;
+    float value = control.value;
+    
+    switch (tag) {
+        case 0:
+            if (_osc1) {
+                [_osc1 setFreq_adjust:value];
+            }
+            break;
+        case 1:
+            if (_osc2) {
+                [_osc2 setFreq_adjust:value];
+            }
+        default:
+            break;
     }
 }
 
 -(IBAction)oscillatorWaveformChanged:(id)sender {
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
+    NSInteger value = control.selectedSegmentIndex;
     
-    
-    
-    if (_delegate) {
-        [_delegate oscillatorControlView:self oscillator:(int)tag WaveformChangedTo:(int)control.selectedSegmentIndex];
+    switch (tag) {
+        case 0:
+            if (_osc1) {
+                [_osc1 setWaveform:(OscillatorWaveform)value];
+            }
+            break;
+        case 1:
+            if (_osc2) {
+                [_osc2 setWaveform:(OscillatorWaveform)value];
+            }
+        default:
+            break;
     }
 }
 
 -(IBAction)oscillatorOctaveChanged:(id)sender {
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
-
-    if (_delegate) {
-        [_delegate oscillatorControlView:self oscillator:(int)tag OctaveChangedTo:(int)control.selectedSegmentIndex];
+    NSInteger value = control.selectedSegmentIndex;
+    
+    switch (tag) {
+        case 0:
+            if (_osc1) {
+                [_osc1 setOctave:(OscillatorWaveform)value];
+            }
+            break;
+        case 1:
+            if (_osc2) {
+                [_osc2 setOctave:(OscillatorWaveform)value];
+            }
+        default:
+            break;
     }
 }
 @end

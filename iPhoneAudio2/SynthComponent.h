@@ -14,8 +14,6 @@ typedef float AudioSignalType;
 
 @property Float64 sampleRate;
 
-@property AudioSignalType* buffer;
-
 - (instancetype)initWithSampleRate:(Float64)graphSampleRate;
 
 @end

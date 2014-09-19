@@ -6,8 +6,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IPAViewController">
             <connections>
-                <outlet property="controller" destination="Ebm-w0-UQT" id="yCa-cN-XoZ"/>
                 <outlet property="iPhoneControlsView" destination="xQw-Uo-LMr" id="IZM-eP-Jj5"/>
+                <outlet property="keyboardView" destination="Ebm-w0-UQT" id="oQH-JC-hwd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="f9q-3r-xKQ"/>
             </connections>
         </placeholder>

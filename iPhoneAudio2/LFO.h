@@ -7,6 +7,7 @@
 //
 
 #import "Generator.h"
+#import "CVController.h"
 
 typedef enum LFOWaveform {
     LFOSin,
@@ -15,14 +16,12 @@ typedef enum LFOWaveform {
     LFOSampleHold
 } LFOWaveform;
 
-@interface LFO : Generator
+@interface LFO : Generator <CVControllerDelegate>
 
 @property AudioSignalType* buffer;
 @property float freq;
 @property float amp;
 @property LFOWaveform waveform;
 @property (readonly) LFOWaveform nextWaveform;
-
--(void)reset;
 
 @end

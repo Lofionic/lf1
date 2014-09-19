@@ -17,14 +17,14 @@
 -(id)initWithSampleRate:(Float64)graphSampleRate {
     
     if (self = [super initWithSampleRate:graphSampleRate]) {
-        _freq = 0;
         _freq_adjust = 1;
-        _octave = 1;
+        _octave = 0;
         
         _waveform = Sin;
         _nextWaveform = Sin;
-        phase = 0;
-         }
+        phase = DBL_MIN;
+        prevResult = DBL_MIN;
+    }
     
     return self;
 }
@@ -40,7 +40,8 @@
 }
 
 
--(void)fillBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+-(void)renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
@@ -57,8 +58,14 @@
         float adjustValue = (_freq_adjust * 2.0) - 1.0;
         adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
         
+        
+        float freq = FLT_MIN;
+        if (_cvController) {
+            freq = _cvController.buffer[i] * CV_FREQUENCY_RANGE;
+        }
+        
         // Increment Phase
-        phase += (M_PI * _freq * lfo * powf(2, _octave) * adjustValue) / self.sampleRate;
+        phase += (M_PI * freq * lfo * powf(2, _octave) * adjustValue) / self.sampleRate;
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
