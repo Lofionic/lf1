@@ -53,9 +53,7 @@
     
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger tag = control.tag;
-    
-    NSLog(@"%li", (long)control.selectedSegmentIndex);
-    
+
     if (_delegate) {
         [_delegate LFOControlView:self LFOID:tag didChangeDestinationTo:control.selectedSegmentIndex];
     }

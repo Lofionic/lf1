@@ -12,7 +12,6 @@
 const Float64 kGraphSampleRate = 44100.0;
 @implementation AudioController {
     float noteFreq;
-    float osc2Freq;
 }
 
 
@@ -21,10 +20,14 @@ const Float64 kGraphSampleRate = 44100.0;
     [self initializeSynthComponents];
     
     // Error checking result
-    // OSStatus result = noErr;
+    OSStatus result = noErr;
     
     // create a new AU graph
-    NewAUGraph(&mGraph);
+    result = NewAUGraph(&mGraph);
+    
+    if (![self checkError:result withDescription:@"Cannot create new AUGraph" ]) {
+        return;
+    }
     
     // AUNodes represent Audio Units on the AUGraph
     AUNode outputNode;
@@ -47,31 +50,58 @@ const Float64 kGraphSampleRate = 44100.0;
     output_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
     
     // Add nodes to the graph to hold our AudioUnits
-    AUGraphAddNode(mGraph, &converter_desc, &converterNode);
-    AUGraphAddNode(mGraph, &output_desc, &outputNode);
+    result = AUGraphAddNode(mGraph, &converter_desc, &converterNode);
+    if (![self checkError:result withDescription:@"Cannot add AUConverter node to AUGraph" ]) {
+        return;
+    }
+    
+    result = AUGraphAddNode(mGraph, &output_desc, &outputNode);
+    if (![self checkError:result withDescription:@"Cannot add RemoteIO node to AUGraph" ]) {
+        return;
+    }
     
     // Connect Converter Node's outout to the Output node's input
-    AUGraphConnectNodeInput(mGraph, converterNode, 0, outputNode, 0);
+    result = AUGraphConnectNodeInput(mGraph, converterNode, 0, outputNode, 0);
+    if (![self checkError:result withDescription:@"Cannot connect AUConverter node to RemoteIO node" ]) {
+        return;
+    }
     
     // Open the graph - AudioUnits are opened but not initialized
-    AUGraphOpen(mGraph);
+    result = AUGraphOpen(mGraph);
+    if (![self checkError:result withDescription:@"Cannot open AUGraph" ]) {
+        return;
+    }
     
     // Get a link to the converter node
-    AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter);
-
+    result = AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter);
+    if (![self checkError:result withDescription:@"Cannot get info for AUConverter node" ]) {
+        return;
+    }
+    
     // Get a link to the output AU so we can talk to it later
     AUGraphNodeInfo(mGraph, outputNode, NULL, &mOutput);
+    result = AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter);
+    if (![self checkError:result withDescription:@"Cannot get info for RemoteIO node" ]) {
+        return;
+    }
     
     // Set the converter callback struct
     AURenderCallbackStruct renderCallbackStruct;
     renderCallbackStruct.inputProc = &renderAudio;
     renderCallbackStruct.inputProcRefCon = (__bridge void*)self;
-    AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct);
+    result = AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct);
+    if (![self checkError:result withDescription:@"Cannot set AUConverter node input callback" ]) {
+        return;
+    }
     
     // Set up the converter input stream
     CAStreamBasicDescription desc;
     UInt32 size = sizeof(desc);
-    AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size);
+    
+    result = AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size);
+    if (![self checkError:result withDescription:@"Cannot get stream format from AUConverter" ]) {
+        return;
+    }
     
     // Initialize the structure to ensure there are no spurious values
     memset (&desc, 0, sizeof(desc));
@@ -87,11 +117,26 @@ const Float64 kGraphSampleRate = 44100.0;
     desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
     
     // Apply the modified AudioStreamBasicDescription to the converter input bus
-    AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc));
+    result = AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc));
+    if (![self checkError:result withDescription:@"Cannot set AUConverter audio stream property" ]) {
+        return;
+    }
     
     // Print graph setup
     CAShow(mGraph);
-    AUGraphInitialize(mGraph);
+    result = AUGraphInitialize(mGraph);
+    if (![self checkError:result withDescription:@"Cannot initialize AUGraph" ]) {
+        return;
+    }
+}
+
+-(BOOL)checkError:(OSStatus)osstatus withDescription:(NSString*)description {
+    
+    if (osstatus != 0) {
+        NSLog(@"AudioEngine Error:%@ OSStatus:%d", description, osstatus);
+        return false;
+    }
+    return true;
 }
 
 -(void)initializeSynthComponents {
@@ -104,7 +149,6 @@ const Float64 kGraphSampleRate = 44100.0;
     } else {
         _osc1 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
         _osc2 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
-        
     }
     
     // Initialize VCO envelope
@@ -122,7 +166,8 @@ const Float64 kGraphSampleRate = 44100.0;
     [_lfo1 setWaveform:LFOSin];
     
     // Initial settings
-    osc2Freq = 1.0f;
+    
+    // TODO: Create MIXER component to replace these ivars
     _osc1vol = 0.5f;
     _osc2vol = 0.5f;
    
@@ -136,8 +181,12 @@ const Float64 kGraphSampleRate = 44100.0;
     OSStatus result = AUGraphIsRunning(mGraph, &isRunning);
     
     if (!isRunning) {
+        // Start the graph
         result = AUGraphStart(mGraph);
-
+        if (![self checkError:result withDescription:@"Cannot start AUGraph" ]) {
+            return;
+        }
+        
         // Print the result
         if (result) { printf("AUGraphStart result %d %08X %4.4s\n", (int)result, (int)result, (char*)&result); return; }
     }
@@ -148,14 +197,19 @@ const Float64 kGraphSampleRate = 44100.0;
     // Stop the AUGraph
     Boolean isRunning = false;
     
+    OSStatus result;
+    
     // Check that the graph is running
     AUGraphIsRunning(mGraph, &isRunning);
     
     // If the graph is running, stop it
     if (isRunning) {
-        AUGraphStop(mGraph);
+        result = AUGraphStop(mGraph);
+        if (![self checkError:result withDescription:@"Cannot stop AUGraph" ]) {
+            return;
+        }
     }
-
+    
 }
 
 // the render callback procedure
@@ -274,17 +328,6 @@ OSStatus RenderTone(
     [_filterEnvelope releaseNote];
 }
 
-
-
--(void)setFrequencies:(float)frequency {
-
-    noteFreq = frequency;
-
-    [_osc1 setFreq:frequency];
-    [_osc2 setFreq:frequency * osc2Freq];
-    
-}
-
 // ControllerProtocols
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId VolumeChangedTo:(float)value {
     //[self setMixerInputChannel:oscillatorId toLevel:value];
@@ -297,12 +340,21 @@ OSStatus RenderTone(
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId FreqChangedTo:(float)value {
     
-    float inValue = (value * 2.0) - 1.0;
-    
-    osc2Freq = (powf(powf(2, (1.0 / 12.0)), inValue * 7));
+
+    _osc2.freq_adjust = value;
     
     [self setFrequencies:noteFreq];
 }
+
+-(void)setFrequencies:(float)frequency {
+    
+    noteFreq = frequency;
+    
+    [_osc1 setFreq:frequency];
+    [_osc2 setFreq:frequency];
+    
+}
+
 
 -(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId WaveformChangedTo:(int)value {
     if (oscillatorId == 0) {
@@ -377,13 +429,9 @@ OSStatus RenderTone(
 }
 
 -(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeDestinationTo:(NSInteger)value {
-    NSLog(@"Value: %@", [NSNumber numberWithInteger:value]);
-    
     _osc1.lfo = (value == 0) ? _lfo1 : nil;
     _osc2.lfo = (value == 0 || value == 1) ? _lfo1 : nil;
     _filter.lfo = (value == 2) ? _lfo1 : nil;
-    
-    NSLog(@"LFOs: OSC1:%@ OSC2:%@ VCF:%@", _osc1.lfo, _osc2.lfo, _filter.lfo);
 }
 
 -(void)LFOControlView:(LFOControlView *)view LFOID:(NSInteger)id didChangeWaveformTo:(NSInteger)value {

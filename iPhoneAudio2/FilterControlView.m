@@ -28,7 +28,7 @@
     _freqControl.spriteSheet = cutoffKnob;
     _freqControl.spriteSize = CGSizeMake(150 * SCREEN_SCALE, 150 * SCREEN_SCALE);
     
-    _freqControl.value = 0.5;
+    _freqControl.value = 0.75;
     _freqControl.defaultValue = 0.5;
     _resControl.value = 0.75;
     _resControl.defaultValue = 0;

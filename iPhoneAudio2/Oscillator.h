@@ -18,6 +18,7 @@ typedef enum OscillatorWaveform {
 @interface Oscillator : Generator
 
 @property float freq;
+@property float freq_adjust;
 @property OscillatorWaveform waveform;
 @property (readonly) OscillatorWaveform nextWaveform;
 @property NSInteger octave;
