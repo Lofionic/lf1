@@ -21,7 +21,7 @@
     if (self) {
         currentOutputValue = 0;
         targetOutputValue = 0;
-        _glide = 0.1;
+        _glide =   1.0;
     }
     return self;
 }

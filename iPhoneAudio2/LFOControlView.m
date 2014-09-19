@@ -23,9 +23,9 @@
     _waveformControl1.segments = 4;
     _waveformControl1.selectedSegmentIndex = 2;
     
-    _amountControl1.value = 1.0;
-    _rateControl1.value = 0.8;
-    _destinationControl1.selectedSegmentIndex = 1;
+    _amountControl1.value = 0.2;
+    _rateControl1.value = 0.7;
+    _destinationControl1.selectedSegmentIndex = 0;
 
 }
 
