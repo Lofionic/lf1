@@ -30,21 +30,21 @@
         switch (control.tag) {
             case Attack:
                 // Limit range
-                value = (value * 0.7) + 0.3;
+                // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
                 [_VCOEnvelope setEnvelopeAttack:value];
                 break;
             case Decay:
                 // Limit range
-                value = (value * 0.7) + 0.3;
+                // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
                 [_VCOEnvelope setEnvelopeDecay:value];
                 break;
             case Release:
                 // Limit range
-                value = (value * 0.7) + 0.3;
+                // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
                 [_VCOEnvelope setEnvelopeRelease:value];
@@ -65,19 +65,19 @@
     if (_VCFEnvelope) {
         switch (control.tag) {
             case Attack:// Limit range
-                value = (value * 0.7) + 0.3;
+                // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
                 [_VCFEnvelope setEnvelopeAttack:value];
                 break;
             case Decay:// Limit range
-                value = (value * 0.7) + 0.3;
+                // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
                 [_VCFEnvelope setEnvelopeDecay:value];
                 break;
             case Release:
-                value = (value * 0.7) + 0.3;
+                // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
                 [_VCFEnvelope setEnvelopeRelease:value];

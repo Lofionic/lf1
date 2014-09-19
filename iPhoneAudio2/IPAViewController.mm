@@ -42,6 +42,18 @@
     _presetController = [[PresetController alloc] initWithViewController:self];
 
     [_presetController restorePresetAtIndex:0];
+    
+    UIButton *savePresetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64.0, 32.0)];
+    [savePresetButton setTitle:@"Save" forState:UIControlStateNormal];
+    [savePresetButton addTarget:self action:@selector(savePreset) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:savePresetButton];
+
+}
+
+-(void)savePreset {
+    
+    [_presetController storePresetAtIndex:0];
+    
 }
 
 -(void)setupControllers {
@@ -147,6 +159,7 @@
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+
 
 -(void)viewDidDisappear:(BOOL)animated
 {

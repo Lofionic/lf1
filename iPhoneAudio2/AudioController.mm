@@ -177,7 +177,7 @@ const Float64 kGraphSampleRate = 44100.0;
 -(BOOL)checkError:(OSStatus)osstatus withDescription:(NSString*)description {
     
     if (osstatus != 0) {
-        NSLog(@"AudioEngine Error:%@ OSStatus:%d", description, osstatus);
+        NSLog(@"AudioEngine Error:%@ OSStatus:%d", description, (int)osstatus);
         return false;
     }
     return true;
@@ -260,9 +260,13 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     // Mix oscillator 1 + 2
     AudioSignalType *mixedSignal = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
     
+    
+    
     for (int i = 0; i < inNumberFrames;i++) {
+
         mixedSignal[i] = ((osc1[i] * ac.osc1vol) + (osc2[i] * ac.osc2vol) / 2.0);
         mixedSignal[i] = mixedSignal[i] * ac.vcoEnvelope.buffer[i];
+
     }
     
     // Filter

@@ -53,9 +53,9 @@
 
 -(void) renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
     
-    attackMS = _envelopeAttack * 10000;
-    decayMS = _envelopeDecay * 10000;
-    releaseMS = _envelopeRelease * 10000;
+    attackMS = (_envelopeAttack * 10000) + 1;
+    decayMS = (_envelopeDecay * 10000) + 1;
+    releaseMS = (_envelopeRelease * 10000) + 1;
 
     
     // Fill a buffer with envelope samples
