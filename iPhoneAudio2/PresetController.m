@@ -27,6 +27,7 @@
                         @"oscView.osc2octave.index",
                         @"filterView.freqControl.value",
                         @"filterView.resControl.value",
+                        @"filterView.egControl.value",
                         @"envView.oscAttackControl.value",
                         @"envView.oscDecayControl.value",
                         @"envView.oscSustainControl.value",
@@ -58,38 +59,40 @@
     NSData *presetData = [NSKeyedArchiver archivedDataWithRootObject:presetDictionary];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *userDefaultsPresetArray = [userDefaults valueForKey:USER_DEFAULTS_PRESETS_KEY];
+    NSMutableArray *userDefaultsPresetArray = [NSMutableArray arrayWithArray:[userDefaults valueForKey:USER_DEFAULTS_PRESETS_KEY]];
     
     if (!userDefaultsPresetArray) {
         NSLog(@"No UserDefaults found: creating");
         userDefaultsPresetArray = [[NSMutableArray alloc] initWithCapacity:8];
+        userDefaultsPresetArray = [[NSMutableArray alloc] initWithObjects:presetData, nil];
     } else {
         NSLog(@"UserDefaults found");
-        
-    }
     
-    if ([userDefaultsPresetArray count] >= index) {
-        NSLog(@"Overwriting preset at index %i", index);
-        [userDefaultsPresetArray replaceObjectAtIndex:index withObject:presetData];
-    } else {
-        NSLog(@"Inserting preset at index %i", index);
-        [userDefaultsPresetArray insertObject:presetData atIndex:index];
+        if ([userDefaultsPresetArray count] >= index) {
+            NSLog(@"Overwriting preset at index %li", (long)index);
+            [userDefaultsPresetArray replaceObjectAtIndex:index withObject:presetData];
+        } else {
+            NSLog(@"Inserting preset at index %li", (long)index);
+            [userDefaultsPresetArray insertObject:presetData atIndex:index];
+        }
     }
     [userDefaults setObject:userDefaultsPresetArray forKey:USER_DEFAULTS_PRESETS_KEY];
     [userDefaults synchronize];
+    
+    userDefaultsPresetArray = nil;
 }
 
 -(void)restorePresetAtIndex:(NSInteger)index {
     
-    NSLog(@"Loading preset at index %i", index);
+    NSLog(@"Loading preset at index %li", (long)index);
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *userDefaultsPresetArray = [userDefaults valueForKey:USER_DEFAULTS_PRESETS_KEY];
     
     if (userDefaultsPresetArray) {
-        NSLog(@"UserDefaults found: %i",[userDefaultsPresetArray count]);
+        NSLog(@"UserDefaults found: %lu",(unsigned long)[userDefaultsPresetArray count]);
         
         if ([userDefaultsPresetArray count] <= index) {
-            NSLog(@"Index %i out of bounds", index);
+            NSLog(@"Index %li out of bounds", (long)index);
             return;
         }
         

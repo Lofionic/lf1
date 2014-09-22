@@ -48,12 +48,12 @@
             }
 
             float cutoff = _cutoff;
-            
+
             if (_envelope) {
 
-                float env = (_eg_amount - 0.5) * 2.0;
+                float env = ((_eg_amount - 0.5) * 2.0) * cutoff;
                 
-                cutoff = 0.5 + (_envelope.buffer[i] - 0.5) * env;
+                cutoff = cutoff + (_envelope.buffer[i] - cutoff) * env;
 
             }
             
@@ -63,6 +63,8 @@
                     cutoff = 1;
                 }
             }
+            
+
             
             q = 1.0f - cutoff;
             p = cutoff + 0.8f * cutoff * q;
