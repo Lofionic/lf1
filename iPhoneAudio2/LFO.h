@@ -21,6 +21,7 @@ typedef enum LFOWaveform {
 @property AudioSignalType* buffer;
 @property float freq;
 @property float amp;
+@property float eg_amount;
 @property LFOWaveform waveform;
 @property (readonly) LFOWaveform nextWaveform;
 

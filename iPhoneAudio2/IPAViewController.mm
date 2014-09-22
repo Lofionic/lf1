@@ -62,21 +62,18 @@
     _keyboardView.cvController = _audioController.cvController;
     
     // Create oscillator controller view
-    NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"OscillatorControlView" owner:self options:nil];
-    _oscView = oscNib[0];
+    _oscView = [[OscillatorControlView alloc] initWithFrame:CGRectZero];
     _oscView.delegate = _audioController;
     _oscView.osc1 = _audioController.osc1;
     _oscView.osc2 = _audioController.osc2;
     [_oscView initializeParameters];
     
-    NSArray *envNib = [[NSBundle mainBundle] loadNibNamed:@"EnvelopeControlView" owner:self options:nil];
-    _envView = envNib[0];
+    _envView = [[EnvelopeControlView alloc] initWithFrame:CGRectZero];
     _envView.VCFEnvelope = _audioController.vcfEnvelope;
     _envView.VCOEnvelope = _audioController.vcoEnvelope;
     [_envView initializeParameters];
     
-    NSArray *filterNib = [[NSBundle mainBundle] loadNibNamed:@"FilterControlView" owner:self options:nil];
-    _filterView = filterNib[0];
+    _filterView = [[FilterControlView alloc] initWithFrame:CGRectZero];
     _filterView.vcf = _audioController.vcf;
     [_filterView initializeParameters];
     

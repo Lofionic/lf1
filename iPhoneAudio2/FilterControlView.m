@@ -15,6 +15,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        NSArray *filterNib = [[NSBundle mainBundle] loadNibNamed:@"FilterControlView" owner:self options:nil];
+        self = filterNib[0];
+        self.clipsToBounds = true;
     }
     return self;
 }
@@ -27,6 +30,9 @@
     UIImage *cutoffKnob = [UIImage imageNamed:@"CutoffKnob"];
     _freqControl.spriteSheet = cutoffKnob;
     _freqControl.spriteSize = CGSizeMake(150 * SCREEN_SCALE, 150 * SCREEN_SCALE);
+    
+    UIImage *egBackground = [UIImage imageNamed:@"Osc2Freq_Background"];
+    _egControl.backgroundImage = egBackground;
     
 }
 
@@ -46,6 +52,8 @@
             
         } else if (sender == _resControl) {
             [_vcf setResonance:value];
+        } else if (sender == _egControl) {
+            [_vcf setEg_amount:value];
         }
     }
 }

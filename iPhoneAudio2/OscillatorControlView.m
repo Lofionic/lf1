@@ -15,7 +15,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-
+        NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"OscillatorControlView" owner:self options:nil];
+        self = oscNib[0];
     }
     return self;
 }

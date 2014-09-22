@@ -17,5 +17,5 @@
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *freqControl;
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *resControl;
-
+@property (nonatomic, strong) IBOutlet CCRRotaryControl *egControl;
 @end

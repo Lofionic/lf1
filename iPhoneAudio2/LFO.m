@@ -31,6 +31,7 @@
     if (self) {
         _amp = FLT_MIN;
         _freq = FLT_MIN;
+        _eg_amount = FLT_MIN;
         _waveform = LFOSin;
         _nextWaveform = LFOSin;
     }

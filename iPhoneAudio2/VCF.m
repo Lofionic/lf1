@@ -50,7 +50,11 @@
             float cutoff = _cutoff;
             
             if (_envelope) {
-                cutoff *= _envelope.buffer[i];
+
+                float env = (_eg_amount - 0.5) * 2.0;
+                
+                cutoff = 0.5 + (_envelope.buffer[i] - 0.5) * env;
+
             }
             
             if (_lfo) {

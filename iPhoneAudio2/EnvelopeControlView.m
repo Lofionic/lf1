@@ -17,6 +17,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        NSArray *envNib = [[NSBundle mainBundle] loadNibNamed:@"EnvelopeControlView" owner:self options:nil];
+        self = envNib[0];
     }
     return self;
 }
