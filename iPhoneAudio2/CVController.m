@@ -11,7 +11,6 @@
 @implementation CVController {
     AudioSignalType currentOutputValue;
     AudioSignalType targetOutputValue;
-    float portamento;
     NSInteger prevNote;
 }
 

@@ -83,6 +83,10 @@
     _lfoView.osc2 = _audioController.osc2;
     _lfoView.vcf = _audioController.vcf;
     [_lfoView initializeParameters];
+    
+    _keyboardControlView = [[KeyboardControlView alloc] initWithFrame:CGRectZero];
+    _keyboardControlView.cvController = _audioController.cvController;
+    [_keyboardControlView initializeParameters];
 
     if (_iPhoneControlsView) {
         // iPhone - add control views
@@ -99,6 +103,7 @@
         [_iPadControlsView2 addSubview:_envView];
         [_iPadControlsView3 addSubview:_filterView];
         [_iPadControlsView4 addSubview:_lfoView];
+        [_iPadControlsView5 addSubview:_keyboardControlView];
     }
 }
 
@@ -149,6 +154,7 @@
         _envView.frame = [_envView superview].bounds;
         _filterView.frame = [_filterView superview].bounds;
         _lfoView.frame = [_lfoView superview].bounds;
+        _keyboardControlView.frame = [_keyboardControlView superview].bounds;
     }
 }
 

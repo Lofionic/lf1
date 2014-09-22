@@ -39,7 +39,9 @@
                         @"lfoView.rateControl.value",
                         @"lfoView.amountControl.value",
                         @"lfoView.destinationControl.index",
-                        @"lfoView.waveformControl.index"
+                        @"lfoView.waveformControl.index",
+                        @"keyboardControlView.glideControl.value",
+                        @"keyboardControlView.glissSwitch.value"
                         ];
     }
     return self;
@@ -100,7 +102,12 @@
         NSMutableDictionary *presetDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:presetData];
         
         for (NSString *thisKey in [presetDictionary allKeys]) {
-            [_viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
+            @try {
+                [_viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
+            }
+            @catch (NSException *e) {
+                NSLog(@"Key Path %@ not found", thisKey);
+            }
         }
         
     }

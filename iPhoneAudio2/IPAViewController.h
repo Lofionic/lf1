@@ -12,6 +12,7 @@
 #import "EnvelopeControlView.h"
 #import "FilterControlView.h"
 #import "LFOControlView.h"
+#import "KeyboardControlView.h"
 
 #import "PresetController.h"
 
@@ -29,12 +30,14 @@
 @property (nonatomic, strong) EnvelopeControlView *envView;
 @property (nonatomic, strong) FilterControlView *filterView;
 @property (nonatomic, strong) LFOControlView *lfoView;
+@property (nonatomic, strong) KeyboardControlView *keyboardControlView;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *iPhoneControlsView;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView1;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView2;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView3;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView4;
+@property (nonatomic, strong) IBOutlet UIView *iPadControlsView5;
 
 @property (nonatomic, strong) PresetController *presetController;
 

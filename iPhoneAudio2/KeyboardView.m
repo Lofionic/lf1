@@ -129,7 +129,6 @@
         for (int i = 0; i < keyCount; i++){
             if (CGRectContainsPoint(keys[i], touchNormalized)) {
                 [keyTouches setObject:thisTouch forKey:thisTouchRef];
-                NSLog(@"Touch added: %@ %@", thisTouchRef, [NSNumber numberWithInt:i]);
             }
         }
     }

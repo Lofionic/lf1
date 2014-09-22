@@ -18,6 +18,11 @@
 		6C3F314E19C9D7A7003BF83F /* control_view_frame_left.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C3F314819C9D7A7003BF83F /* control_view_frame_left.png */; };
 		6C406FCE19CC244A0096672F /* Processor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FCD19CC244A0096672F /* Processor.m */; };
 		6C406FD119CC5B1F0096672F /* CVController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FD019CC5B1F0096672F /* CVController.m */; };
+		6C47256519D0CB76008F481F /* KeyboardControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256419D0CB76008F481F /* KeyboardControlView.xib */; };
+		6C47256819D0CC34008F481F /* KeyboardControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C47256719D0CC34008F481F /* KeyboardControlView.m */; };
+		6C47256B19D0D4EC008F481F /* Red_Switch_Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256919D0D4EC008F481F /* Red_Switch_Off.png */; };
+		6C47256C19D0D4EC008F481F /* Red_Switch_On.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256A19D0D4EC008F481F /* Red_Switch_On.png */; };
+		6C47256F19D0D505008F481F /* SwitchControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C47256E19D0D505008F481F /* SwitchControl.m */; };
 		6C60601119CC85E7008A0AAA /* PresetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C60601019CC85E7008A0AAA /* PresetController.m */; };
 		6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.m */; };
 		6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.m */; };
@@ -104,6 +109,13 @@
 		6C406FCD19CC244A0096672F /* Processor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Processor.m; sourceTree = "<group>"; };
 		6C406FCF19CC5B1F0096672F /* CVController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVController.h; sourceTree = "<group>"; };
 		6C406FD019CC5B1F0096672F /* CVController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVController.m; sourceTree = "<group>"; };
+		6C47256419D0CB76008F481F /* KeyboardControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KeyboardControlView.xib; sourceTree = "<group>"; };
+		6C47256619D0CC34008F481F /* KeyboardControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardControlView.h; sourceTree = "<group>"; };
+		6C47256719D0CC34008F481F /* KeyboardControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardControlView.m; sourceTree = "<group>"; };
+		6C47256919D0D4EC008F481F /* Red_Switch_Off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_Switch_Off.png; sourceTree = "<group>"; };
+		6C47256A19D0D4EC008F481F /* Red_Switch_On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_Switch_On.png; sourceTree = "<group>"; };
+		6C47256D19D0D505008F481F /* SwitchControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchControl.h; sourceTree = "<group>"; };
+		6C47256E19D0D505008F481F /* SwitchControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchControl.m; sourceTree = "<group>"; };
 		6C60600F19CC85E7008A0AAA /* PresetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetController.h; sourceTree = "<group>"; };
 		6C60601019CC85E7008A0AAA /* PresetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetController.m; sourceTree = "<group>"; };
 		6C7E9B4519C7793300DAB5B9 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
@@ -253,6 +265,9 @@
 				6C01140919C19C3600D3C802 /* OscillatorControlView.xib */,
 				6C01140B19C19C6500D3C802 /* OscillatorControlView.h */,
 				6C01140C19C19C6500D3C802 /* OscillatorControlView.m */,
+				6C47256419D0CB76008F481F /* KeyboardControlView.xib */,
+				6C47256619D0CC34008F481F /* KeyboardControlView.h */,
+				6C47256719D0CC34008F481F /* KeyboardControlView.m */,
 				6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */,
 				6CBB934519C23BAE00F40AC1 /* EnvelopeControlView.h */,
 				6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */,
@@ -269,6 +284,8 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6C47256919D0D4EC008F481F /* Red_Switch_Off.png */,
+				6C47256A19D0D4EC008F481F /* Red_Switch_On.png */,
 				6CD81ECC19CB835200B46963 /* ChickenKnob_2way.png */,
 				6CD81ECD19CB835200B46963 /* ChickenKnob_2way@2x.png */,
 				6CD81ECE19CB835200B46963 /* ChickenKnob_3way.png */,
@@ -337,23 +354,25 @@
 			isa = PBXGroup;
 			children = (
 				6CB5E13419C4659B008B9AC3 /* BuildSettings.h */,
-				6CD5B68F19C8F411002E835C /* CCRRotaryControl.h */,
-				6CD5B69019C8F411002E835C /* CCRRotaryControl.m */,
-				6CD81EC919CB561100B46963 /* CCRSegmentedRotaryControl.h */,
-				6CD81ECA19CB561100B46963 /* CCRSegmentedRotaryControl.m */,
-				6C01140219C18E6000D3C802 /* Components */,
-				6C01140E19C1A37400D3C802 /* Control Views */,
-				834FA80C18B95FA800923F29 /* Supporting Files */,
-				6CE06BB619C0AD9E005AB92F /* Resources */,
 				834FA81418B95FA800923F29 /* IPAAppDelegate.h */,
 				834FA81518B95FA800923F29 /* IPAAppDelegate.m */,
-				834FA81718B95FA800923F29 /* Images.xcassets */,
 				834FA83618B95FD200923F29 /* IPAViewController.h */,
 				834FA83718B95FD200923F29 /* IPAViewController.mm */,
 				6C60600F19CC85E7008A0AAA /* PresetController.h */,
 				6C60601019CC85E7008A0AAA /* PresetController.m */,
+				6CD5B68F19C8F411002E835C /* CCRRotaryControl.h */,
+				6CD5B69019C8F411002E835C /* CCRRotaryControl.m */,
+				6CD81EC919CB561100B46963 /* CCRSegmentedRotaryControl.h */,
+				6CD81ECA19CB561100B46963 /* CCRSegmentedRotaryControl.m */,
+				6C47256D19D0D505008F481F /* SwitchControl.h */,
+				6C47256E19D0D505008F481F /* SwitchControl.m */,
+				834FA81718B95FA800923F29 /* Images.xcassets */,
 				6C983BC919BBAA2C005543D8 /* IPAView~iphone.xib */,
 				6CB5E13219C45F0B008B9AC3 /* IPAView.xib */,
+				6C01140219C18E6000D3C802 /* Components */,
+				6C01140E19C1A37400D3C802 /* Control Views */,
+				834FA80C18B95FA800923F29 /* Supporting Files */,
+				6CE06BB619C0AD9E005AB92F /* Resources */,
 			);
 			path = iPhoneAudio2;
 			sourceTree = "<group>";
@@ -490,13 +509,16 @@
 				6CB5E13319C45F0B008B9AC3 /* IPAView.xib in Resources */,
 				6C3F314919C9D7A7003BF83F /* control_view_frame@2x.png in Resources */,
 				6C3F314A19C9D7A7003BF83F /* control_view_frame.png in Resources */,
+				6C47256C19D0D4EC008F481F /* Red_Switch_On.png in Resources */,
 				6CE13C6819CA2D9600AF7954 /* CutoffKnob.png in Resources */,
+				6C47256519D0CB76008F481F /* KeyboardControlView.xib in Resources */,
 				6CE13C6419CA265400AF7954 /* LFORate_Background.png in Resources */,
 				6CD81ED619CB835200B46963 /* ChickenKnob_3way.png in Resources */,
 				834FA81818B95FA800923F29 /* Images.xcassets in Resources */,
 				6CD81ED519CB835200B46963 /* ChickenKnob_2way@2x.png in Resources */,
 				6C3F314C19C9D7A7003BF83F /* control_view_frame_right.png in Resources */,
 				6CD81ED719CB835200B46963 /* ChickenKnob_3way@2x.png in Resources */,
+				6C47256B19D0D4EC008F481F /* Red_Switch_Off.png in Resources */,
 				6CE13C5719CA1FEF00AF7954 /* Osc2Freq_Background.png in Resources */,
 				6CE13C6C19CA38E600AF7954 /* ChickenKnob.png in Resources */,
 				6CE13C6519CA265400AF7954 /* LFORate_Background@2x.png in Resources */,
@@ -530,6 +552,7 @@
 				6C60601119CC85E7008A0AAA /* PresetController.m in Sources */,
 				6CF53BC919C5D64200C63B1C /* FilterControlView.m in Sources */,
 				6C3F313619C9C583003BF83F /* ControlView.m in Sources */,
+				6C47256F19D0D505008F481F /* SwitchControl.m in Sources */,
 				6CC18F2219C83625000894AB /* SynthComponent.m in Sources */,
 				6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */,
 				6CC18F2519C842E9000894AB /* Generator.m in Sources */,
@@ -539,6 +562,7 @@
 				834FA81618B95FA800923F29 /* IPAAppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
 				6CC18F2B19C85DA4000894AB /* VCF.m in Sources */,
+				6C47256819D0CC34008F481F /* KeyboardControlView.m in Sources */,
 				6C406FD119CC5B1F0096672F /* CVController.m in Sources */,
 				6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */,
 				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
