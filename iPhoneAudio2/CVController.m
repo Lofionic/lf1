@@ -12,6 +12,7 @@
     AudioSignalType currentOutputValue;
     AudioSignalType targetOutputValue;
     float portamento;
+    NSInteger prevNote;
 }
 
 
@@ -21,7 +22,11 @@
     if (self) {
         currentOutputValue = 0;
         targetOutputValue = 0;
-        _glide =  0.0;
+        _glide =  1;
+        _gliss = true;
+        
+        // -1 means no previous note
+        prevNote = -1;
     }
     return self;
 }
@@ -39,6 +44,14 @@
     if (currentOutputValue == 0 || _glide == 0) {
         currentOutputValue = targetOutputValue;
     }
+    
+    if (prevNote == - 1) {
+        [self openGate];
+    } else if (note != prevNote && !_gliss) {
+        [self openGate];
+    }
+
+    prevNote = note;
 }
 
 -(void)openGate {
@@ -55,6 +68,8 @@
         SynthComponent <CVControllerDelegate> *thisComponent = (SynthComponent <CVControllerDelegate> *)thisId;
         [thisComponent CVControllerDidCloseGate:self];
     }
+    
+    prevNote = -1;
 }
 
 -(void)renderBuffer:(AudioSignalType *)outA samples:(int)numFrames {

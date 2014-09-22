@@ -10,10 +10,16 @@
 #import "BuildSettings.h"
 
 @implementation KeyboardView {
- 
+    
     int octaves;
     CGRect keys[88];
     int keyValues[88];
+    
+    NSMutableDictionary *keyTouches;
+    NSMutableArray *keyDownArray;
+    
+    BOOL keyDowns[88];
+    BOOL gateOpen;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -32,11 +38,15 @@
 
 -(void)awakeFromNib {
     self.userInteractionEnabled = YES;
+    self.multipleTouchEnabled = YES;
     self.backgroundColor = [UIColor redColor];
     [self initKeys];
 }
 
 -(void)initKeys {
+    
+    keyTouches = [[NSMutableDictionary alloc] initWithCapacity:10];
+    
     
     if (IS_IPAD()) {
         octaves = 2;
@@ -95,37 +105,46 @@
     
     keys[thisKey] = CGRectMake(octaves * keyWidth * 7.0, 0, keyWidth, keyHeight);
     keyValues[thisKey] = thisKey;
+    
+    keyDownArray = [[NSMutableArray alloc] initWithCapacity:10];
+    for (int i = 0; i < 88; i++) {
+        keyDowns[i] = false;
+    }
+    gateOpen = false;
 }
 
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (_cvController) {
+    
+    for (UITouch* thisTouch in touches) {
         
-        UITouch *touch = [touches anyObject];
-        CGPoint touchLocation = [touch locationInView:self];
+        NSNumber *thisTouchRef = [NSNumber numberWithInt:(int)thisTouch];
+        
+        CGPoint touchLocation = [thisTouch locationInView:self];
         CGPoint touchNormalized = CGPointMake(
                                               touchLocation.x / self.bounds.size.width,
                                               touchLocation.y / self.bounds.size.height);
         
         int keyCount = (octaves * 12) + 1;
-        int key = 0;
-        for (int i = 0; i < keyCount; i++) {
+        for (int i = 0; i < keyCount; i++){
             if (CGRectContainsPoint(keys[i], touchNormalized)) {
-                key = keyValues[i];
+                [keyTouches setObject:thisTouch forKey:thisTouchRef];
+                NSLog(@"Touch added: %@ %@", thisTouchRef, [NSNumber numberWithInt:i]);
             }
         }
-        
-        [_cvController playNote:key];
-        [_cvController openGate];
-
     }
     
+    [self updateCVController];
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (_cvController) {
-        [_cvController closeGate];
+    for (UITouch *thisTouch in touches) {
+        
+        NSNumber *thisTouchRef = [NSNumber numberWithInt:(int)thisTouch];
+        [keyTouches removeObjectForKey:thisTouchRef];
     }
+    
+    [self updateCVController];
 }
 
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -133,7 +152,67 @@
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    //[self touchesBegan:touches withEvent:event];
+    [self updateCVController];
+}
+
+-(void)updateCVController {
+    
+    int keyCount = (octaves * 12) + 1;
+    
+    // reset all keys
+    for (int i = 0; i < keyCount; i++) {
+        keyDowns[i] = false;
+    }
+    
+    // Process all touches and record which keys are pressed
+    for (UITouch *thisTouch in [keyTouches allValues]) {
+        CGPoint touchLocation = [thisTouch locationInView:self];
+        CGPoint touchNormalized = CGPointMake(
+                                              touchLocation.x / self.bounds.size.width,
+                                              touchLocation.y / self.bounds.size.height);
+        
+        for (int i = keyCount; i >= 0; i--){
+            if (CGRectContainsPoint(keys[i], touchNormalized)) {
+                keyDowns[i] = true;
+                break;
+            }
+        }
+    }
+    
+    // update the array of pressed keys
+    bool somethingChanged = false;
+    
+    for (int i = 0; i < keyCount; i ++) {
+        
+        NSNumber *t = [NSNumber numberWithInt:i];
+        
+        if (keyDowns[i]) {
+            if (![keyDownArray containsObject:t]) {
+                [keyDownArray addObject:t];
+                somethingChanged = true;
+            }
+        } else {
+            if ([keyDownArray containsObject:t]) {
+                [keyDownArray removeObject:t];
+                somethingChanged = true;
+            }
+        }
+    }
+    
+    if (somethingChanged) {
+        
+        // something has changed with the keyboard
+        
+        if (keyDownArray.count > 0) {
+            // keys are down
+            [_cvController playNote:keyValues[[keyDownArray.lastObject integerValue]]];
+        } else  {
+            // no keys are down
+            [_cvController closeGate];
+        }
+        
+        [self setNeedsDisplay];
+    }
 }
 
 
@@ -144,7 +223,7 @@
     // Drawing code
     CGContextRef ctx = UIGraphicsGetCurrentContext();
     
-    int totalKeys = (12 * octaves) + 1;
+    NSInteger totalKeys = (12 * octaves) + 1;
     
     for (int i = 0; i < totalKeys; i++) {
         
@@ -153,6 +232,11 @@
         } else {
             [[UIColor darkGrayColor] setFill];
         }
+        
+        if (keyDowns[i]) {
+            [[UIColor redColor] setFill];
+        }
+        
         [[UIColor lightGrayColor] setStroke];
         
         CGRect thisKey = keys[i];

@@ -21,6 +21,7 @@
 @interface CVController : Generator
 
 @property float glide;
+@property bool gliss;
 @property (nonatomic, strong) NSArray *gateComponents;
 
 -(void)playNote:(NSInteger)note;
