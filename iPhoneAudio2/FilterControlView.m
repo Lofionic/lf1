@@ -17,7 +17,6 @@
         // Initialization code
         NSArray *filterNib = [[NSBundle mainBundle] loadNibNamed:@"FilterControlView" owner:self options:nil];
         self = filterNib[0];
-        self.clipsToBounds = true;
     }
     return self;
 }

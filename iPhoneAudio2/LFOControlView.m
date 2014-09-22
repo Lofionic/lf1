@@ -10,6 +10,18 @@
 
 @implementation LFOControlView
 
+-(id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        NSArray *lfoNib = [[NSBundle mainBundle] loadNibNamed:@"LFOControlView" owner:self options:nil];
+        self = lfoNib[0];
+    }
+    return self;
+    
+    
+}
+
 -(void)initializeParameters {
     
     UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];

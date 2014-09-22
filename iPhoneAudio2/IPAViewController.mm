@@ -77,8 +77,7 @@
     _filterView.vcf = _audioController.vcf;
     [_filterView initializeParameters];
     
-    NSArray *lfoNib = [[NSBundle mainBundle] loadNibNamed:@"LFOControlView" owner:self options:nil];
-    _lfoView = lfoNib[0];
+    _lfoView = [[LFOControlView alloc] initWithFrame:CGRectZero];
     _lfoView.lfo = _audioController.lfo1;
     _lfoView.osc1 = _audioController.osc1;
     _lfoView.osc2 = _audioController.osc2;
