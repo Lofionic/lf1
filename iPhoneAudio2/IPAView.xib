@@ -38,11 +38,11 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="54c-MI-6LV">
-                    <rect key="frame" x="908" y="468" width="108" height="292"/>
+                    <rect key="frame" x="908" y="470" width="108" height="290"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="dDc-zW-m3s" customClass="KeyboardView">
-                    <rect key="frame" x="100" y="468" width="800" height="292"/>
+                    <rect key="frame" x="8" y="470" width="900" height="290"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

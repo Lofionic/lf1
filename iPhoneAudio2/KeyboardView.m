@@ -56,7 +56,7 @@
     
     CGFloat keyWidth = 1.0 / ((octaves * 7.0) + 1);
     CGFloat keyHeight = 1;
-    CGFloat blackKeyHeight = 1 * 0.5;
+    CGFloat blackKeyHeight = 1 * 0.6;
     CGFloat blackKeyWidth = keyWidth / 1.5;
     
     int thisKey = 0;
@@ -226,10 +226,20 @@
     
     for (int i = 0; i < totalKeys; i++) {
         
+        UIImage *drawImage;
+        
         if (i % 12 < 7) {
-            [[UIColor whiteColor] setFill];
+            if (keyDowns[i]) {
+                drawImage = [UIImage imageNamed:@"white_key_down"];
+            } else {
+                drawImage = [UIImage imageNamed:@"white_key_up"];
+            }
         } else {
-            [[UIColor darkGrayColor] setFill];
+            if (keyDowns[i]) {
+                drawImage = [UIImage imageNamed:@"black_key_down"];
+            } else {
+                drawImage = [UIImage imageNamed:@"black_key_up"];
+            }
         }
         
         if (keyDowns[i]) {
@@ -239,15 +249,21 @@
         [[UIColor lightGrayColor] setStroke];
         
         CGRect thisKey = keys[i];
-        
         CGRect drawRect = CGRectMake(
                                      thisKey.origin.x * self.frame.size.width,
                                      thisKey.origin.y * self.frame.size.height,
                                      thisKey.size.width * self.frame.size.width,
-                                     thisKey.size.height * self.frame.size.height);
+                                     -thisKey.size.height * self.frame.size.height);
         
-        CGContextAddRect(ctx, drawRect);
-        CGContextDrawPath(ctx, kCGPathFillStroke);
+        if (drawImage) {
+            CGContextSaveGState(ctx);
+            CGContextScaleCTM(ctx, 1.0, -1.0);
+            CGContextDrawImage(ctx, drawRect, [drawImage CGImage]);
+            CGContextRestoreGState(ctx);
+        } else {
+            CGContextAddRect(ctx, drawRect);
+            CGContextDrawPath(ctx, kCGPathFillStroke);
+        }
     }
     
 }

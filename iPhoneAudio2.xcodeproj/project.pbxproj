@@ -23,6 +23,14 @@
 		6C47256B19D0D4EC008F481F /* Red_Switch_Off.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256919D0D4EC008F481F /* Red_Switch_Off.png */; };
 		6C47256C19D0D4EC008F481F /* Red_Switch_On.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256A19D0D4EC008F481F /* Red_Switch_On.png */; };
 		6C47256F19D0D505008F481F /* SwitchControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C47256E19D0D505008F481F /* SwitchControl.m */; };
+		6C47257C19D0F046008F481F /* white_key_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47257819D0F046008F481F /* white_key_up.png */; };
+		6C47257D19D0F046008F481F /* white_key_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47257919D0F046008F481F /* white_key_down.png */; };
+		6C47257E19D0F046008F481F /* white_key_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47257A19D0F046008F481F /* white_key_down@2x.png */; };
+		6C47257F19D0F046008F481F /* white_key_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47257B19D0F046008F481F /* white_key_up@2x.png */; };
+		6C47258C19D0F72B008F481F /* black_key_up.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47258819D0F72B008F481F /* black_key_up.png */; };
+		6C47258D19D0F72B008F481F /* black_key_down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47258919D0F72B008F481F /* black_key_down@2x.png */; };
+		6C47258E19D0F72B008F481F /* black_key_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47258A19D0F72B008F481F /* black_key_down.png */; };
+		6C47258F19D0F72B008F481F /* black_key_up@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C47258B19D0F72B008F481F /* black_key_up@2x.png */; };
 		6C60601119CC85E7008A0AAA /* PresetController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C60601019CC85E7008A0AAA /* PresetController.m */; };
 		6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.m */; };
 		6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.m */; };
@@ -116,6 +124,14 @@
 		6C47256A19D0D4EC008F481F /* Red_Switch_On.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Red_Switch_On.png; sourceTree = "<group>"; };
 		6C47256D19D0D505008F481F /* SwitchControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchControl.h; sourceTree = "<group>"; };
 		6C47256E19D0D505008F481F /* SwitchControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchControl.m; sourceTree = "<group>"; };
+		6C47257819D0F046008F481F /* white_key_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_key_up.png; sourceTree = "<group>"; };
+		6C47257919D0F046008F481F /* white_key_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = white_key_down.png; sourceTree = "<group>"; };
+		6C47257A19D0F046008F481F /* white_key_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_key_down@2x.png"; sourceTree = "<group>"; };
+		6C47257B19D0F046008F481F /* white_key_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_key_up@2x.png"; sourceTree = "<group>"; };
+		6C47258819D0F72B008F481F /* black_key_up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_key_up.png; sourceTree = "<group>"; };
+		6C47258919D0F72B008F481F /* black_key_down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_key_down@2x.png"; sourceTree = "<group>"; };
+		6C47258A19D0F72B008F481F /* black_key_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = black_key_down.png; sourceTree = "<group>"; };
+		6C47258B19D0F72B008F481F /* black_key_up@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black_key_up@2x.png"; sourceTree = "<group>"; };
 		6C60600F19CC85E7008A0AAA /* PresetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresetController.h; sourceTree = "<group>"; };
 		6C60601019CC85E7008A0AAA /* PresetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetController.m; sourceTree = "<group>"; };
 		6C7E9B4519C7793300DAB5B9 /* Envelope.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Envelope.h; sourceTree = "<group>"; };
@@ -284,6 +300,14 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6C47258819D0F72B008F481F /* black_key_up.png */,
+				6C47258919D0F72B008F481F /* black_key_down@2x.png */,
+				6C47258A19D0F72B008F481F /* black_key_down.png */,
+				6C47258B19D0F72B008F481F /* black_key_up@2x.png */,
+				6C47257819D0F046008F481F /* white_key_up.png */,
+				6C47257919D0F046008F481F /* white_key_down.png */,
+				6C47257A19D0F046008F481F /* white_key_down@2x.png */,
+				6C47257B19D0F046008F481F /* white_key_up@2x.png */,
 				6C47256919D0D4EC008F481F /* Red_Switch_Off.png */,
 				6C47256A19D0D4EC008F481F /* Red_Switch_On.png */,
 				6CD81ECC19CB835200B46963 /* ChickenKnob_2way.png */,
@@ -491,22 +515,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C47257E19D0F046008F481F /* white_key_down@2x.png in Resources */,
 				6CE13C5519CA13FF00AF7954 /* SmallKnob@2x.png in Resources */,
+				6C47257D19D0F046008F481F /* white_key_down.png in Resources */,
 				6CE13C6019CA240100AF7954 /* Env_Background.png in Resources */,
 				6CE13C6D19CA38E600AF7954 /* ChickenKnob@2x.png in Resources */,
 				6C3F314D19C9D7A7003BF83F /* control_view_frame_left@2x.png in Resources */,
 				6CD81ED819CB835200B46963 /* ChickenKnob_4way.png in Resources */,
 				6CE13C5419CA13FF00AF7954 /* SmallKnob.png in Resources */,
+				6C47257F19D0F046008F481F /* white_key_up@2x.png in Resources */,
 				6CD5B68B19C8DED8002E835C /* LFOControlView.xib in Resources */,
 				834FA81018B95FA800923F29 /* InfoPlist.strings in Resources */,
 				6CD81EDB19CB835200B46963 /* ChickenKnob_5way@2x.png in Resources */,
 				6CE13C5919CA200800AF7954 /* Osc2Freq_Background@2x.png in Resources */,
 				6C3F314B19C9D7A7003BF83F /* control_view_frame_right@2x.png in Resources */,
 				6CE13C6119CA240100AF7954 /* Env_Background@2x.png in Resources */,
+				6C47258F19D0F72B008F481F /* black_key_up@2x.png in Resources */,
+				6C47258E19D0F72B008F481F /* black_key_down.png in Resources */,
 				6CE13C6919CA2D9600AF7954 /* CutoffKnob@2x.png in Resources */,
 				6CF53BC619C5D56E00C63B1C /* FilterControlView.xib in Resources */,
 				6CE13C5D19CA21BF00AF7954 /* ZeroTen_Background@2x.png in Resources */,
 				6CB5E13319C45F0B008B9AC3 /* IPAView.xib in Resources */,
+				6C47257C19D0F046008F481F /* white_key_up.png in Resources */,
+				6C47258D19D0F72B008F481F /* black_key_down@2x.png in Resources */,
 				6C3F314919C9D7A7003BF83F /* control_view_frame@2x.png in Resources */,
 				6C3F314A19C9D7A7003BF83F /* control_view_frame.png in Resources */,
 				6C47256C19D0D4EC008F481F /* Red_Switch_On.png in Resources */,
@@ -523,6 +554,7 @@
 				6CE13C6C19CA38E600AF7954 /* ChickenKnob.png in Resources */,
 				6CE13C6519CA265400AF7954 /* LFORate_Background@2x.png in Resources */,
 				6CD81EDA19CB835200B46963 /* ChickenKnob_5way.png in Resources */,
+				6C47258C19D0F72B008F481F /* black_key_up.png in Resources */,
 				6C983BCA19BBAA2C005543D8 /* IPAView~iphone.xib in Resources */,
 				6CD81ED419CB835200B46963 /* ChickenKnob_2way.png in Resources */,
 				6CD81ED919CB835200B46963 /* ChickenKnob_4way@2x.png in Resources */,
