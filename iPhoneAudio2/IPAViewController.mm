@@ -166,6 +166,7 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [self.audioController stopAUGraph];
+    [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning

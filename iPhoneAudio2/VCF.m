@@ -39,8 +39,7 @@
         
         float valueIn = (float)outA[i];
         
-        if (valueIn != 0) {
-            
+
             if (valueIn > 1) {
                 valueIn = 1;
             } else if (valueIn < -1) {
@@ -49,12 +48,23 @@
 
             float cutoff = _cutoff;
 
+        
             if (_envelope) {
 
-                float env = ((_eg_amount - 0.5) * 2.0) * cutoff;
+                float env = ((_eg_amount - 0.5) * 2.0);
                 
-                cutoff = cutoff + (_envelope.buffer[i] - cutoff) * env;
+                float envValue = _envelope.buffer[i];
+                
+                if (env < 0) {
+                    envValue = 1 - envValue;
+                }
+                
+                float newCutoff = cutoff + (((envValue * cutoff) - cutoff) * fabsf(env));
 
+                
+                //NSLog(@"In: %.2f Buffer: %.2f EGAMT: %.2f Env: %.2f Out: %.2f", cutoff, _envelope.buffer[i], _eg_amount, env, newCutoff);
+                
+                cutoff = newCutoff;
             }
             
             if (_lfo) {
@@ -64,7 +74,6 @@
                 }
             }
             
-
             
             q = 1.0f - cutoff;
             p = cutoff + 0.8f * cutoff * q;
@@ -81,8 +90,10 @@
             b0 = valueIn;
             
             outA[i] = (AudioSignalType)b4;
+            
+            //printf("b0: %.2f b1: %.2f b2: %.2f b3: %.2f b4: %.2f \n", b0, b1, b2, b3, b4);
         }
-    }
+    
 }
 
 @end

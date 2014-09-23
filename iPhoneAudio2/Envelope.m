@@ -57,7 +57,6 @@
     decayMS = (_envelopeDecay * 10000) + 1;
     releaseMS = (_envelopeRelease * 10000) + 1;
 
-    
     // Fill a buffer with envelope samples
     for (int i = 0; i < numFrames; i++) {
         
@@ -101,7 +100,7 @@
     // Limit the change of envelope amp per sample
     // Reduces clicks
     float delta = result - prevEnv;
-    if (fabs(delta) > 0.01) {
+    if (fabsf(delta) > 0.01) {
         result = prevEnv + (0.01 * ((delta < 0) ? -1 : 1));
     }
 

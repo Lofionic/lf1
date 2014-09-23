@@ -17,7 +17,7 @@
 -(id)initWithSampleRate:(Float64)graphSampleRate {
     
     if (self = [super initWithSampleRate:graphSampleRate]) {
-        _freq_adjust = 1;
+        _freq_adjust = 0.5; // freq_adjust of 0.5 = no adjust
         _octave = 0;
         
         _waveform = Sin;
@@ -56,9 +56,9 @@
         
         // Apply freq adjustment
         float adjustValue = (_freq_adjust * 2.0) - 1.0;
+
         adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
-        
-        
+
         float freq = FLT_MIN;
         if (_cvController) {
             freq = _cvController.buffer[i] * CV_FREQUENCY_RANGE;

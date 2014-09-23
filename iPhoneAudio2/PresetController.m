@@ -65,7 +65,6 @@
     
     if (!userDefaultsPresetArray) {
         NSLog(@"No UserDefaults found: creating");
-        userDefaultsPresetArray = [[NSMutableArray alloc] initWithCapacity:8];
         userDefaultsPresetArray = [[NSMutableArray alloc] initWithObjects:presetData, nil];
     } else {
         NSLog(@"UserDefaults found");

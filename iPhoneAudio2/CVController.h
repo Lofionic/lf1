@@ -26,6 +26,6 @@
 
 -(void)playNote:(NSInteger)note;
 -(void)openGate;
--(void)closeGate;
+-(void)closeGateIsLastNote:(BOOL)lastNote;
 
 @end

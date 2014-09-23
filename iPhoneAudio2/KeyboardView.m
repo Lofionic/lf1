@@ -20,6 +20,8 @@
     
     BOOL keyDowns[88];
     BOOL gateOpen;
+    
+    NSInteger prevKeysDownCount;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -203,15 +205,21 @@
         // something has changed with the keyboard
         
         if (keyDownArray.count > 0) {
-            // keys are down
+            // a new key has been played
             [_cvController playNote:keyValues[[keyDownArray.lastObject integerValue]]];
-        } else  {
-            // no keys are down
-            [_cvController closeGate];
         }
+        if (keyDownArray.count < prevKeysDownCount) {
+            // a key has been released
+            [_cvController closeGateIsLastNote:keyDownArray.count == 0];
+        }
+        
+        // Keep track of the number of keys down so we can detect when a new one is played
+        prevKeysDownCount = keyDownArray.count;
         
         [self setNeedsDisplay];
     }
+    
+    
 }
 
 

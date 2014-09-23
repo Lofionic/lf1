@@ -50,6 +50,7 @@
         [self openGate];
     }
 
+
     prevNote = note;
 }
 
@@ -61,14 +62,18 @@
     }
 }
 
--(void)closeGate {
+-(void)closeGateIsLastNote:(BOOL)lastNote {
     // Trigger close gate in every gate component
-    for (id thisId in _gateComponents) {
-        SynthComponent <CVControllerDelegate> *thisComponent = (SynthComponent <CVControllerDelegate> *)thisId;
-        [thisComponent CVControllerDidCloseGate:self];
+    if (lastNote || !_gliss) {
+        
+        for (id thisId in _gateComponents) {
+            SynthComponent <CVControllerDelegate> *thisComponent = (SynthComponent <CVControllerDelegate> *)thisId;
+            [thisComponent CVControllerDidCloseGate:self];
+        }
+        
+        prevNote = -1;
+
     }
-    
-    prevNote = -1;
 }
 
 -(void)renderBuffer:(AudioSignalType *)outA samples:(int)numFrames {
