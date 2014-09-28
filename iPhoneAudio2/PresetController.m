@@ -63,20 +63,21 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSMutableArray *userDefaultsPresetArray = [NSMutableArray arrayWithArray:[userDefaults valueForKey:USER_DEFAULTS_PRESETS_KEY]];
     
-    if (!userDefaultsPresetArray) {
-        NSLog(@"No UserDefaults found: creating");
-        userDefaultsPresetArray = [[NSMutableArray alloc] initWithObjects:presetData, nil];
-    } else {
+    if ([userDefaultsPresetArray count] > 0) {
         NSLog(@"UserDefaults found");
-    
-        if ([userDefaultsPresetArray count] >= index) {
+        
+        if ([userDefaultsPresetArray count] > index) {
             NSLog(@"Overwriting preset at index %li", (long)index);
             [userDefaultsPresetArray replaceObjectAtIndex:index withObject:presetData];
         } else {
             NSLog(@"Inserting preset at index %li", (long)index);
             [userDefaultsPresetArray insertObject:presetData atIndex:index];
         }
+    } else {
+        NSLog(@"No UserDefaults found: creating");
+        userDefaultsPresetArray = [[NSMutableArray alloc] initWithObjects:presetData, nil];
     }
+    
     [userDefaults setObject:userDefaultsPresetArray forKey:USER_DEFAULTS_PRESETS_KEY];
     [userDefaults synchronize];
     
@@ -108,7 +109,8 @@
                 NSLog(@"Key Path %@ not found", thisKey);
             }
         }
-        
+    } else {
+        NSLog(@"No UserDefaults found");
     }
 }
 

@@ -10,7 +10,7 @@
 
 @implementation Processor
 
--(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+-(void)processBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
     NSLog(@"%@ Warning: processBuffer method not implemented", self.description);
 }
 

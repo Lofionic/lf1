@@ -38,9 +38,8 @@
     } else {
         _value = 0;
     }
-    [self setNeedsDisplay];
     [self sendActionsForControlEvents:UIControlEventValueChanged];
-    
+    [self setNeedsDisplay];
 }
 
 - (void)drawRect:(CGRect)rect {

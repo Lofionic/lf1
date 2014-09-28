@@ -11,7 +11,9 @@
 @interface Generator : SynthComponent
 
 @property AudioSignalType* buffer;
+@property UInt32 bufferSize;
 
--(void)renderBuffer:(AudioSignalType*)outA samples:(int)numFrames;
+-(void)prepareBufferWithBufferSize:(UInt32)bufferSize;
+-(void)renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames;
 
 @end

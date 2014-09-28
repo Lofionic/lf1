@@ -31,7 +31,7 @@
     return self;
 }
 
--(void)processBuffer:(AudioSignalType*)outA samples:(int)numFrames {
+-(void)processBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
     
     // DSP ! http://www.musicdsp.org/showArchiveComment.php?ArchiveID=25
     
@@ -88,7 +88,8 @@
             b4 = (b3 + t1) * p - b4 * f;
             b4 = b4 - b4 * b4 * b4 * 0.166667f;    //clipping
             b0 = valueIn;
-            
+
+        
             outA[i] = (AudioSignalType)b4;
             
             //printf("b0: %.2f b1: %.2f b2: %.2f b3: %.2f b4: %.2f \n", b0, b1, b2, b3, b4);

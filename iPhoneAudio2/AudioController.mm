@@ -232,40 +232,41 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     // Get reference to audio controller from inRefCon
     AudioController *ac = (__bridge AudioController*)inRefCon;
 
-    // Initialize buffer in render call since we don't know what the buffer size will be until now
+    
     
     // Generate CV Controller buffer
-    ac.cvController.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    // prepare the buffer in case its size has changed
+    [ac.cvController prepareBufferWithBufferSize:inNumberFrames];
     [ac.cvController renderBuffer:ac.cvController.buffer samples:inNumberFrames];
     
     // Generate VCO envelope buffer
-    ac.vcoEnvelope.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    [ac.vcoEnvelope prepareBufferWithBufferSize:inNumberFrames];
     [ac.vcoEnvelope renderBuffer:ac.vcoEnvelope.buffer samples:inNumberFrames];
     
     // Generate VCF envelope buffer
-    ac.vcfEnvelope.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    [ac.vcfEnvelope prepareBufferWithBufferSize:inNumberFrames];
     [ac.vcfEnvelope renderBuffer:ac.vcfEnvelope.buffer samples:inNumberFrames];
     
-    ac.lfo1.buffer = (AudioSignalType*)malloc(inNumberFrames * sizeof(AudioSignalType));
+    // Generate LFO buffer
+    [ac.lfo1 prepareBufferWithBufferSize:inNumberFrames];
     [ac.lfo1 renderBuffer:ac.lfo1.buffer samples:inNumberFrames];
     
     // Generate buffer for oscillator 1
-    AudioSignalType *osc1 = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
-    [ac.osc1 renderBuffer:osc1 samples:inNumberFrames];
+    [ac.osc1 prepareBufferWithBufferSize:inNumberFrames];
+    [ac.osc1 renderBuffer:ac.osc1.buffer samples:inNumberFrames];
     
     // Generate buffer for oscillator 2
-    AudioSignalType *osc2 = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
-    [ac.osc2 renderBuffer:osc2 samples:inNumberFrames];
+    [ac.osc2 prepareBufferWithBufferSize:inNumberFrames];
+    [ac.osc2 renderBuffer:ac.osc2.buffer samples:inNumberFrames];
 
     // Mix oscillator 1 + 2
     AudioSignalType *mixedSignal = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
     
     for (int i = 0; i < inNumberFrames;i++) {
-
-        mixedSignal[i] = ((osc1[i] * ac.osc1vol) + (osc2[i] * ac.osc2vol) / 2.0);
+        mixedSignal[i] = ((ac.osc1.buffer[i] * ac.osc1vol) + (ac.osc2.buffer[i] * ac.osc2vol) / 2.0);
         mixedSignal[i] = mixedSignal[i] * ac.vcoEnvelope.buffer[i];
-
     }
+    
     
     // Filter
     [ac.vcf processBuffer:mixedSignal samples:inNumberFrames];
@@ -279,11 +280,6 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     }
     
     // Free up the buffers we have initialized to avoid memory leaks
-    free (ac.vcoEnvelope.buffer);
-    free (ac.vcfEnvelope.buffer);
-    free (ac.lfo1.buffer);
-    free (osc1);
-    free (osc2);
     free (mixedSignal);
     
     return noErr;

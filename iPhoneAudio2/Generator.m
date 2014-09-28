@@ -15,12 +15,21 @@
     self = [super initWithSampleRate:(Float64)graphSampleRate];
     if (self) {
         _buffer = nil;
+        _bufferSize = 0;
     }
     return self;
 }
 
--(void)renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
-    NSLog(@"%@ Warning: fillBuffer method not implemented", self.description);
+-(void)prepareBufferWithBufferSize:(UInt32)bufferSize {
+    if (bufferSize != _bufferSize) {
+        free(_buffer);
+        _buffer = (AudioSignalType*)malloc(bufferSize * sizeof(AudioSignalType));
+        _bufferSize = bufferSize;
+    }
+}
+
+-(void)renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
+    NSLog(@"%@ Warning: renderBuffer method not implemented", self.description);
 }
 
 

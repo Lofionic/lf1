@@ -12,16 +12,12 @@
 @implementation KeyboardView {
     
     int octaves;
-    CGRect keys[88];
+    CGRect keyRects[88];
     int keyValues[88];
     
     NSMutableDictionary *keyTouches;
-    NSMutableArray *keyDownArray;
-    
-    BOOL keyDowns[88];
-    BOOL gateOpen;
-    
-    NSInteger prevKeysDownCount;
+
+    NSSet *prevKeysDown;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -66,53 +62,49 @@
     for (int i = 0; i < octaves; i++ ) {
         
         CGFloat leftPoint = i * keyWidth * 7.0;
-        keys[thisKey + 0] = CGRectMake(leftPoint, 0, keyWidth, keyHeight); // C
+        keyRects[thisKey + 0] = CGRectMake(leftPoint, 0, keyWidth, keyHeight); // C
         keyValues[thisKey + 0] = thisKey + 0;
         
-        keys[thisKey + 1] = CGRectMake(leftPoint + keyWidth, 0, keyWidth, keyHeight); // D
+        keyRects[thisKey + 1] = CGRectMake(leftPoint + keyWidth, 0, keyWidth, keyHeight); // D
         keyValues[thisKey + 1] = thisKey + 2;
         
-        keys[thisKey + 2] = CGRectMake(leftPoint + (keyWidth * 2.0), 0, keyWidth, keyHeight); // E
+        keyRects[thisKey + 2] = CGRectMake(leftPoint + (keyWidth * 2.0), 0, keyWidth, keyHeight); // E
         keyValues[thisKey + 2] = thisKey + 4;
         
-        keys[thisKey + 3] = CGRectMake(leftPoint + (keyWidth * 3.0), 0, keyWidth, keyHeight); // F
+        keyRects[thisKey + 3] = CGRectMake(leftPoint + (keyWidth * 3.0), 0, keyWidth, keyHeight); // F
         keyValues[thisKey + 3] = thisKey + 5;
         
-        keys[thisKey + 4] = CGRectMake(leftPoint + (keyWidth * 4.0), 0, keyWidth, keyHeight); // G
+        keyRects[thisKey + 4] = CGRectMake(leftPoint + (keyWidth * 4.0), 0, keyWidth, keyHeight); // G
         keyValues[thisKey + 4] = thisKey + 7;
         
-        keys[thisKey + 5] = CGRectMake(leftPoint + (keyWidth * 5.0), 0, keyWidth, keyHeight); // A
+        keyRects[thisKey + 5] = CGRectMake(leftPoint + (keyWidth * 5.0), 0, keyWidth, keyHeight); // A
         keyValues[thisKey + 5] = thisKey + 9;
         
-        keys[thisKey + 6] = CGRectMake(leftPoint + (keyWidth * 6.0), 0, keyWidth, keyHeight); // B
+        keyRects[thisKey + 6] = CGRectMake(leftPoint + (keyWidth * 6.0), 0, keyWidth, keyHeight); // B
         keyValues[thisKey + 6] = thisKey + 11;
         
-        keys[thisKey + 7] = CGRectMake(leftPoint + (keyWidth * 0.75), 0, blackKeyWidth, blackKeyHeight); // C#
+        keyRects[thisKey + 7] = CGRectMake(leftPoint + (keyWidth * 0.75), 0, blackKeyWidth, blackKeyHeight); // C#
         keyValues[thisKey + 7] = thisKey + 1;
         
-        keys[thisKey + 8] = CGRectMake(leftPoint + (keyWidth * 1.75), 0, blackKeyWidth, blackKeyHeight); // Eb
+        keyRects[thisKey + 8] = CGRectMake(leftPoint + (keyWidth * 1.75), 0, blackKeyWidth, blackKeyHeight); // Eb
         keyValues[thisKey + 8] = thisKey + 3;
         
-        keys[thisKey + 9] = CGRectMake(leftPoint + (keyWidth * 3.75), 0, blackKeyWidth, blackKeyHeight); // F#
+        keyRects[thisKey + 9] = CGRectMake(leftPoint + (keyWidth * 3.75), 0, blackKeyWidth, blackKeyHeight); // F#
         keyValues[thisKey + 9] = thisKey + 6;
         
-        keys[thisKey + 10] = CGRectMake(leftPoint + (keyWidth * 4.75), 0, blackKeyWidth, blackKeyHeight); // Ab
+        keyRects[thisKey + 10] = CGRectMake(leftPoint + (keyWidth * 4.75), 0, blackKeyWidth, blackKeyHeight); // Ab
         keyValues[thisKey +10] = thisKey + 8;
         
-        keys[thisKey + 11] = CGRectMake(leftPoint + (keyWidth * 5.75), 0, blackKeyWidth, blackKeyHeight); // Bb
+        keyRects[thisKey + 11] = CGRectMake(leftPoint + (keyWidth * 5.75), 0, blackKeyWidth, blackKeyHeight); // Bb
         keyValues[thisKey + 11] = thisKey + 10;
         
         thisKey += 12;
     }
     
-    keys[thisKey] = CGRectMake(octaves * keyWidth * 7.0, 0, keyWidth, keyHeight);
+    keyRects[thisKey] = CGRectMake(octaves * keyWidth * 7.0, 0, keyWidth, keyHeight);
     keyValues[thisKey] = thisKey;
     
-    keyDownArray = [[NSMutableArray alloc] initWithCapacity:10];
-    for (int i = 0; i < 88; i++) {
-        keyDowns[i] = false;
-    }
-    gateOpen = false;
+    prevKeysDown = [[NSSet alloc] init];
 }
 
 
@@ -129,7 +121,7 @@
         
         int keyCount = (octaves * 12) + 1;
         for (int i = 0; i < keyCount; i++){
-            if (CGRectContainsPoint(keys[i], touchNormalized)) {
+            if (CGRectContainsPoint(keyRects[i], touchNormalized)) {
                 [keyTouches setObject:thisTouch forKey:thisTouchRef];
             }
         }
@@ -160,10 +152,10 @@
     
     int keyCount = (octaves * 12) + 1;
     
-    // reset all keys
-    for (int i = 0; i < keyCount; i++) {
-        keyDowns[i] = false;
-    }
+    // Store the current keyboard state
+
+   
+    NSMutableSet *keysDown = [[NSMutableSet alloc] initWithCapacity:10];
     
     // Process all touches and record which keys are pressed
     for (UITouch *thisTouch in [keyTouches allValues]) {
@@ -173,52 +165,37 @@
                                               touchLocation.y / self.bounds.size.height);
         
         for (int i = keyCount; i >= 0; i--){
-            if (CGRectContainsPoint(keys[i], touchNormalized)) {
-                keyDowns[i] = true;
+            if (CGRectContainsPoint(keyRects[i], touchNormalized)) {
+                [keysDown addObject:[NSNumber numberWithInt:i]];
                 break;
             }
         }
     }
-    
-    // update the array of pressed keys
-    bool somethingChanged = false;
-    
-    for (int i = 0; i < keyCount; i ++) {
+
+    if (![keysDown isEqualToSet:prevKeysDown]) {
+        // Something's changed
         
-        NSNumber *t = [NSNumber numberWithInt:i];
-        
-        if (keyDowns[i]) {
-            if (![keyDownArray containsObject:t]) {
-                [keyDownArray addObject:t];
-                somethingChanged = true;
-            }
-        } else {
-            if ([keyDownArray containsObject:t]) {
-                [keyDownArray removeObject:t];
-                somethingChanged = true;
-            }
+        // Determine released keys
+        NSMutableSet *releasedKeys = [NSMutableSet setWithSet:prevKeysDown];
+        [releasedKeys minusSet:keysDown];
+        for (NSNumber *n in releasedKeys) {
+            [_cvController noteOff:keyValues[[n integerValue]]];
         }
-    }
-    
-    if (somethingChanged) {
-        
-        // something has changed with the keyboard
-        
-        if (keyDownArray.count > 0) {
-            // a new key has been played
-            [_cvController playNote:keyValues[[keyDownArray.lastObject integerValue]]];
-        }
-        if (keyDownArray.count < prevKeysDownCount) {
-            // a key has been released
-            [_cvController closeGateIsLastNote:keyDownArray.count == 0];
-        }
-        
-        // Keep track of the number of keys down so we can detect when a new one is played
-        prevKeysDownCount = keyDownArray.count;
-        
         [self setNeedsDisplay];
+        
+        // Determine new keys down
+        NSMutableSet *newKeys = [NSMutableSet setWithSet:keysDown];
+        [newKeys minusSet:prevKeysDown];
+        
+        for (NSNumber *n in newKeys) {
+            [_cvController noteOn:keyValues[[n integerValue]]];
+        }
+
     }
     
+    
+    
+    prevKeysDown = [NSSet setWithSet:keysDown];
     
 }
 
@@ -235,28 +212,25 @@
     for (int i = 0; i < totalKeys; i++) {
         
         UIImage *drawImage;
+        NSNumber *keyNumber = [NSNumber numberWithInt:i];
         
         if (i % 12 < 7) {
-            if (keyDowns[i]) {
+            if ([prevKeysDown containsObject:keyNumber]) {
                 drawImage = [UIImage imageNamed:@"white_key_down"];
             } else {
                 drawImage = [UIImage imageNamed:@"white_key_up"];
             }
         } else {
-            if (keyDowns[i]) {
+            if ([prevKeysDown containsObject:keyNumber]) {
                 drawImage = [UIImage imageNamed:@"black_key_down"];
             } else {
                 drawImage = [UIImage imageNamed:@"black_key_up"];
             }
         }
         
-        if (keyDowns[i]) {
-            [[UIColor redColor] setFill];
-        }
-        
         [[UIColor lightGrayColor] setStroke];
         
-        CGRect thisKey = keys[i];
+        CGRect thisKey = keyRects[i];
         CGRect drawRect = CGRectMake(
                                      thisKey.origin.x * self.frame.size.width,
                                      thisKey.origin.y * self.frame.size.height,

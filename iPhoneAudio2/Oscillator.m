@@ -40,8 +40,7 @@
 }
 
 
--(void)renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
-
+-(void)renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {

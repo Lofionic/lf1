@@ -51,8 +51,8 @@
     envelopePosition = 0;
 }
 
--(void) renderBuffer:(AudioSignalType*)outA samples:(int)numFrames {
-    
+-(void) renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
+
     attackMS = (_envelopeAttack * 10000) + 1;
     decayMS = (_envelopeDecay * 10000) + 1;
     releaseMS = (_envelopeRelease * 10000) + 1;

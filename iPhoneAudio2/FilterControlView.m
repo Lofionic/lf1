@@ -32,7 +32,6 @@
     
     UIImage *egBackground = [UIImage imageNamed:@"Osc2Freq_Background"];
     _egControl.backgroundImage = egBackground;
-    
 }
 
 
@@ -56,5 +55,4 @@
         }
     }
 }
-
 @end

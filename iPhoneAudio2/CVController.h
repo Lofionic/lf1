@@ -24,8 +24,7 @@
 @property bool gliss;
 @property (nonatomic, strong) NSArray *gateComponents;
 
--(void)playNote:(NSInteger)note;
--(void)openGate;
--(void)closeGateIsLastNote:(BOOL)lastNote;
+-(void)noteOn:(NSInteger)note;
+-(void)noteOff:(NSInteger)note;
 
 @end
