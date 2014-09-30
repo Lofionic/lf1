@@ -66,7 +66,7 @@
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
             if (_waveform != _nextWaveform) {
-                _waveform = _nextWaveform;
+                [self changeToNextWaveform];
                 phase = 0;
             }
         }
@@ -74,6 +74,12 @@
     
     // Prevent phase from overloading
     phase = fmod(phase, M_PI * 2.0);
+}
+
+-(void)changeToNextWaveform {
+
+    _waveform = _nextWaveform;
+    
 }
 
 

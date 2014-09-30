@@ -51,6 +51,7 @@
     
     [_presetController storePresetAtIndex:0];
     
+    [_presetController exportBankToFileNamed:@"test.bnk"];
 }
 
 -(void)setupControllers {
@@ -62,17 +63,21 @@
     _oscView = [[OscillatorControlView alloc] initWithFrame:CGRectZero];
     _oscView.osc1 = _audioEngine.osc1;
     _oscView.osc2 = _audioEngine.osc2;
+    _oscView.mixer = _audioEngine.mixer;
     [_oscView initializeParameters];
     
+    // Create envelope controller view
     _envView = [[EnvelopeControlView alloc] initWithFrame:CGRectZero];
     _envView.VCFEnvelope = _audioEngine.vcfEnvelope;
     _envView.VCOEnvelope = _audioEngine.vcoEnvelope;
     [_envView initializeParameters];
     
+    // Create filter controller view
     _filterView = [[FilterControlView alloc] initWithFrame:CGRectZero];
     _filterView.vcf = _audioEngine.vcf;
     [_filterView initializeParameters];
     
+    // Create lfo controller view
     _lfoView = [[LFOControlView alloc] initWithFrame:CGRectZero];
     _lfoView.lfo = _audioEngine.lfo1;
     _lfoView.osc1 = _audioEngine.osc1;
@@ -80,6 +85,11 @@
     _lfoView.vcf = _audioEngine.vcf;
     [_lfoView initializeParameters];
     
+    // Create presets controller view
+    _presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
+    [_presetControlView initializeParameters];
+    
+    // Create keyboard controller view
     _keyboardControlView = [[KeyboardControlView alloc] initWithFrame:CGRectZero];
     _keyboardControlView.cvController = _audioEngine.cvController;
     [_keyboardControlView initializeParameters];
@@ -100,6 +110,7 @@
         [_iPadControlsView3 addSubview:_filterView];
         [_iPadControlsView4 addSubview:_lfoView];
         [_iPadControlsView5 addSubview:_keyboardControlView];
+        [_iPadControlsView6 addSubview:_presetControlView];
     }
 }
 

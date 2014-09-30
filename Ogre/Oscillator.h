@@ -17,10 +17,11 @@ typedef enum OscillatorWaveform {
 
 @property float freq_adjust;
 @property OscillatorWaveform waveform;
-@property (readonly) OscillatorWaveform nextWaveform;
+@property OscillatorWaveform nextWaveform;
 @property NSInteger octave;
 
 -(void)setWaveform:(OscillatorWaveform)waveform;
+-(void)changeToNextWaveform;
 
 @property (weak) LFO* lfo;
 @property (weak) CVController* cvController;

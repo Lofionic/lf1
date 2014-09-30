@@ -12,6 +12,7 @@
 #import "KeyboardControlView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "PresetController.h"
+#import "PresetControlView.h"
 
 @class AudioEngine;
 
@@ -28,6 +29,7 @@
 @property (nonatomic, strong) FilterControlView *filterView;
 @property (nonatomic, strong) LFOControlView *lfoView;
 @property (nonatomic, strong) KeyboardControlView *keyboardControlView;
+@property (nonatomic, strong) PresetControlView *presetControlView;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *iPhoneControlsView;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView1;
@@ -35,6 +37,7 @@
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView3;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView4;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView5;
+@property (nonatomic, strong) IBOutlet UIView *iPadControlsView6;
 
 @property (nonatomic, strong) PresetController *presetController;
 

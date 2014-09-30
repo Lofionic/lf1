@@ -29,6 +29,12 @@
         AudioSignalType value = [self getNextSample];
         outA[i] = value;
         
+        // Apply LFO
+        float lfo = 1;
+        if (self.lfo) {
+            lfo = powf(0.5, -self.lfo.buffer[i]);
+        }
+        
         // Apply freq adjustment
         float adjustValue = (self.freq_adjust * 2.0) - 1.0;
         
@@ -41,7 +47,7 @@
         
         // Increment Phase
         for (int j = 0; j < ANALOG_HARMONICS; j++) {
-            phase[j] += ((M_PI * freq * adjustValue * powf(2, self.octave)) / self.sampleRate) * (j + 1);
+            phase[j] += ((M_PI * freq * lfo * adjustValue * powf(2, self.octave)) / self.sampleRate) * (j + 1);
             
             if (phase[j] > M_PI * 2.0) {
                 phase[j] -= M_PI * 2.0;
@@ -52,7 +58,7 @@
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
             if (self.waveform != self.nextWaveform) {
-                self.waveform = self.nextWaveform;
+                [self changeToNextWaveform];
                 for (int j = 0; j <ANALOG_HARMONICS; j++) {
                     phase[j] = 0;
                 }
@@ -72,7 +78,6 @@
         case Sin: {
             // Sin generator
             AudioSignalType a = (AudioSignalType)sin(phase[0]);
-
             return a;
             break;
         }
@@ -86,7 +91,6 @@
                 amp /= 2.0;
             }
             return (AudioSignalType)result;
-        
             break;
         }
         case Square: {

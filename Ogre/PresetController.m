@@ -44,59 +44,64 @@
     return self;
 }
 
+-(void)restoreBank {
+ 
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    _currentBank = [userDefaults valueForKey:PRESET_BANK_KEY];
+    
+    if (!_currentBank) {
+        // Load default bank
+        NSLog(@"Loading default bank");
+        NSString *defaultBankPath = [[NSBundle mainBundle] pathForResource:@"init" ofType:@"bnk"];
+        NSData *defaultBankData = [NSData dataWithContentsOfFile:defaultBankPath];
+        if (defaultBankData) {
+            _currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
+        } else {
+            NSLog(@"Default bank not found");
+            _currentBank = [[NSMutableDictionary alloc] init];
+            [_currentBank setValue:[[NSMutableArray alloc] initWithCapacity:8] forKey:@"presets"];
+            [_currentBank setValue:@"Unnamed" forKey:@"bankName"];
+        }
+    }
+}
+
+-(void)saveBank {
+  
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:_currentBank forKey:PRESET_BANK_KEY];
+    
+    [userDefaults synchronize];
+}
+
+
 -(void)storePresetAtIndex:(NSInteger)index {
 
-    NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[_keyPaths count]];
-    
-    for (NSString *thisKeyPath in _keyPaths) {
-        
-        NSValue *thisValue = [_viewController valueForKeyPath:thisKeyPath];
-        [presetDictionary setValue:thisValue forKey:thisKeyPath];
-        
-    }
-
-    NSData *presetData = [NSKeyedArchiver archivedDataWithRootObject:presetDictionary];
-
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *userDefaultsPresetArray = [NSMutableArray arrayWithArray:[userDefaults valueForKey:USER_DEFAULTS_PRESETS_KEY]];
-    
-    if ([userDefaultsPresetArray count] > 0) {
-        NSLog(@"UserDefaults found");
-        
-        if ([userDefaultsPresetArray count] > index) {
-            NSLog(@"Overwriting preset at index %li", (long)index);
-            [userDefaultsPresetArray replaceObjectAtIndex:index withObject:presetData];
-        } else {
-            NSLog(@"Inserting preset at index %li", (long)index);
-            [userDefaultsPresetArray insertObject:presetData atIndex:index];
+    if (_currentBank) {
+        NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[_keyPaths count]];
+        for (NSString *thisKeyPath in _keyPaths) {
+            NSValue *thisValue = [_viewController valueForKeyPath:thisKeyPath];
+            [presetDictionary setValue:thisValue forKey:thisKeyPath];
         }
-    } else {
-        NSLog(@"No UserDefaults found: creating");
-        userDefaultsPresetArray = [[NSMutableArray alloc] initWithObjects:presetData, nil];
+        
+        NSMutableArray *presetsArray = _currentBank[@"presets"];
+        presetsArray[index] = presetDictionary;
+        
+        [self saveBank];
     }
-    
-    [userDefaults setObject:userDefaultsPresetArray forKey:USER_DEFAULTS_PRESETS_KEY];
-    [userDefaults synchronize];
-    
-    userDefaultsPresetArray = nil;
 }
 
 -(void)restorePresetAtIndex:(NSInteger)index {
     
-    NSLog(@"Loading preset at index %li", (long)index);
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSMutableArray *userDefaultsPresetArray = [userDefaults valueForKey:USER_DEFAULTS_PRESETS_KEY];
+    [self restoreBank];
     
-    if (userDefaultsPresetArray) {
-        NSLog(@"UserDefaults found: %lu",(unsigned long)[userDefaultsPresetArray count]);
-        
-        if ([userDefaultsPresetArray count] <= index) {
-            NSLog(@"Index %li out of bounds", (long)index);
+    if (_currentBank) {
+
+        NSArray *presetsArray = _currentBank[@"presets"];
+        if ([presetsArray count] <= index) {
+            NSLog(@"Can't load preset %li : out of bounds", (long)index);
             return;
         }
-        
-        NSData *presetData = [userDefaultsPresetArray objectAtIndex:index];
-        NSMutableDictionary *presetDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:presetData];
+        NSDictionary *presetDictionary = presetsArray[index];
         
         for (NSString *thisKey in [presetDictionary allKeys]) {
             @try {
@@ -106,9 +111,25 @@
                 NSLog(@"Key Path %@ not found", thisKey);
             }
         }
-    } else {
-        NSLog(@"No UserDefaults found");
     }
+}
+
+-(void)exportBankToFileNamed:(NSString*)filename {
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    if (![[filename pathExtension] isEqualToString:@"bnk"]) {
+        
+        filename = [filename stringByAppendingPathExtension:@"bnk"];
+        
+    }
+    NSString *fullPath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
+    
+    NSLog(@"Writing to: %@", fullPath);
+    NSData *bankData = [NSKeyedArchiver archivedDataWithRootObject:_currentBank];
+    [bankData writeToFile:fullPath atomically:NO];
+    
 }
 
 @end

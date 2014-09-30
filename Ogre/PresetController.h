@@ -10,9 +10,12 @@
 
 @property (nonatomic, weak) UIViewController *viewController;
 @property (nonatomic, strong) NSArray *keyPaths;
+@property (nonatomic, strong) NSMutableDictionary *currentBank;
 
 -(instancetype)initWithViewController:(UIViewController*)viewController;
 -(void)storePresetAtIndex:(NSInteger)index;
 -(void)restorePresetAtIndex:(NSInteger)index;
+
+-(void)exportBankToFileNamed:(NSString*)filename;
 
 @end

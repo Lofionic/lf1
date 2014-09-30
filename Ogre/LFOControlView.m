@@ -18,8 +18,6 @@
         self = lfoNib[0];
     }
     return self;
-    
-    
 }
 
 -(void)initializeParameters {
