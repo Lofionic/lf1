@@ -45,8 +45,12 @@
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
     NSInteger tag = control.tag;
     
-    if (_delegate) {
-        [_delegate oscillatorControlView:self oscillator:(int)tag VolumeChangedTo:control.value];
+    if (_mixer) {
+        if (tag == 0) {
+            _mixer.source1Gain = control.value;
+        } else {
+            _mixer.source2Gain = control.value;
+        }
     }
 }
 

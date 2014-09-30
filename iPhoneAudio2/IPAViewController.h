@@ -13,14 +13,14 @@
 #import "FilterControlView.h"
 #import "LFOControlView.h"
 #import "KeyboardControlView.h"
-
+#import <AVFoundation/AVFoundation.h>
 #import "PresetController.h"
 
-@class AudioController;
+@class AudioEngine;
 
 @interface IPAViewController : UIViewController
 
-@property (nonatomic, strong) AudioController *audioController;
+@property (nonatomic, strong) AudioEngine *audioEngine;
 
 // Parameter controls
 
@@ -40,5 +40,7 @@
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView5;
 
 @property (nonatomic, strong) PresetController *presetController;
+
+-(void)handleInterruption: (NSNotification*) aNotification;
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "AudioController.h"
+#import "AudioEngine.h"
 #import "IPAViewController.h"
 
 @interface IPAViewController ()
@@ -33,11 +33,11 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
     
 	// Do any additional setup after loading the view.
-    self.audioController = [[AudioController alloc] init];
+    self.audioEngine = [[AudioEngine alloc] init];
 
-    [self.audioController initializeAUGraph];
+    [self.audioEngine initializeAUGraph];
     [self setupControllers];
-    [self.audioController startAUGraph];
+    [self.audioEngine startAUGraph];
        
     _presetController = [[PresetController alloc] initWithViewController:self];
 
@@ -59,33 +59,32 @@
 -(void)setupControllers {
     
     // Connect keyboard controller to CVController
-    _keyboardView.cvController = _audioController.cvController;
+    _keyboardView.cvController = _audioEngine.cvController;
     
     // Create oscillator controller view
     _oscView = [[OscillatorControlView alloc] initWithFrame:CGRectZero];
-    _oscView.delegate = _audioController;
-    _oscView.osc1 = _audioController.osc1;
-    _oscView.osc2 = _audioController.osc2;
+    _oscView.osc1 = _audioEngine.osc1;
+    _oscView.osc2 = _audioEngine.osc2;
     [_oscView initializeParameters];
     
     _envView = [[EnvelopeControlView alloc] initWithFrame:CGRectZero];
-    _envView.VCFEnvelope = _audioController.vcfEnvelope;
-    _envView.VCOEnvelope = _audioController.vcoEnvelope;
+    _envView.VCFEnvelope = _audioEngine.vcfEnvelope;
+    _envView.VCOEnvelope = _audioEngine.vcoEnvelope;
     [_envView initializeParameters];
     
     _filterView = [[FilterControlView alloc] initWithFrame:CGRectZero];
-    _filterView.vcf = _audioController.vcf;
+    _filterView.vcf = _audioEngine.vcf;
     [_filterView initializeParameters];
     
     _lfoView = [[LFOControlView alloc] initWithFrame:CGRectZero];
-    _lfoView.lfo = _audioController.lfo1;
-    _lfoView.osc1 = _audioController.osc1;
-    _lfoView.osc2 = _audioController.osc2;
-    _lfoView.vcf = _audioController.vcf;
+    _lfoView.lfo = _audioEngine.lfo1;
+    _lfoView.osc1 = _audioEngine.osc1;
+    _lfoView.osc2 = _audioEngine.osc2;
+    _lfoView.vcf = _audioEngine.vcf;
     [_lfoView initializeParameters];
     
     _keyboardControlView = [[KeyboardControlView alloc] initWithFrame:CGRectZero];
-    _keyboardControlView.cvController = _audioController.cvController;
+    _keyboardControlView.cvController = _audioEngine.cvController;
     [_keyboardControlView initializeParameters];
 
     if (_iPhoneControlsView) {
@@ -165,7 +164,7 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
-    [self.audioController stopAUGraph];
+    [self.audioEngine stopAUGraph];
     [super viewDidDisappear:animated];
 }
 
@@ -177,6 +176,23 @@
 
 -(BOOL)prefersStatusBarHidden {
     return true;
+}
+
+//Interruption handler
+-(void)handleInterruption: (NSNotification*) aNotification
+{
+    NSDictionary *interuptionDict = aNotification.userInfo;
+    
+    NSNumber* interuptionType = (NSNumber*)[interuptionDict valueForKey:AVAudioSessionInterruptionTypeKey];
+    
+    if([interuptionType intValue] == AVAudioSessionInterruptionTypeBegan)
+        
+        [_audioEngine stopAUGraph];
+    
+    else if ([interuptionType intValue] == AVAudioSessionInterruptionTypeEnded)
+        
+        [_audioEngine startAUGraph];
+    
 }
 
 

@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IPAViewController.h"
 
 @interface IPAAppDelegate : UIResponder <UIApplicationDelegate>
 
+@property (strong, nonatomic) IPAViewController *ipaViewController;
 @property (strong, nonatomic) UIWindow *window;
 
 @end

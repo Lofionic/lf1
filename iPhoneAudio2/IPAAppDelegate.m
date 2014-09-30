@@ -7,19 +7,27 @@
 //
 
 #import "IPAAppDelegate.h"
-#import "IPAViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation IPAAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
+    // Setup view controller
     IPAViewController *rootView = [[IPAViewController alloc] init];
     [self.window setRootViewController:rootView];
+    
+    // Setup Audio Session
+    NSError* __autoreleasing error;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
+    [[AVAudioSession sharedInstance] setActive:YES error:&error];
+    [[NSNotificationCenter defaultCenter] addObserver:rootView selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
     
     return YES;
 }

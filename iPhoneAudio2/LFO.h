@@ -18,7 +18,6 @@ typedef enum LFOWaveform {
 
 @interface LFO : Generator <CVControllerDelegate>
 
-@property AudioSignalType* buffer;
 @property float freq;
 @property float amp;
 @property float eg_amount;

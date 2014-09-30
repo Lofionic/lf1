@@ -37,6 +37,8 @@
 		6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* KeyboardView.m */; };
 		6C983BCA19BBAA2C005543D8 /* IPAView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C983BC919BBAA2C005543D8 /* IPAView~iphone.xib */; };
 		6C9A9B5A19C8C04700DFA51A /* LFO.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9B5919C8C04700DFA51A /* LFO.m */; };
+		6C9BD76419DB2E5F008CE346 /* Mixer2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD76319DB2E5F008CE346 /* Mixer2.m */; };
+		6C9BD76619DB32DB008CE346 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C9BD76519DB32DB008CE346 /* AVFoundation.framework */; };
 		6CB5E13319C45F0B008B9AC3 /* IPAView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* IPAView.xib */; };
 		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
@@ -85,7 +87,7 @@
 		834FA82B18B95FA800923F29 /* iPhoneAudio2Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FA82A18B95FA800923F29 /* iPhoneAudio2Tests.m */; };
 		834FA83518B95FB100923F29 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA83418B95FB100923F29 /* CoreAudio.framework */; };
 		834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83718B95FD200923F29 /* IPAViewController.mm */; };
-		834FA83B18B9602A00923F29 /* AudioController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83A18B9602A00923F29 /* AudioController.mm */; };
+		834FA83B18B9602A00923F29 /* AudioEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83A18B9602A00923F29 /* AudioEngine.mm */; };
 		834FA83D18B960F500923F29 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA83C18B960F500923F29 /* AudioToolbox.framework */; };
 		83A616EA18B970FB0068AD08 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83F18B96CED00923F29 /* CAStreamBasicDescription.cpp */; };
 		83AFC397192ABB8E00851413 /* Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AFC396192ABB8E00851413 /* Oscillator.m */; };
@@ -143,6 +145,9 @@
 		6C983BC919BBAA2C005543D8 /* IPAView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "IPAView~iphone.xib"; sourceTree = "<group>"; };
 		6C9A9B5819C8C04700DFA51A /* LFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFO.h; sourceTree = "<group>"; };
 		6C9A9B5919C8C04700DFA51A /* LFO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFO.m; sourceTree = "<group>"; };
+		6C9BD76219DB2E5F008CE346 /* Mixer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer2.h; sourceTree = "<group>"; };
+		6C9BD76319DB2E5F008CE346 /* Mixer2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mixer2.m; sourceTree = "<group>"; };
+		6C9BD76519DB32DB008CE346 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6CB5E13219C45F0B008B9AC3 /* IPAView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IPAView.xib; sourceTree = "<group>"; };
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
@@ -205,8 +210,8 @@
 		834FA83418B95FB100923F29 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		834FA83618B95FD200923F29 /* IPAViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IPAViewController.h; sourceTree = "<group>"; };
 		834FA83718B95FD200923F29 /* IPAViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IPAViewController.mm; sourceTree = "<group>"; };
-		834FA83918B9602A00923F29 /* AudioController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioController.h; sourceTree = "<group>"; };
-		834FA83A18B9602A00923F29 /* AudioController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioController.mm; sourceTree = "<group>"; };
+		834FA83918B9602A00923F29 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
+		834FA83A18B9602A00923F29 /* AudioEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioEngine.mm; sourceTree = "<group>"; };
 		834FA83C18B960F500923F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		834FA83E18B96C8500923F29 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
 		834FA83F18B96CED00923F29 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
@@ -223,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C9BD76619DB32DB008CE346 /* AVFoundation.framework in Frameworks */,
 				834FA83D18B960F500923F29 /* AudioToolbox.framework in Frameworks */,
 				834FA83518B95FB100923F29 /* CoreAudio.framework in Frameworks */,
 				834FA80818B95FA800923F29 /* CoreGraphics.framework in Frameworks */,
@@ -247,8 +253,8 @@
 		6C01140219C18E6000D3C802 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				834FA83918B9602A00923F29 /* AudioController.h */,
-				834FA83A18B9602A00923F29 /* AudioController.mm */,
+				834FA83918B9602A00923F29 /* AudioEngine.h */,
+				834FA83A18B9602A00923F29 /* AudioEngine.mm */,
 				6CC18F2019C83625000894AB /* SynthComponent.h */,
 				6CC18F2119C83625000894AB /* SynthComponent.m */,
 				6CC18F2319C842E9000894AB /* Generator.h */,
@@ -259,6 +265,8 @@
 				6C9A9B5919C8C04700DFA51A /* LFO.m */,
 				83AFC395192ABB8E00851413 /* Oscillator.h */,
 				83AFC396192ABB8E00851413 /* Oscillator.m */,
+				6C9BD76219DB2E5F008CE346 /* Mixer2.h */,
+				6C9BD76319DB2E5F008CE346 /* Mixer2.m */,
 				6C863E5719BF1D170056D43D /* Analog_Oscillator.h */,
 				6C863E5819BF1D170056D43D /* Analog_Oscillator.m */,
 				6C7E9B4519C7793300DAB5B9 /* Envelope.h */,
@@ -364,6 +372,7 @@
 		834FA80418B95FA800923F29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C9BD76519DB32DB008CE346 /* AVFoundation.framework */,
 				834FA83C18B960F500923F29 /* AudioToolbox.framework */,
 				834FA83418B95FB100923F29 /* CoreAudio.framework */,
 				834FA80518B95FA800923F29 /* Foundation.framework */,
@@ -597,11 +606,12 @@
 				6C47256819D0CC34008F481F /* KeyboardControlView.m in Sources */,
 				6C406FD119CC5B1F0096672F /* CVController.m in Sources */,
 				6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */,
-				834FA83B18B9602A00923F29 /* AudioController.mm in Sources */,
+				834FA83B18B9602A00923F29 /* AudioEngine.mm in Sources */,
 				83AFC397192ABB8E00851413 /* Oscillator.m in Sources */,
 				6CD5B69119C8F411002E835C /* CCRRotaryControl.m in Sources */,
 				6C406FCE19CC244A0096672F /* Processor.m in Sources */,
 				834FA83818B95FD200923F29 /* IPAViewController.mm in Sources */,
+				6C9BD76419DB2E5F008CE346 /* Mixer2.m in Sources */,
 				6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */,
 				6CD5B68E19C8DFCD002E835C /* LFOControlView.m in Sources */,
 				83A616EA18B970FB0068AD08 /* CAStreamBasicDescription.cpp in Sources */,

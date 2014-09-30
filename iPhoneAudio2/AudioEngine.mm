@@ -6,28 +6,19 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "AudioController.h"
+#import "AudioEngine.h"
 
 
 const Float64 kGraphSampleRate = 44100.0;
-@implementation AudioController {
-    float noteFreq;
-}
+@implementation AudioEngine 
 
 #pragma mark INITIALIZATION
 -(void)initializeAUGraph {
     
     [self initializeSynthComponents];
     
-    // Error checking result
-    OSStatus result = noErr;
-    
     // create a new AU graph
-    result = NewAUGraph(&mGraph);
-    
-    if (![self checkError:result withDescription:@"Cannot create new AUGraph" ]) {
-        return;
-    }
+    checkError(NewAUGraph(&mGraph), "Cannot create new AUGraph");
     
     // AUNodes represent Audio Units on the AUGraph
     AUNode outputNode;
@@ -50,60 +41,35 @@ const Float64 kGraphSampleRate = 44100.0;
     output_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
     
     // Add nodes to the graph to hold our AudioUnits
-    result = AUGraphAddNode(mGraph, &converter_desc, &converterNode);
-    if (![self checkError:result withDescription:@"Cannot add AUConverter node to AUGraph" ]) {
-        return;
-    }
+    checkError(AUGraphAddNode(mGraph, &converter_desc, &converterNode), "Cannot add AUConverter node to AUGraph");
+
     
-    result = AUGraphAddNode(mGraph, &output_desc, &outputNode);
-    if (![self checkError:result withDescription:@"Cannot add RemoteIO node to AUGraph" ]) {
-        return;
-    }
+    checkError(AUGraphAddNode(mGraph, &output_desc, &outputNode), "Cannot add RemoteIO node to AUGraph");
     
     // Connect Converter Node's outout to the Output node's input
-    result = AUGraphConnectNodeInput(mGraph, converterNode, 0, outputNode, 0);
-    if (![self checkError:result withDescription:@"Cannot connect AUConverter node to RemoteIO node" ]) {
-        return;
-    }
+    checkError(AUGraphConnectNodeInput(mGraph, converterNode, 0, outputNode, 0), "Cannot connect AUConverter node to RemoteIO node");
     
     // Open the graph - AudioUnits are opened but not initialized
-    result = AUGraphOpen(mGraph);
-    if (![self checkError:result withDescription:@"Cannot open AUGraph" ]) {
-        return;
-    }
+    checkError(AUGraphOpen(mGraph), "Cannot open AUGraph");
     
     // Get a link to the converter node
-    result = AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter);
-    if (![self checkError:result withDescription:@"Cannot get info for AUConverter node" ]) {
-        return;
-    }
-    
+    checkError(AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter), "Cannot get info for AUConverter node");
+
     // Get a link to the output AU so we can talk to it later
-    AUGraphNodeInfo(mGraph, outputNode, NULL, &mOutput);
-    result = AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter);
-    if (![self checkError:result withDescription:@"Cannot get info for RemoteIO node" ]) {
-        return;
-    }
+    checkError(AUGraphNodeInfo(mGraph, outputNode, NULL, &mOutput), "Cannot get info for RemoteIO node");
     
     // Set the converter callback struct
     AURenderCallbackStruct renderCallbackStruct;
     renderCallbackStruct.inputProc = &renderAudio;
     renderCallbackStruct.inputProcRefCon = (__bridge void*)self;
-    result = AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct);
-    if (![self checkError:result withDescription:@"Cannot set AUConverter node input callback" ]) {
-        return;
-    }
-    
+    checkError(AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct), "Cannot set AUConverter node input callback" );
+
     // Set up the converter input stream
     CAStreamBasicDescription desc;
     UInt32 size = sizeof(desc);
     
-    result = AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size);
-    if (![self checkError:result withDescription:@"Cannot get stream format from AUConverter" ]) {
-        return;
-    }
-    
-    // Initialize the structure to ensure there are no spurious values
+    checkError(AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size), "Cannot get stream format from AUConverter");
+        // Initialize the structure to ensure there are no spurious values
     memset (&desc, 0, sizeof(desc));
     
     // Make modifications to the AudioStreamBasicDescription
@@ -117,17 +83,13 @@ const Float64 kGraphSampleRate = 44100.0;
     desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
     
     // Apply the modified AudioStreamBasicDescription to the converter input bus
-    result = AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc));
-    if (![self checkError:result withDescription:@"Cannot set AUConverter audio stream property" ]) {
-        return;
-    }
-    
+    checkError(AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc)), "Cannot set AUConverter audio stream property");
+
     // Print graph setup
     CAShow(mGraph);
-    result = AUGraphInitialize(mGraph);
-    if (![self checkError:result withDescription:@"Cannot initialize AUGraph" ]) {
-        return;
-    }
+    
+    // Start AUGraph
+    checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
 }
 
 
@@ -157,14 +119,15 @@ const Float64 kGraphSampleRate = 44100.0;
     [_lfo1 setAmp:0.2];
     [_lfo1 setWaveform:LFOSin];
     
-    // Initial settings
-    
-    // TODO: Create MIXER component to replace these ivars
-    _osc1vol = 0.5f;
-    _osc2vol = 0.5f;
+    // Initialize Mixer component
+    _mixer = [[Mixer2 alloc] initWithSampleRate:kGraphSampleRate];
+    _mixer.source1 = _osc1;
+    _mixer.source2 = _osc2;
+    _mixer.envelope = _vcoEnvelope;
    
     // Initialize CVController
     _cvController = [[CVController alloc] initWithSampleRate:kGraphSampleRate];
+    
     // Plug CV controller into Oscillators
     _osc1.cvController = _cvController;
     _osc2.cvController = _cvController;
@@ -172,15 +135,6 @@ const Float64 kGraphSampleRate = 44100.0;
     // Plug CV controller into gate responders
     _cvController.gateComponents = @[_lfo1, _vcfEnvelope, _vcoEnvelope];
     
-}
-
--(BOOL)checkError:(OSStatus)osstatus withDescription:(NSString*)description {
-    
-    if (osstatus != 0) {
-        NSLog(@"AudioEngine Error:%@ OSStatus:%d", description, (int)osstatus);
-        return false;
-    }
-    return true;
 }
 
 #pragma mark START & STOP
@@ -193,10 +147,7 @@ const Float64 kGraphSampleRate = 44100.0;
     
     if (!isRunning) {
         // Start the graph
-        result = AUGraphStart(mGraph);
-        if (![self checkError:result withDescription:@"Cannot start AUGraph" ]) {
-            return;
-        }
+        checkError(AUGraphStart(mGraph), "Cannot start AUGraph");
         
         // Print the result
         if (result) { printf("AUGraphStart result %d %08X %4.4s\n", (int)result, (int)result, (char*)&result); return; }
@@ -208,17 +159,12 @@ const Float64 kGraphSampleRate = 44100.0;
     // Stop the AUGraph
     Boolean isRunning = false;
     
-    OSStatus result;
-    
     // Check that the graph is running
     AUGraphIsRunning(mGraph, &isRunning);
     
     // If the graph is running, stop it
     if (isRunning) {
-        result = AUGraphStop(mGraph);
-        if (![self checkError:result withDescription:@"Cannot stop AUGraph" ]) {
-            return;
-        }
+            checkError(AUGraphStop(mGraph),"Cannot stop AUGraph");
     }
 }
 
@@ -230,10 +176,8 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     // Renders synth
  
     // Get reference to audio controller from inRefCon
-    AudioController *ac = (__bridge AudioController*)inRefCon;
+    AudioEngine *ac = (__bridge AudioEngine*)inRefCon;
 
-    
-    
     // Generate CV Controller buffer
     // prepare the buffer in case its size has changed
     [ac.cvController prepareBufferWithBufferSize:inNumberFrames];
@@ -259,16 +203,13 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     [ac.osc2 prepareBufferWithBufferSize:inNumberFrames];
     [ac.osc2 renderBuffer:ac.osc2.buffer samples:inNumberFrames];
 
-    // Mix oscillator 1 + 2
-    AudioSignalType *mixedSignal = (AudioSignalType *)malloc(inNumberFrames * sizeof(AudioSignalType));
-    
-    for (int i = 0; i < inNumberFrames;i++) {
-        mixedSignal[i] = ((ac.osc1.buffer[i] * ac.osc1vol) + (ac.osc2.buffer[i] * ac.osc2vol) / 2.0);
-        mixedSignal[i] = mixedSignal[i] * ac.vcoEnvelope.buffer[i];
-    }
-    
+    // Generate Mixer buffer
+    [ac.mixer prepareBufferWithBufferSize:inNumberFrames];
+    [ac.mixer renderBuffer:ac.mixer.buffer samples:inNumberFrames];
     
     // Filter
+    AudioSignalType *mixedSignal = ac.mixer.buffer;
+    
     [ac.vcf processBuffer:mixedSignal samples:inNumberFrames];
 
     // Send signal to audio buffer
@@ -279,20 +220,24 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         outA[i] = mixedSignal[i] * 32767.0f;
     }
     
-    // Free up the buffers we have initialized to avoid memory leaks
-    free (mixedSignal);
-    
     return noErr;
 }
 
-// ControllerProtocols
--(void)oscillatorControlView:(OscillatorControlView *)view oscillator:(int)oscillatorId VolumeChangedTo:(float)value {
-    //[self setMixerInputChannel:oscillatorId toLevel:value];
-    if (oscillatorId == 0) {
-        _osc1vol = value;
+static void checkError(OSStatus error, const char *operation) {
+    if (error == noErr) return;
+    char errorString[20];
+    
+    // See if it appears to be a 4-char-code
+    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
+    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
+        errorString[0] = errorString[5] = '\'';
+        errorString[6] = '\0';
     } else {
-        _osc2vol = value;
+        // No, format it as an integer
+        sprintf(errorString, "%d", (int)error);
     }
+    
+    fprintf(stderr, "Error: %s (%s)\n", operation, errorString); exit(1);
 }
 
 

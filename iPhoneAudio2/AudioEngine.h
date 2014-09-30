@@ -17,11 +17,12 @@
 #import "VCF.h"
 #import "analog_oscillator.h"
 #import "oscillator.h"
+#import "Mixer2.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import <Foundation/Foundation.h>
 
-@interface AudioController : NSObject <OscillatorViewDelegate> {
+@interface AudioEngine : NSObject {
 
     AUGraph mGraph;
     AudioUnit mOutput;
@@ -40,10 +41,7 @@
 @property (nonatomic, strong) Envelope *vcfEnvelope;
 @property (nonatomic, strong) Envelope *vcoEnvelope;
 @property (nonatomic, strong) LFO *lfo1;
-
-@property float osc1vol;
-@property float osc2vol;
-
+@property (nonatomic, strong) Mixer2 *mixer;
 
 -(void)initializeAUGraph;
 -(void)startAUGraph;
