@@ -9,12 +9,44 @@
 #import "PresetButton.h"
 #import "BuildSettings.h"
 
-@implementation PresetButton
+@implementation PresetButton {
+    
+    NSOperationQueue *flashLEDQueue;
+    
+}
+
+@synthesize LEDOn = _ledOn;
+
+-(BOOL)LEDOn {
+    return _ledOn;
+}
+
+-(void)setLEDOn:(BOOL)LEDOn {
+    _ledOn = LEDOn;
+    [self setNeedsDisplay];
+}
 
 -(void)awakeFromNib {
     
     _spriteSheet = [UIImage imageNamed:@"buttonA"];
     
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
+    [self addGestureRecognizer: tapGesture];
+    
+    UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
+    [longPressGesture setMinimumPressDuration:4];
+    [self addGestureRecognizer:longPressGesture];
+
+}
+
+-(void)onTap:(UIGestureRecognizer*)gesture {
+    [_delegate presetButtonWasTapped:self];
+}
+
+-(void)onLongPress:(UIGestureRecognizer*)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        [_delegate presetButtonWasLongPressed:self];
+    }
 }
 
 -(void)drawRect:(CGRect)rect {
@@ -26,7 +58,7 @@
         CGContextScaleCTM(ctx, 1.0, -1.0);
 
         CGRect sourceRect = CGRectMake(60.0 * SCREEN_SCALE, 0, 60.0 * SCREEN_SCALE, 40.0 * SCREEN_SCALE);
-        if (_LEDOn) {
+        if (_ledOn) {
                 sourceRect = CGRectMake(0 * SCREEN_SCALE, 0, 60.0 * SCREEN_SCALE, 40.0 * SCREEN_SCALE);
         }
         CGImageRef drawImage = CGImageCreateWithImageInRect([_spriteSheet CGImage], sourceRect);
@@ -35,5 +67,6 @@
         CGContextRestoreGState(ctx);
     }
 }
+
 
 @end

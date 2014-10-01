@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "ControlView.h"
+#import "PresetController.h"
+#import "PresetButton.h"
 
-@interface PresetControlView : ControlView
+@interface PresetControlView : ControlView <PresetButtonDelegate>
 
+@property (nonatomic, strong) PresetController *presetController;
 @property (nonatomic, strong) NSArray *presetButtons;
 
 @end

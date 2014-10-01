@@ -47,7 +47,7 @@
 -(void)restoreBank {
  
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    _currentBank = [userDefaults valueForKey:PRESET_BANK_KEY];
+    _currentBank = [[userDefaults valueForKey:PRESET_BANK_KEY] mutableCopy];
     
     if (!_currentBank) {
         // Load default bank
@@ -56,21 +56,31 @@
         NSData *defaultBankData = [NSData dataWithContentsOfFile:defaultBankPath];
         if (defaultBankData) {
             _currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
+            // Write bank to user defaults
+            [self saveBank];
         } else {
             NSLog(@"Default bank not found");
             _currentBank = [[NSMutableDictionary alloc] init];
-            [_currentBank setValue:[[NSMutableArray alloc] initWithCapacity:8] forKey:@"presets"];
+
+            NSMutableArray *presetsArray = [[NSMutableArray alloc] initWithCapacity:8];
+            for (int i = 0; i < 8; i++) {
+                [presetsArray addObject:[[NSDictionary alloc] init]];
+            }
+            [_currentBank setValue:presetsArray forKey:@"presets"];
             [_currentBank setValue:@"Unnamed" forKey:@"bankName"];
         }
     }
 }
 
 -(void)saveBank {
-  
+
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+
     [userDefaults setObject:_currentBank forKey:PRESET_BANK_KEY];
     
     [userDefaults synchronize];
+    
+    [self exportBankToFileNamed:@"default"];
 }
 
 
@@ -83,8 +93,11 @@
             [presetDictionary setValue:thisValue forKey:thisKeyPath];
         }
         
-        NSMutableArray *presetsArray = _currentBank[@"presets"];
+        NSMutableArray *presetsArray = [_currentBank[@"presets"] mutableCopy];
+        
         presetsArray[index] = presetDictionary;
+        
+        [_currentBank setObject:presetsArray forKey:@"presets"];
         
         [self saveBank];
     }
@@ -96,7 +109,7 @@
     
     if (_currentBank) {
 
-        NSArray *presetsArray = _currentBank[@"presets"];
+        NSMutableArray *presetsArray = _currentBank[@"presets"];
         if ([presetsArray count] <= index) {
             NSLog(@"Can't load preset %li : out of bounds", (long)index);
             return;

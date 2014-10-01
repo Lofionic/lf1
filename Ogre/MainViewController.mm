@@ -17,6 +17,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        _presetController = [[PresetController alloc] initWithViewController:self];
     }
     return self;
 }
@@ -35,15 +36,13 @@
     [self.audioEngine initializeAUGraph];
     [self setupControllers];
     [self.audioEngine startAUGraph];
-       
-    _presetController = [[PresetController alloc] initWithViewController:self];
 
-    [_presetController restorePresetAtIndex:0];
-    
+    /*
     UIButton *savePresetButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64.0, 32.0)];
     [savePresetButton setTitle:@"Save" forState:UIControlStateNormal];
     [savePresetButton addTarget:self action:@selector(savePreset) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:savePresetButton];
+     */
 
 }
 
@@ -87,6 +86,7 @@
     
     // Create presets controller view
     _presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
+    _presetControlView.presetController = _presetController;
     [_presetControlView initializeParameters];
     
     // Create keyboard controller view

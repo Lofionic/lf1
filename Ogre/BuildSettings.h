@@ -5,7 +5,7 @@
 
 #define IS_IPAD() (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define USE_ANALOG 1
-#define ANALOG_HARMONICS 50
+#define ANALOG_HARMONICS 15
 #define ROTARY_CONTROLS 0
 #define CV_FREQUENCY_RANGE 5000
 #define PRESET_BANK_KEY @"presetBank"

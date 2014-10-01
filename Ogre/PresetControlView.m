@@ -29,7 +29,10 @@
             [buttons addObject:thisView];
         }
     }
+    
+
     _presetButtons = [NSArray arrayWithArray:buttons];
+    
     [_presetButtons[0] setSpriteSheet:[UIImage imageNamed:@"buttonA"]];
     [_presetButtons[1] setSpriteSheet:[UIImage imageNamed:@"buttonB"]];
     [_presetButtons[2] setSpriteSheet:[UIImage imageNamed:@"buttonC"]];
@@ -38,8 +41,45 @@
     [_presetButtons[5] setSpriteSheet:[UIImage imageNamed:@"buttonF"]];
     [_presetButtons[6] setSpriteSheet:[UIImage imageNamed:@"buttonG"]];
     [_presetButtons[7] setSpriteSheet:[UIImage imageNamed:@"buttonH"]];
+   
+    for (PresetButton *thisButton in _presetButtons) {
+        thisButton.delegate = self;
+    }
     
-    [_presetButtons[6] setLEDOn:YES];
+    [self selectPresetWithIndex:0];
+}
+
+
+
+-(void)selectPresetWithIndex:(NSInteger)index  {
+
+    for (int i = 0; i < 8; i++) {
+        [_presetButtons[i] setLEDOn:(i == index)];
+    }
+    
+    [_presetController restorePresetAtIndex:index];
+}
+
+-(void)storePresetAtIndex:(NSInteger)index {
+    
+    NSLog(@"Storing Preset");
+    [_presetController storePresetAtIndex:index];
+
+    for (int i = 0; i < 8; i++) {
+        [_presetButtons[i] setLEDOn:(i == index)];
+    }    
+}
+
+-(void)presetButtonWasTapped:(PresetButton *)presetButton {
+    
+    [self selectPresetWithIndex:presetButton.tag];
+    
+}
+
+-(void)presetButtonWasLongPressed:(PresetButton *)presetButton {
+
+    //[self selectPresetWithIndex:presetButton.tag];
+    [self storePresetAtIndex:presetButton.tag];
 }
 
 @end

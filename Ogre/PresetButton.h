@@ -7,10 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+@class PresetButton;
 
-@interface PresetButton : UIControl
+@protocol PresetButtonDelegate <NSObject>
 
+-(void)presetButtonWasTapped:(PresetButton*)presetButton;
+-(void)presetButtonWasLongPressed:(PresetButton*)presetButton;
+
+@end
+
+@interface PresetButton : UIControl <UIGestureRecognizerDelegate>
+
+@property (nonatomic, weak) id<PresetButtonDelegate> delegate;
 @property (nonatomic, strong) UIImage *spriteSheet;
 @property BOOL LEDOn;
+
 
 @end
