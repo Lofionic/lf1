@@ -65,12 +65,14 @@
             }
             
             if (_lfo) {
-                cutoff *= powf(0.5, -_lfo.buffer[i]);
+                float buffer = (_lfo.buffer[i] + 1) / 2.0f;
+                cutoff *= buffer;
+                //cutoff *= powf(0.5, -_lfo.buffer[i]);
                 if (cutoff > 1) {
                     cutoff = 1;
                 }
             }
-            
+        
             
             q = 1.0f - cutoff;
             p = cutoff + 0.8f * cutoff * q;

@@ -39,7 +39,7 @@
     self.backgroundColor = [UIColor clearColor];
     
     self.userInteractionEnabled = true;
-    
+
 }
 
 @synthesize index = _index;
