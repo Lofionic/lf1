@@ -4,6 +4,7 @@
 //
 
 #import "Envelope.h"
+#define DECLICK_THRESHOLD 0.01
 
 @implementation Envelope {
     
@@ -97,8 +98,8 @@
     // Limit the change of envelope amp per sample
     // Reduces clicks
     float delta = result - prevEnv;
-    if (fabsf(delta) > 0.01) {
-        result = prevEnv + (0.01 * ((delta < 0) ? -1 : 1));
+    if (fabsf(delta) > DECLICK_THRESHOLD) {
+        result = prevEnv + (DECLICK_THRESHOLD * ((delta < 0) ? -1 : 1));
     }
 
     prevEnv = result;

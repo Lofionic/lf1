@@ -4,6 +4,7 @@
 //
 
 #import "LFO.h"
+#define DECLICK_THRESHOLD 0.005
 
 @implementation LFO {
     double phase;
@@ -41,7 +42,15 @@
     for (int i = 0; i < numFrames; i++) {
         float value = [self getNextSample];
 
-        outA[i] = value * _amp;
+        AudioSignalType outValue = value * _amp;
+        
+        // Declicker
+        AudioSignalType delta = outValue - prevResult;
+        if (fabsf(delta) > DECLICK_THRESHOLD) {
+            outValue = prevResult + (DECLICK_THRESHOLD * ((delta < 0) ? -1 : 1));
+        }
+        
+        outA[i] = outValue;
         
         phase += (M_PI * _freq * 180) / self.sampleRate;
         
@@ -53,12 +62,15 @@
             }
         }
         
+        prevResult = outValue;
+        
     }
     
     // Prevent phase from overloading
     if (phase > M_PI * 2.0) {
         sampleHold = (arc4random_uniform(32767) / 16385.0) - 1;
     }
+    
     phase = fmod(phase, M_PI * 2.0);
 }
 

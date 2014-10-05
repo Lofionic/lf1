@@ -7,11 +7,13 @@
 
 
 const Float64 kGraphSampleRate = 44100.0;
-@implementation AudioEngine 
+@implementation AudioEngine
+    
+AudioSignalType prevOut;
 
 #pragma mark INITIALIZATION
 -(void)initializeAUGraph {
-    
+
     [self initializeSynthComponents];
     
     // create a new AU graph
@@ -87,6 +89,8 @@ const Float64 kGraphSampleRate = 44100.0;
     
     // Start AUGraph
     checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
+    
+    prevOut = 0;
 }
 
 
@@ -220,7 +224,9 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
     
     for (int i = 0; i < inNumberFrames; i++) {
-        outA[i] = mixedSignal[i] * 32767.0f;
+        
+        outA[i] = mixedSignal[i] * 32767.0f; 
+ 
     }
     
     
