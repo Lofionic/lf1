@@ -21,6 +21,8 @@
 @property (nonatomic, weak) id<PresetButtonDelegate> delegate;
 @property (nonatomic, strong) UIImage *spriteSheet;
 @property BOOL LEDOn;
+@property (readonly) BOOL flashing;
 
+-(void)flash;
 
 @end

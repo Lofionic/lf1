@@ -12,8 +12,8 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="0vh-fx-PNc" customClass="CCRRotaryControl">
-                    <rect key="frame" x="145" y="71" width="90" height="90"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="145" y="46" width="90" height="90"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -21,8 +21,8 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="veY-6v-pBS" customClass="CCRRotaryControl">
-                    <rect key="frame" x="243" y="71" width="90" height="90"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="243" y="46" width="90" height="90"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -30,21 +30,37 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="UdO-Qm-22q" customClass="CCRSegmentedRotaryControl">
-                    <rect key="frame" x="37" y="65" width="100" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="37" y="41" width="100" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="changeWaveform:" destination="09L-db-1By" eventType="valueChanged" id="nAu-UO-UEp"/>
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="wiP-PR-uOA" customClass="CCRSegmentedRotaryControl">
-                    <rect key="frame" x="341" y="65" width="100" height="100"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <rect key="frame" x="341" y="41" width="100" height="100"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <action selector="changeDestination:" destination="09L-db-1By" eventType="valueChanged" id="7vU-g2-sd7"/>
                     </connections>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_wave.png" id="UJ8-yz-wtx">
+                    <rect key="frame" x="37" y="136" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_rate.png" id="oQe-uq-omW">
+                    <rect key="frame" x="145" y="136" width="90" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_amount.png" id="mah-1p-F6Z">
+                    <rect key="frame" x="243" y="136" width="90" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_dest" id="Drb-nQ-P73">
+                    <rect key="frame" x="341" y="136" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -57,6 +73,12 @@
             <point key="canvasLocation" x="139.5" y="140.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="label_amount.png" width="42" height="7"/>
+        <image name="label_dest" width="22" height="6"/>
+        <image name="label_rate.png" width="22" height="7"/>
+        <image name="label_wave.png" width="27" height="6"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

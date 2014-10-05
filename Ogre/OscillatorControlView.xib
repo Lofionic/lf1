@@ -28,7 +28,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="dof-NZ-fHs" customClass="CCRRotaryControl">
-                    <rect key="frame" x="27" y="143" width="86" height="86"/>
+                    <rect key="frame" x="27" y="135" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -37,7 +37,7 @@
                     </connections>
                 </view>
                 <view tag="1" contentMode="scaleToFill" id="uxt-lO-1Le" customClass="CCRRotaryControl">
-                    <rect key="frame" x="138" y="143" width="86" height="86"/>
+                    <rect key="frame" x="138" y="135" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -46,7 +46,7 @@
                     </connections>
                 </view>
                 <view tag="1" contentMode="scaleToFill" id="Cit-bM-hIZ" customClass="CCRRotaryControl">
-                    <rect key="frame" x="138" y="237" width="86" height="86"/>
+                    <rect key="frame" x="138" y="231" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -70,6 +70,34 @@
                         <action selector="oscillatorWaveformChanged:" destination="A7f-UO-C1T" eventType="valueChanged" id="rjZ-Cz-44K"/>
                     </connections>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_octave.png" id="O5Q-KI-9dI">
+                    <rect key="frame" x="20" y="118" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_octave.png" id="f9f-4f-wfn">
+                    <rect key="frame" x="131" y="118" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_vol.png" id="eDT-T4-g0l">
+                    <rect key="frame" x="27" y="217" width="86" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_vol.png" id="rgF-Mb-CHc">
+                    <rect key="frame" x="138" y="217" width="86" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_freq.png" id="EAe-xL-rrY">
+                    <rect key="frame" x="138" y="313" width="86" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_wave.png" id="n2T-Eo-c41">
+                    <rect key="frame" x="20" y="414" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_wave.png" id="edN-v4-m2r">
+                    <rect key="frame" x="131" y="414" width="100" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -85,6 +113,12 @@
             <point key="canvasLocation" x="136.5" y="153.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="label_freq.png" width="24" height="7"/>
+        <image name="label_octave.png" width="36" height="7"/>
+        <image name="label_vol.png" width="19" height="7"/>
+        <image name="label_wave.png" width="27" height="6"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

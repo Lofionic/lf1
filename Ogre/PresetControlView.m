@@ -71,7 +71,11 @@
 
     for (int i = 0; i < 8; i++) {
         [_presetButtons[i] setLEDOn:(i == index)];
-    }    
+    }
+    
+    for (PresetButton* thisButton in _presetButtons) {
+        [thisButton flash];
+    }
 }
 
 -(void)presetButtonWasTapped:(PresetButton *)presetButton {
@@ -83,6 +87,8 @@
 -(void)presetButtonWasLongPressed:(PresetButton *)presetButton {
 
     //[self selectPresetWithIndex:presetButton.tag];
+
+    
     [self storePresetAtIndex:presetButton.tag];
 }
 

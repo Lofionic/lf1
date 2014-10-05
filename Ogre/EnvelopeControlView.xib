@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="EnvelopeControlView">
-            <rect key="frame" x="0.0" y="0.0" width="385" height="266"/>
+            <rect key="frame" x="0.0" y="0.0" width="385" height="269"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="xna-x8-Mmk" customClass="CCRRotaryControl">
@@ -48,7 +48,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="jJf-YE-prr" customClass="CCRRotaryControl">
-                    <rect key="frame" x="8" y="137" width="86" height="86"/>
+                    <rect key="frame" x="8" y="151" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                     </connections>
                 </view>
                 <view tag="1" contentMode="scaleToFill" id="50A-SG-wmP" customClass="CCRRotaryControl">
-                    <rect key="frame" x="102" y="137" width="86" height="86"/>
+                    <rect key="frame" x="102" y="151" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -65,17 +65,8 @@
                         <action selector="oscValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="dB4-Ia-sfF"/>
                     </connections>
                 </view>
-                <view tag="2" contentMode="scaleToFill" id="ZoM-3F-yzc" customClass="CCRRotaryControl">
-                    <rect key="frame" x="196" y="137" width="86" height="86"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <connections>
-                        <action selector="oscValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="GGH-wD-7W5"/>
-                    </connections>
-                </view>
                 <view tag="3" contentMode="scaleToFill" id="r8k-QS-cRc" customClass="CCRRotaryControl">
-                    <rect key="frame" x="291" y="137" width="85" height="86"/>
+                    <rect key="frame" x="291" y="151" width="85" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -83,6 +74,39 @@
                         <action selector="oscValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="Asn-7q-kTY"/>
                     </connections>
                 </view>
+                <view tag="2" contentMode="scaleToFill" id="ZoM-3F-yzc" customClass="CCRRotaryControl">
+                    <rect key="frame" x="196" y="151" width="86" height="86"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="oscValueChanged:" destination="iN0-l3-epB" eventType="valueChanged" id="GGH-wD-7W5"/>
+                    </connections>
+                </view>
+                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_ampenv.png" id="jGd-S8-gMI">
+                    <rect key="frame" x="0.0" y="237" width="385" height="24"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                </imageView>
+                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_filterenv.png" id="MV4-u8-Uxq">
+                    <rect key="frame" x="0.0" y="38" width="385" height="24"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_attack.png" id="X47-ZL-olo">
+                    <rect key="frame" x="8" y="125" width="86" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_decay.png" id="xHg-jh-olV">
+                    <rect key="frame" x="102" y="125" width="86" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_sustain.png" id="bPe-f4-3ln">
+                    <rect key="frame" x="196" y="125" width="86" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_release.png" id="NDm-ik-VfH">
+                    <rect key="frame" x="290" y="125" width="86" height="24"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -96,9 +120,17 @@
                 <outlet property="oscReleaseControl" destination="r8k-QS-cRc" id="KKg-ir-wBk"/>
                 <outlet property="oscSustainControl" destination="ZoM-3F-yzc" id="Wpg-IK-wBK"/>
             </connections>
-            <point key="canvasLocation" x="511.5" y="313"/>
+            <point key="canvasLocation" x="511.5" y="314.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="label_ampenv.png" width="512" height="24"/>
+        <image name="label_attack.png" width="36" height="18"/>
+        <image name="label_decay.png" width="36" height="18"/>
+        <image name="label_filterenv.png" width="512" height="24"/>
+        <image name="label_release.png" width="36" height="18"/>
+        <image name="label_sustain.png" width="36" height="18"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

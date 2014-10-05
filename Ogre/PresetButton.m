@@ -12,7 +12,8 @@
 @implementation PresetButton {
     
     NSOperationQueue *flashLEDQueue;
-    
+    bool ledSavedStatus;
+    int flashCount;
 }
 
 @synthesize LEDOn = _ledOn;
@@ -39,15 +40,50 @@
 
 }
 
+-(void)flash {
+    
+    // Start flashing
+    ledSavedStatus = _ledOn;
+    _ledOn = false;
+    _flashing = true;
+    
+    flashCount = 0;
+    
+    [self performSelector:@selector(toggleFlash) withObject:self afterDelay:0.1];
+    
+}
+
+
+-(void)toggleFlash {
+    
+    _ledOn = !_ledOn;
+    
+    flashCount ++;
+    if (flashCount < 12) {
+        // Continue to flash
+        [self performSelector:@selector(toggleFlash) withObject:self afterDelay:0.1];
+    } else {
+        // End flashing
+        _ledOn = ledSavedStatus;
+        _flashing = false;
+    }
+    [self setNeedsDisplay];
+}
+
 -(void)onTap:(UIGestureRecognizer*)gesture {
-    [_delegate presetButtonWasTapped:self];
+    if (!_flashing) {
+        [_delegate presetButtonWasTapped:self];
+    }
 }
 
 -(void)onLongPress:(UIGestureRecognizer*)gesture {
-    if (gesture.state == UIGestureRecognizerStateBegan) {
+
+    if (!_flashing && gesture.state == UIGestureRecognizerStateBegan) {
         [_delegate presetButtonWasLongPressed:self];
     }
+    
 }
+
 
 -(void)drawRect:(CGRect)rect {
     

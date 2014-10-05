@@ -23,6 +23,8 @@
 
 -(void)initializeParameters {
     self.glideControl.value = 0;
+    
+    [self.backgroundView setImage:nil];
 }
 
 -(IBAction)controlChanged:(id)sender {
