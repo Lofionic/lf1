@@ -23,7 +23,7 @@ typedef enum OscillatorWaveform {
 -(void)setWaveform:(OscillatorWaveform)waveform;
 -(void)changeToNextWaveform;
 
-@property (weak) LFO* lfo;
-@property (weak) CVController* cvController;
+@property (assign) LFO* lfo;
+@property (assign) CVController* cvController;
 
 @end

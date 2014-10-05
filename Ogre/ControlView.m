@@ -27,6 +27,9 @@
     _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
     [self addSubview:_backgroundView];
     
+    UIImage *frame = [UIImage imageNamed:@"control_frame"];
+    frame = [frame resizableImageWithCapInsets:UIEdgeInsetsMake(30, 15, 15, 15)];
+    [_backgroundView setImage:frame];
 }
 
 -(void)layoutSubviews {

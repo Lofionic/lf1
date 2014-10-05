@@ -26,25 +26,32 @@
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
+        
         AudioSignalType value = [self getNextSample];
         outA[i] = value;
         
         // Apply LFO
+        
+        // Get a weak reference to the LFO component
+
         float lfo = 1;
+        
         if (self.lfo) {
             lfo = powf(0.5, -self.lfo.buffer[i]);
         }
+        
         
         // Apply freq adjustment
         float adjustValue = (self.freq_adjust * 2.0) - 1.0;
         
         adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
         
-        float freq = FLT_MIN;
-        if (self.cvController) {
-            freq = self.cvController.buffer[i] * CV_FREQUENCY_RANGE;
-        }
         
+        float freq = FLT_MIN;
+        if ([self cvController]) {
+            freq = [self cvController].buffer[i] * CV_FREQUENCY_RANGE;
+        }
+    
         // Increment Phase
         for (int j = 0; j < ANALOG_HARMONICS; j++) {
             phase[j] += ((M_PI * freq * lfo * adjustValue * powf(2, self.octave)) / self.sampleRate) * (j + 1);

@@ -41,6 +41,7 @@
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
+        
         float value = [self getNextSample];
         outA[i] = value;
         
@@ -70,6 +71,7 @@
                 phase = 0;
             }
         }
+        
     }
     
     // Prevent phase from overloading

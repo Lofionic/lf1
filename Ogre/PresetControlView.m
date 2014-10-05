@@ -47,6 +47,10 @@
     }
     
     [self selectPresetWithIndex:0];
+    
+    UIImage *presetsFrame = [UIImage imageNamed:@"presets_frame"];
+    presetsFrame = [presetsFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 15, 15, 15)];
+    [self.backgroundView setImage:presetsFrame];
 }
 
 

@@ -28,10 +28,18 @@
     UIImage *LFORateBackground = [UIImage imageNamed:@"LFORate_Background"];
     _rateControl.backgroundImage = LFORateBackground;
 
-    UIImage *chicken4 = [UIImage imageNamed:@"ChickenKnob_4way"];
-    _waveformControl.spriteSheet = chicken4;
-    _waveformControl.segments = 4;
+    UIImage *chicken5 = [UIImage imageNamed:@"ChickenKnob_5way"];
+    UIImage *waveBackground = [UIImage imageNamed:@"lfowave_background"];
+    _waveformControl.spriteSheet = chicken5;
+    _waveformControl.segments = 5;
+    _waveformControl.backgroundImage = waveBackground;
     
+    UIImage *destBackground = [UIImage imageNamed:@"LFODest_Background"];
+    _destinationControl.backgroundImage = destBackground;
+    
+    UIImage *lfoFrame = [UIImage imageNamed:@"lfo_frame"];
+    lfoFrame = [lfoFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 15, 15, 15)];
+    [self.backgroundView setImage:lfoFrame];
 }
 
 -(IBAction)changeRate:(id)sender {

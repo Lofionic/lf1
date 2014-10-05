@@ -52,6 +52,7 @@
                 phase = 0;
             }
         }
+        
     }
     
     // Prevent phase from overloading
@@ -71,6 +72,12 @@
         case LFOSaw: {
             double modPhase = fmod(phase, M_PI * 2.0);
             float a = (modPhase / (M_PI)) - 1.0f;
+            return (float)(a);
+        }
+            break;
+        case LFORamp: {
+            double modPhase = fmod(phase, M_PI * 2.0);
+            float a = - ((modPhase / (M_PI)) - 1.0f);
             return (float)(a);
         }
             break;

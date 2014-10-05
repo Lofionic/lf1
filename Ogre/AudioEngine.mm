@@ -175,22 +175,28 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     // Get reference to audio controller from inRefCon
     AudioEngine *ac = (__bridge AudioEngine*)inRefCon;
 
+    
+    
     // Generate CV Controller buffer
     // prepare the buffer in case its size has changed
     [ac.cvController prepareBufferWithBufferSize:inNumberFrames];
     [ac.cvController renderBuffer:ac.cvController.buffer samples:inNumberFrames];
     
+    
     // Generate VCO envelope buffer
     [ac.vcoEnvelope prepareBufferWithBufferSize:inNumberFrames];
     [ac.vcoEnvelope renderBuffer:ac.vcoEnvelope.buffer samples:inNumberFrames];
+    
     
     // Generate VCF envelope buffer
     [ac.vcfEnvelope prepareBufferWithBufferSize:inNumberFrames];
     [ac.vcfEnvelope renderBuffer:ac.vcfEnvelope.buffer samples:inNumberFrames];
     
+    
     // Generate LFO buffer
     [ac.lfo1 prepareBufferWithBufferSize:inNumberFrames];
     [ac.lfo1 renderBuffer:ac.lfo1.buffer samples:inNumberFrames];
+    
     
     // Generate buffer for oscillator 1
     [ac.osc1 prepareBufferWithBufferSize:inNumberFrames];
@@ -216,6 +222,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     for (int i = 0; i < inNumberFrames; i++) {
         outA[i] = mixedSignal[i] * 32767.0f;
     }
+    
     
     return noErr;
 }

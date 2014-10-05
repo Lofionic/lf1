@@ -59,7 +59,7 @@
     _keyboardView.cvController = _audioEngine.cvController;
     
     // Create oscillator controller view
-    _oscView = [[OscillatorControlView alloc] initWithFrame:CGRectZero];
+    _oscView = [[OscillatorControlView alloc] init];
     _oscView.osc1 = _audioEngine.osc1;
     _oscView.osc2 = _audioEngine.osc2;
     _oscView.mixer = _audioEngine.mixer;

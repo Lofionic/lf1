@@ -30,8 +30,16 @@
     _freqControl.spriteSheet = cutoffKnob;
     _freqControl.spriteSize = CGSizeMake(150 * SCREEN_SCALE, 150 * SCREEN_SCALE);
     
-    UIImage *egBackground = [UIImage imageNamed:@"Osc2Freq_Background"];
+    
+    UIImage *cutoffBackground = [UIImage imageNamed:@"Cutoff_background"];
+    _freqControl.backgroundImage = cutoffBackground;
+    
+    UIImage *egBackground = [UIImage imageNamed:@"eg_amt_background"];
     _egControl.backgroundImage = egBackground;
+
+    UIImage *vcfFrame = [UIImage imageNamed:@"vcf_frame"];
+    vcfFrame = [vcfFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 15, 15, 15)];
+    [self.backgroundView setImage:vcfFrame];
 }
 
 

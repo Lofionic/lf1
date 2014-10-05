@@ -24,7 +24,7 @@
 
 @property (nonatomic, strong) IBOutlet KeyboardView *keyboardView;
 
-@property (nonatomic, strong) OscillatorControlView *oscView;
+@property (nonatomic, strong) IBOutlet OscillatorControlView *oscView;
 @property (nonatomic, strong) EnvelopeControlView *envView;
 @property (nonatomic, strong) FilterControlView *filterView;
 @property (nonatomic, strong) LFOControlView *lfoView;

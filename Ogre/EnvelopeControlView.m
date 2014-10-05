@@ -107,7 +107,10 @@
     UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
     _oscSustainControl.backgroundImage = zeroTenBackground;
     _filterSustainControl.backgroundImage = zeroTenBackground;
-    
+
+    UIImage *envFrame = [UIImage imageNamed:@"env_frame"];
+    envFrame = [envFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 0, 0, 15)];
+    [self.backgroundView setImage:envFrame];
 }
 
 @end

@@ -39,6 +39,17 @@
     _osc2octave.spriteSheet = chicken4;
     _osc2octave.segments = 4;
     
+    UIImage *oscWaveBackground = [UIImage imageNamed:@"OscWave_Background"];
+    _osc1wave.backgroundImage = oscWaveBackground;
+    _osc2wave.backgroundImage = oscWaveBackground;
+    
+    UIImage *oscOctBackground = [UIImage imageNamed:@"OscOct_Background"];
+    _osc1octave.backgroundImage = oscOctBackground;
+    _osc2octave.backgroundImage = oscOctBackground;
+    
+    UIImage *oscFrame = [UIImage imageNamed:@"osc_frame"];
+    oscFrame = [oscFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 15, 15, 15)];
+    [self.backgroundView setImage:oscFrame];
 }
 
 -(IBAction)oscillatorVolumeChanged:(id)sender {

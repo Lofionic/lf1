@@ -9,6 +9,7 @@
 typedef enum LFOWaveform {
     LFOSin,
     LFOSaw,
+    LFORamp,
     LFOSquare,
     LFOSampleHold
 } LFOWaveform;

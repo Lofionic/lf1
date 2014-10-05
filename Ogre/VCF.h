@@ -16,7 +16,7 @@
 @property float cutoff;
 @property float resonance;
 @property float eg_amount;
-@property (weak) LFO *lfo;
-@property (weak) Envelope* envelope;
+@property (assign) LFO *lfo;
+@property (assign) Envelope* envelope;
 
 @end
