@@ -86,7 +86,6 @@
 		6C9A9B5A19C8C04700DFA51A /* LFO.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9B5919C8C04700DFA51A /* LFO.m */; };
 		6C9BD76419DB2E5F008CE346 /* Mixer2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD76319DB2E5F008CE346 /* Mixer2.m */; };
 		6C9BD76619DB32DB008CE346 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C9BD76519DB32DB008CE346 /* AVFoundation.framework */; };
-		6C9BD76719DB3AA5008CE346 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83F18B96CED00923F29 /* CAStreamBasicDescription.cpp */; };
 		6C9BD79D19DB613C008CE346 /* PresetControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C9BD79C19DB613C008CE346 /* PresetControlView.xib */; };
 		6C9BD7A019DB61F1008CE346 /* PresetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD79F19DB61F1008CE346 /* PresetButton.m */; };
 		6C9BD7A319DB6296008CE346 /* PresetControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD7A219DB6296008CE346 /* PresetControlView.m */; };
@@ -359,12 +358,6 @@
 		834FA83918B9602A00923F29 /* AudioEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioEngine.h; sourceTree = "<group>"; };
 		834FA83A18B9602A00923F29 /* AudioEngine.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioEngine.mm; sourceTree = "<group>"; };
 		834FA83C18B960F500923F29 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		834FA83E18B96C8500923F29 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
-		834FA83F18B96CED00923F29 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
-		834FA84118B96CFB00923F29 /* CAMath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
-		834FA84218B96D0500923F29 /* CAXException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
-		834FA84318B96D0F00923F29 /* CADebugMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
-		834FA84418B96D3100923F29 /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugPrintf.h; sourceTree = "<group>"; };
 		83AFC395192ABB8E00851413 /* Oscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Oscillator.h; sourceTree = "<group>"; };
 		83AFC396192ABB8E00851413 /* Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Oscillator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -686,12 +679,6 @@
 		834FA80C18B95FA800923F29 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				834FA84418B96D3100923F29 /* CADebugPrintf.h */,
-				834FA84318B96D0F00923F29 /* CADebugMacros.h */,
-				834FA84218B96D0500923F29 /* CAXException.h */,
-				834FA84118B96CFB00923F29 /* CAMath.h */,
-				834FA83F18B96CED00923F29 /* CAStreamBasicDescription.cpp */,
-				834FA83E18B96C8500923F29 /* CAStreamBasicDescription.h */,
 				834FA80D18B95FA800923F29 /* Ogre-Info.plist */,
 				834FA80E18B95FA800923F29 /* InfoPlist.strings */,
 				834FA81118B95FA800923F29 /* main.m */,
@@ -895,7 +882,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C9BD7A619DB632D008CE346 /* ControlView.m in Sources */,
-				6C9BD76719DB3AA5008CE346 /* CAStreamBasicDescription.cpp in Sources */,
 				6CD81ECB19CB561100B46963 /* CCRSegmentedRotaryControl.m in Sources */,
 				6C60601119CC85E7008A0AAA /* PresetController.m in Sources */,
 				6CF53BC919C5D64200C63B1C /* FilterControlView.m in Sources */,

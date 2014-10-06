@@ -64,7 +64,7 @@ AudioSignalType prevOut;
     checkError(AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct), "Cannot set AUConverter node input callback" );
 
     // Set up the converter input stream
-    CAStreamBasicDescription desc;
+    AudioStreamBasicDescription desc;
     UInt32 size = sizeof(desc);
     
     checkError(AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size), "Cannot get stream format from AUConverter");
@@ -75,7 +75,7 @@ AudioSignalType prevOut;
     desc.mSampleRate = kGraphSampleRate;
     desc.mFormatID = kAudioFormatLinearPCM;
     desc.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    desc.mBitsPerChannel = sizeof(AudioSampleType) * 8; // AudioSampleType == 16 bit signed ints
+    desc.mBitsPerChannel = sizeof(SInt16) * 8; // AudioSampleType == 16 bit signed ints
     desc.mChannelsPerFrame = 1;
     desc.mFramesPerPacket = 1;
     desc.mBytesPerFrame = (desc.mBitsPerChannel / 8) * desc.mChannelsPerFrame;
@@ -221,7 +221,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
     // Send signal to audio buffer
     // outA is a pointer to the buffer that will be filled
-    AudioSampleType *outA = (AudioSampleType *)ioData->mBuffers[0].mData;
+    SInt16 *outA = (SInt16 *)ioData->mBuffers[0].mData;
     
     for (int i = 0; i < inNumberFrames; i++) {
         

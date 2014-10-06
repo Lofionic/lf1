@@ -4,7 +4,7 @@
 //
 
 #import "BuildSettings.h"
-#import "CAStreamBasicDescription.h"
+//#import "CAStreamBasicDescription.h"
 #import "CVController.h"
 #import "Envelope.h"
 #import "EnvelopeControlView.h"
@@ -25,7 +25,7 @@
     AudioUnit mOutput;
     AudioUnit mConverter;
     
-    CAStreamBasicDescription outputASBD;
+    AudioStreamBasicDescription outputASBD;
 }
 
 @property bool IsRunning;
