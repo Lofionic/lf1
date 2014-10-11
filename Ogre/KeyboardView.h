@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CVController.h"
+#import "CVComponent.h"
 
 @interface KeyboardView : UIView
 
-@property (nonatomic, weak) CVController *cvController;
+@property (nonatomic, weak) CVComponent *cvController;
 
 @end

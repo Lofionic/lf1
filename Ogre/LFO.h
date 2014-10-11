@@ -4,7 +4,7 @@
 //
 
 #import "Generator.h"
-#import "CVController.h"
+#import "CVComponent.h"
 
 typedef enum LFOWaveform {
     LFOSin,

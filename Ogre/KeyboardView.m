@@ -179,7 +179,7 @@
         NSMutableSet *releasedKeys = [NSMutableSet setWithSet:prevKeysDown];
         [releasedKeys minusSet:keysDown];
         for (NSNumber *n in releasedKeys) {
-            [_cvController noteOff:keyValues[[n integerValue]]];
+            [self.cvController noteOff:keyValues[[n integerValue]]];
         }
         [self setNeedsDisplay];
         
@@ -188,7 +188,7 @@
         [newKeys minusSet:prevKeysDown];
         
         for (NSNumber *n in newKeys) {
-            [_cvController noteOn:keyValues[[n integerValue]]];
+            [self.cvController noteOn:keyValues[[n integerValue]]];
         }
 
     }

@@ -5,7 +5,7 @@
 
 #import "BuildSettings.h"
 //#import "CAStreamBasicDescription.h"
-#import "CVController.h"
+#import "CVComponent.h"
 #import "Envelope.h"
 #import "EnvelopeControlView.h"
 #import "FilterControlView.h"
@@ -31,7 +31,7 @@
 @property bool IsRunning;
 
 // Synth Components
-@property (nonatomic, strong) CVController *cvController;
+@property (nonatomic, strong) CVComponent *cvController;
 @property (nonatomic, strong) Oscillator *osc1;
 @property (nonatomic, strong) Oscillator *osc2;
 @property (nonatomic, strong) VCF *vcf;

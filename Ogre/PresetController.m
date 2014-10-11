@@ -11,10 +11,10 @@
 {
     self = [super init];
     if (self) {
-        _viewController = viewController;
+        self.viewController = viewController;
         
         // KeyPaths to all the values we want to store in the presets
-        _keyPaths = @[
+        self.keyPaths = @[
                         @"oscView.osc1vol.value",
                         @"oscView.osc2vol.value",
                         @"oscView.osc2freq.value",
@@ -47,7 +47,7 @@
 -(void)restoreBank {
  
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    _currentBank = [[userDefaults valueForKey:PRESET_BANK_KEY] mutableCopy];
+    self.currentBank = [[userDefaults valueForKey:PRESET_BANK_KEY] mutableCopy];
     
     if (!_currentBank) {
         // Load default bank
@@ -55,19 +55,19 @@
         NSString *defaultBankPath = [[NSBundle mainBundle] pathForResource:@"init" ofType:@"bnk"];
         NSData *defaultBankData = [NSData dataWithContentsOfFile:defaultBankPath];
         if (defaultBankData) {
-            _currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
+            self.currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
             // Write bank to user defaults
             [self saveBank];
         } else {
             NSLog(@"Default bank not found");
-            _currentBank = [[NSMutableDictionary alloc] init];
+            self.currentBank = [[NSMutableDictionary alloc] init];
 
             NSMutableArray *presetsArray = [[NSMutableArray alloc] initWithCapacity:8];
             for (int i = 0; i < 8; i++) {
                 [presetsArray addObject:[[NSDictionary alloc] init]];
             }
-            [_currentBank setValue:presetsArray forKey:@"presets"];
-            [_currentBank setValue:@"Unnamed" forKey:@"bankName"];
+            [self.currentBank setValue:presetsArray forKey:@"presets"];
+            [self.currentBank setValue:@"Unnamed" forKey:@"bankName"];
         }
     }
 }
@@ -86,18 +86,18 @@
 
 -(void)storePresetAtIndex:(NSInteger)index {
 
-    if (_currentBank) {
-        NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[_keyPaths count]];
-        for (NSString *thisKeyPath in _keyPaths) {
-            NSValue *thisValue = [_viewController valueForKeyPath:thisKeyPath];
+    if (self.currentBank) {
+        NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self.keyPaths count]];
+        for (NSString *thisKeyPath in self.keyPaths) {
+            NSValue *thisValue = [self.viewController valueForKeyPath:thisKeyPath];
             [presetDictionary setValue:thisValue forKey:thisKeyPath];
         }
         
-        NSMutableArray *presetsArray = [_currentBank[@"presets"] mutableCopy];
+        NSMutableArray *presetsArray = [self.currentBank[@"presets"] mutableCopy];
         
         presetsArray[index] = presetDictionary;
         
-        [_currentBank setObject:presetsArray forKey:@"presets"];
+        [self.currentBank setObject:presetsArray forKey:@"presets"];
         
         [self saveBank];
     }
@@ -107,9 +107,9 @@
     
     [self restoreBank];
     
-    if (_currentBank) {
+    if (self.currentBank) {
 
-        NSMutableArray *presetsArray = _currentBank[@"presets"];
+        NSMutableArray *presetsArray = self.currentBank[@"presets"];
         if ([presetsArray count] <= index) {
             NSLog(@"Can't load preset %li : out of bounds", (long)index);
             return;
@@ -118,7 +118,7 @@
         
         for (NSString *thisKey in [presetDictionary allKeys]) {
             @try {
-                [_viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
+                [self.viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
             }
             @catch (NSException *e) {
                 NSLog(@"Key Path %@ not found", thisKey);
@@ -140,7 +140,7 @@
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
     
     NSLog(@"Writing to: %@", fullPath);
-    NSData *bankData = [NSKeyedArchiver archivedDataWithRootObject:_currentBank];
+    NSData *bankData = [NSKeyedArchiver archivedDataWithRootObject:self.currentBank];
     [bankData writeToFile:fullPath atomically:NO];
     
 }

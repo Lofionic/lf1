@@ -29,7 +29,7 @@
 
 -(void)awakeFromNib {
     
-    _spriteSheet = [UIImage imageNamed:@"buttonA"];
+    self.spriteSheet = [UIImage imageNamed:@"buttonA"];
     
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
     [self addGestureRecognizer: tapGesture];
@@ -43,8 +43,8 @@
 -(void)flash {
     
     // Start flashing
-    ledSavedStatus = _ledOn;
-    _ledOn = false;
+    ledSavedStatus = self.LEDOn;
+    self.LEDOn = false;
     _flashing = true;
     
     flashCount = 0;
@@ -56,7 +56,7 @@
 
 -(void)toggleFlash {
     
-    _ledOn = !_ledOn;
+    self.LEDOn = !self.LEDOn;
     
     flashCount ++;
     if (flashCount < 12) {
@@ -64,22 +64,22 @@
         [self performSelector:@selector(toggleFlash) withObject:self afterDelay:0.1];
     } else {
         // End flashing
-        _ledOn = ledSavedStatus;
+        self.LEDOn = ledSavedStatus;
         _flashing = false;
     }
     [self setNeedsDisplay];
 }
 
 -(void)onTap:(UIGestureRecognizer*)gesture {
-    if (!_flashing) {
-        [_delegate presetButtonWasTapped:self];
+    if (!self.flashing) {
+        [self.delegate presetButtonWasTapped:self];
     }
 }
 
 -(void)onLongPress:(UIGestureRecognizer*)gesture {
 
-    if (!_flashing && gesture.state == UIGestureRecognizerStateBegan) {
-        [_delegate presetButtonWasLongPressed:self];
+    if (!self.flashing && gesture.state == UIGestureRecognizerStateBegan) {
+        [self.delegate presetButtonWasLongPressed:self];
     }
     
 }
@@ -94,10 +94,10 @@
         CGContextScaleCTM(ctx, 1.0, -1.0);
 
         CGRect sourceRect = CGRectMake(60.0 * SCREEN_SCALE, 0, 60.0 * SCREEN_SCALE, 40.0 * SCREEN_SCALE);
-        if (_ledOn) {
+        if (self.LEDOn) {
                 sourceRect = CGRectMake(0 * SCREEN_SCALE, 0, 60.0 * SCREEN_SCALE, 40.0 * SCREEN_SCALE);
         }
-        CGImageRef drawImage = CGImageCreateWithImageInRect([_spriteSheet CGImage], sourceRect);
+        CGImageRef drawImage = CGImageCreateWithImageInRect([self.spriteSheet CGImage], sourceRect);
         CGContextDrawImage(ctx, CGRectMake(0, 0, self.frame.size.width, -self.frame.size.height), drawImage);
         CGImageRelease(drawImage);
         CGContextRestoreGState(ctx);

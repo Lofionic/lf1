@@ -11,18 +11,18 @@
 {
     self = [super initWithSampleRate:(Float64)graphSampleRate];
     if (self) {
-        _buffer = nil;
-        _bufferSize = 0;
+        self.buffer = nil;
+        self.bufferSize = 0;
     }
     return self;
 }
 
 -(void)prepareBufferWithBufferSize:(UInt32)bufferSize {
-    if (bufferSize != _bufferSize) {
+    if (bufferSize != self.bufferSize) {
         NSLog(@"Preparing buffer of size: %i for component:%@", (unsigned int)bufferSize, self.description);
         free(_buffer);
-        _buffer = (AudioSignalType*)malloc(bufferSize * sizeof(AudioSignalType));
-        _bufferSize = bufferSize;
+        self.buffer = (AudioSignalType*)malloc(bufferSize * sizeof(AudioSignalType));
+        self.bufferSize = bufferSize;
     }
 }
 

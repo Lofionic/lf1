@@ -98,43 +98,43 @@ AudioSignalType prevOut;
 
     // initialize oscillators
     if (USE_ANALOG > 0) {
-        _osc1 = [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate];
-        _osc2 = [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate];
+        self.osc1 = [[Analog_Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        self.osc2 = [[Analog_Oscillator  alloc] initWithSampleRate:kGraphSampleRate];
         
     } else {
-        _osc1 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
-        _osc2 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        self.osc1 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
+        self.osc2 = [[Oscillator alloc] initWithSampleRate:kGraphSampleRate];
     }
     
     // Initialize VCO envelope
-    _vcoEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
+    self.vcoEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
     
     // Initialize filter & vcf envelope
-    _vcf = [[VCF alloc] initWithSampleRate:kGraphSampleRate];
-    _vcfEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
-    [_vcf setEnvelope:_vcfEnvelope];
+    self.vcf = [[VCF alloc] initWithSampleRate:kGraphSampleRate];
+    self.vcfEnvelope = [[Envelope alloc] initWithSampleRate:kGraphSampleRate];
+    [self.vcf setEnvelope:self.vcfEnvelope];
     
     // Initialize LFO
-    _lfo1 = [[LFO alloc] initWithSampleRate:kGraphSampleRate];
-    [_lfo1 setFreq:30];
-    [_lfo1 setAmp:0.2];
-    [_lfo1 setWaveform:LFOSin];
+    self.lfo1 = [[LFO alloc] initWithSampleRate:kGraphSampleRate];
+    [self.lfo1 setFreq:30];
+    [self.lfo1 setAmp:0.2];
+    [self.lfo1 setWaveform:LFOSin];
     
     // Initialize Mixer component
-    _mixer = [[Mixer2 alloc] initWithSampleRate:kGraphSampleRate];
-    _mixer.source1 = _osc1;
-    _mixer.source2 = _osc2;
-    _mixer.envelope = _vcoEnvelope;
+    self.mixer = [[Mixer2 alloc] initWithSampleRate:kGraphSampleRate];
+    self.mixer.source1 = self.osc1;
+    self.mixer.source2 = self.osc2;
+    self.mixer.envelope = self.vcoEnvelope;
    
     // Initialize CVController
-    _cvController = [[CVController alloc] initWithSampleRate:kGraphSampleRate];
+    self.cvController = [[CVComponent alloc] initWithSampleRate:kGraphSampleRate];
     
     // Plug CV controller into Oscillators
-    _osc1.cvController = _cvController;
-    _osc2.cvController = _cvController;
+    self.osc1.cvController = self.cvController;
+    self.osc2.cvController = self.cvController;
     
     // Plug CV controller into gate responders
-    _cvController.gateComponents = @[_lfo1, _vcfEnvelope, _vcoEnvelope];
+    self.cvController.gateComponents = @[self.lfo1, self.vcfEnvelope, self.vcoEnvelope];
     
 }
 
@@ -179,8 +179,6 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     // Get reference to audio controller from inRefCon
     AudioEngine *ac = (__bridge AudioEngine*)inRefCon;
 
-    
-    
     // Generate CV Controller buffer
     // prepare the buffer in case its size has changed
     [ac.cvController prepareBufferWithBufferSize:inNumberFrames];

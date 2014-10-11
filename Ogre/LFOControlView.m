@@ -23,19 +23,19 @@
 -(void)initializeParameters {
     
     UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
-    _amountControl.backgroundImage = zeroTenBackground;
+    self.amountControl.backgroundImage = zeroTenBackground;
  
     UIImage *LFORateBackground = [UIImage imageNamed:@"LFORate_Background"];
-    _rateControl.backgroundImage = LFORateBackground;
+    self.rateControl.backgroundImage = LFORateBackground;
 
     UIImage *chicken5 = [UIImage imageNamed:@"ChickenKnob_5way"];
     UIImage *waveBackground = [UIImage imageNamed:@"lfowave_background"];
-    _waveformControl.spriteSheet = chicken5;
-    _waveformControl.segments = 5;
-    _waveformControl.backgroundImage = waveBackground;
+    self.waveformControl.spriteSheet = chicken5;
+    self.waveformControl.segments = 5;
+    self.waveformControl.backgroundImage = waveBackground;
     
     UIImage *destBackground = [UIImage imageNamed:@"LFODest_Background"];
-    _destinationControl.backgroundImage = destBackground;
+    self.destinationControl.backgroundImage = destBackground;
     
     UIImage *lfoFrame = [UIImage imageNamed:@"lfo_frame"];
     lfoFrame = [lfoFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 15, 15, 15)];
@@ -46,12 +46,12 @@
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
     float value = control.value;
     
-    if (_lfo) {
+    if (self.lfo) {
         // Scale value
         value = (value * 0.999) + 0.001;
         
         // Return exponential value
-        [_lfo setFreq:(powf(value, 4))];
+        [self.lfo setFreq:(powf(value, 4))];
     }
 }
 
@@ -61,29 +61,29 @@
     
     if (_lfo) {
         // Return exponential value
-        [_lfo setAmp:(powf(value, 2))];
+        [self.lfo setAmp:(powf(value, 2))];
     }
 }
 
 -(IBAction)changeDestination:(id)sender {
     
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
-    if (_lfo) {
+    if (self.lfo) {
         switch (control.index) {
             case 0:
-                [_osc1 setLfo:_lfo];
-                [_osc2 setLfo:_lfo];
-                [_vcf setLfo:nil];
+                [self.osc1 setLfo:_lfo];
+                [self.osc2 setLfo:_lfo];
+                [self.vcf setLfo:nil];
                 break;
             case 1:
-                [_osc1 setLfo:nil];
-                [_osc2 setLfo:_lfo];
-                [_vcf setLfo:nil];
+                [self.osc1 setLfo:nil];
+                [self.osc2 setLfo:_lfo];
+                [self.vcf setLfo:nil];
                 break;
             case 2:
-                [_osc1 setLfo:nil];
-                [_osc2 setLfo:nil];
-                [_vcf setLfo:_lfo];
+                [self.osc1 setLfo:nil];
+                [self.osc2 setLfo:nil];
+                [self.vcf setLfo:_lfo];
             default:
                 break;
         }
@@ -95,8 +95,8 @@
     CCRSegmentedRotaryControl *control = (CCRSegmentedRotaryControl*)sender;
     NSInteger value = control.index;
     
-    if (_lfo) {
-        [_lfo setWaveform:(LFOWaveform)value];
+    if (self.lfo) {
+        [self.lfo setWaveform:(LFOWaveform)value];
     }
 }
 

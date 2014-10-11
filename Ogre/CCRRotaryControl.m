@@ -31,17 +31,17 @@
 -(void)initialize {
     
     // Initialize default properties
-    _value = 0.0;
-    _defaultValue = _value;
+    self.value = 0.0;
+    self.defaultValue = self.value;
     
-    _changeByRotating = ROTARY_CONTROLS > 0;
-    _sensitivity = 3;
-    _enableDefaultValue = false;
+    self.changeByRotating = ROTARY_CONTROLS > 0;
+    self.sensitivity = 3;
+    self.enableDefaultValue = false;
     
     // style
     UIImage *knobImage = [UIImage imageNamed:@"SmallKnob"];
-    _spriteSheet = knobImage;
-    _spriteSize = CGSizeMake(86 * SCREEN_SCALE, 86 * SCREEN_SCALE);
+    self.spriteSheet = knobImage;
+    self.spriteSize = CGSizeMake(86 * SCREEN_SCALE, 86 * SCREEN_SCALE);
     self.backgroundColor = [UIColor clearColor];
     
     self.userInteractionEnabled = true;
@@ -55,8 +55,8 @@
     // Reset value to default on double tap
 
     // Precision mode must fail to register double tap
-    if (gesture.state == UIGestureRecognizerStateEnded && _enableDefaultValue) {
-        _value = _defaultValue;
+    if (gesture.state == UIGestureRecognizerStateEnded && self.enableDefaultValue) {
+        self.value = self.defaultValue;
         [self sendActionsForControlEvents:UIControlEventValueChanged];
         [self setNeedsDisplay];
     }
@@ -116,20 +116,20 @@
                 double delta = -atan2(thisVector.dx * prevVector.dy - prevVector.dx * thisVector.dy, prevVector.dx * thisVector.dx + prevVector.dy * thisVector.dy);
                 
                 // Normalize rotation and adjust value accordingly
-                _value += (delta / (M_PI * 2.0)) / 1.0;
+                self.value += (delta / (M_PI * 2.0)) / 1.0;
 
             }
         }
         else {
-            CGFloat delta = ((thisTouchLocation.y - previousTrackingTouchLocation.y) * _sensitivity) / 500.0;
-            _value -= delta;
+            CGFloat delta = ((thisTouchLocation.y - previousTrackingTouchLocation.y) * self.sensitivity) / 500.0;
+            self.value -= delta;
         }
         
         // Clamp value
-        if (_value > 1.0) {
-            _value = 1.0;
-        } else if (_value < 0.0) {
-            _value = 0.0;
+        if (self.value > 1.0) {
+            self.value = 1.0;
+        } else if (self.value < 0.0) {
+            self.value = 0.0;
         }
         
         [self sendActionsForControlEvents:UIControlEventValueChanged];
@@ -154,19 +154,19 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    if (_spriteSheet) {
+    if (self.spriteSheet) {
         // draw control
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         CGContextSaveGState(ctx);
         CGContextScaleCTM(ctx, 1.0, -1.0);
-        if (_backgroundImage) {
-            CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), [_backgroundImage CGImage]);
+        if (self.backgroundImage) {
+            CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), [self.backgroundImage CGImage]);
         }
         
-        int sprites = ((_spriteSheet.size.height / _spriteSize.height) * SCREEN_SCALE) - 1;
-        int frame = (_value * sprites);
-        CGRect sourceRect = CGRectMake(0, frame * _spriteSize.height, _spriteSize.width, _spriteSize.height);
-        CGImageRef drawImage = CGImageCreateWithImageInRect([_spriteSheet CGImage], sourceRect);
+        int sprites = ((self.spriteSheet.size.height / self.spriteSize.height) * SCREEN_SCALE) - 1;
+        int frame = (self.value * sprites);
+        CGRect sourceRect = CGRectMake(0, frame * self.spriteSize.height, self.spriteSize.width, self.spriteSize.height);
+        CGImageRef drawImage = CGImageCreateWithImageInRect([self.spriteSheet CGImage], sourceRect);
 
         CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), drawImage);
         CGImageRelease(drawImage);

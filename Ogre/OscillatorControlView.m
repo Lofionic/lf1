@@ -24,28 +24,28 @@
 -(void)initializeParameters {
     
     UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
-    _osc1vol.backgroundImage = zeroTenBackground;
-    _osc2vol.backgroundImage = zeroTenBackground;
+    self.osc1vol.backgroundImage = zeroTenBackground;
+    self.osc2vol.backgroundImage = zeroTenBackground;
     
     UIImage *osc2FreqBackground = [UIImage imageNamed:@"Osc2Freq_Background"];
-    _osc2freq.backgroundImage = osc2FreqBackground;
-    _osc2freq.enableDefaultValue = true;
-    _osc2freq.defaultValue = 0.5;
+    self.osc2freq.backgroundImage = osc2FreqBackground;
+    self.osc2freq.enableDefaultValue = true;
+    self.osc2freq.defaultValue = 0.5;
     
     UIImage *chicken4 = [UIImage imageNamed:@"ChickenKnob_4way"];
-    _osc1octave.spriteSheet = chicken4;
-    _osc1octave.segments = 4;
+    self.osc1octave.spriteSheet = chicken4;
+    self.osc1octave.segments = 4;
     
-    _osc2octave.spriteSheet = chicken4;
-    _osc2octave.segments = 4;
+    self.osc2octave.spriteSheet = chicken4;
+    self.osc2octave.segments = 4;
     
     UIImage *oscWaveBackground = [UIImage imageNamed:@"OscWave_Background"];
-    _osc1wave.backgroundImage = oscWaveBackground;
-    _osc2wave.backgroundImage = oscWaveBackground;
+    self.osc1wave.backgroundImage = oscWaveBackground;
+    self.osc2wave.backgroundImage = oscWaveBackground;
     
     UIImage *oscOctBackground = [UIImage imageNamed:@"OscOct_Background"];
-    _osc1octave.backgroundImage = oscOctBackground;
-    _osc2octave.backgroundImage = oscOctBackground;
+    self.osc1octave.backgroundImage = oscOctBackground;
+    self.osc2octave.backgroundImage = oscOctBackground;
     
     UIImage *oscFrame = [UIImage imageNamed:@"osc_frame"];
     oscFrame = [oscFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 15, 15, 15)];
@@ -56,11 +56,11 @@
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
     NSInteger tag = control.tag;
     
-    if (_mixer) {
+    if (self.mixer) {
         if (tag == 0) {
-            _mixer.source1Gain = control.value;
+            self.mixer.source1Gain = control.value;
         } else {
-            _mixer.source2Gain = control.value;
+            self.mixer.source2Gain = control.value;
         }
     }
 }
@@ -73,13 +73,13 @@
     
     switch (tag) {
         case 0:
-            if (_osc1) {
-                [_osc1 setFreq_adjust:value];
+            if (self.osc1) {
+                [self.osc1 setFreq_adjust:value];
             }
             break;
         case 1:
-            if (_osc2) {
-                [_osc2 setFreq_adjust:value];
+            if (self.osc2) {
+                [self.osc2 setFreq_adjust:value];
             }
         default:
             break;
@@ -93,13 +93,13 @@
     
     switch (tag) {
         case 0:
-            if (_osc1) {
-                [_osc1 setWaveform:(OscillatorWaveform)value];
+            if (self.osc1) {
+                [self.osc1 setWaveform:(OscillatorWaveform)value];
             }
             break;
         case 1:
-            if (_osc2) {
-                [_osc2 setWaveform:(OscillatorWaveform)value];
+            if (self.osc2) {
+                [self.osc2 setWaveform:(OscillatorWaveform)value];
             }
         default:
             break;
@@ -113,13 +113,13 @@
     
     switch (tag) {
         case 0:
-            if (_osc1) {
-                [_osc1 setOctave:(OscillatorWaveform)value];
+            if (self.osc1) {
+                [self.osc1 setOctave:(OscillatorWaveform)value];
             }
             break;
         case 1:
-            if (_osc2) {
-                [_osc2 setOctave:(OscillatorWaveform)value];
+            if (self.osc2) {
+                [self.osc2 setOctave:(OscillatorWaveform)value];
             }
         default:
             break;

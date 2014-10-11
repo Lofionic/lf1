@@ -6,21 +6,21 @@
 #import "BuildSettings.h"
 #import "Generator.h"
 
-@class CVController;
+@class CVComponent;
 
 @protocol CVControllerDelegate <NSObject>
 
--(void)CVControllerDidOpenGate:(CVController*)cvController ;
--(void)CVControllerDidCloseGate:(CVController*)cvController;
+-(void)CVControllerDidOpenGate:(CVComponent*)cvController ;
+-(void)CVControllerDidCloseGate:(CVComponent*)cvController;
 
 @end
 
-
-@interface CVController : Generator
+@interface CVComponent : Generator
 
 @property float glide;
 @property bool gliss;
 @property (nonatomic, strong) NSArray *gateComponents;
+@property float pitchbend;
 
 -(void)noteOn:(NSInteger)note;
 -(void)noteOff:(NSInteger)note;

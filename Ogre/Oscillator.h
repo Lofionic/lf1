@@ -5,7 +5,7 @@
 
 #import "Generator.h"
 #import "LFO.h"
-#import "CVController.h"
+#import "CVComponent.h"
 
 typedef enum OscillatorWaveform {
     Sin,
@@ -24,6 +24,6 @@ typedef enum OscillatorWaveform {
 -(void)changeToNextWaveform;
 
 @property (assign) LFO* lfo;
-@property (assign) CVController* cvController;
+@property (assign) CVComponent* cvController;
 
 @end

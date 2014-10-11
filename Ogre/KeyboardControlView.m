@@ -30,9 +30,11 @@
 -(IBAction)controlChanged:(id)sender {
     
     if (sender == self.glideControl) {
-        _cvController.glide = self.glideControl.value;
+        self.cvComponent.glide = self.glideControl.value;
     } else if (sender == self.glissSwitch) {
-        _cvController.gliss = (self.glissSwitch.value == 1);
+        self.cvComponent.gliss = (self.glissSwitch.value == 1);
+    } else if (sender == self.pitchbendControl) {
+        self.cvComponent.pitchbend = self.pitchbendControl.value;
     }
     
 }

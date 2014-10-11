@@ -28,31 +28,31 @@
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
     float value = control.value;
     
-    if (_VCOEnvelope) {
+    if (self.VCOEnvelope) {
         switch (control.tag) {
             case Attack:
                 // Limit range
                 // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
-                [_VCOEnvelope setEnvelopeAttack:value];
+                [self.VCOEnvelope setEnvelopeAttack:value];
                 break;
             case Decay:
                 // Limit range
                 // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
-                [_VCOEnvelope setEnvelopeDecay:value];
+                [self.VCOEnvelope setEnvelopeDecay:value];
                 break;
             case Release:
                 // Limit range
                 // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
-                [_VCOEnvelope setEnvelopeRelease:value];
+                [self.VCOEnvelope setEnvelopeRelease:value];
                 break;
             case Sustain:
-                [_VCOEnvelope setEnvelopeSustain:value];
+                [self.VCOEnvelope setEnvelopeSustain:value];
                 break;
             default:
                 break;
@@ -64,28 +64,28 @@
     CCRRotaryControl *control = (CCRRotaryControl*)sender;
     float value = control.value;
     
-    if (_VCFEnvelope) {
+    if (self.VCFEnvelope) {
         switch (control.tag) {
             case Attack:// Limit range
                 // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
-                [_VCFEnvelope setEnvelopeAttack:value];
+                [self.VCFEnvelope setEnvelopeAttack:value];
                 break;
             case Decay:// Limit range
                 // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
-                [_VCFEnvelope setEnvelopeDecay:value];
+                [self.VCFEnvelope setEnvelopeDecay:value];
                 break;
             case Release:
                 // value = (value * 0.7) + 0.3;
                 // Return exponential value
                 value = powf(value, EXPONENTIAL_CONTROL_VALUE);
-                [_VCFEnvelope setEnvelopeRelease:value];
+                [self.VCFEnvelope setEnvelopeRelease:value];
                 break;
             case Sustain:
-                [_VCFEnvelope setEnvelopeSustain:value];
+                [self.VCFEnvelope setEnvelopeSustain:value];
                 break;
             default:
                 break;
@@ -96,17 +96,17 @@
 -(void)initializeParameters {
     
     UIImage *envBackground = [UIImage imageNamed:@"Env_Background"];
-    _oscAttackControl.backgroundImage = envBackground;
-    _oscDecayControl.backgroundImage = envBackground;
-    _oscReleaseControl.backgroundImage = envBackground;
+    self.oscAttackControl.backgroundImage = envBackground;
+    self.oscDecayControl.backgroundImage = envBackground;
+    self.oscReleaseControl.backgroundImage = envBackground;
     
-    _filterAttackControl.backgroundImage = envBackground;
-    _filterDecayControl.backgroundImage = envBackground;
-    _filterReleaseControl.backgroundImage = envBackground;
+    self.filterAttackControl.backgroundImage = envBackground;
+    self.filterDecayControl.backgroundImage = envBackground;
+    self.filterReleaseControl.backgroundImage = envBackground;
     
     UIImage *zeroTenBackground = [UIImage imageNamed:@"ZeroTen_Background"];
-    _oscSustainControl.backgroundImage = zeroTenBackground;
-    _filterSustainControl.backgroundImage = zeroTenBackground;
+    self.oscSustainControl.backgroundImage = zeroTenBackground;
+    self.filterSustainControl.backgroundImage = zeroTenBackground;
 
     UIImage *envFrame = [UIImage imageNamed:@"env_frame"];
     envFrame = [envFrame resizableImageWithCapInsets:UIEdgeInsetsMake(25, 0, 0, 15)];

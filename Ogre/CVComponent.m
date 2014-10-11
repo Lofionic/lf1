@@ -3,14 +3,13 @@
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
 
-#import "CVController.h"
+#import "CVComponent.h"
 
-@implementation CVController {
+@implementation CVComponent {
     AudioSignalType currentOutputValue;
     AudioSignalType targetOutputValue;
-    
     NSMutableArray *noteOns;
-    
+    float prevPitchbend;
 }
 
 
@@ -20,9 +19,11 @@
     if (self) {
         currentOutputValue = 0;
         targetOutputValue = 0;
-        _glide =  1;
-        _gliss = true;
-        
+        self.glide =  1;
+        self.gliss = true;
+        self.pitchbend = 0.5;
+        prevPitchbend = 0.5;
+
         noteOns = [[NSMutableArray alloc] initWithCapacity:10];
         
     }
@@ -36,7 +37,7 @@
     
     if (![noteOns containsObject:noteNumber]) {
         
-        if (_gliss) {
+        if (self.gliss) {
             [noteOns addObject:noteNumber];
             // Only open gate on first note
             if ([noteOns count] == 1) {
@@ -81,14 +82,14 @@
     
     // currentOutputValue will glide towards targetOutputVale,
     // or jump immediately if glide is zero or it is the first note played
-    if (currentOutputValue == 0 || _glide == 0) {
+    if (currentOutputValue == 0 || self.glide == 0) {
         currentOutputValue = targetOutputValue;
     }
 }
 
 -(void)openGate {
     // Trigger open gate in every gate component
-    for (id thisId in _gateComponents) {
+    for (id thisId in self.gateComponents) {
         SynthComponent <CVControllerDelegate> *thisComponent = (SynthComponent <CVControllerDelegate> *)thisId;
         [thisComponent CVControllerDidOpenGate:self];
     }
@@ -97,7 +98,7 @@
 -(void)closeGate {
     // Trigger close gate in every gate component
 
-    for (id thisId in _gateComponents) {
+    for (id thisId in self.gateComponents) {
         SynthComponent <CVControllerDelegate> *thisComponent = (SynthComponent <CVControllerDelegate> *)thisId;
         [thisComponent CVControllerDidCloseGate:self];
     }
@@ -105,19 +106,30 @@
 
 -(void)renderBuffer:(AudioSignalType *)outA samples:(UInt32)numFrames {
 
+    float pitchbendDelta = (self.pitchbend - prevPitchbend) / numFrames;
+    
     for (int i = 0; i < numFrames; i++) {
-        outA[i] = currentOutputValue;
+        
+        float pitchbendNormalized = prevPitchbend + (i * pitchbendDelta);
+        
+        float adjustValue = (pitchbendNormalized * 2.0) - 1.0;
+        adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
+        
+        outA[i] = currentOutputValue * adjustValue;
         [self updateCurrentOutputValueForOneSample];
     }
+    
+    prevPitchbend = self.pitchbend;
 }
 
 -(void)updateCurrentOutputValueForOneSample {
     
     if (targetOutputValue > currentOutputValue) {
+        
         // Glide down
         float ellapsedMS = 1000 / self.sampleRate;
         
-        currentOutputValue += ((1.1 - _glide) * ellapsedMS / CV_FREQUENCY_RANGE);
+        currentOutputValue += ((1.1 - self.glide) * ellapsedMS / CV_FREQUENCY_RANGE);
         if (currentOutputValue > targetOutputValue) {
             currentOutputValue = targetOutputValue;
         }
@@ -127,7 +139,7 @@
         // Glide down
         float ellapsedMS = 1000 / self.sampleRate;
         
-        currentOutputValue -= ((1.1 - _glide) * ellapsedMS / CV_FREQUENCY_RANGE);
+        currentOutputValue -= ((1.1 - self.glide) * ellapsedMS / CV_FREQUENCY_RANGE);
         if (currentOutputValue < targetOutputValue) {
             currentOutputValue = targetOutputValue;
         }

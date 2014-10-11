@@ -12,7 +12,7 @@
 {
     self = [super init];
     if (self) {
-        _sampleRate = sampleRate;
+        self.sampleRate = sampleRate;
     }
     return self;
 }

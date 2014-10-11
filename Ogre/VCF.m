@@ -17,10 +17,10 @@
 -(instancetype)initWithSampleRate:(Float64)graphSampleRate {
     
     if (self = [super initWithSampleRate:graphSampleRate]) {
-        _cutoff = 0;
-        _resonance = 0;
-        _lfo = nil;
-        _envelope = nil;
+        self.cutoff = 0;
+        self.resonance = 0;
+        self.lfo = nil;
+        self.envelope = nil;
         
         f = p = q = b0 = b1 = b2 = b3 = b4 = t1 = t2 = 0;
     }
@@ -43,31 +43,28 @@
                 valueIn = -1;
             }
 
-            float cutoff = _cutoff;
+            float cutoff = self.cutoff;
 
         
-            if (_envelope) {
+            if (self.envelope) {
 
-                float env = ((_eg_amount - 0.5) * 2.0);
+                float env = ((self.eg_amount - 0.5) * 2.0);
                 
-                float envValue = _envelope.buffer[i];
+                float envValue = self.envelope.buffer[i];
                 
                 if (env < 0) {
                     envValue = 1 - envValue;
                 }
                 
                 float newCutoff = cutoff + (((envValue * cutoff) - cutoff) * fabsf(env));
-
-                
-                //NSLog(@"In: %.2f Buffer: %.2f EGAMT: %.2f Env: %.2f Out: %.2f", cutoff, _envelope.buffer[i], _eg_amount, env, newCutoff);
-                
+ 
                 cutoff = newCutoff;
             }
             
-            if (_lfo) {
-                float buffer = (_lfo.buffer[i] + 1) / 2.0f;
+            if (self.lfo) {
+                float buffer = (self.lfo.buffer[i] + 1) / 2.0f;
                 cutoff *= buffer;
-                //cutoff *= powf(0.5, -_lfo.buffer[i]);
+                //cutoff *= powf(0.5, -self.lfo.buffer[i]);
                 if (cutoff > 1) {
                     cutoff = 1;
                 }
@@ -77,7 +74,7 @@
             q = 1.0f - cutoff;
             p = cutoff + 0.8f * cutoff * q;
             f = p + p - 1.0f;
-            q = _resonance * (1.0f + 0.5f * q * (1.0f - q + 5.6f * q * q));
+            q = self.resonance * (1.0f + 0.5f * q * (1.0f - q + 5.6f * q * q));
             
             valueIn -= q * b4; //feedback
             

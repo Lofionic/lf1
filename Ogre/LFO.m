@@ -27,10 +27,10 @@
 {
     self = [super initWithSampleRate:(Float64)graphSampleRate];
     if (self) {
-        _amp = FLT_MIN;
-        _freq = FLT_MIN;
-        _eg_amount = FLT_MIN;
-        _waveform = LFOSin;
+        self.amp = FLT_MIN;
+        self.freq = FLT_MIN;
+        self.eg_amount = FLT_MIN;
+        self.waveform = LFOSin;
         _nextWaveform = LFOSin;
     }
     return self;
@@ -42,7 +42,7 @@
     for (int i = 0; i < numFrames; i++) {
         float value = [self getNextSample];
 
-        AudioSignalType outValue = value * _amp;
+        AudioSignalType outValue = value * self.amp;
         
         // Declicker
         AudioSignalType delta = outValue - prevResult;
@@ -52,12 +52,12 @@
         
         outA[i] = outValue;
         
-        phase += (M_PI * _freq * 180) / self.sampleRate;
+        phase += (M_PI * self.freq * 180) / self.sampleRate;
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
-            if (_waveform != _nextWaveform) {
-                _waveform = _nextWaveform;
+            if (self.waveform != self.nextWaveform) {
+                self.waveform = self.nextWaveform;
                 phase = 0;
             }
         }
@@ -76,7 +76,7 @@
 
 -(AudioSignalType)getNextSample {
     
-    switch (_waveform) {
+    switch (self.waveform) {
         case LFOSin:
             // Sin generator
             return (float)(sin(phase * 2));
@@ -109,12 +109,12 @@
     }
 }
 
--(void)CVControllerDidOpenGate:(CVController *)cvController {
+-(void)CVControllerDidOpenGate:(CVComponent *)cvController {
     // Re-trigger LFO
     phase = 0;
 }
 
--(void)CVControllerDidCloseGate:(CVController *)cvController {
+-(void)CVControllerDidCloseGate:(CVComponent *)cvController {
     // Nothing to do here
 }
 

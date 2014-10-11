@@ -27,33 +27,33 @@
         prevEnv = 0;
         noteOn = false;
         
-        _envelopeAttack = 0;
-        _envelopeDecay = 0;
-        _envelopeSustain = 0;
-        _envelopeRelease = 0;
+        self.envelopeAttack = 0;
+        self.envelopeDecay = 0;
+        self.envelopeSustain = 0;
+        self.envelopeRelease = 0;
     }
     return self;
 }
 
 // Input values of time based parameters need to be turned into ms
 
--(void)CVControllerDidOpenGate:(CVController *)cvController {
+-(void)CVControllerDidOpenGate:(CVComponent *)cvController {
     envelopePosition = 0;
     envelopeDecayFrom = 0;
     envelopeTriggered = true;
     noteOn = true;
 }
 
--(void)CVControllerDidCloseGate:(CVController *)cvController {
+-(void)CVControllerDidCloseGate:(CVComponent *)cvController {
     noteOn = false;
     envelopePosition = 0;
 }
 
 -(void) renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
 
-    attackMS = (_envelopeAttack * 10000) + 1;
-    decayMS = (_envelopeDecay * 10000) + 1;
-    releaseMS = (_envelopeRelease * 10000) + 1;
+    attackMS = (self.envelopeAttack * 10000) + 1;
+    decayMS = (self.envelopeDecay * 10000) + 1;
+    releaseMS = (self.envelopeRelease * 10000) + 1;
 
     // Fill a buffer with envelope samples
     for (int i = 0; i < numFrames; i++) {
@@ -78,16 +78,16 @@
             result = envelopePosition / attackMS;
         } else if (envelopePosition <= attackMS + decayMS) {
             // Envelope is decaying
-            result = 1 - ((envelopePosition - attackMS) / (decayMS) * (1 - _envelopeSustain));
+            result = 1 - ((envelopePosition - attackMS) / (decayMS) * (1 - self.envelopeSustain));
         } else {
             // Envelope is sustaining
-            result = _envelopeSustain;
+            result = self.envelopeSustain;
         }
         
         envelopeDecayFrom = result;
         
     } else {
-        if (_envelopeRelease > 0 && envelopePosition <= releaseMS) {
+        if (self.envelopeRelease > 0 && envelopePosition <= releaseMS) {
             // Envelope is releasing
             result = MAX(envelopeDecayFrom - (envelopePosition / releaseMS) * envelopeDecayFrom, 0);
         } else {

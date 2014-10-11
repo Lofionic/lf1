@@ -6,7 +6,7 @@
 #import <UIKit/UIKit.h>
 #import "SynthComponent.h"
 #import "Generator.h"
-#import "CVController.h"
+#import "CVComponent.h"
 
 @interface Envelope : Generator <CVControllerDelegate>
 

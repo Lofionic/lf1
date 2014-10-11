@@ -24,18 +24,18 @@
 
 -(void)awakeFromNib {
     
-    _backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    [self addSubview:_backgroundView];
+    self.backgroundView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    [self addSubview:self.backgroundView];
     
     UIImage *frame = [UIImage imageNamed:@"control_frame"];
     frame = [frame resizableImageWithCapInsets:UIEdgeInsetsMake(30, 15, 15, 15)];
-    [_backgroundView setImage:frame];
+    [self.backgroundView setImage:frame];
 }
 
 -(void)layoutSubviews {
     
-    _backgroundView.frame = self.bounds;
-    [self sendSubviewToBack:_backgroundView];
+    self.backgroundView.frame = self.bounds;
+    [self sendSubviewToBack:self.backgroundView];
 
 }
 

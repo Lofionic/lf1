@@ -30,10 +30,10 @@
 
 -(void)toggle {
     
-    if (_value == 0) {
-        _value = 1;
+    if (self.value == 0) {
+        self.value = 1;
     } else {
-        _value = 0;
+        self.value = 0;
     }
     [self sendActionsForControlEvents:UIControlEventValueChanged];
     [self setNeedsDisplay];
@@ -43,7 +43,7 @@
     // Drawing code
     UIImage *switchImage;
     
-    if (_value == 1) {
+    if (self.value == 1) {
         switchImage = [UIImage imageNamed:@"Red_Switch_On"];
     } else {
         switchImage = [UIImage imageNamed:@"Red_Switch_Off"];

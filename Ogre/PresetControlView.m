@@ -31,18 +31,18 @@
     }
     
 
-    _presetButtons = [NSArray arrayWithArray:buttons];
+    self.presetButtons = [NSArray arrayWithArray:buttons];
     
-    [_presetButtons[0] setSpriteSheet:[UIImage imageNamed:@"buttonA"]];
-    [_presetButtons[1] setSpriteSheet:[UIImage imageNamed:@"buttonB"]];
-    [_presetButtons[2] setSpriteSheet:[UIImage imageNamed:@"buttonC"]];
-    [_presetButtons[3] setSpriteSheet:[UIImage imageNamed:@"buttonD"]];
-    [_presetButtons[4] setSpriteSheet:[UIImage imageNamed:@"buttonE"]];
-    [_presetButtons[5] setSpriteSheet:[UIImage imageNamed:@"buttonF"]];
-    [_presetButtons[6] setSpriteSheet:[UIImage imageNamed:@"buttonG"]];
-    [_presetButtons[7] setSpriteSheet:[UIImage imageNamed:@"buttonH"]];
+    [self.presetButtons[0] setSpriteSheet:[UIImage imageNamed:@"buttonA"]];
+    [self.presetButtons[1] setSpriteSheet:[UIImage imageNamed:@"buttonB"]];
+    [self.presetButtons[2] setSpriteSheet:[UIImage imageNamed:@"buttonC"]];
+    [self.presetButtons[3] setSpriteSheet:[UIImage imageNamed:@"buttonD"]];
+    [self.presetButtons[4] setSpriteSheet:[UIImage imageNamed:@"buttonE"]];
+    [self.presetButtons[5] setSpriteSheet:[UIImage imageNamed:@"buttonF"]];
+    [self.presetButtons[6] setSpriteSheet:[UIImage imageNamed:@"buttonG"]];
+    [self.presetButtons[7] setSpriteSheet:[UIImage imageNamed:@"buttonH"]];
    
-    for (PresetButton *thisButton in _presetButtons) {
+    for (PresetButton *thisButton in self.presetButtons) {
         thisButton.delegate = self;
     }
     
@@ -58,22 +58,22 @@
 -(void)selectPresetWithIndex:(NSInteger)index  {
 
     for (int i = 0; i < 8; i++) {
-        [_presetButtons[i] setLEDOn:(i == index)];
+        [self.presetButtons[i] setLEDOn:(i == index)];
     }
     
-    [_presetController restorePresetAtIndex:index];
+    [self.presetController restorePresetAtIndex:index];
 }
 
 -(void)storePresetAtIndex:(NSInteger)index {
     
     NSLog(@"Storing Preset");
-    [_presetController storePresetAtIndex:index];
+    [self.presetController storePresetAtIndex:index];
 
     for (int i = 0; i < 8; i++) {
-        [_presetButtons[i] setLEDOn:(i == index)];
+        [self.presetButtons[i] setLEDOn:(i == index)];
     }
     
-    for (PresetButton* thisButton in _presetButtons) {
+    for (PresetButton* thisButton in self.presetButtons) {
         [thisButton flash];
     }
 }

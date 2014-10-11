@@ -7,15 +7,16 @@
 //
 
 #import "ControlView.h"
-#import "CVController.h"
+#import "CVComponent.h"
 #import "SwitchControl.h"
-
+#import "PitchbendWheelControl.h"
 
 @interface KeyboardControlView : ControlView
 
-@property (nonatomic, weak) CVController *cvController;
+@property (nonatomic, weak) CVComponent *cvComponent;
 
 @property (nonatomic, strong) IBOutlet CCRRotaryControl *glideControl;
 @property (nonatomic, strong) IBOutlet SwitchControl *glissSwitch;
+@property (nonatomic, strong) IBOutlet PitchbendWheelControl *pitchbendControl;
 
 @end

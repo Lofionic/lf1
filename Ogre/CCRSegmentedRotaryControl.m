@@ -30,8 +30,8 @@
 -(void) initialize {
     
     // Initialize default properties
-    _index = 0;
-    _segments = 3;
+    self.index = 0;
+    self.segments = 3;
     
     UIImage *knobImage = [UIImage imageNamed:@"ChickenKnob_3way"];
     self.spriteSheet = knobImage;
@@ -62,7 +62,7 @@
     UITouch *thisTouch = [touches anyObject];
     tracking = true;
     firstTouchLocation = [thisTouch locationInView:self];
-    firstTouchIndex = _index;
+    firstTouchIndex = self.index;
     [self becomeFirstResponder];
 }
 
@@ -73,20 +73,20 @@
         // Handle tracking touch
         CGPoint thisTouchLocation = [thisTouch locationInView:self];
         
-        CGFloat delta = ((thisTouchLocation.y - firstTouchLocation.y)) / (100.0 / _segments);
+        CGFloat delta = ((thisTouchLocation.y - firstTouchLocation.y)) / (100.0 / self.segments);
 
-        NSInteger currentIndex = _index;
+        NSInteger currentIndex = self.index;
 
-        _index =  firstTouchIndex-(int)delta;
+        self.index =  firstTouchIndex-(int)delta;
         
         // Clamp value
-        if (_index >= _segments) {
-            _index = _segments - 1;
-        } else if (_index < 0) {
-            _index = 0;
+        if (self.index >= self.segments) {
+            self.index = self.segments - 1;
+        } else if (self.index < 0) {
+            self.index = 0;
         }
 
-        if (_index != currentIndex) {
+        if (self.index != currentIndex) {
             [self sendActionsForControlEvents:UIControlEventValueChanged];
             [self setNeedsDisplay];
         }
@@ -112,14 +112,14 @@
         CGContextRef ctx = UIGraphicsGetCurrentContext();
         CGContextSaveGState(ctx);
         CGContextScaleCTM(ctx, 1.0, -1.0);
-        if (_backgroundImage) {
-            CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), [_backgroundImage CGImage]);
+        if (self.backgroundImage) {
+            CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), [self.backgroundImage CGImage]);
         }
         
-        int sprites = ((_spriteSheet.size.height / _spriteSize.height) * SCREEN_SCALE);
-        int frame = ((float)_index / _segments) * sprites;
-        CGRect sourceRect = CGRectMake(0, frame * _spriteSize.height, _spriteSize.width, _spriteSize.height);
-        CGImageRef drawImage = CGImageCreateWithImageInRect([_spriteSheet CGImage], sourceRect);
+        int sprites = ((self.spriteSheet.size.height / self.spriteSize.height) * SCREEN_SCALE);
+        int frame = ((float)self.index / self.segments) * sprites;
+        CGRect sourceRect = CGRectMake(0, frame * self.spriteSize.height, self.spriteSize.width, self.spriteSize.height);
+        CGImageRef drawImage = CGImageCreateWithImageInRect([self.spriteSheet CGImage], sourceRect);
         
         CGContextDrawImage(ctx, CGRectMake(0, 0, self.bounds.size.width, -self.bounds.size.height), drawImage);
         CGImageRelease(drawImage);
