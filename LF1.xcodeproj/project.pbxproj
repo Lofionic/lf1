@@ -628,7 +628,7 @@
 		834FA7F918B95FA800923F29 = {
 			isa = PBXGroup;
 			children = (
-				834FA80B18B95FA800923F29 /* Ogre */,
+				834FA80B18B95FA800923F29 /* LF1 */,
 				834FA80418B95FA800923F29 /* Frameworks */,
 				834FA80318B95FA800923F29 /* Products */,
 			);
@@ -655,7 +655,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		834FA80B18B95FA800923F29 /* Ogre */ = {
+		834FA80B18B95FA800923F29 /* LF1 */ = {
 			isa = PBXGroup;
 			children = (
 				6C9BD76819DB557E008CE346 /* Banks */,
@@ -684,7 +684,8 @@
 				834FA80C18B95FA800923F29 /* Supporting Files */,
 				6CE06BB619C0AD9E005AB92F /* Resources */,
 			);
-			path = Ogre;
+			name = LF1;
+			path = lf1;
 			sourceTree = "<group>";
 		};
 		834FA80C18B95FA800923F29 /* Supporting Files */ = {
@@ -1019,8 +1020,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ogre/LF1-Prefix.pch";
-				INFOPLIST_FILE = "Ogre/LF1-Info.plist";
+				GCC_PREFIX_HEADER = "LF1/LF1-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/lf1/LF1-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = LF1;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1036,8 +1037,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ogre/LF1-Prefix.pch";
-				INFOPLIST_FILE = "Ogre/LF1-Info.plist";
+				GCC_PREFIX_HEADER = "LF1/LF1-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/lf1/LF1-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = LF1;
 				TARGETED_DEVICE_FAMILY = "1,2";
