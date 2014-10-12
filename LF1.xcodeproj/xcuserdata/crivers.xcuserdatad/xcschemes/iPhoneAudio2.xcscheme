@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "834FA80118B95FA800923F29"
-               BuildableName = "Ogre.app"
+               BuildableName = "LF1.app"
                BlueprintName = "LF1"
                ReferencedContainer = "container:LF1.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "834FA80118B95FA800923F29"
-            BuildableName = "Ogre.app"
+            BuildableName = "LF1.app"
             BlueprintName = "LF1"
             ReferencedContainer = "container:LF1.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "834FA80118B95FA800923F29"
-            BuildableName = "Ogre.app"
+            BuildableName = "LF1.app"
             BlueprintName = "LF1"
             ReferencedContainer = "container:LF1.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "834FA80118B95FA800923F29"
-            BuildableName = "Ogre.app"
+            BuildableName = "LF1.app"
             BlueprintName = "LF1"
             ReferencedContainer = "container:LF1.xcodeproj">
          </BuildableReference>
