@@ -4,7 +4,7 @@
 //
 
 #import "Envelope.h"
-#define DECLICK_THRESHOLD 0.01
+#define DECLICK_THRESHOLD 0.001
 
 @implementation Envelope {
     

@@ -61,6 +61,7 @@
             freq = self.cvController.buffer[i] * CV_FREQUENCY_RANGE;
         }
         
+
         // Increment Phase
         phase += (M_PI * freq * lfo * powf(2, self.octave) * adjustValue) / self.sampleRate;
         
@@ -71,11 +72,14 @@
                 phase = 0;
             }
         }
+        prevResult = value;
         
     }
     
     // Prevent phase from overloading
-    phase = fmod(phase, M_PI * 2.0);
+    if (phase > M_PI * 2.0) {
+        phase = phase -  (M_PI * 2.0);
+    }
 }
 
 -(void)changeToNextWaveform {

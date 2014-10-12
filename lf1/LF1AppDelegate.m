@@ -3,11 +3,10 @@
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
 
-#import "OgreAppDelegate.h"
-#import "MainViewController.h"
+#import "LF1AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 
-@implementation OgreAppDelegate
+@implementation LF1AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -18,15 +17,15 @@
     [self.window makeKeyAndVisible];
     
     // Setup view controller
-    MainViewController *rootView = [[MainViewController alloc] init];
-    [self.window setRootViewController:rootView];
+    self.mainViewController = [[MainViewController alloc] init];
+    [self.window setRootViewController:self.mainViewController];
     
     // Setup Audio Session
     NSError* __autoreleasing error;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
     [[AVAudioSession sharedInstance] setActive:YES error:&error];
-    [[NSNotificationCenter defaultCenter] addObserver:rootView selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
-    
+    //[[NSNotificationCenter defaultCenter] addObserver:self.mainViewController selector:@selector(handleInterruption:) name:AVAudioSessionInterruptionNotification object:nil];
+
     return YES;
 }
 
@@ -34,22 +33,27 @@
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    [self.mainViewController stopAUGraph];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    // [self.mainViewController stopAUGraph];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    // [self.mainViewController startAUGraph];
+    [self.mainViewController startAUGraph];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

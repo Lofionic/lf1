@@ -114,12 +114,12 @@
     switch (tag) {
         case 0:
             if (self.osc1) {
-                [self.osc1 setOctave:(OscillatorWaveform)value];
+                [self.osc1 setOctave:value];
             }
             break;
         case 1:
             if (self.osc2) {
-                [self.osc2 setOctave:(OscillatorWaveform)value];
+                [self.osc2 setOctave:value];
             }
         default:
             break;

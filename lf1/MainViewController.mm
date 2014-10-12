@@ -83,17 +83,17 @@
     self.lfoView.osc2 = self.audioEngine.osc2;
     self.lfoView.vcf = self.audioEngine.vcf;
     [self.lfoView initializeParameters];
+
+    // Create keyboard controller view
+    self.keyboardControlView = [[KeyboardControlView alloc] initWithFrame:CGRectZero];
+    self.keyboardControlView.cvComponent = self.audioEngine.cvController;
+    [self.keyboardControlView initializeParameters];
     
     // Create presets controller view
     self.presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
     self.presetControlView.presetController = self.presetController;
     [self.presetControlView initializeParameters];
     
-    // Create keyboard controller view
-    self.keyboardControlView = [[KeyboardControlView alloc] initWithFrame:CGRectZero];
-    self.keyboardControlView.cvComponent = self.audioEngine.cvController;
-    [self.keyboardControlView initializeParameters];
-
     if (self.iPhoneControlsView) {
         // iPhone - add control views
         [self.iPhoneControlsView setContentInset:UIEdgeInsetsZero];
@@ -189,18 +189,27 @@
 //Interruption handler
 -(void)handleInterruption: (NSNotification*) aNotification
 {
+    NSLog(@"Handle Interrupt...");
     NSDictionary *interuptionDict = aNotification.userInfo;
     
     NSNumber* interuptionType = (NSNumber*)[interuptionDict valueForKey:AVAudioSessionInterruptionTypeKey];
     
-    if([interuptionType intValue] == AVAudioSessionInterruptionTypeBegan)
+    if([interuptionType intValue] == AVAudioSessionInterruptionTypeBegan) {
         
-        [_audioEngine stopAUGraph];
-    
-    else if ([interuptionType intValue] == AVAudioSessionInterruptionTypeEnded)
-        
-        [_audioEngine startAUGraph];
-    
+        [self stopAUGraph];
+    } else if ([interuptionType intValue] == AVAudioSessionInterruptionTypeEnded) {
+        [self startAUGraph];
+    }
+}
+
+-(void)stopAUGraph {
+    NSLog(@"Stopping AUGraph...");
+    [_audioEngine stopAUGraph];
+}
+
+-(void)startAUGraph {
+    NSLog(@"Start AUGraph...");
+    [_audioEngine startAUGraph];
 }
 
 

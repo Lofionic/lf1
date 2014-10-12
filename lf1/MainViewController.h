@@ -42,5 +42,6 @@
 @property (nonatomic, strong) PresetController *presetController;
 
 -(void)handleInterruption: (NSNotification*) aNotification;
-
+-(void)stopAUGraph;
+-(void)startAUGraph;
 @end

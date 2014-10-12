@@ -20,7 +20,7 @@
         currentOutputValue = 0;
         targetOutputValue = 0;
         self.glide =  1;
-        self.gliss = true;
+        self.gliss = false;
         self.pitchbend = 0.5;
         prevPitchbend = 0.5;
 

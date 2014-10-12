@@ -4,7 +4,7 @@
 //
 
 #import "LFO.h"
-#define DECLICK_THRESHOLD 0.001
+#define DECLICK_THRESHOLD 0.005
 
 @implementation LFO {
     double phase;

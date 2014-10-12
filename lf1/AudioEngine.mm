@@ -5,11 +5,8 @@
 
 #import "AudioEngine.h"
 
-
 const Float64 kGraphSampleRate = 44100.0;
 @implementation AudioEngine
-    
-AudioSignalType prevOut;
 
 #pragma mark INITIALIZATION
 -(void)initializeAUGraph {
@@ -89,8 +86,7 @@ AudioSignalType prevOut;
     
     // Start AUGraph
     checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
-    
-    prevOut = 0;
+
 }
 
 
@@ -223,8 +219,9 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     
     for (int i = 0; i < inNumberFrames; i++) {
         
-        outA[i] = mixedSignal[i] * 32767.0f; 
- 
+        AudioSignalType output = mixedSignal[i];
+        
+        outA[i] = output * 32767.0f;
     }
     
     

@@ -5,6 +5,7 @@
 
 #import "Analog_Oscillator.h"
 #import "BuildSettings.h"
+#define DECLICK_THRESHOLD 0.05
 
 @implementation Analog_Oscillator {
 
@@ -28,12 +29,11 @@
     for (int i = 0; i < numFrames; i++) {
         
         AudioSignalType value = [self getNextSample];
+
+        
         outA[i] = value;
         
         // Apply LFO
-        
-        // Get a weak reference to the LFO component
-
         float lfo = 1;
         
         if (self.lfo) {
@@ -72,6 +72,7 @@
             }
         }
         
+        prevResult = value;
         
     }
     

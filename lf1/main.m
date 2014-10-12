@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "OgreAppDelegate.h"
+#import "LF1AppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([OgreAppDelegate class]));
+        return UIApplicationMain(argc, argv, nil, NSStringFromClass([LF1AppDelegate class]));
     }
 }

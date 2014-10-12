@@ -63,7 +63,8 @@
 		6C04C6AB19E1E70000391A7D /* label_glide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6A719E1E70000391A7D /* label_glide@2x.png */; };
 		6C04C6AE19E1FB4600391A7D /* label_cutoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AC19E1FB4600391A7D /* label_cutoff.png */; };
 		6C04C6AF19E1FB4600391A7D /* label_cutoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */; };
-		6C35243B19EA8F1C00C1BC80 /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6C35243A19EA8F1C00C1BC80 /* init.bnk */; };
+		6C35244319EB0AD200C1BC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C35244219EB0AD200C1BC80 /* Images.xcassets */; };
+		6C35244519EB175900C1BC80 /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6C35244419EB175900C1BC80 /* init.bnk */; };
 		6C406FCE19CC244A0096672F /* Processor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FCD19CC244A0096672F /* Processor.m */; };
 		6C406FD119CC5B1F0096672F /* CVComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FD019CC5B1F0096672F /* CVComponent.m */; };
 		6C47256519D0CB76008F481F /* KeyboardControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256419D0CB76008F481F /* KeyboardControlView.xib */; };
@@ -83,7 +84,6 @@
 		6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.m */; };
 		6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.m */; };
 		6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* KeyboardView.m */; };
-		6C983BCA19BBAA2C005543D8 /* MainView~iphone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C983BC919BBAA2C005543D8 /* MainView~iphone.xib */; };
 		6C9A9B5A19C8C04700DFA51A /* LFO.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9B5919C8C04700DFA51A /* LFO.m */; };
 		6C9BD76419DB2E5F008CE346 /* Mixer2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD76319DB2E5F008CE346 /* Mixer2.m */; };
 		6C9BD76619DB32DB008CE346 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C9BD76519DB32DB008CE346 /* AVFoundation.framework */; };
@@ -163,8 +163,7 @@
 		834FA80A18B95FA800923F29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80918B95FA800923F29 /* UIKit.framework */; };
 		834FA81018B95FA800923F29 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 834FA80E18B95FA800923F29 /* InfoPlist.strings */; };
 		834FA81218B95FA800923F29 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FA81118B95FA800923F29 /* main.m */; };
-		834FA81618B95FA800923F29 /* OgreAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FA81518B95FA800923F29 /* OgreAppDelegate.m */; };
-		834FA81818B95FA800923F29 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 834FA81718B95FA800923F29 /* Images.xcassets */; };
+		834FA81618B95FA800923F29 /* LF1AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 834FA81518B95FA800923F29 /* LF1AppDelegate.m */; };
 		834FA83518B95FB100923F29 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA83418B95FB100923F29 /* CoreAudio.framework */; };
 		834FA83818B95FD200923F29 /* MainViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83718B95FD200923F29 /* MainViewController.mm */; };
 		834FA83B18B9602A00923F29 /* AudioEngine.mm in Sources */ = {isa = PBXBuildFile; fileRef = 834FA83A18B9602A00923F29 /* AudioEngine.mm */; };
@@ -230,7 +229,10 @@
 		6C04C6A719E1E70000391A7D /* label_glide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_glide@2x.png"; sourceTree = "<group>"; };
 		6C04C6AC19E1FB4600391A7D /* label_cutoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_cutoff.png; sourceTree = "<group>"; };
 		6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_cutoff@2x.png"; sourceTree = "<group>"; };
-		6C35243A19EA8F1C00C1BC80 /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
+		6C35244219EB0AD200C1BC80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LF1/Images.xcassets; sourceTree = SOURCE_ROOT; };
+		6C35244419EB175900C1BC80 /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
+		6C35246919EB287B00C1BC80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C35246A19EB287B00C1BC80 /* LF1_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LF1_Tests.m; sourceTree = "<group>"; };
 		6C406FCC19CC244A0096672F /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
 		6C406FCD19CC244A0096672F /* Processor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Processor.m; sourceTree = "<group>"; };
 		6C406FCF19CC5B1F0096672F /* CVComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVComponent.h; sourceTree = "<group>"; };
@@ -258,7 +260,6 @@
 		6C863E5819BF1D170056D43D /* Analog_Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analog_Oscillator.m; sourceTree = "<group>"; };
 		6C863E5A19BF30B60056D43D /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
 		6C863E5B19BF30B60056D43D /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
-		6C983BC919BBAA2C005543D8 /* MainView~iphone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainView~iphone.xib"; sourceTree = "<group>"; };
 		6C9A9B5819C8C04700DFA51A /* LFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFO.h; sourceTree = "<group>"; };
 		6C9A9B5919C8C04700DFA51A /* LFO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFO.m; sourceTree = "<group>"; };
 		6C9BD76219DB2E5F008CE346 /* Mixer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer2.h; sourceTree = "<group>"; };
@@ -356,9 +357,8 @@
 		834FA80F18B95FA800923F29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		834FA81118B95FA800923F29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		834FA81318B95FA800923F29 /* LF1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LF1-Prefix.pch"; sourceTree = "<group>"; };
-		834FA81418B95FA800923F29 /* OgreAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OgreAppDelegate.h; sourceTree = "<group>"; };
-		834FA81518B95FA800923F29 /* OgreAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OgreAppDelegate.m; sourceTree = "<group>"; };
-		834FA81718B95FA800923F29 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		834FA81418B95FA800923F29 /* LF1AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LF1AppDelegate.h; sourceTree = "<group>"; };
+		834FA81518B95FA800923F29 /* LF1AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LF1AppDelegate.m; sourceTree = "<group>"; };
 		834FA83418B95FB100923F29 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		834FA83618B95FD200923F29 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		834FA83718B95FD200923F29 /* MainViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainViewController.mm; sourceTree = "<group>"; };
@@ -573,10 +573,27 @@
 			name = Frames;
 			sourceTree = "<group>";
 		};
+		6C35246719EB287B00C1BC80 /* LF1_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6C35246A19EB287B00C1BC80 /* LF1_Tests.m */,
+				6C35246819EB287B00C1BC80 /* Supporting Files */,
+			);
+			path = LF1_Tests;
+			sourceTree = "<group>";
+		};
+		6C35246819EB287B00C1BC80 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				6C35246919EB287B00C1BC80 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		6C9BD76819DB557E008CE346 /* Banks */ = {
 			isa = PBXGroup;
 			children = (
-				6C35243A19EA8F1C00C1BC80 /* init.bnk */,
+				6C35244419EB175900C1BC80 /* init.bnk */,
 			);
 			name = Banks;
 			sourceTree = "<group>";
@@ -629,6 +646,7 @@
 			isa = PBXGroup;
 			children = (
 				834FA80B18B95FA800923F29 /* LF1 */,
+				6C35246719EB287B00C1BC80 /* LF1_Tests */,
 				834FA80418B95FA800923F29 /* Frameworks */,
 				834FA80318B95FA800923F29 /* Products */,
 			);
@@ -660,8 +678,8 @@
 			children = (
 				6C9BD76819DB557E008CE346 /* Banks */,
 				6CB5E13419C4659B008B9AC3 /* BuildSettings.h */,
-				834FA81418B95FA800923F29 /* OgreAppDelegate.h */,
-				834FA81518B95FA800923F29 /* OgreAppDelegate.m */,
+				834FA81418B95FA800923F29 /* LF1AppDelegate.h */,
+				834FA81518B95FA800923F29 /* LF1AppDelegate.m */,
 				834FA83618B95FD200923F29 /* MainViewController.h */,
 				834FA83718B95FD200923F29 /* MainViewController.mm */,
 				6C60600F19CC85E7008A0AAA /* PresetController.h */,
@@ -676,13 +694,12 @@
 				6C9BD79F19DB61F1008CE346 /* PresetButton.m */,
 				6CD60A2E19E890A0000C3C84 /* PitchbendWheelControl.h */,
 				6CD60A2F19E890A0000C3C84 /* PitchbendWheelControl.m */,
-				834FA81718B95FA800923F29 /* Images.xcassets */,
-				6C983BC919BBAA2C005543D8 /* MainView~iphone.xib */,
 				6CB5E13219C45F0B008B9AC3 /* MainView.xib */,
 				6C01140219C18E6000D3C802 /* Components */,
 				6C01140E19C1A37400D3C802 /* Control Views */,
 				834FA80C18B95FA800923F29 /* Supporting Files */,
 				6CE06BB619C0AD9E005AB92F /* Resources */,
+				6C35244219EB0AD200C1BC80 /* Images.xcassets */,
 			);
 			name = LF1;
 			path = lf1;
@@ -740,6 +757,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 834FA7F918B95FA800923F29;
 			productRefGroup = 834FA80318B95FA800923F29 /* Products */;
@@ -780,6 +798,7 @@
 				6C47257F19D0F046008F481F /* white_key_up@2x.png in Resources */,
 				6CF5F26419DC8E1900835C1B /* buttonD.png in Resources */,
 				6C04C63B19E1B54000391A7D /* vcf_frame@2x.png in Resources */,
+				6C35244319EB0AD200C1BC80 /* Images.xcassets in Resources */,
 				6C04C67D19E1D76000391A7D /* label_filterenv@2x.png in Resources */,
 				6CD5B68B19C8DED8002E835C /* LFOControlView.xib in Resources */,
 				6C04C67619E1D52000391A7D /* label_res.png in Resources */,
@@ -844,7 +863,6 @@
 				6CF5F26219DC8E1900835C1B /* buttonB.png in Resources */,
 				6C04C68519E1DBEC00391A7D /* label_attack@2x.png in Resources */,
 				6CD81ED619CB835200B46963 /* ChickenKnob_3way.png in Resources */,
-				834FA81818B95FA800923F29 /* Images.xcassets in Resources */,
 				6CD81ED519CB835200B46963 /* ChickenKnob_2way@2x.png in Resources */,
 				6CD81ED719CB835200B46963 /* ChickenKnob_3way@2x.png in Resources */,
 				6C04C64C19E1C5B400391A7D /* Cutoff_background.png in Resources */,
@@ -863,10 +881,9 @@
 				6C04C6AA19E1E70000391A7D /* label_glide.png in Resources */,
 				6C47258C19D0F72B008F481F /* black_key_up.png in Resources */,
 				6CBF661F19E0BC8D00236261 /* OscWave_Background@2x.png in Resources */,
-				6C983BCA19BBAA2C005543D8 /* MainView~iphone.xib in Resources */,
 				6CF5F25219DC8DDC00835C1B /* buttonB@3x.png in Resources */,
 				6CF5F24219DC8D1500835C1B /* buttonB@2x.png in Resources */,
-				6C35243B19EA8F1C00C1BC80 /* init.bnk in Resources */,
+				6C35244519EB175900C1BC80 /* init.bnk in Resources */,
 				6CD81ED419CB835200B46963 /* ChickenKnob_2way.png in Resources */,
 				6C04C6A819E1E70000391A7D /* label_gliss.png in Resources */,
 				6CF5F26519DC8E1900835C1B /* buttonE.png in Resources */,
@@ -907,7 +924,7 @@
 				6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */,
 				6C9BD7A019DB61F1008CE346 /* PresetButton.m in Sources */,
 				834FA81218B95FA800923F29 /* main.m in Sources */,
-				834FA81618B95FA800923F29 /* OgreAppDelegate.m in Sources */,
+				834FA81618B95FA800923F29 /* LF1AppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
 				6CC18F2B19C85DA4000894AB /* VCF.m in Sources */,
 				6C47256819D0CC34008F481F /* KeyboardControlView.m in Sources */,
@@ -1018,13 +1035,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LF1/LF1-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/lf1/LF1-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = LF1;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1035,13 +1054,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LF1/LF1-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/lf1/LF1-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PRODUCT_NAME = LF1;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				PROVISIONING_PROFILE = "d42c2e7e-8cc0-4414-98e6-23587cfdaf70";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

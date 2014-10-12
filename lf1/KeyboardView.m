@@ -63,46 +63,46 @@
         
         CGFloat leftPoint = i * keyWidth * 7.0;
         keyRects[thisKey + 0] = CGRectMake(leftPoint, 0, keyWidth, keyHeight); // C
-        keyValues[thisKey + 0] = thisKey + 0;
+        keyValues[thisKey + 0] = thisKey + 3;
         
         keyRects[thisKey + 1] = CGRectMake(leftPoint + keyWidth, 0, keyWidth, keyHeight); // D
-        keyValues[thisKey + 1] = thisKey + 2;
+        keyValues[thisKey + 1] = thisKey + 5;
         
         keyRects[thisKey + 2] = CGRectMake(leftPoint + (keyWidth * 2.0), 0, keyWidth, keyHeight); // E
-        keyValues[thisKey + 2] = thisKey + 4;
+        keyValues[thisKey + 2] = thisKey + 7;
         
         keyRects[thisKey + 3] = CGRectMake(leftPoint + (keyWidth * 3.0), 0, keyWidth, keyHeight); // F
-        keyValues[thisKey + 3] = thisKey + 5;
+        keyValues[thisKey + 3] = thisKey + 8;
         
         keyRects[thisKey + 4] = CGRectMake(leftPoint + (keyWidth * 4.0), 0, keyWidth, keyHeight); // G
-        keyValues[thisKey + 4] = thisKey + 7;
+        keyValues[thisKey + 4] = thisKey + 10;
         
         keyRects[thisKey + 5] = CGRectMake(leftPoint + (keyWidth * 5.0), 0, keyWidth, keyHeight); // A
-        keyValues[thisKey + 5] = thisKey + 9;
+        keyValues[thisKey + 5] = thisKey + 12;
         
         keyRects[thisKey + 6] = CGRectMake(leftPoint + (keyWidth * 6.0), 0, keyWidth, keyHeight); // B
-        keyValues[thisKey + 6] = thisKey + 11;
+        keyValues[thisKey + 6] = thisKey + 14;
         
         keyRects[thisKey + 7] = CGRectMake(leftPoint + (keyWidth * 0.75), 0, blackKeyWidth, blackKeyHeight); // C#
-        keyValues[thisKey + 7] = thisKey + 1;
+        keyValues[thisKey + 7] = thisKey + 4;
         
         keyRects[thisKey + 8] = CGRectMake(leftPoint + (keyWidth * 1.75), 0, blackKeyWidth, blackKeyHeight); // Eb
-        keyValues[thisKey + 8] = thisKey + 3;
+        keyValues[thisKey + 8] = thisKey + 6;
         
         keyRects[thisKey + 9] = CGRectMake(leftPoint + (keyWidth * 3.75), 0, blackKeyWidth, blackKeyHeight); // F#
-        keyValues[thisKey + 9] = thisKey + 6;
+        keyValues[thisKey + 9] = thisKey + 9;
         
         keyRects[thisKey + 10] = CGRectMake(leftPoint + (keyWidth * 4.75), 0, blackKeyWidth, blackKeyHeight); // Ab
-        keyValues[thisKey +10] = thisKey + 8;
+        keyValues[thisKey +10] = thisKey + 11;
         
         keyRects[thisKey + 11] = CGRectMake(leftPoint + (keyWidth * 5.75), 0, blackKeyWidth, blackKeyHeight); // Bb
-        keyValues[thisKey + 11] = thisKey + 10;
+        keyValues[thisKey + 11] = thisKey + 13;
         
         thisKey += 12;
     }
     
     keyRects[thisKey] = CGRectMake(octaves * keyWidth * 7.0, 0, keyWidth, keyHeight);
-    keyValues[thisKey] = thisKey;
+    keyValues[thisKey] = thisKey + 3;
     
     prevKeysDown = [[NSSet alloc] init];
 }
@@ -192,8 +192,6 @@
         }
 
     }
-    
-    
     
     prevKeysDown = [NSSet setWithSet:keysDown];
     
