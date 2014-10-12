@@ -4,7 +4,7 @@
 //
 
 #import "LFO.h"
-#define DECLICK_THRESHOLD 0.005
+#define DECLICK_THRESHOLD 0.001
 
 @implementation LFO {
     double phase;
@@ -57,7 +57,7 @@
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
             if (self.waveform != self.nextWaveform) {
-                self.waveform = self.nextWaveform;
+                _waveform = self.nextWaveform;
                 phase = 0;
             }
         }

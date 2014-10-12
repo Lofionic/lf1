@@ -20,6 +20,7 @@
     self.spriteSheet = [UIImage imageNamed:@"pitchwheel"];
     self.spriteSize = CGSizeMake(60 * SCREEN_SCALE, 150 * SCREEN_SCALE);
     self.value = 0.5;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 - (void)drawRect:(CGRect)rect

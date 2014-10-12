@@ -63,6 +63,7 @@
 		6C04C6AB19E1E70000391A7D /* label_glide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6A719E1E70000391A7D /* label_glide@2x.png */; };
 		6C04C6AE19E1FB4600391A7D /* label_cutoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AC19E1FB4600391A7D /* label_cutoff.png */; };
 		6C04C6AF19E1FB4600391A7D /* label_cutoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */; };
+		6C35243B19EA8F1C00C1BC80 /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6C35243A19EA8F1C00C1BC80 /* init.bnk */; };
 		6C406FCE19CC244A0096672F /* Processor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FCD19CC244A0096672F /* Processor.m */; };
 		6C406FD119CC5B1F0096672F /* CVComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FD019CC5B1F0096672F /* CVComponent.m */; };
 		6C47256519D0CB76008F481F /* KeyboardControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C47256419D0CB76008F481F /* KeyboardControlView.xib */; };
@@ -157,7 +158,6 @@
 		6CF5F26619DC8E1900835C1B /* buttonF.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF5F25E19DC8E1900835C1B /* buttonF.png */; };
 		6CF5F26719DC8E1900835C1B /* buttonG.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF5F25F19DC8E1900835C1B /* buttonG.png */; };
 		6CF5F26819DC8E1900835C1B /* buttonH.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF5F26019DC8E1900835C1B /* buttonH.png */; };
-		6CF5F27219DCB8EB00835C1B /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6CF5F27119DCB8EB00835C1B /* init.bnk */; };
 		834FA80618B95FA800923F29 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80518B95FA800923F29 /* Foundation.framework */; };
 		834FA80818B95FA800923F29 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80718B95FA800923F29 /* CoreGraphics.framework */; };
 		834FA80A18B95FA800923F29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 834FA80918B95FA800923F29 /* UIKit.framework */; };
@@ -230,6 +230,7 @@
 		6C04C6A719E1E70000391A7D /* label_glide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_glide@2x.png"; sourceTree = "<group>"; };
 		6C04C6AC19E1FB4600391A7D /* label_cutoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_cutoff.png; sourceTree = "<group>"; };
 		6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_cutoff@2x.png"; sourceTree = "<group>"; };
+		6C35243A19EA8F1C00C1BC80 /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
 		6C406FCC19CC244A0096672F /* Processor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Processor.h; sourceTree = "<group>"; };
 		6C406FCD19CC244A0096672F /* Processor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Processor.m; sourceTree = "<group>"; };
 		6C406FCF19CC5B1F0096672F /* CVComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVComponent.h; sourceTree = "<group>"; };
@@ -347,15 +348,14 @@
 		6CF5F25E19DC8E1900835C1B /* buttonF.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonF.png; sourceTree = "<group>"; };
 		6CF5F25F19DC8E1900835C1B /* buttonG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonG.png; sourceTree = "<group>"; };
 		6CF5F26019DC8E1900835C1B /* buttonH.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonH.png; sourceTree = "<group>"; };
-		6CF5F27119DCB8EB00835C1B /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
-		834FA80218B95FA800923F29 /* Ogre.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ogre.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		834FA80218B95FA800923F29 /* LF1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LF1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		834FA80518B95FA800923F29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		834FA80718B95FA800923F29 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		834FA80918B95FA800923F29 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		834FA80D18B95FA800923F29 /* Ogre-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Ogre-Info.plist"; sourceTree = "<group>"; };
+		834FA80D18B95FA800923F29 /* LF1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LF1-Info.plist"; sourceTree = "<group>"; };
 		834FA80F18B95FA800923F29 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		834FA81118B95FA800923F29 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		834FA81318B95FA800923F29 /* Ogre-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Ogre-Prefix.pch"; sourceTree = "<group>"; };
+		834FA81318B95FA800923F29 /* LF1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LF1-Prefix.pch"; sourceTree = "<group>"; };
 		834FA81418B95FA800923F29 /* OgreAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OgreAppDelegate.h; sourceTree = "<group>"; };
 		834FA81518B95FA800923F29 /* OgreAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OgreAppDelegate.m; sourceTree = "<group>"; };
 		834FA81718B95FA800923F29 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 		6C9BD76819DB557E008CE346 /* Banks */ = {
 			isa = PBXGroup;
 			children = (
-				6CF5F27119DCB8EB00835C1B /* init.bnk */,
+				6C35243A19EA8F1C00C1BC80 /* init.bnk */,
 			);
 			name = Banks;
 			sourceTree = "<group>";
@@ -637,7 +637,7 @@
 		834FA80318B95FA800923F29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				834FA80218B95FA800923F29 /* Ogre.app */,
+				834FA80218B95FA800923F29 /* LF1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -690,10 +690,10 @@
 		834FA80C18B95FA800923F29 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				834FA80D18B95FA800923F29 /* Ogre-Info.plist */,
+				834FA80D18B95FA800923F29 /* LF1-Info.plist */,
 				834FA80E18B95FA800923F29 /* InfoPlist.strings */,
 				834FA81118B95FA800923F29 /* main.m */,
-				834FA81318B95FA800923F29 /* Ogre-Prefix.pch */,
+				834FA81318B95FA800923F29 /* LF1-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -701,9 +701,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		834FA80118B95FA800923F29 /* Ogre */ = {
+		834FA80118B95FA800923F29 /* LF1 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 834FA82E18B95FA800923F29 /* Build configuration list for PBXNativeTarget "Ogre" */;
+			buildConfigurationList = 834FA82E18B95FA800923F29 /* Build configuration list for PBXNativeTarget "LF1" */;
 			buildPhases = (
 				834FA7FE18B95FA800923F29 /* Sources */,
 				834FA7FF18B95FA800923F29 /* Frameworks */,
@@ -713,9 +713,9 @@
 			);
 			dependencies = (
 			);
-			name = Ogre;
+			name = LF1;
 			productName = iPhoneAudio2;
-			productReference = 834FA80218B95FA800923F29 /* Ogre.app */;
+			productReference = 834FA80218B95FA800923F29 /* LF1.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -733,7 +733,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 834FA7FD18B95FA800923F29 /* Build configuration list for PBXProject "Ogre" */;
+			buildConfigurationList = 834FA7FD18B95FA800923F29 /* Build configuration list for PBXProject "LF1" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -745,7 +745,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				834FA80118B95FA800923F29 /* Ogre */,
+				834FA80118B95FA800923F29 /* LF1 */,
 			);
 		};
 /* End PBXProject section */
@@ -768,7 +768,6 @@
 				6CD60A3419E891E2000C3C84 /* pitchwheel@2x.png in Resources */,
 				6CF5F25419DC8DDC00835C1B /* buttonD@3x.png in Resources */,
 				6CE13C6019CA240100AF7954 /* Env_Background.png in Resources */,
-				6CF5F27219DCB8EB00835C1B /* init.bnk in Resources */,
 				6CE13C6D19CA38E600AF7954 /* ChickenKnob@2x.png in Resources */,
 				6CBF662619E0C28500236261 /* LFODest_Background.png in Resources */,
 				6C04C65E19E1D34200391A7D /* label_wave@2x.png in Resources */,
@@ -866,6 +865,7 @@
 				6C983BCA19BBAA2C005543D8 /* MainView~iphone.xib in Resources */,
 				6CF5F25219DC8DDC00835C1B /* buttonB@3x.png in Resources */,
 				6CF5F24219DC8D1500835C1B /* buttonB@2x.png in Resources */,
+				6C35243B19EA8F1C00C1BC80 /* init.bnk in Resources */,
 				6CD81ED419CB835200B46963 /* ChickenKnob_2way.png in Resources */,
 				6C04C6A819E1E70000391A7D /* label_gliss.png in Resources */,
 				6CF5F26519DC8E1900835C1B /* buttonE.png in Resources */,
@@ -1019,10 +1019,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ogre/Ogre-Prefix.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/Ogre/Ogre-Info.plist";
+				GCC_PREFIX_HEADER = "Ogre/LF1-Prefix.pch";
+				INFOPLIST_FILE = "Ogre/LF1-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = Ogre;
+				PRODUCT_NAME = LF1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1036,10 +1036,10 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Ogre/Ogre-Prefix.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/Ogre/Ogre-Info.plist";
+				GCC_PREFIX_HEADER = "Ogre/LF1-Prefix.pch";
+				INFOPLIST_FILE = "Ogre/LF1-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				PRODUCT_NAME = Ogre;
+				PRODUCT_NAME = LF1;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1048,7 +1048,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		834FA7FD18B95FA800923F29 /* Build configuration list for PBXProject "Ogre" */ = {
+		834FA7FD18B95FA800923F29 /* Build configuration list for PBXProject "LF1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				834FA82C18B95FA800923F29 /* Debug */,
@@ -1057,7 +1057,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		834FA82E18B95FA800923F29 /* Build configuration list for PBXNativeTarget "Ogre" */ = {
+		834FA82E18B95FA800923F29 /* Build configuration list for PBXNativeTarget "LF1" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				834FA82F18B95FA800923F29 /* Debug */,
