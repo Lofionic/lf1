@@ -3,13 +3,16 @@
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
 
-#import "LF1AppDelegate.h"
+#import "AppDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 
-@implementation LF1AppDelegate
+@implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.audioEngine = [[AudioEngine alloc] init];
+    [self.audioEngine initializeAUGraph];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.
@@ -20,13 +23,7 @@
     self.mainViewController = [[MainViewController alloc] init];
     [self.window setRootViewController:self.mainViewController];
     
-    // Setup Audio Session
-    NSError* __autoreleasing error;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&error];
-    [[AVAudioSession sharedInstance] setActive:YES error:&error];
-
     return YES;
 }
-
 
 @end

@@ -5,6 +5,7 @@
 #import "Defines.h"
 #import "AudioEngine.h"
 #import "MainViewController.h"
+#import "AppDelegate.h"
 
 @interface MainViewController ()
 
@@ -34,9 +35,9 @@
     // Hide status bar in IOS6.1 and prior
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 
-    self.audioEngine = [[AudioEngine alloc] init];
+    self.audioEngine = ((AppDelegate *)[UIApplication sharedApplication].delegate).audioEngine;
     
-    [self.audioEngine initializeAUGraph];
+    
     [self setupControllerViews];
     
     // Prepare notifications for app state

@@ -18,7 +18,7 @@
 
 @interface MainViewController : UIViewController
 
-@property (nonatomic, strong) AudioEngine *audioEngine;
+@property (nonatomic, weak) AudioEngine *audioEngine;
 
 // Parameter controls
 

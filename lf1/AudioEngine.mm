@@ -99,7 +99,7 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     CAShow(mGraph);
     
     // Start AUGraph
-    checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
+    // checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
     
     [self checkStartStopGraph];
     [self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
