@@ -5,7 +5,7 @@
 
 #import "Analog_Oscillator.h"
 #import "BuildSettings.h"
-#define DECLICK_THRESHOLD 0.05
+#import "Defines.h"
 
 @implementation Analog_Oscillator {
 

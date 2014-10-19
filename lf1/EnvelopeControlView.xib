@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
+        <deployment defaultVersion="2048" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" id="xna-x8-Mmk" customClass="CCRRotaryControl">
-                    <rect key="frame" x="8" y="42" width="86" height="86"/>
+                    <rect key="frame" x="8" y="48" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -21,7 +21,7 @@
                     </connections>
                 </view>
                 <view tag="1" contentMode="scaleToFill" id="ArC-MA-da7" customClass="CCRRotaryControl">
-                    <rect key="frame" x="102" y="43" width="86" height="86"/>
+                    <rect key="frame" x="102" y="49" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,7 +30,7 @@
                     </connections>
                 </view>
                 <view tag="3" contentMode="scaleToFill" id="K0d-c7-vJT" customClass="CCRRotaryControl">
-                    <rect key="frame" x="290" y="43" width="86" height="86"/>
+                    <rect key="frame" x="290" y="49" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -39,7 +39,7 @@
                     </connections>
                 </view>
                 <view tag="2" contentMode="scaleToFill" id="yof-Xh-0Ix" customClass="CCRRotaryControl">
-                    <rect key="frame" x="196" y="43" width="86" height="86"/>
+                    <rect key="frame" x="196" y="49" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,7 +48,7 @@
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" id="jJf-YE-prr" customClass="CCRRotaryControl">
-                    <rect key="frame" x="8" y="151" width="86" height="86"/>
+                    <rect key="frame" x="8" y="155" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                     </connections>
                 </view>
                 <view tag="1" contentMode="scaleToFill" id="50A-SG-wmP" customClass="CCRRotaryControl">
-                    <rect key="frame" x="102" y="151" width="86" height="86"/>
+                    <rect key="frame" x="102" y="155" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -66,7 +66,7 @@
                     </connections>
                 </view>
                 <view tag="3" contentMode="scaleToFill" id="r8k-QS-cRc" customClass="CCRRotaryControl">
-                    <rect key="frame" x="291" y="151" width="85" height="86"/>
+                    <rect key="frame" x="291" y="155" width="85" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,7 +75,7 @@
                     </connections>
                 </view>
                 <view tag="2" contentMode="scaleToFill" id="ZoM-3F-yzc" customClass="CCRRotaryControl">
-                    <rect key="frame" x="196" y="151" width="86" height="86"/>
+                    <rect key="frame" x="196" y="155" width="86" height="86"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,27 +84,27 @@
                     </connections>
                 </view>
                 <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_ampenv.png" id="jGd-S8-gMI">
-                    <rect key="frame" x="0.0" y="237" width="385" height="24"/>
+                    <rect key="frame" x="0.0" y="241" width="385" height="24"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                 </imageView>
                 <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_filterenv.png" id="MV4-u8-Uxq">
-                    <rect key="frame" x="0.0" y="38" width="385" height="24"/>
+                    <rect key="frame" x="0.0" y="44" width="385" height="24"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_attack.png" id="X47-ZL-olo">
-                    <rect key="frame" x="8" y="125" width="86" height="24"/>
+                    <rect key="frame" x="8" y="129" width="86" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_decay.png" id="xHg-jh-olV">
-                    <rect key="frame" x="102" y="125" width="86" height="24"/>
+                    <rect key="frame" x="102" y="129" width="86" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_sustain.png" id="bPe-f4-3ln">
-                    <rect key="frame" x="196" y="125" width="86" height="24"/>
+                    <rect key="frame" x="196" y="129" width="86" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="label_release.png" id="NDm-ik-VfH">
-                    <rect key="frame" x="290" y="125" width="86" height="24"/>
+                    <rect key="frame" x="290" y="129" width="86" height="24"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>

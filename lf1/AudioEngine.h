@@ -4,7 +4,6 @@
 //
 
 #import "BuildSettings.h"
-//#import "CAStreamBasicDescription.h"
 #import "CVComponent.h"
 #import "Envelope.h"
 #import "EnvelopeControlView.h"
@@ -43,5 +42,19 @@
 -(void)initializeAUGraph;
 -(void)startAUGraph;
 -(void)stopAUGraph;
+
+-(BOOL)isHostConnected;
+-(UIImage*) getAudioUnitIcon;
+-(void)toggleRecord;
+-(void)togglePlay;
+-(void)rewind;
+-(void)gotoHost;
+
+@property (nonatomic) bool connected;
+@property (nonatomic) bool isHostRecording;
+@property (nonatomic) bool isHostPlaying;
+@property (nonatomic) bool inForeground;
+@property (nonatomic) Float64 playTime;
+@property (nonatomic, strong) UIImage *hostAppIcon;
 
 @end

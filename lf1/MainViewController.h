@@ -39,9 +39,14 @@
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView5;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView6;
 
+@property (nonatomic, strong) IBOutlet UILabel *playTimeLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *hostIcon;
+@property (nonatomic, strong) IBOutlet UIButton *playButton;
+@property (nonatomic, strong) IBOutlet UIButton *recordButton;
+@property (nonatomic, strong) IBOutlet UIButton *rewindButon;
+
+@property BOOL inForeground;
+
 @property (nonatomic, strong) PresetController *presetController;
 
--(void)handleInterruption: (NSNotification*) aNotification;
--(void)stopAUGraph;
--(void)startAUGraph;
 @end

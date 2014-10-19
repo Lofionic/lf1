@@ -2,7 +2,7 @@
 //  Created by Chris Rivers on 22/02/2014.
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
-
+#import "Defines.h"
 #import "CVComponent.h"
 
 @implementation CVComponent {
@@ -75,7 +75,8 @@
     
     // set the target freq
     // Calculate note frequency
-    float frequency = (powf(powf(2, (1.0 / 12.0)), note)) * 55.0;
+    //float frequency = (powf(powf(2, (1.0 / 12.0)), note)) * 3.4375;
+    float frequency = powf(2, (note - 69) / 12.0) * 110;
     
     // Convert to float in 0-1 range
     targetOutputValue = frequency / CV_FREQUENCY_RANGE;

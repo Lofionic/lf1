@@ -8,6 +8,7 @@
 
 #import "PresetButton.h"
 #import "BuildSettings.h"
+#import "Defines.h"
 
 @implementation PresetButton {
     

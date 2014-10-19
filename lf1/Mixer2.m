@@ -13,15 +13,12 @@ float source2GainContinuous;
 }
 
 -(instancetype)initWithSampleRate:(Float64)graphSampleRate {
-    
     if (self = [super initWithSampleRate:graphSampleRate]) {
         self.source1Gain = 1.0;
         self.source2Gain = 1.0;
-        
         source1GainContinuous = 0;
         source2GainContinuous = 0;
     }
-    
     return self;
 }
 
@@ -35,14 +32,13 @@ float source2GainContinuous;
         float source1Gain = source1GainContinuous + (i * source1GainDelta);
         float source2Gain = source2GainContinuous + (i * source2GainDelta);
         
-        AudioSignalType mixedSignal = ((self.source1.buffer[i] * source1Gain) + (self.source2.buffer[i] * source2Gain)) / 2.0;
-        mixedSignal = mixedSignal * self.envelope.buffer[i];
+        //AudioSignalType mixedSignal = ((self.source1.buffer[i] * source1Gain) + (self.source2.buffer[i] * source2Gain)) / 2.0;
         
+        AudioSignalType mixedSignal = tanhf((self.source1.buffer[i] * source1Gain) + (self.source2.buffer[i] * source2Gain));
+        mixedSignal = mixedSignal * self.envelope.buffer[i];
         outA[i] = mixedSignal;
     }
-    
     source1GainContinuous = self.source1Gain;
     source2GainContinuous = self.source2Gain;
-    
 }
 @end
