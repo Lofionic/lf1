@@ -18,6 +18,7 @@
                 <outlet property="playButton" destination="COl-nt-z3T" id="LtH-XH-0ck"/>
                 <outlet property="recordButton" destination="qX0-iR-Ec4" id="K7e-fz-gWb"/>
                 <outlet property="rewindButon" destination="eud-GZ-u8N" id="f6v-Qp-wQR"/>
+                <outlet property="transportView" destination="s4W-9Q-8kx" id="j9E-e5-p0d"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Flc-gi-arS"/>
             </connections>
         </placeholder>
@@ -26,6 +27,10 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="controls_bg.png" id="81z-2B-UuQ">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="470"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="KLo-Pj-TPe" userLabel="Controller View 1">
                     <rect key="frame" x="8" y="44" width="248" height="410"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -55,50 +60,58 @@
                     <rect key="frame" x="256" y="340" width="256" height="114"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="COl-nt-z3T">
-                    <rect key="frame" x="114" y="8" width="60" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="play_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="transportPlay:" destination="-1" eventType="touchDown" id="cpx-7l-5hW"/>
-                    </connections>
-                </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eud-GZ-u8N">
-                    <rect key="frame" x="46" y="8" width="60" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="rewind_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="transportRewind:" destination="-1" eventType="touchDown" id="TUk-jP-7fc"/>
-                    </connections>
-                </button>
-                <imageView hidden="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xsg-JT-lal">
-                    <rect key="frame" x="8" y="8" width="30" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qX0-iR-Ec4">
-                    <rect key="frame" x="182" y="8" width="60" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" image="record_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="transportRecord:" destination="-1" eventType="touchDown" id="eXt-Da-ZOt"/>
-                    </connections>
-                </button>
+                <view hidden="YES" alpha="0.75" contentMode="scaleToFill" id="s4W-9Q-8kx" userLabel="InterappView">
+                    <rect key="frame" x="0.0" y="0.0" width="342" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="COl-nt-z3T">
+                            <rect key="frame" x="154" y="8" width="80" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="play_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="transportPlay:" destination="-1" eventType="touchDown" id="cpx-7l-5hW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eud-GZ-u8N">
+                            <rect key="frame" x="66" y="7" width="80" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="rewind_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="transportRewind:" destination="-1" eventType="touchDown" id="TUk-jP-7fc"/>
+                            </connections>
+                        </button>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xsg-JT-lal">
+                            <rect key="frame" x="8" y="6" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qX0-iR-Ec4">
+                            <rect key="frame" x="242" y="8" width="80" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="record_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="transportRecord:" destination="-1" eventType="touchDown" id="eXt-Da-ZOt"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.11892361110000001" green="0.1151555623" blue="0.1180474363" alpha="1" colorSpace="calibratedRGB"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <point key="canvasLocation" x="140" y="55"/>
+            <point key="canvasLocation" x="96" y="58"/>
         </view>
     </objects>
     <resources>
-        <image name="play_button.png" width="60" height="30"/>
-        <image name="record_button.png" width="60" height="30"/>
-        <image name="rewind_button.png" width="60" height="30"/>
+        <image name="controls_bg.png" width="1024" height="470"/>
+        <image name="play_button.png" width="80" height="50"/>
+        <image name="record_button.png" width="80" height="50"/>
+        <image name="rewind_button.png" width="80" height="50"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

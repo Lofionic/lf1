@@ -106,9 +106,9 @@
     [self.lfoView initializeParameters];
 
     // Create keyboard controller view
-    self.keyboardControlView = [[KeyboardControlView alloc] initWithFrame:CGRectZero];
-    self.keyboardControlView.cvComponent = self.audioEngine.cvController;
-    [self.keyboardControlView initializeParameters];
+    self.performanceControlView = [[PerformanceControlView alloc] initWithFrame:CGRectZero];
+    self.performanceControlView.cvComponent = self.audioEngine.cvController;
+    [self.performanceControlView initializeParameters];
     
     // Create presets controller view
     self.presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
@@ -120,7 +120,7 @@
     [self.iPadControlsView2 addSubview:_envView];
     [self.iPadControlsView3 addSubview:_filterView];
     [self.iPadControlsView4 addSubview:_lfoView];
-    [self.iPadControlsView5 addSubview:_keyboardControlView];
+    [self.iPadControlsView5 addSubview:_performanceControlView];
     [self.iPadControlsView6 addSubview:_presetControlView];
 
 }
@@ -131,7 +131,7 @@
     self.envView.frame = [self.envView superview].bounds;
     self.filterView.frame = [self.filterView superview].bounds;
     self.lfoView.frame = [self.lfoView superview].bounds;
-    self.keyboardControlView.frame = [self.keyboardControlView superview].bounds;
+    self.performanceControlView.frame = [self.performanceControlView superview].bounds;
 }
 
 -(BOOL)prefersStatusBarHidden {
@@ -151,15 +151,10 @@
 
 #pragma mark InterApp Audio
 
-
 -(void)updateTransportControls {
     if (self.audioEngine) {
         if ([self.audioEngine isHostConnected]) {
-            self.hostIcon.hidden = NO;
-            self.recordButton.hidden = NO;
-            self.playButton.hidden = NO;
-            self.rewindButon.hidden = NO;
-            self.playTimeLabel.hidden = NO;
+            self.transportView.hidden = NO;
             self.hostIcon.image = [self.audioEngine getAudioUnitIcon];
             self.rewindButon.enabled = !self.audioEngine.isHostPlaying;
             [self.playButton setImage:(self.audioEngine.isHostPlaying ? [UIImage imageNamed:@"pause_button.png"] : [UIImage imageNamed:@"play_button.png"]) forState:UIControlStateNormal];
@@ -167,11 +162,7 @@
 
 
         } else {
-            self.hostIcon.hidden = YES;
-            self.recordButton.hidden = YES;
-            self.playButton.hidden = YES;
-            self.rewindButon.hidden = YES;
-            self.playTimeLabel.hidden = YES;
+            self.transportView.hidden = YES;
         }
         
         [self.view setNeedsDisplay];

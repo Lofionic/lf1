@@ -4,10 +4,9 @@
 //
 
 #import "Envelope.h"
-#define DECLICK_THRESHOLD 0.001
+#define DECLICK_THRESHOLD 0.01
 
 @implementation Envelope {
-    
     double envelopePosition;
     bool envelopeTriggered;
     float envelopeDecayFrom;

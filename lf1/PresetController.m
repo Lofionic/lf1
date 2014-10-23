@@ -37,8 +37,8 @@
                         @"lfoView.amountControl.value",
                         @"lfoView.destinationControl.index",
                         @"lfoView.waveformControl.index",
-                        @"keyboardControlView.glideControl.value",
-                        @"keyboardControlView.glissSwitch.value"
+                        @"performanceControlView.glideControl.value",
+                        @"performanceControlView.glissSwitch.value"
                         ];
     }
     return self;

@@ -158,6 +158,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 #pragma mark MIDI
 
 -(void) setupMidiCallBacks:(AudioUnit*)output userData:(void*)inUserData {
+    
     AudioOutputUnitMIDICallbacks callBackStruct;
     callBackStruct.userData = inUserData;
     callBackStruct.MIDIEventProc = MIDIEventProcCallBack;
@@ -169,8 +170,50 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
                                 &callBackStruct,
                                 sizeof(callBackStruct)),
                "Error setting MIDI callbacks");
+    
+    MIDIClientRef client;
+    checkError(MIDIClientCreate(CFSTR("LF1 Monosynth"), MyMIDINotifyProc, (__bridge void*)self, &client), "Couldn't create MIDI Client");
+
+    MIDIPortRef inPort;
+    checkError(MIDIInputPortCreate(client, CFSTR("MIDI In"), MyMIDIReadProc, (__bridge void*)self, &inPort), "Couldn't create MIDI In port");
+    
+    unsigned long sourceCount = MIDIGetNumberOfSources();
+    printf("%ld MIDI source(s)\n", sourceCount);
+    for (int i = 0; i < sourceCount; ++i) {
+        MIDIEndpointRef src = MIDIGetSource(i);
+        CFStringRef endPointName = NULL;
+        checkError(MIDIObjectGetStringProperty(src, kMIDIPropertyName, &endPointName), "Couldn't get endpoint name");
+        char endpointNameC[255];
+        CFStringGetCString(endPointName, endpointNameC, 255, kCFStringEncodingUTF8);
+        printf(" source %d: %s\n", i, endpointNameC);
+        checkError(MIDIPortConnectSource(inPort, src, NULL), "Couldn't connect MIDI port");
+    }
 }
 
+void MyMIDINotifyProc (const MIDINotification *message, void *refCon) {
+    printf("MIDI Notify, messageId=%d,", message->messageID);
+    
+}
+
+static void MyMIDIReadProc(const MIDIPacketList *pktlist, void *refCon, void *connRefCon) {
+    printf("MIDI Received...");
+    AudioEngine *ae = (__bridge AudioEngine*) refCon;
+    
+    MIDIPacket *packet = (MIDIPacket *)pktlist->packet; for (int i=0; i < pktlist->numPackets; i++) {
+        Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
+        Byte inData1 = packet->data[1] & 0x7F;
+        Byte inData2 = packet->data[2] & 0x7F;
+        
+        printf("MIDI in: %i %i %i", midiStatus, inData1, inData2);
+        
+        if (midiCommand == 0x09) {
+            [ae.cvController noteOn:inData1];
+        } else if (midiCommand == 0x08) {
+            [ae.cvController noteOff:inData1];
+        }
+            packet = MIDIPacketNext(packet);
+        }
+}
 void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt32 inData2, UInt32 inOffsetSampleFrame){
     AudioEngine *ae = (__bridge AudioEngine*)userData;
     
@@ -357,6 +400,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
     [self removeObserver:self forKeyPath:UIApplicationWillEnterForegroundNotification];
     [self removeObserver:self forKeyPath:UIApplicationWillTerminateNotification];
 }
+
 
 #pragma mark InterApp Audio
 // Publish the interapp node
