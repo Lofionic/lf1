@@ -191,7 +191,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 }
 
 void MyMIDINotifyProc (const MIDINotification *message, void *refCon) {
-    printf("MIDI Notify, messageId=%d,", message->messageID);
+    printf("MIDI Notify, messageId=%d,", (int)message->messageID);
     
 }
 

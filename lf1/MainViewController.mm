@@ -35,9 +35,15 @@
     // Hide status bar in IOS6.1 and prior
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
 
+    // Setup settings popover
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:[NSBundle mainBundle]];
+    UINavigationController *settingsController = [storyboard instantiateInitialViewController];
+    
+    self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsController];
+    [self.settingsPopoverController setBackgroundColor:[UIColor whiteColor]];
+    
     self.audioEngine = ((AppDelegate *)[UIApplication sharedApplication].delegate).audioEngine;
-    
-    
+
     [self setupControllerViews];
     
     // Prepare notifications for app state
@@ -202,5 +208,11 @@
     }
 }
 
+-(IBAction)settingsButton:(id)sender {
+    
+
+    [self.settingsPopoverController presentPopoverFromRect:((UIView*)sender).frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    
+}
 
 @end

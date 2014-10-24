@@ -101,8 +101,17 @@
                     </subviews>
                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LZm-do-vcH">
+                    <rect key="frame" x="984" y="0.0" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="spanner.png"/>
+                    <connections>
+                        <action selector="settingsButton:" destination="-1" eventType="touchDown" id="x0f-pk-3xW"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.11892361110000001" green="0.1151555623" blue="0.1180474363" alpha="1" colorSpace="calibratedRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <point key="canvasLocation" x="96" y="58"/>
         </view>
@@ -112,6 +121,7 @@
         <image name="play_button.png" width="80" height="50"/>
         <image name="record_button.png" width="80" height="50"/>
         <image name="rewind_button.png" width="80" height="50"/>
+        <image name="spanner.png" width="30" height="30"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

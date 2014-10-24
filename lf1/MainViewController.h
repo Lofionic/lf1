@@ -20,8 +20,6 @@
 
 @property (nonatomic, weak) AudioEngine *audioEngine;
 
-// Parameter controls
-
 @property (nonatomic, strong) IBOutlet KeyboardView *keyboardView;
 
 @property (nonatomic, strong) IBOutlet OscillatorControlView *oscView;
@@ -49,5 +47,7 @@
 @property BOOL inForeground;
 
 @property (nonatomic, strong) PresetController *presetController;
+
+@property (nonatomic, strong) UIPopoverController *settingsPopoverController;
 
 @end
