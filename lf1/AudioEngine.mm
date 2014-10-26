@@ -6,6 +6,7 @@
 #import "Defines.h"
 #import "AudioEngine.h"
 #import <AVFoundation/AVFoundation.h>
+#import "AppDelegate.h"
 
 const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
 @implementation AudioEngine {
@@ -102,7 +103,10 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     // checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
     
     [self checkStartStopGraph];
-    [self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
+    //[self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
+    
+    // Start MIDI
+    [self initializeMidi];
 }
 
 
@@ -155,80 +159,74 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
     [SELF audioUnitPropertyChangedListener:inRefCon unit:inUnit propID:inID scope:inScope element:inElement];
 }
 
-#pragma mark MIDI
+#pragma mark PGMidi
 
--(void) setupMidiCallBacks:(AudioUnit*)output userData:(void*)inUserData {
+-(void)initializeMidi {
+    self.midi = MIDI_ENGINE;
+    self.midi.delegate = self;
     
-    AudioOutputUnitMIDICallbacks callBackStruct;
-    callBackStruct.userData = inUserData;
-    callBackStruct.MIDIEventProc = MIDIEventProcCallBack;
-    callBackStruct.MIDISysExProc = NULL;
-    checkError(AudioUnitSetProperty (*output,
-                                kAudioOutputUnitProperty_MIDICallbacks,
-                                kAudioUnitScope_Global,
-                                0,
-                                &callBackStruct,
-                                sizeof(callBackStruct)),
-               "Error setting MIDI callbacks");
-    
-    MIDIClientRef client;
-    checkError(MIDIClientCreate(CFSTR("LF1 Monosynth"), MyMIDINotifyProc, (__bridge void*)self, &client), "Couldn't create MIDI Client");
-
-    MIDIPortRef inPort;
-    checkError(MIDIInputPortCreate(client, CFSTR("MIDI In"), MyMIDIReadProc, (__bridge void*)self, &inPort), "Couldn't create MIDI In port");
-    
-    unsigned long sourceCount = MIDIGetNumberOfSources();
-    printf("%ld MIDI source(s)\n", sourceCount);
-    for (int i = 0; i < sourceCount; ++i) {
-        MIDIEndpointRef src = MIDIGetSource(i);
-        CFStringRef endPointName = NULL;
-        checkError(MIDIObjectGetStringProperty(src, kMIDIPropertyName, &endPointName), "Couldn't get endpoint name");
-        char endpointNameC[255];
-        CFStringGetCString(endPointName, endpointNameC, 255, kCFStringEncodingUTF8);
-        printf(" source %d: %s\n", i, endpointNameC);
-        checkError(MIDIPortConnectSource(inPort, src, NULL), "Couldn't connect MIDI port");
+    if (self.midi.sources.count > 0) {
+        PGMidiSource *source = self.midi.sources[0];
+        self.midiSource = source;
     }
 }
 
-void MyMIDINotifyProc (const MIDINotification *message, void *refCon) {
-    printf("MIDI Notify, messageId=%d,", (int)message->messageID);
+-(void)setMidiSource:(PGMidiSource *)midiSource {
+    self.midiSource.delegate = nil;
     
+    if (midiSource) {
+        midiSource.delegate = self;
+    }
+    
+    _midiSource = midiSource;
 }
 
-static void MyMIDIReadProc(const MIDIPacketList *pktlist, void *refCon, void *connRefCon) {
-    printf("MIDI Received...");
-    AudioEngine *ae = (__bridge AudioEngine*) refCon;
+-(void)midiSource:(PGMidiSource *)input midiReceived:(const MIDIPacketList *)packetList {
     
-    MIDIPacket *packet = (MIDIPacket *)pktlist->packet; for (int i=0; i < pktlist->numPackets; i++) {
+    MIDIPacket *packet = (MIDIPacket *)packetList->packet;
+    for (int i=0; i < packetList->numPackets; i++) {
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
         
-        printf("MIDI in: %i %i %i", midiStatus, inData1, inData2);
+        NSLog(@"%i %i %i", midiStatus, inData1, inData2);
         
         if (midiCommand == 0x09) {
-            [ae.cvController noteOn:inData1];
+            [self.cvController noteOn:inData1];
         } else if (midiCommand == 0x08) {
-            [ae.cvController noteOff:inData1];
+            [self.cvController noteOff:inData1];
+        } else if (midiCommand == 0x0E) {
+            int value = ((inData2 << 7)) + inData1;
+            [self.cvController setPitchbend:value / 16383.0];
         }
-            packet = MIDIPacketNext(packet);
-        }
-}
-void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt32 inData2, UInt32 inOffsetSampleFrame){
-    AudioEngine *ae = (__bridge AudioEngine*)userData;
-    
-    if (inStatus == 144) {
-        // Note on command
-        [ae.cvController noteOn:inData1];
-    } else if (inStatus == 128) {
-        // Note off command
-        [ae.cvController noteOff:inData1];
-    } else if (inStatus == 224) {
-        float pitchbendValue = inData1  / 126.0;
-        [ae.cvController setPitchbend:pitchbendValue];
+        packet = MIDIPacketNext(packet);
     }
 }
 
+-(void)midi:(PGMidi *)midi destinationAdded:(PGMidiDestination *)destination {
+    
+}
+
+-(void)midi:(PGMidi *)midi destinationRemoved:(PGMidiDestination *)destination {
+    
+}
+
+-(void)midi:(PGMidi *)midi sourceAdded:(PGMidiSource *)source {
+    [self postMidiChangeNotification];
+}
+
+-(void)midi:(PGMidi *)midi sourceRemoved:(PGMidiSource *)source {
+    if (source == self.midiSource) {
+        self.midiSource = nil;
+    }
+    
+    [self performSelector:@selector(postMidiChangeNotification) withObject:nil afterDelay:1];
+}
+
+-(void)postMidiChangeNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:MIDI_CHANGE_NOTIFICATION object:nil];
+    
+}
 
 #pragma mark START & STOP
 -(void)startAUGraph {
@@ -295,7 +293,6 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
 // the render callback procedure
 static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
 {
-    // DSP!
     // Renders synth
  
     // Get reference to audio controller from inRefCon
@@ -412,6 +409,8 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         1};
     
     checkError(AudioOutputUnitPublish(&desc, CFSTR("LF1 Monosynth"), 1, mOutput) , "Cannot publish to inter-app audio" );
+    
+    [self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
 }
 
 // Checks host connection, and handles transitions between states
@@ -542,6 +541,48 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         if (result == noErr) {
             [[UIApplication sharedApplication] openURL:(__bridge NSURL*)instrumentUrl];
         }
+    }
+}
+
+-(void) setupMidiCallBacks:(AudioUnit*)output userData:(void*)inUserData {
+    AudioOutputUnitMIDICallbacks callBackStruct;
+    callBackStruct.userData = inUserData;
+    callBackStruct.MIDIEventProc = MIDIEventProcCallBack;
+    callBackStruct.MIDISysExProc = NULL;
+    checkError(AudioUnitSetProperty (*output,
+                                kAudioOutputUnitProperty_MIDICallbacks,
+                                kAudioUnitScope_Global,
+                                0,
+                                &callBackStruct,
+                                sizeof(callBackStruct)), "Can't setup Inter App MIDI Callback");
+}
+
+void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt32 inData2, UInt32 inOffsetSampleFrame){
+    AudioEngine *ae = (__bridge AudioEngine*)userData;
+//    
+//    if (inStatus == 144) {
+//        [ae.cvController noteOn:inData1];
+//    } else if (inStatus == 128) {
+//        [ae.cvController noteOff:inData1];
+//    } else if (inStatus == 224) {
+//        int value = ((inData2 << 7)) + inData1;
+//        [ae.cvController setPitchbend:value / 16383.0];
+//        
+//        
+//        //ae.cvController.pitchbend = inData1 / 127.0;
+//    }
+    
+    Byte midiCommand = inStatus >> 4;
+    Byte data1 = inData1 & 0x7F;
+    Byte data2 = inData2 & 0x7F;
+    
+    if (midiCommand == 0x09) {
+        [ae.cvController noteOn:inData1];
+    } else if (midiCommand == 0x08) {
+        [ae.cvController noteOff:data1];
+    } else if (midiCommand == 0x0E) {
+        int value = ((data2 << 7)) + data1;
+        [ae.cvController setPitchbend:value / 16383.0];
     }
 }
 

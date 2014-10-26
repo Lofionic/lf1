@@ -10,9 +10,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.midiEngine = [[PGMidi alloc] init];
+    [self.midiEngine enableNetwork:YES];
+    
     self.audioEngine = [[AudioEngine alloc] init];
     [self.audioEngine initializeAUGraph];
-    
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     // Override point for customization after application launch.

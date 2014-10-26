@@ -34,7 +34,7 @@ float source2GainContinuous;
         
         //AudioSignalType mixedSignal = ((self.source1.buffer[i] * source1Gain) + (self.source2.buffer[i] * source2Gain)) / 2.0;
         
-        AudioSignalType mixedSignal = tanhf(((self.source1.buffer[i] * source1Gain) + (self.source2.buffer[i] * source2Gain)) * 3.0);
+        AudioSignalType mixedSignal = tanhf(((self.source1.buffer[i] * source1Gain) + (self.source2.buffer[i] * source2Gain)) * 4.0);
         mixedSignal = mixedSignal * self.envelope.buffer[i];
         outA[i] = mixedSignal;
     }

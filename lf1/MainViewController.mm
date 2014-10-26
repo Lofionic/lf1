@@ -37,9 +37,9 @@
 
     // Setup settings popover
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Storyboard" bundle:[NSBundle mainBundle]];
-    UINavigationController *settingsController = [storyboard instantiateInitialViewController];
+    self.settingsNavigationController = [storyboard instantiateInitialViewController];
     
-    self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:settingsController];
+    self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:self.settingsNavigationController];
     [self.settingsPopoverController setBackgroundColor:[UIColor whiteColor]];
     
     self.audioEngine = ((AppDelegate *)[UIApplication sharedApplication].delegate).audioEngine;
@@ -209,8 +209,7 @@
 }
 
 -(IBAction)settingsButton:(id)sender {
-    
-
+    [self.settingsNavigationController popToRootViewControllerAnimated:NO];
     [self.settingsPopoverController presentPopoverFromRect:((UIView*)sender).frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
 }

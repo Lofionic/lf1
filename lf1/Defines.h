@@ -16,4 +16,10 @@
 #define IS_IPAD() (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define TRANSPORT_CHANGE_NOTIFICATION_STRING @"LF1_TRANSPORT_CHANGE"
 
+#define AUDIO_ENGINE ((AppDelegate *)[UIApplication sharedApplication].delegate).audioEngine
+#define MIDI_ENGINE ((AppDelegate *)[UIApplication sharedApplication].delegate).midiEngine
+#define MAIN_VIEW_CONTROLLER ((AppDelegate *)[UIApplication sharedApplication].delegate).mainViewController
+
+#define MIDI_CHANGE_NOTIFICATION @"Midi_Change_Notification"
+
 #endif

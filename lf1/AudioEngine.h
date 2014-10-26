@@ -17,13 +17,14 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import <Foundation/Foundation.h>
+#import "PGMidi.h"
 
-@interface AudioEngine : NSObject {
-
+@interface AudioEngine : NSObject <PGMidiDelegate, PGMidiSourceDelegate> {
     AUGraph mGraph;
     AudioUnit mOutput;
     AudioUnit mConverter;
-    
+    MIDIPortRef inPort;
+    MIDIClientRef client;
     AudioStreamBasicDescription outputASBD;
 }
 
@@ -56,5 +57,8 @@
 @property (nonatomic) bool inForeground;
 @property (nonatomic) Float64 playTime;
 @property (nonatomic, strong) UIImage *hostAppIcon;
+
+@property (nonatomic, weak) PGMidi *midi;
+@property (nonatomic, weak) PGMidiSource *midiSource;
 
 @end

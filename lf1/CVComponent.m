@@ -24,6 +24,8 @@
         self.pitchbend = 0.5;
         prevPitchbend = 0.5;
 
+        self.pitchWheelRange = 7;
+        
         noteOns = [[NSMutableArray alloc] initWithCapacity:10];
         
     }
@@ -44,7 +46,8 @@
                 [self openGate];
             }
         } else {
-            noteOns = [@[noteNumber] mutableCopy];
+            [noteOns addObject:noteNumber];
+            //noteOns = [@[noteNumber] mutableCopy];
             [self openGate];
         }
         
@@ -64,6 +67,9 @@
             [self closeGate];
         } else {
             [self setFrequency];
+            if (!self.gliss && noteNumber == [noteOns lastObject]) {
+                [self openGate];
+            }
         }
     }
 }
@@ -76,7 +82,7 @@
     // set the target freq
     // Calculate note frequency
     //float frequency = (powf(powf(2, (1.0 / 12.0)), note)) * 3.4375;
-    float frequency = powf(2, (note - 69) / 12.0) * 110;
+    float frequency = powf(2, (note - 69) / 12.0) * 220;
     
     // Convert to float in 0-1 range
     targetOutputValue = frequency / CV_FREQUENCY_RANGE;
@@ -114,7 +120,7 @@
         float pitchbendNormalized = prevPitchbend + (i * pitchbendDelta);
         
         float adjustValue = (pitchbendNormalized * 2.0) - 1.0;
-        adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
+        adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * self.pitchWheelRange));
         
         outA[i] = currentOutputValue * adjustValue;
         [self updateCurrentOutputValueForOneSample];

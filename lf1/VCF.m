@@ -43,6 +43,8 @@
     float resDelta = (self.resonance - resContinous) / numFrames;
     float egDelta = (self.eg_amount - egContinuous) / numFrames;
     
+    LFO *lfo = self.lfo;
+    
     for (int i = 0; i < numFrames; i++) {
         
         float valueIn = (float)outA[i];
@@ -74,8 +76,8 @@
             cutoff = newCutoff;
         }
         
-        if (self.lfo) {
-            float buffer = (self.lfo.buffer[i] + 1) / 2.0f;
+        if (lfo) {
+            float buffer = (lfo.buffer[i] + 1) / 2.0f;
             
             //cutoff *= powf(0.5, -self.lfo.buffer[i]);
             if (cutoff > 1) {

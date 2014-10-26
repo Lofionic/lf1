@@ -49,5 +49,6 @@
 @property (nonatomic, strong) PresetController *presetController;
 
 @property (nonatomic, strong) UIPopoverController *settingsPopoverController;
+@property (nonatomic, strong) UINavigationController *settingsNavigationController;
 
 @end

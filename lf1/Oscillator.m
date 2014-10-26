@@ -39,6 +39,8 @@
 
 -(void)renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
     
+    LFO *lfo = self.lfo;
+    
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
         
@@ -46,9 +48,9 @@
         outA[i] = value;
         
         // Apply LFO
-        float lfo = 1;
-        if (self.lfo) {
-            lfo = powf(0.5, -self.lfo.buffer[i]);
+        float lfoValue = 1;
+        if (lfo) {
+            lfoValue = powf(0.5, -lfo.buffer[i]);
         }
         
         // Apply freq adjustment
@@ -63,7 +65,7 @@
         
 
         // Increment Phase
-        phase += (M_PI * freq * lfo * powf(2, self.octave) * adjustValue) / self.sampleRate;
+        phase += (M_PI * freq * lfoValue * powf(2, self.octave) * adjustValue) / self.sampleRate;
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {

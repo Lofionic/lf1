@@ -1,5 +1,5 @@
 //
-//  controllerView.m
+//  keyboardView.m
 //  iPhoneAudio2
 //
 //  Created by Chris on 9/9/14.
@@ -10,13 +10,10 @@
 #import "BuildSettings.h"
 
 @implementation KeyboardView {
-    
     int octaves;
-    CGRect keyRects[88];
     int keyValues[88];
-    
+    CGRect keyRects[88];
     NSMutableDictionary *keyTouches;
-
     NSSet *prevKeysDown;
 }
 
@@ -28,6 +25,7 @@
         self.userInteractionEnabled = YES;
         self.multipleTouchEnabled = YES;
         self.backgroundColor = [UIColor redColor];
+        self.keyboardShift = 2;
         [self initKeys];
     }
     return self;
@@ -38,6 +36,7 @@
     self.userInteractionEnabled = YES;
     self.multipleTouchEnabled = YES;
     self.backgroundColor = [UIColor redColor];
+    self.keyboardShift = 2;
     [self initKeys];
 }
 
@@ -83,19 +82,19 @@
         keyRects[thisKey + 6] = CGRectMake(leftPoint + (keyWidth * 6.0), 0, keyWidth, keyHeight); // B
         keyValues[thisKey + 6] = thisKey + 11;
         
-        keyRects[thisKey + 7] = CGRectMake(leftPoint + (keyWidth * 0.75), 0, blackKeyWidth, blackKeyHeight); // C#
+        keyRects[thisKey + 7] = CGRectMake(leftPoint + (keyWidth * 0.6), 0, blackKeyWidth, blackKeyHeight); // C#
         keyValues[thisKey + 7] = thisKey + 1;
         
-        keyRects[thisKey + 8] = CGRectMake(leftPoint + (keyWidth * 1.75), 0, blackKeyWidth, blackKeyHeight); // Eb
+        keyRects[thisKey + 8] = CGRectMake(leftPoint + (keyWidth * 1.7), 0, blackKeyWidth, blackKeyHeight); // Eb
         keyValues[thisKey + 8] = thisKey + 3;
         
-        keyRects[thisKey + 9] = CGRectMake(leftPoint + (keyWidth * 3.75), 0, blackKeyWidth, blackKeyHeight); // F#
+        keyRects[thisKey + 9] = CGRectMake(leftPoint + (keyWidth * 3.6), 0, blackKeyWidth, blackKeyHeight); // F#
         keyValues[thisKey + 9] = thisKey + 6;
         
-        keyRects[thisKey + 10] = CGRectMake(leftPoint + (keyWidth * 4.75), 0, blackKeyWidth, blackKeyHeight); // Ab
+        keyRects[thisKey + 10] = CGRectMake(leftPoint + (keyWidth * 4.65), 0, blackKeyWidth, blackKeyHeight); // Ab
         keyValues[thisKey +10] = thisKey + 8;
         
-        keyRects[thisKey + 11] = CGRectMake(leftPoint + (keyWidth * 5.75), 0, blackKeyWidth, blackKeyHeight); // Bb
+        keyRects[thisKey + 11] = CGRectMake(leftPoint + (keyWidth * 5.7), 0, blackKeyWidth, blackKeyHeight); // Bb
         keyValues[thisKey + 11] = thisKey + 10;
         
         thisKey += 12;
@@ -177,7 +176,7 @@
         NSMutableSet *releasedKeys = [NSMutableSet setWithSet:prevKeysDown];
         [releasedKeys minusSet:keysDown];
         for (NSNumber *n in releasedKeys) {
-            int midiNote = keyValues[[n integerValue]] + 60;
+            int midiNote = keyValues[[n integerValue]] + 36 + ((int)self.keyboardShift * 12);
             [self.cvController noteOff:midiNote];
         }
         [self setNeedsDisplay];
@@ -187,7 +186,7 @@
         [newKeys minusSet:prevKeysDown];
         
         for (NSNumber *n in newKeys) {
-            int midiNote = keyValues[[n integerValue]] + 60;
+            int midiNote = keyValues[[n integerValue]] + 36 + ((int)self.keyboardShift * 12);
             [self.cvController noteOn:midiNote];
         }
 

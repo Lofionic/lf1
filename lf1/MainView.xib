@@ -62,7 +62,7 @@
                 </view>
                 <view hidden="YES" alpha="0.75" contentMode="scaleToFill" id="s4W-9Q-8kx" userLabel="InterappView">
                     <rect key="frame" x="0.0" y="0.0" width="342" height="64"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="COl-nt-z3T">
                             <rect key="frame" x="154" y="8" width="80" height="50"/>
@@ -102,7 +102,7 @@
                     <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LZm-do-vcH">
-                    <rect key="frame" x="984" y="0.0" width="40" height="40"/>
+                    <rect key="frame" x="976" y="0.0" width="40" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" image="spanner.png"/>
                     <connections>
