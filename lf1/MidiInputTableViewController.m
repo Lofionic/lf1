@@ -22,6 +22,8 @@
     self.ae = AUDIO_ENGINE;
     self.midi = MIDI_ENGINE;
     
+    self.tableView.rowHeight = 60;
+    
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(midiChange)
@@ -61,6 +63,9 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
+        
+        cell.imageView.image = [UIImage imageNamed:@"cross"];
+        
     } else {
         PGMidiSource *source = self.midi.sources[indexPath.row -1];
         cell.textLabel.text = source.name;
@@ -69,6 +74,12 @@
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+        
+        if (source.isNetworkSession) {
+            cell.imageView.image = [UIImage imageNamed:@"wifi"];
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"plug"];
         }
     }
 

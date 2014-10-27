@@ -5,18 +5,18 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Advanced Settings-->
+        <!--Settings-->
         <scene sceneID="g0t-9V-bb2">
             <objects>
                 <tableViewController id="kha-BB-zH8" customClass="SettingsTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HJB-gp-QW9">
-                        <rect key="frame" x="0.0" y="64" width="300" height="236"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HJB-gp-QW9">
+                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
                             <tableViewSection id="lj7-au-IWA">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="9Q8-A1-4cn" detailTextLabel="XSM-hp-Mex" style="IBUITableViewCellStyleValue1" id="Fxd-Kf-bfa">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="9Q8-A1-4cn" detailTextLabel="XSM-hp-Mex" imageView="vwc-be-DSC" rowHeight="60" style="IBUITableViewCellStyleValue1" id="Fxd-Kf-bfa">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fxd-Kf-bfa" id="uWF-Ao-8Vq">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -35,13 +35,16 @@
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="midi.png" id="vwc-be-DSC">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="B6G-1W-sLB" kind="show" id="auQ-OM-OVT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="czg-X6-DQ7" detailTextLabel="j6g-m5-OAX" style="IBUITableViewCellStyleValue1" id="3Jh-EG-SBx">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="czg-X6-DQ7" detailTextLabel="j6g-m5-OAX" imageView="S7C-GJ-6nw" rowHeight="60" style="IBUITableViewCellStyleValue1" id="3Jh-EG-SBx">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Jh-EG-SBx" id="TgR-qb-ulw">
@@ -59,13 +62,16 @@
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="keyboard.png" id="S7C-GJ-6nw">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="2e5-xz-iFz" kind="show" id="IJg-os-wCt"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="XfV-sb-DRR" detailTextLabel="mhA-wc-22h" style="IBUITableViewCellStyleValue1" id="I1e-08-Ov7">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="XfV-sb-DRR" detailTextLabel="mhA-wc-22h" imageView="zYi-lN-7WV" rowHeight="60" style="IBUITableViewCellStyleValue1" id="I1e-08-Ov7">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I1e-08-Ov7" id="BLQ-Qm-ASR">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -84,6 +90,9 @@
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="pitchbend.png" id="zYi-lN-7WV">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
@@ -98,10 +107,7 @@
                             <outlet property="delegate" destination="kha-BB-zH8" id="Sw9-Bf-IKB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Advanced Settings" id="gEG-hA-GDj"/>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="236"/>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="300"/>
+                    <navigationItem key="navigationItem" title="Settings" id="gEG-hA-GDj"/>
                     <connections>
                         <outlet property="keyboardShiftTableViewCell" destination="3Jh-EG-SBx" id="U0T-H3-Zoy"/>
                         <outlet property="midiInTableViewCell" destination="Fxd-Kf-bfa" id="GaP-gI-7Rd"/>
@@ -110,22 +116,22 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aFL-C3-9VL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="302" y="370"/>
+            <point key="canvasLocation" x="446" y="370"/>
         </scene>
-        <!--Pitch Wheel Range-->
+        <!--Keyboard Shift-->
         <scene sceneID="aWC-xX-ZHr">
             <objects>
-                <viewController title="Pitch Wheel Range" id="2e5-xz-iFz" customClass="KeyboardShiftTableViewController" sceneMemberID="viewController">
+                <viewController title="Keyboard Shift" id="2e5-xz-iFz" customClass="KeyboardShiftTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="REM-g8-KC2"/>
                         <viewControllerLayoutGuide type="bottom" id="NZ3-AG-XVX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TM7-mj-OZe">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="236"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYE-YT-KhA">
-                                <rect key="frame" x="-10" y="37" width="320" height="162"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYE-YT-KhA" customClass="SilentPickerView">
+                                <rect key="frame" x="40" y="7" width="320" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2e5-xz-iFz" id="Ud4-fz-W09"/>
                                     <outlet property="delegate" destination="2e5-xz-iFz" id="DGb-mh-moa"/>
@@ -138,25 +144,24 @@
                             <constraint firstAttribute="centerX" secondItem="MYE-YT-KhA" secondAttribute="centerX" id="uN6-So-Rpb"/>
                         </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="236"/>
                     <connections>
                         <outlet property="pickerView" destination="MYE-YT-KhA" id="oUt-m4-M11"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FIa-K8-ltW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="269"/>
+            <point key="canvasLocation" x="993" y="370"/>
         </scene>
         <!--MIDI Input-->
         <scene sceneID="M9T-C5-wxM">
             <objects>
                 <tableViewController title="MIDI Input" id="B6G-1W-sLB" customClass="MidiInputTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rha-nO-mTn">
-                        <rect key="frame" x="0.0" y="64" width="300" height="236"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rha-nO-mTn">
+                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="1UA-Iv-q6A" style="IBUITableViewCellStyleDefault" id="cDm-zl-cuh">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" textLabel="1UA-Iv-q6A" rowHeight="60" style="IBUITableViewCellStyleDefault" id="cDm-zl-cuh">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cDm-zl-cuh" id="qP2-E6-gi1">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -176,11 +181,10 @@
                             <outlet property="delegate" destination="B6G-1W-sLB" id="y4j-Nz-do4"/>
                         </connections>
                     </tableView>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="236"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wkk-Da-bLV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="-169"/>
+            <point key="canvasLocation" x="993" y="-117"/>
         </scene>
         <!--Pitch Wheel Range-->
         <scene sceneID="1O0-M2-kBM">
@@ -191,11 +195,11 @@
                         <viewControllerLayoutGuide type="bottom" id="rmc-8C-l6w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M6q-te-Tgc">
-                        <rect key="frame" x="0.0" y="64" width="300" height="236"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ith-dK-1Hq">
-                                <rect key="frame" x="-10" y="10" width="320" height="216"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ith-dK-1Hq" customClass="SilentPickerView">
+                                <rect key="frame" x="40" y="-20" width="320" height="216"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="xdL-6o-gcS"/>
                                 </constraints>
@@ -211,22 +215,21 @@
                             <constraint firstAttribute="centerY" secondItem="ith-dK-1Hq" secondAttribute="centerY" id="zm5-me-vhW"/>
                         </constraints>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="236"/>
                     <connections>
                         <outlet property="pickerView" destination="ith-dK-1Hq" id="Cfb-vI-9WD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQm-Vj-hBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="717" y="906"/>
+            <point key="canvasLocation" x="993" y="866"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NOd-cs-h2Q">
             <objects>
                 <navigationController id="EPH-gI-4xT" sceneMemberID="viewController">
-                    <value key="contentSizeForViewInPopover" type="size" width="300" height="300"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="240"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="300" height="300"/>
+                    <size key="freeformSize" width="400" height="240"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SXX-JL-Xls">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -245,4 +248,9 @@
             <point key="canvasLocation" x="-107" y="370"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="keyboard.png" width="40" height="40"/>
+        <image name="midi.png" width="40" height="40"/>
+        <image name="pitchbend.png" width="40" height="40"/>
+    </resources>
 </document>

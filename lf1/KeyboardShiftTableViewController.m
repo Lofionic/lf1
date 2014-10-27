@@ -25,6 +25,7 @@
                         @"+1 Octave",
                         @"+2 Octaves"];
     self.keyboardVew = MAIN_VIEW_CONTROLLER.keyboardView;
+    [self.pickerView setSoundsEnabled:NO];
     
 }
 

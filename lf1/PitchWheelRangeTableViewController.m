@@ -20,6 +20,8 @@
     [super viewDidLoad];
 
     self.ae = AUDIO_ENGINE;
+    
+    [self.pickerView setSoundsEnabled:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
