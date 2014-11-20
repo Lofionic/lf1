@@ -1,5 +1,5 @@
 //
-//  controllerView.h
+//  keyboardView.h
 //  iPhoneAudio2
 //
 //  Created by Chris on 9/9/14.
@@ -12,5 +12,6 @@
 @interface KeyboardView : UIView
 
 @property (nonatomic, weak) CVComponent *cvController;
+@property NSInteger keyboardShift;
 
 @end

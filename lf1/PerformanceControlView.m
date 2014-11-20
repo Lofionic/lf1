@@ -6,16 +6,16 @@
 //  Copyright (c) 2014 ccr. All rights reserved.
 //
 
-#import "KeyboardControlView.h"
+#import "PerformanceControlView.h"
 
-@implementation KeyboardControlView
+@implementation PerformanceControlView
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"KeyboardControlView" owner:self options:nil];
+        NSArray *oscNib = [[NSBundle mainBundle] loadNibNamed:@"PerformanceControlView" owner:self options:nil];
         self = oscNib[0];
     }
     return self;

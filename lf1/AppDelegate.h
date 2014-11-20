@@ -5,11 +5,15 @@
 
 #import <UIKit/UIKit.h>
 #import "MainViewController.h"
+#import "AudioEngine.h"
+#import "PGMidi.h"
 
-@interface LF1AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
 @property (nonatomic, strong) MainViewController *mainViewController;
+@property (nonatomic, strong) AudioEngine *audioEngine;
+@property (nonatomic, strong) PGMidi *midiEngine;
 
 @end

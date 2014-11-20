@@ -2,11 +2,18 @@
 //  Created by Chris Rivers on 22/02/2014.
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
-
+#import "BuildSettings.h"
+#import "Defines.h"
 #import "AudioEngine.h"
+#import <AVFoundation/AVFoundation.h>
+#import "AppDelegate.h"
 
-const Float64 kGraphSampleRate = 44100.0;
-@implementation AudioEngine
+const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
+@implementation AudioEngine {
+    
+    HostCallbackInfo *callBackInfo;
+    
+}
 
 #pragma mark INITIALIZATION
 -(void)initializeAUGraph {
@@ -17,16 +24,7 @@ const Float64 kGraphSampleRate = 44100.0;
     checkError(NewAUGraph(&mGraph), "Cannot create new AUGraph");
     
     // AUNodes represent Audio Units on the AUGraph
-    AUNode outputNode;
-    AUNode converterNode;
-    
-    // Set up converter component description
-    AudioComponentDescription converter_desc;
-    converter_desc.componentType = kAudioUnitType_FormatConverter;
-    converter_desc.componentSubType = kAudioUnitSubType_AUConverter;
-    converter_desc.componentFlags = 0;
-    converter_desc.componentFlagsMask = 0;
-    converter_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
+    AUNode ioNode;
     
     // Setup output component description
     AudioComponentDescription output_desc;
@@ -37,56 +35,57 @@ const Float64 kGraphSampleRate = 44100.0;
     output_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
     
     // Add nodes to the graph to hold our AudioUnits
-    checkError(AUGraphAddNode(mGraph, &converter_desc, &converterNode), "Cannot add AUConverter node to AUGraph");
-
-    
-    checkError(AUGraphAddNode(mGraph, &output_desc, &outputNode), "Cannot add RemoteIO node to AUGraph");
-    
-    // Connect Converter Node's outout to the Output node's input
-    checkError(AUGraphConnectNodeInput(mGraph, converterNode, 0, outputNode, 0), "Cannot connect AUConverter node to RemoteIO node");
+    checkError(AUGraphAddNode(mGraph, &output_desc, &ioNode), "Cannot add RemoteIO node to AUGraph");
     
     // Open the graph - AudioUnits are opened but not initialized
     checkError(AUGraphOpen(mGraph), "Cannot open AUGraph");
     
-    // Get a link to the converter node
-    checkError(AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter), "Cannot get info for AUConverter node");
-
     // Get a link to the output AU so we can talk to it later
-    checkError(AUGraphNodeInfo(mGraph, outputNode, NULL, &mOutput), "Cannot get info for RemoteIO node");
+    checkError(AUGraphNodeInfo(mGraph, ioNode, NULL, &mOutput), "Cannot get info for RemoteIO node");
     
-    // Set the converter callback struct
+    // Set the render callback struct
     AURenderCallbackStruct renderCallbackStruct;
     renderCallbackStruct.inputProc = &renderAudio;
     renderCallbackStruct.inputProcRefCon = (__bridge void*)self;
-    checkError(AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct), "Cannot set AUConverter node input callback" );
-
-    // Set up the converter input stream
-    AudioStreamBasicDescription desc;
-    UInt32 size = sizeof(desc);
+    checkError(AUGraphSetNodeInputCallback(mGraph, ioNode, 0, &renderCallbackStruct), "Cannot set AUConverter node input callback" );
     
-    checkError(AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size), "Cannot get stream format from AUConverter");
-        // Initialize the structure to ensure there are no spurious values
-    memset (&desc, 0, sizeof(desc));
-    
-    // Make modifications to the AudioStreamBasicDescription
-    desc.mSampleRate = kGraphSampleRate;
-    desc.mFormatID = kAudioFormatLinearPCM;
-    desc.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    desc.mBitsPerChannel = sizeof(SInt16) * 8; // AudioSampleType == 16 bit signed ints
-    desc.mChannelsPerFrame = 1;
-    desc.mFramesPerPacket = 1;
-    desc.mBytesPerFrame = (desc.mBitsPerChannel / 8) * desc.mChannelsPerFrame;
-    desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
+    // Setup the IO stream format
+    const int four_bytes_per_float = 4;
+    const int eight_bits_per_byte = 8;
+    AudioStreamBasicDescription streamFormat;
+    streamFormat.mSampleRate = kGraphSampleRate;
+    streamFormat.mFormatID = kAudioFormatLinearPCM;
+    streamFormat.mFormatFlags =
+    kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
+    streamFormat.mBytesPerPacket = four_bytes_per_float;
+    streamFormat.mFramesPerPacket = 1;
+    streamFormat.mBytesPerFrame = four_bytes_per_float;
+    streamFormat.mChannelsPerFrame = 1;
+    streamFormat.mBitsPerChannel = four_bytes_per_float * eight_bits_per_byte;
     
     // Apply the modified AudioStreamBasicDescription to the converter input bus
-    checkError(AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc)), "Cannot set AUConverter audio stream property");
+    checkError(AudioUnitSetProperty(mOutput, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &streamFormat, sizeof(streamFormat)), "Cannot set AUConverter audio stream property");
 
+    // Add property listeners for inter app audio
+    checkError(AudioUnitAddPropertyListener(mOutput, kAudioUnitProperty_IsInterAppConnected, AudioUnitPropertyChangeDispatcher, (__bridge void*)self), "Error setting IsInterAppConnected property listener");
+    
+    checkError(AudioUnitAddPropertyListener(mOutput, kAudioOutputUnitProperty_HostTransportState, AudioUnitPropertyChangeDispatcher, (__bridge void*)self), "Error setting IsInterAppConnected property listener");
+    
+    // Publish as inter-app audio node
+    [self publishAsNode];
+    [self registerNotifications];
+    
     // Print graph setup
     CAShow(mGraph);
     
     // Start AUGraph
-    checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
-
+    // checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
+    
+    [self checkStartStopGraph];
+    //[self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
+    
+    // Start MIDI
+    [self initializeMidi];
 }
 
 
@@ -131,6 +130,78 @@ const Float64 kGraphSampleRate = 44100.0;
     
     // Plug CV controller into gate responders
     self.cvController.gateComponents = @[self.lfo1, self.vcfEnvelope, self.vcoEnvelope];
+}
+
+//Callback for audio units bouncing from c to objective c
+void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUnitPropertyID inID, AudioUnitScope inScope, AudioUnitElement inElement) {
+    AudioEngine *SELF = (__bridge AudioEngine *)inRefCon;
+    [SELF audioUnitPropertyChangedListener:inRefCon unit:inUnit propID:inID scope:inScope element:inElement];
+}
+
+#pragma mark PGMidi
+
+-(void)initializeMidi {
+    self.midi = MIDI_ENGINE;
+    self.midi.delegate = self;
+    
+    if (self.midi.sources.count > 0) {
+        PGMidiSource *source = self.midi.sources[0];
+        self.midiSource = source;
+    }
+}
+
+-(void)setMidiSource:(PGMidiSource *)midiSource {
+    self.midiSource.delegate = nil;
+    
+    if (midiSource) {
+        midiSource.delegate = self;
+    }
+    
+    _midiSource = midiSource;
+}
+
+-(void)midiSource:(PGMidiSource *)input midiReceived:(const MIDIPacketList *)packetList {
+    
+    MIDIPacket *packet = (MIDIPacket *)packetList->packet;
+    for (int i=0; i < packetList->numPackets; i++) {
+        Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
+        Byte inData1 = packet->data[1] & 0x7F;
+        Byte inData2 = packet->data[2] & 0x7F;
+
+        if (midiCommand == 0x09) {
+            [self.cvController noteOn:inData1];
+        } else if (midiCommand == 0x08) {
+            [self.cvController noteOff:inData1];
+        } else if (midiCommand == 0x0E) {
+            int value = ((inData2 << 7)) + inData1;
+            [self.cvController setPitchbend:value / 16383.0];
+        }
+        packet = MIDIPacketNext(packet);
+    }
+}
+
+-(void)midi:(PGMidi *)midi destinationAdded:(PGMidiDestination *)destination {
+    
+}
+
+-(void)midi:(PGMidi *)midi destinationRemoved:(PGMidiDestination *)destination {
+    
+}
+
+-(void)midi:(PGMidi *)midi sourceAdded:(PGMidiSource *)source {
+    [self postMidiChangeNotification];
+}
+
+-(void)midi:(PGMidi *)midi sourceRemoved:(PGMidiSource *)source {
+    if (source == self.midiSource) {
+        self.midiSource = nil;
+    }
+    
+    [self performSelector:@selector(postMidiChangeNotification) withObject:nil afterDelay:1];
+}
+
+-(void)postMidiChangeNotification {
+    [[NSNotificationCenter defaultCenter] postNotificationName:MIDI_CHANGE_NOTIFICATION object:nil];
     
 }
 
@@ -165,11 +236,40 @@ const Float64 kGraphSampleRate = 44100.0;
     }
 }
 
+-(void) checkStartStopGraph {
+    // Stops and starts AUGraph with respect in background
+    if (self.connected || self.inForeground ) {
+        [self setAudioSessionActive];
+        //Initialize the graph if it hasn't been already
+        if (mGraph) {
+            Boolean initialized = YES;
+            checkError(AUGraphIsInitialized(mGraph, &initialized), "Error checking initializing of AUGraph");
+            if (!initialized)
+                checkError(AUGraphInitialize (mGraph), "Error initializing AUGraph");
+        }
+        [self startAUGraph];
+    } else if(!self.inForeground){
+        [self stopAUGraph];
+        [self setAudioSessionInActive];
+    }
+}
+
+-(void) setAudioSessionActive {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setPreferredSampleRate: [[AVAudioSession sharedInstance] sampleRate] error: nil];
+    [session setCategory: AVAudioSessionCategoryPlayback withOptions: AVAudioSessionCategoryOptionMixWithOthers error: nil];
+    [session setActive: YES error: nil];
+}
+
+-(void) setAudioSessionInActive {
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setActive: NO error: nil];
+}
+
 #pragma mark RENDER
 // the render callback procedure
 static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData)
 {
-    // DSP!
     // Renders synth
  
     // Get reference to audio controller from inRefCon
@@ -215,35 +315,271 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
     // Send signal to audio buffer
     // outA is a pointer to the buffer that will be filled
-    SInt16 *outA = (SInt16 *)ioData->mBuffers[0].mData;
+    AudioSignalType *outA = (AudioSignalType *)ioData->mBuffers[0].mData;
     
     for (int i = 0; i < inNumberFrames; i++) {
         
         AudioSignalType output = mixedSignal[i];
-        
-        outA[i] = output * 32767.0f;
+        outA[i] = output;
+        //outA[i] = output * 32767.0f;
     }
     
     
     return noErr;
 }
 
+#pragma mark Housekeeping
+-(void)registerNotifications {
+
+    UIApplicationState appstate = [UIApplication sharedApplication].applicationState;
+    self.inForeground = (appstate != UIApplicationStateBackground);
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(appHasGoneInBackground)
+                                                 name: UIApplicationDidEnterBackgroundNotification
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(appHasGoneForeground)
+                                                 name: UIApplicationWillEnterForegroundNotification
+                                               object: nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver: self
+                                             selector: @selector(cleanup)
+                                                 name: UIApplicationWillTerminateNotification
+                                               object: nil];
+}
+
+-(void)cleanup {
+    [self stopAUGraph];
+    AUGraphClose(mGraph);
+    DisposeAUGraph(mGraph);
+    mGraph = nil;
+}
+
+-(void)appHasGoneInBackground {
+    self.inForeground = NO;
+    [self checkStartStopGraph];
+}
+
+-(void) appHasGoneForeground {
+    self.inForeground = YES;
+    [self isHostConnected];
+    [self checkStartStopGraph];
+    [self updateStatefromTransportCallBack];
+}
+
+-(void)dealloc {
+    [self removeObserver:self forKeyPath:UIApplicationDidEnterBackgroundNotification];
+    [self removeObserver:self forKeyPath:UIApplicationWillEnterForegroundNotification];
+    [self removeObserver:self forKeyPath:UIApplicationWillTerminateNotification];
+}
+
+
+#pragma mark InterApp Audio
+// Publish the interapp node
+- (void)publishAsNode {
+    AudioComponentDescription desc = {
+        kAudioUnitType_RemoteInstrument, 'iasp',
+        'lfnc',
+        0,
+        1};
+    
+    checkError(AudioOutputUnitPublish(&desc, CFSTR("LF1 Monosynth"), 1, mOutput) , "Cannot publish to inter-app audio" );
+    
+    [self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
+}
+
+// Checks host connection, and handles transitions between states
+- (BOOL) isHostConnected {
+    if (mOutput) {
+        UInt32 connect;
+        UInt32 dataSize = sizeof(UInt32);
+        checkError(AudioUnitGetProperty(mOutput, kAudioUnitProperty_IsInterAppConnected, kAudioUnitScope_Global, 0, &connect, &dataSize), "Error checking host status");
+        if (connect != self.connected) {
+            self.connected = connect;
+            //Transition is from not connected to connected
+            if (self.connected) {
+                [self checkStartStopGraph];
+                //Get the appropriate callback info
+                [self getHostCallBackInfo];
+                [self getAudioUnitIcon];
+            }
+            //Transition is from connected to not connected;
+            else {
+                //If the graph is started stop it.
+                [self stopAUGraph];
+                //Attempt to restart the graph
+                [self checkStartStopGraph];
+            }
+        }
+    }
+    return self.connected;
+}
+
+// Send transport state to remote host
+-(void)sendStateToRemoteHost:(AudioUnitRemoteControlEvent)state {
+    // Send a remote control message back to host
+    if (mOutput) {
+        UInt32 controlEvent = state;
+        UInt32 dataSize = sizeof(controlEvent);
+        checkError(AudioUnitSetProperty(mOutput, kAudioOutputUnitProperty_RemoteControlToHost, kAudioUnitScope_Global, 0, &controlEvent, dataSize), "Failed sendStateToRemoteHost");
+    }
+}
+
+-(void)toggleRecord {
+    [self sendStateToRemoteHost:kAudioUnitRemoteControlEvent_ToggleRecord];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TRANSPORT_CHANGE_NOTIFICATION_STRING object:self];
+}
+
+-(void)togglePlay {
+    [self sendStateToRemoteHost:kAudioUnitRemoteControlEvent_TogglePlayPause];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TRANSPORT_CHANGE_NOTIFICATION_STRING object:self];
+}
+
+-(void)rewind {
+    [self sendStateToRemoteHost:kAudioUnitRemoteControlEvent_Rewind];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TRANSPORT_CHANGE_NOTIFICATION_STRING object:self];
+}
+
+
+// Respond to changes from host
+-(void) audioUnitPropertyChangedListener:(void *) inObject unit:(AudioUnit )inUnit propID:(AudioUnitPropertyID) inID scope:( AudioUnitScope )inScope  element:(AudioUnitElement )inElement {
+    if (inID == kAudioUnitProperty_IsInterAppConnected) {
+        [self isHostConnected];
+        [self postUpdateStateNotification];
+    } else if (inID == kAudioOutputUnitProperty_HostTransportState) {
+        [self updateStatefromTransportCallBack];
+        [self postUpdateStateNotification];
+    }
+}
+
+// Update the current transport state
+-(void)updateStatefromTransportCallBack{
+    if (self.connected && self.inForeground) {
+        if (!callBackInfo) {
+            [self getHostCallBackInfo];
+        }
+        if (callBackInfo) {
+            Boolean isPlaying  = self.isHostPlaying;
+            Boolean isRecording = self.isHostRecording;
+            Float64 outCurrentSampleInTimeLine = 0;
+            void * hostUserData = callBackInfo->hostUserData;
+            OSStatus result =  callBackInfo->transportStateProc2( hostUserData,
+                                                                 &isPlaying,
+                                                                 &isRecording, NULL,
+                                                                 &outCurrentSampleInTimeLine,
+                                                                 NULL, NULL, NULL);
+            if (result == noErr) {
+                self.isHostPlaying = isPlaying;
+                self.isHostRecording = isRecording;
+                self.playTime = outCurrentSampleInTimeLine;
+            } else
+                NSLog(@"Error occured fetching callBackInfo->transportStateProc2 : %d", (int)result);
+        }
+    }
+}
+
+// Get callback info for host
+-(void)getHostCallBackInfo {
+    if (self.connected) {
+        if (callBackInfo)
+            free(callBackInfo);
+        UInt32 dataSize = sizeof(HostCallbackInfo);
+        callBackInfo = (HostCallbackInfo*) malloc(dataSize);
+        OSStatus result = AudioUnitGetProperty(mOutput, kAudioUnitProperty_HostCallbacks, kAudioUnitScope_Global, 0, callBackInfo, &dataSize);
+        if (result != noErr) {
+            NSLog(@"Error occured fetching kAudioUnitProperty_HostCallbacks : %d", (int)result);
+            free(callBackInfo);
+            callBackInfo = NULL;
+        }
+    }
+}
+
+-(UIImage *) getAudioUnitIcon {
+    if (mOutput) {
+        self.hostAppIcon = AudioOutputUnitGetHostIcon(mOutput, 114);
+    }
+    return self.hostAppIcon;
+}
+
+// Notification when the transport state has changed
+-(void) postUpdateStateNotification {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:TRANSPORT_CHANGE_NOTIFICATION_STRING object:self];
+    });
+}
+
+-(void)gotoHost {
+    if (mOutput) {
+        CFURLRef instrumentUrl;
+        UInt32 dataSize = sizeof(instrumentUrl);
+        OSStatus result = AudioUnitGetProperty(mOutput, kAudioUnitProperty_PeerURL, kAudioUnitScope_Global, 0, &instrumentUrl, &dataSize);
+        if (result == noErr) {
+            [[UIApplication sharedApplication] openURL:(__bridge NSURL*)instrumentUrl];
+        }
+    }
+}
+
+-(void) setupMidiCallBacks:(AudioUnit*)output userData:(void*)inUserData {
+    AudioOutputUnitMIDICallbacks callBackStruct;
+    callBackStruct.userData = inUserData;
+    callBackStruct.MIDIEventProc = MIDIEventProcCallBack;
+    callBackStruct.MIDISysExProc = NULL;
+    checkError(AudioUnitSetProperty (*output,
+                                kAudioOutputUnitProperty_MIDICallbacks,
+                                kAudioUnitScope_Global,
+                                0,
+                                &callBackStruct,
+                                sizeof(callBackStruct)), "Can't setup Inter App MIDI Callback");
+}
+
+void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt32 inData2, UInt32 inOffsetSampleFrame){
+    AudioEngine *ae = (__bridge AudioEngine*)userData;
+//    
+//    if (inStatus == 144) {
+//        [ae.cvController noteOn:inData1];
+//    } else if (inStatus == 128) {
+//        [ae.cvController noteOff:inData1];
+//    } else if (inStatus == 224) {
+//        int value = ((inData2 << 7)) + inData1;
+//        [ae.cvController setPitchbend:value / 16383.0];
+//        
+//        
+//        //ae.cvController.pitchbend = inData1 / 127.0;
+//    }
+    
+    Byte midiCommand = inStatus >> 4;
+    Byte data1 = inData1 & 0x7F;
+    Byte data2 = inData2 & 0x7F;
+    
+    if (midiCommand == 0x09) {
+        [ae.cvController noteOn:inData1];
+    } else if (midiCommand == 0x08) {
+        [ae.cvController noteOff:data1];
+    } else if (midiCommand == 0x0E) {
+        int value = ((data2 << 7)) + data1;
+        [ae.cvController setPitchbend:value / 16383.0];
+    }
+}
+
+#pragma mark Utility
+
 static void checkError(OSStatus error, const char *operation) {
     if (error == noErr) return;
     char errorString[20];
     
-    // See if it appears to be a 4-char-code
-    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
-    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
-        errorString[0] = errorString[5] = '\'';
-        errorString[6] = '\0';
-    } else {
-        // No, format it as an integer
-        sprintf(errorString, "%d", (int)error);
-    }
+//    // See if it appears to be a 4-char-code
+//    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
+//    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
+//        errorString[0] = errorString[5] = '\'';
+//        errorString[6] = '\0';
+//    } else {
+//        // No, format it as an integer
+//        sprintf(errorString, "%d", (int)error);
+//    }
     
     fprintf(stderr, "Error: %s (%s)\n", operation, errorString); exit(1);
 }
-
 
 @end

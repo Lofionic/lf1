@@ -19,7 +19,6 @@
 
 -(void)prepareBufferWithBufferSize:(UInt32)bufferSize {
     if (bufferSize != self.bufferSize) {
-        NSLog(@"Preparing buffer of size: %i for component:%@", (unsigned int)bufferSize, self.description);
         free(_buffer);
         self.buffer = (AudioSignalType*)malloc(bufferSize * sizeof(AudioSignalType));
         self.bufferSize = bufferSize;

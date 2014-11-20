@@ -21,6 +21,7 @@
 @property bool gliss;
 @property (nonatomic, strong) NSArray *gateComponents;
 @property float pitchbend;
+@property NSInteger pitchWheelRange;
 
 -(void)noteOn:(NSInteger)note;
 -(void)noteOff:(NSInteger)note;

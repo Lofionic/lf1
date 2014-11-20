@@ -2,7 +2,7 @@
 //  Created by Chris Rivers on 22/02/2014.
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
-
+#import "Defines.h"
 #import "CVComponent.h"
 
 @implementation CVComponent {
@@ -24,6 +24,8 @@
         self.pitchbend = 0.5;
         prevPitchbend = 0.5;
 
+        self.pitchWheelRange = 7;
+        
         noteOns = [[NSMutableArray alloc] initWithCapacity:10];
         
     }
@@ -44,7 +46,8 @@
                 [self openGate];
             }
         } else {
-            noteOns = [@[noteNumber] mutableCopy];
+            [noteOns addObject:noteNumber];
+            //noteOns = [@[noteNumber] mutableCopy];
             [self openGate];
         }
         
@@ -58,12 +61,18 @@
     NSNumber *noteNumber = [NSNumber numberWithInteger:note];
     
     if ([noteOns containsObject:noteNumber]) {
+        
+        NSNumber *lastOn = [noteOns lastObject];
+        
         [noteOns removeObject:noteNumber];
         
         if ([noteOns count] == 0) {
             [self closeGate];
         } else {
             [self setFrequency];
+            if (!self.gliss && noteNumber == lastOn) {
+                [self openGate];
+            }
         }
     }
 }
@@ -75,7 +84,8 @@
     
     // set the target freq
     // Calculate note frequency
-    float frequency = (powf(powf(2, (1.0 / 12.0)), note)) * 55.0;
+    //float frequency = (powf(powf(2, (1.0 / 12.0)), note)) * 3.4375;
+    float frequency = powf(2, (note - 69) / 12.0) * 220;
     
     // Convert to float in 0-1 range
     targetOutputValue = frequency / CV_FREQUENCY_RANGE;
@@ -113,7 +123,7 @@
         float pitchbendNormalized = prevPitchbend + (i * pitchbendDelta);
         
         float adjustValue = (pitchbendNormalized * 2.0) - 1.0;
-        adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
+        adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * self.pitchWheelRange));
         
         outA[i] = currentOutputValue * adjustValue;
         [self updateCurrentOutputValueForOneSample];

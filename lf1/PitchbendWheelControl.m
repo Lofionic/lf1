@@ -7,6 +7,7 @@
 //
 #import "BuildSettings.h"
 #import "PitchbendWheelControl.h"
+#import "Defines.h"
 
 @implementation PitchbendWheelControl {
     

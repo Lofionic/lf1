@@ -2,7 +2,7 @@
 //  Created by Chris Rivers on 22/02/2014.
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
-
+#import "Defines.h"
 #import "PresetController.h"
 
 @implementation PresetController
@@ -37,8 +37,8 @@
                         @"lfoView.amountControl.value",
                         @"lfoView.destinationControl.index",
                         @"lfoView.waveformControl.index",
-                        @"keyboardControlView.glideControl.value",
-                        @"keyboardControlView.glissSwitch.value"
+                        @"performanceControlView.glideControl.value",
+                        @"performanceControlView.glissSwitch.value"
                         ];
     }
     return self;

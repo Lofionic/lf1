@@ -4,7 +4,6 @@
 //
 
 #import "BuildSettings.h"
-//#import "CAStreamBasicDescription.h"
 #import "CVComponent.h"
 #import "Envelope.h"
 #import "EnvelopeControlView.h"
@@ -18,13 +17,14 @@
 #import <AudioToolbox/AudioToolbox.h>
 #import <CoreAudio/CoreAudioTypes.h>
 #import <Foundation/Foundation.h>
+#import "PGMidi.h"
 
-@interface AudioEngine : NSObject {
-
+@interface AudioEngine : NSObject <PGMidiDelegate, PGMidiSourceDelegate> {
     AUGraph mGraph;
     AudioUnit mOutput;
     AudioUnit mConverter;
-    
+    MIDIPortRef inPort;
+    MIDIClientRef client;
     AudioStreamBasicDescription outputASBD;
 }
 
@@ -43,5 +43,22 @@
 -(void)initializeAUGraph;
 -(void)startAUGraph;
 -(void)stopAUGraph;
+
+-(BOOL)isHostConnected;
+-(UIImage*) getAudioUnitIcon;
+-(void)toggleRecord;
+-(void)togglePlay;
+-(void)rewind;
+-(void)gotoHost;
+
+@property (nonatomic) bool connected;
+@property (nonatomic) bool isHostRecording;
+@property (nonatomic) bool isHostPlaying;
+@property (nonatomic) bool inForeground;
+@property (nonatomic) Float64 playTime;
+@property (nonatomic, strong) UIImage *hostAppIcon;
+
+@property (nonatomic, weak) PGMidi *midi;
+@property (nonatomic, weak) PGMidiSource *midiSource;
 
 @end

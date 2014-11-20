@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController">
             <connections>
+                <outlet property="hostIcon" destination="xsg-JT-lal" id="smZ-Xg-0gX"/>
                 <outlet property="iPadControlsView1" destination="KLo-Pj-TPe" id="hzW-CT-eKu"/>
                 <outlet property="iPadControlsView2" destination="zur-Od-iVT" id="YBP-HI-LzW"/>
                 <outlet property="iPadControlsView3" destination="CZ5-mR-Wzv" id="IYX-8T-44L"/>
@@ -14,6 +15,10 @@
                 <outlet property="iPadControlsView5" destination="54c-MI-6LV" id="1yi-C3-tCC"/>
                 <outlet property="iPadControlsView6" destination="BjO-Zo-wSO" id="iCP-eB-np7"/>
                 <outlet property="keyboardView" destination="dDc-zW-m3s" id="2YC-Pc-Irn"/>
+                <outlet property="playButton" destination="COl-nt-z3T" id="LtH-XH-0ck"/>
+                <outlet property="recordButton" destination="qX0-iR-Ec4" id="K7e-fz-gWb"/>
+                <outlet property="rewindButon" destination="eud-GZ-u8N" id="f6v-Qp-wQR"/>
+                <outlet property="transportView" destination="s4W-9Q-8kx" id="j9E-e5-p0d"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Flc-gi-arS"/>
             </connections>
         </placeholder>
@@ -22,20 +27,24 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="controls_bg.png" id="81z-2B-UuQ">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="470"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
                 <view contentMode="scaleToFill" id="KLo-Pj-TPe" userLabel="Controller View 1">
-                    <rect key="frame" x="8" y="20" width="248" height="434"/>
+                    <rect key="frame" x="8" y="44" width="248" height="410"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="YvS-Li-Olr">
-                    <rect key="frame" x="512" y="280" width="504" height="174"/>
+                    <rect key="frame" x="512" y="296" width="504" height="158"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="CZ5-mR-Wzv">
-                    <rect key="frame" x="256" y="20" width="256" height="300"/>
+                    <rect key="frame" x="256" y="44" width="256" height="288"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="zur-Od-iVT" userLabel="Controller View 3">
-                    <rect key="frame" x="512" y="20" width="504" height="260"/>
+                    <rect key="frame" x="512" y="44" width="504" height="252"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="54c-MI-6LV">
@@ -48,14 +57,72 @@
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <view contentMode="scaleToFill" id="BjO-Zo-wSO">
-                    <rect key="frame" x="256" y="326" width="256" height="128"/>
+                    <rect key="frame" x="256" y="340" width="256" height="114"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </view>
+                <view hidden="YES" alpha="0.75" contentMode="scaleToFill" id="s4W-9Q-8kx" userLabel="InterappView">
+                    <rect key="frame" x="0.0" y="0.0" width="342" height="64"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="COl-nt-z3T">
+                            <rect key="frame" x="154" y="8" width="80" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="play_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="transportPlay:" destination="-1" eventType="touchDown" id="cpx-7l-5hW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eud-GZ-u8N">
+                            <rect key="frame" x="66" y="7" width="80" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="rewind_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="transportRewind:" destination="-1" eventType="touchDown" id="TUk-jP-7fc"/>
+                            </connections>
+                        </button>
+                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="xsg-JT-lal">
+                            <rect key="frame" x="8" y="6" width="50" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qX0-iR-Ec4">
+                            <rect key="frame" x="242" y="8" width="80" height="50"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" image="record_button.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="transportRecord:" destination="-1" eventType="touchDown" id="eXt-Da-ZOt"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="LZm-do-vcH">
+                    <rect key="frame" x="976" y="0.0" width="40" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" image="spanner.png"/>
+                    <connections>
+                        <action selector="settingsButton:" destination="-1" eventType="touchDown" id="x0f-pk-3xW"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.11892361110000001" green="0.1151555623" blue="0.1180474363" alpha="1" colorSpace="calibratedRGB"/>
+            <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <point key="canvasLocation" x="96" y="58"/>
         </view>
     </objects>
+    <resources>
+        <image name="controls_bg.png" width="1024" height="470"/>
+        <image name="play_button.png" width="80" height="50"/>
+        <image name="record_button.png" width="80" height="50"/>
+        <image name="rewind_button.png" width="80" height="50"/>
+        <image name="spanner.png" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

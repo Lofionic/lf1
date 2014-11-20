@@ -11,7 +11,7 @@
 #import "SwitchControl.h"
 #import "PitchbendWheelControl.h"
 
-@interface KeyboardControlView : ControlView
+@interface PerformanceControlView : ControlView
 
 @property (nonatomic, weak) CVComponent *cvComponent;
 

@@ -2,7 +2,7 @@
 //  Created by Chris Rivers on 22/02/2014.
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
-
+#import "Defines.h"
 #import "CCRRotaryControl.h"
 #import <QuartzCore/QuartzCore.h>
 

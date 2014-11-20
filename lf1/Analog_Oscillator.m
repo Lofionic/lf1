@@ -5,47 +5,89 @@
 
 #import "Analog_Oscillator.h"
 #import "BuildSettings.h"
-#define DECLICK_THRESHOLD 0.05
+#import "Defines.h"
+
+#define WAVETABLE_SIZE 8196
 
 @implementation Analog_Oscillator {
-
-    double phase[ANALOG_HARMONICS];
+    double phase;
     AudioSignalType prevResult;
+    AudioSignalType sinWaveTable[WAVETABLE_SIZE];
+    AudioSignalType sawWaveTable[WAVETABLE_SIZE];
+    AudioSignalType squareWaveTable[WAVETABLE_SIZE];
 }
 
--(id)init {
-    self = [super init];
+-(id)initWithSampleRate:(Float64)graphSampleRate {
+    self = [super initWithSampleRate:graphSampleRate];
     if (self) {
-        for (int x = 0; x < ANALOG_HARMONICS; x++) {
-            phase[x] = 0;
-        }
+        phase = 0;
+        [self generateWavetablels];
     }
     return self;
 }
 
+-(void)generateWavetablels {
+    
+    // Generate Sin wavetable
+    for (int i = 0; i < WAVETABLE_SIZE; i++) {
+        double tablePhase = (i / (float)WAVETABLE_SIZE + 1.0) * (M_PI * 2);
+        AudioSignalType a = sin(tablePhase);
+        sinWaveTable[i] = a;
+    }
+    
+    // Generate Saw wavetable
+    
+    for (int i = 0; i < WAVETABLE_SIZE; i++) {
+        float amp = 0.5f;
+        double result = 0;
+        double tablePhase = (i / (float)WAVETABLE_SIZE + 1.0) * (M_PI * 2);
+        for (int j = 1; j < ANALOG_HARMONICS + 1; j++) {
+            result += sin(tablePhase * j) * amp;
+            amp /= 2.0;
+        }
+        sawWaveTable[i] = (AudioSignalType)result;
+        
+    }
+    
+    // Generate Square wavetable
+
+    for (int i = 0; i < WAVETABLE_SIZE; i++) {
+        double sum = 0;
+        float count = 0;
+        double tablePhase = (i / (float)WAVETABLE_SIZE + 1.0) * (M_PI * 2);
+        for (int j = 1; j < ANALOG_HARMONICS + 1;j += 2) {
+            
+            sum += sin(tablePhase * j);
+            count ++;
+        }
+        sum /= count;
+        squareWaveTable[i] = (AudioSignalType)sum;
+    }
+
+}
+
 -(void) renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {
+    
+    LFO *lfo = self.lfo;
     
     // Fill a buffer with oscillator samples
     for (int i = 0; i < numFrames; i++) {
         
         AudioSignalType value = [self getNextSample];
 
-        
         outA[i] = value;
         
         // Apply LFO
-        float lfo = 1;
+        AudioSignalType lfoValue = 1;
         
-        if (self.lfo) {
-            lfo = powf(0.5, -self.lfo.buffer[i]);
+        if (lfo) {
+            lfoValue = powf(0.5, -lfo.buffer[i]);
         }
-        
         
         // Apply freq adjustment
         float adjustValue = (self.freq_adjust * 2.0) - 1.0;
         
         adjustValue = (powf(powf(2, (1.0 / 12.0)), adjustValue * 7));
-        
         
         float freq = FLT_MIN;
         if ([self cvController]) {
@@ -53,86 +95,72 @@
         }
     
         // Increment Phase
-        for (int j = 0; j < ANALOG_HARMONICS; j++) {
-            phase[j] += ((M_PI * freq * lfo * adjustValue * powf(2, self.octave)) / self.sampleRate) * (j + 1);
-            
-            if (phase[j] > M_PI * 2.0) {
-                phase[j] -= M_PI * 2.0;
-            }
-            
+        phase += ((M_PI * freq * lfoValue * adjustValue * powf(2, self.octave)) / self.sampleRate);
+        
+
+        // Prevent overflow
+        if (phase > M_PI * 2.0) {
+            phase -= M_PI * 2.0;
         }
         
         // Change waveform on zero crossover
         if ((value > 0) != (prevResult < 0) || value == 0) {
             if (self.waveform != self.nextWaveform) {
                 [self changeToNextWaveform];
-                for (int j = 0; j <ANALOG_HARMONICS; j++) {
-                    phase[j] = 0;
-                }
+                phase = 0;
             }
         }
         
         prevResult = value;
         
     }
-    
-    [self avoidOverflow];
-
 }
 
 -(AudioSignalType) getNextSample {
     
     switch ([self waveform]) {
         case Sin: {
-            // Sin generator
-            AudioSignalType a = (AudioSignalType)sin(phase[0]);
+            
+            double tPhase = phase;
+            float sampleIndexFloat = (tPhase / (M_PI * 2)) * (WAVETABLE_SIZE - 1);
+            AudioSignalType sampleIndexLower = sinWaveTable[(int)floor(sampleIndexFloat)];
+            AudioSignalType sampleIndexUpper = sinWaveTable[(int)ceil(sampleIndexFloat)];
+            float remainder = fmodf(sampleIndexFloat, 1);
+            
+            AudioSignalType a = sampleIndexLower + (sampleIndexUpper - sampleIndexLower) * remainder;
+            
             return a;
-            break;
+
         }
         case Saw: {
             
-            // Sawtooth generator
-            float amp = 0.5f;
-            double result = 0;
-            for (int i = 0; i < ANALOG_HARMONICS; i++) {
-                result += sin(phase[i]) * amp;
-                amp /= 2.0;
-            }
-            return (AudioSignalType)result;
-            break;
+            double tPhase = phase;
+            float sampleIndexFloat = (tPhase / (M_PI * 2)) * (WAVETABLE_SIZE - 1);
+            AudioSignalType sampleIndexLower = sawWaveTable[(int)floor(sampleIndexFloat)];
+            AudioSignalType sampleIndexUpper = sawWaveTable[(int)ceil(sampleIndexFloat)];
+            float remainder = fmodf(sampleIndexFloat, 1);
+            
+            AudioSignalType a = sampleIndexLower + (sampleIndexUpper - sampleIndexLower) * remainder;
+            
+            return a;
+
         }
         case Square: {
             
-            // Square wave generator
-            double sum = 0;
-            float count = 0;
+            double tPhase = phase;
+            float sampleIndexFloat = (tPhase / (M_PI * 2)) * (WAVETABLE_SIZE -1);
+            AudioSignalType sampleIndexLower = squareWaveTable[(int)floor(sampleIndexFloat)];
+            AudioSignalType sampleIndexUpper = squareWaveTable[(int)ceil(sampleIndexFloat)];
+            float remainder = fmodf(sampleIndexFloat, 1);
             
-            for (int i = 0; i < ANALOG_HARMONICS; i += 2) {
-                sum += sin(phase[i]);
-                count ++;
-            }
-            
-            sum /= count;
-            return (AudioSignalType)sum;
+            AudioSignalType a = sampleIndexLower + (sampleIndexUpper - sampleIndexLower) * remainder;
+
+            return a;
             
         }
-            break;
+
         default:
             return 0;
-    }
-}
-
--(void)incrementPhase:(float)phaseIncrement {
-    for (int x = 0; x < ANALOG_HARMONICS; x++) {
-        phase[x] += (phaseIncrement * (x + 1));
-    }
-}
-
--(void)avoidOverflow {
-    for (int x = 0; x < ANALOG_HARMONICS; x++) {
-        if (phase[x] >= M_PI * 2.0) {
-            phase[x] -= (M_PI * 2.0);
-        }
     }
 }
 
