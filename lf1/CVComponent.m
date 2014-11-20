@@ -61,13 +61,16 @@
     NSNumber *noteNumber = [NSNumber numberWithInteger:note];
     
     if ([noteOns containsObject:noteNumber]) {
+        
+        NSNumber *lastOn = [noteOns lastObject];
+        
         [noteOns removeObject:noteNumber];
         
         if ([noteOns count] == 0) {
             [self closeGate];
         } else {
             [self setFrequency];
-            if (!self.gliss && noteNumber == [noteOns lastObject]) {
+            if (!self.gliss && noteNumber == lastOn) {
                 [self openGate];
             }
         }

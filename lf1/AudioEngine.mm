@@ -25,15 +25,6 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     
     // AUNodes represent Audio Units on the AUGraph
     AUNode ioNode;
-    AUNode converterNode;
-    
-    // Set up converter component description
-    AudioComponentDescription converter_desc;
-    converter_desc.componentType = kAudioUnitType_FormatConverter;
-    converter_desc.componentSubType = kAudioUnitSubType_AUConverter;
-    converter_desc.componentFlags = 0;
-    converter_desc.componentFlagsMask = 0;
-    converter_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
     
     // Setup output component description
     AudioComponentDescription output_desc;
@@ -44,48 +35,36 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     output_desc.componentManufacturer = kAudioUnitManufacturer_Apple;
     
     // Add nodes to the graph to hold our AudioUnits
-    checkError(AUGraphAddNode(mGraph, &converter_desc, &converterNode), "Cannot add AUConverter node to AUGraph");
-
     checkError(AUGraphAddNode(mGraph, &output_desc, &ioNode), "Cannot add RemoteIO node to AUGraph");
-    
-    // Connect Converter Node's outout to the Output node's input
-    checkError(AUGraphConnectNodeInput(mGraph, converterNode, 0, ioNode, 0), "Cannot connect AUConverter node to RemoteIO node");
     
     // Open the graph - AudioUnits are opened but not initialized
     checkError(AUGraphOpen(mGraph), "Cannot open AUGraph");
     
-    // Get a link to the converter node
-    checkError(AUGraphNodeInfo(mGraph, converterNode, NULL, &mConverter), "Cannot get info for AUConverter node");
-
     // Get a link to the output AU so we can talk to it later
     checkError(AUGraphNodeInfo(mGraph, ioNode, NULL, &mOutput), "Cannot get info for RemoteIO node");
     
-    // Set the converter callback struct
+    // Set the render callback struct
     AURenderCallbackStruct renderCallbackStruct;
     renderCallbackStruct.inputProc = &renderAudio;
     renderCallbackStruct.inputProcRefCon = (__bridge void*)self;
-    checkError(AUGraphSetNodeInputCallback(mGraph, converterNode, 0, &renderCallbackStruct), "Cannot set AUConverter node input callback" );
-
-    // Set up the converter input stream
-    AudioStreamBasicDescription desc;
-    UInt32 size = sizeof(desc);
+    checkError(AUGraphSetNodeInputCallback(mGraph, ioNode, 0, &renderCallbackStruct), "Cannot set AUConverter node input callback" );
     
-    checkError(AudioUnitGetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, &size), "Cannot get stream format from AUConverter");
-    // Initialize the structure to ensure there are no spurious values
-    memset (&desc, 0, sizeof(desc));
-    
-    // Make modifications to the AudioStreamBasicDescription
-    desc.mSampleRate = kGraphSampleRate;
-    desc.mFormatID = kAudioFormatLinearPCM;
-    desc.mFormatFlags = kAudioFormatFlagIsSignedInteger | kAudioFormatFlagIsPacked;
-    desc.mBitsPerChannel = sizeof(SInt16) * 8; // AudioSampleType == 16 bit signed ints
-    desc.mChannelsPerFrame = 1;
-    desc.mFramesPerPacket = 1;
-    desc.mBytesPerFrame = (desc.mBitsPerChannel / 8) * desc.mChannelsPerFrame;
-    desc.mBytesPerPacket = desc.mBytesPerFrame * desc.mFramesPerPacket;
+    // Setup the IO stream format
+    const int four_bytes_per_float = 4;
+    const int eight_bits_per_byte = 8;
+    AudioStreamBasicDescription streamFormat;
+    streamFormat.mSampleRate = kGraphSampleRate;
+    streamFormat.mFormatID = kAudioFormatLinearPCM;
+    streamFormat.mFormatFlags =
+    kAudioFormatFlagsNativeFloatPacked | kAudioFormatFlagIsNonInterleaved;
+    streamFormat.mBytesPerPacket = four_bytes_per_float;
+    streamFormat.mFramesPerPacket = 1;
+    streamFormat.mBytesPerFrame = four_bytes_per_float;
+    streamFormat.mChannelsPerFrame = 1;
+    streamFormat.mBitsPerChannel = four_bytes_per_float * eight_bits_per_byte;
     
     // Apply the modified AudioStreamBasicDescription to the converter input bus
-    checkError(AudioUnitSetProperty(mConverter, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &desc, sizeof(desc)), "Cannot set AUConverter audio stream property");
+    checkError(AudioUnitSetProperty(mOutput, kAudioUnitProperty_StreamFormat, kAudioUnitScope_Input, 0, &streamFormat, sizeof(streamFormat)), "Cannot set AUConverter audio stream property");
 
     // Add property listeners for inter app audio
     checkError(AudioUnitAddPropertyListener(mOutput, kAudioUnitProperty_IsInterAppConnected, AudioUnitPropertyChangeDispatcher, (__bridge void*)self), "Error setting IsInterAppConnected property listener");
@@ -188,9 +167,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
-        
-        NSLog(@"%i %i %i", midiStatus, inData1, inData2);
-        
+
         if (midiCommand == 0x09) {
             [self.cvController noteOn:inData1];
         } else if (midiCommand == 0x08) {
@@ -338,13 +315,13 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
     // Send signal to audio buffer
     // outA is a pointer to the buffer that will be filled
-    SInt16 *outA = (SInt16 *)ioData->mBuffers[0].mData;
+    AudioSignalType *outA = (AudioSignalType *)ioData->mBuffers[0].mData;
     
     for (int i = 0; i < inNumberFrames; i++) {
         
         AudioSignalType output = mixedSignal[i];
-        
-        outA[i] = output * 32767.0f;
+        outA[i] = output;
+        //outA[i] = output * 32767.0f;
     }
     
     
@@ -592,15 +569,15 @@ static void checkError(OSStatus error, const char *operation) {
     if (error == noErr) return;
     char errorString[20];
     
-    // See if it appears to be a 4-char-code
-    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
-    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
-        errorString[0] = errorString[5] = '\'';
-        errorString[6] = '\0';
-    } else {
-        // No, format it as an integer
-        sprintf(errorString, "%d", (int)error);
-    }
+//    // See if it appears to be a 4-char-code
+//    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
+//    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
+//        errorString[0] = errorString[5] = '\'';
+//        errorString[6] = '\0';
+//    } else {
+//        // No, format it as an integer
+//        sprintf(errorString, "%d", (int)error);
+//    }
     
     fprintf(stderr, "Error: %s (%s)\n", operation, errorString); exit(1);
 }

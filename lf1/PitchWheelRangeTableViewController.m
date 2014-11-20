@@ -21,11 +21,10 @@
 
     self.ae = AUDIO_ENGINE;
     
-    [self.pickerView setSoundsEnabled:NO];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-
+    [super viewWillAppear:animated];
     [self.pickerView selectRow:self.ae.cvController.pitchWheelRange - 1 inComponent:0 animated:NO];
 }
 

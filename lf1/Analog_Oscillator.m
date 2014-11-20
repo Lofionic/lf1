@@ -120,27 +120,41 @@
     
     switch ([self waveform]) {
         case Sin: {
-            // Return wavetable value
+            
             double tPhase = phase;
-            int sampleIndex = (tPhase / (M_PI * 2)) * WAVETABLE_SIZE;
-            AudioSignalType a = sinWaveTable[sampleIndex];
+            float sampleIndexFloat = (tPhase / (M_PI * 2)) * (WAVETABLE_SIZE - 1);
+            AudioSignalType sampleIndexLower = sinWaveTable[(int)floor(sampleIndexFloat)];
+            AudioSignalType sampleIndexUpper = sinWaveTable[(int)ceil(sampleIndexFloat)];
+            float remainder = fmodf(sampleIndexFloat, 1);
+            
+            AudioSignalType a = sampleIndexLower + (sampleIndexUpper - sampleIndexLower) * remainder;
+            
             return a;
 
         }
         case Saw: {
             
             double tPhase = phase;
-            int sampleIndex = (tPhase / (M_PI * 2)) * WAVETABLE_SIZE;
-            AudioSignalType a = sawWaveTable[sampleIndex];
+            float sampleIndexFloat = (tPhase / (M_PI * 2)) * (WAVETABLE_SIZE - 1);
+            AudioSignalType sampleIndexLower = sawWaveTable[(int)floor(sampleIndexFloat)];
+            AudioSignalType sampleIndexUpper = sawWaveTable[(int)ceil(sampleIndexFloat)];
+            float remainder = fmodf(sampleIndexFloat, 1);
+            
+            AudioSignalType a = sampleIndexLower + (sampleIndexUpper - sampleIndexLower) * remainder;
+            
             return a;
-
 
         }
         case Square: {
             
             double tPhase = phase;
-            int sampleIndex = (tPhase / (M_PI * 2)) * WAVETABLE_SIZE;
-            AudioSignalType a = squareWaveTable[sampleIndex];
+            float sampleIndexFloat = (tPhase / (M_PI * 2)) * (WAVETABLE_SIZE -1);
+            AudioSignalType sampleIndexLower = squareWaveTable[(int)floor(sampleIndexFloat)];
+            AudioSignalType sampleIndexUpper = squareWaveTable[(int)ceil(sampleIndexFloat)];
+            float remainder = fmodf(sampleIndexFloat, 1);
+            
+            AudioSignalType a = sampleIndexLower + (sampleIndexUpper - sampleIndexLower) * remainder;
+
             return a;
             
         }

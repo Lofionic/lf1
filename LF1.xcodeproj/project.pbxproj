@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6C01140A19C19C3600D3C802 /* OscillatorControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C01140919C19C3600D3C802 /* OscillatorControlView.xib */; };
 		6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C01140C19C19C6500D3C802 /* OscillatorControlView.m */; };
+		6C0395DC19FEF40F00BF7D0E /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6C0395DB19FEF40F00BF7D0E /* init.bnk */; };
 		6C04C63619E1AE0F00391A7D /* osc_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C63419E1AE0F00391A7D /* osc_frame.png */; };
 		6C04C63719E1AE0F00391A7D /* osc_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C63519E1AE0F00391A7D /* osc_frame@2x.png */; };
 		6C04C63A19E1B54000391A7D /* vcf_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C63819E1B54000391A7D /* vcf_frame.png */; };
@@ -141,7 +142,6 @@
 		6CE13C6519CA265400AF7954 /* LFORate_Background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE13C6319CA265400AF7954 /* LFORate_Background@2x.png */; };
 		6CE13C6C19CA38E600AF7954 /* ChickenKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE13C6A19CA38E600AF7954 /* ChickenKnob.png */; };
 		6CE13C6D19CA38E600AF7954 /* ChickenKnob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE13C6B19CA38E600AF7954 /* ChickenKnob@2x.png */; };
-		6CE3043E19FDAA6200B3F8A6 /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3043D19FDAA6200B3F8A6 /* init.bnk */; };
 		6CE3044319FDB16500B3F8A6 /* midi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3044019FDB16500B3F8A6 /* midi@3x.png */; };
 		6CE3044419FDB16500B3F8A6 /* midi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3044119FDB16500B3F8A6 /* midi@2x.png */; };
 		6CE3044519FDB16500B3F8A6 /* midi.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE3044219FDB16500B3F8A6 /* midi.png */; };
@@ -224,6 +224,7 @@
 		6C01140919C19C3600D3C802 /* OscillatorControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatorControlView.xib; sourceTree = "<group>"; };
 		6C01140B19C19C6500D3C802 /* OscillatorControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscillatorControlView.h; sourceTree = "<group>"; };
 		6C01140C19C19C6500D3C802 /* OscillatorControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OscillatorControlView.m; sourceTree = "<group>"; };
+		6C0395DB19FEF40F00BF7D0E /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
 		6C04C63419E1AE0F00391A7D /* osc_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osc_frame.png; sourceTree = "<group>"; };
 		6C04C63519E1AE0F00391A7D /* osc_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osc_frame@2x.png"; sourceTree = "<group>"; };
 		6C04C63819E1B54000391A7D /* vcf_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vcf_frame.png; sourceTree = "<group>"; };
@@ -389,7 +390,6 @@
 		6CE13C6A19CA38E600AF7954 /* ChickenKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChickenKnob.png; sourceTree = "<group>"; };
 		6CE13C6B19CA38E600AF7954 /* ChickenKnob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChickenKnob@2x.png"; sourceTree = "<group>"; };
 		6CE1DC8E19F2F12900E117B8 /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
-		6CE3043D19FDAA6200B3F8A6 /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
 		6CE3044019FDB16500B3F8A6 /* midi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "midi@3x.png"; sourceTree = "<group>"; };
 		6CE3044119FDB16500B3F8A6 /* midi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "midi@2x.png"; sourceTree = "<group>"; };
 		6CE3044219FDB16500B3F8A6 /* midi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = midi.png; sourceTree = "<group>"; };
@@ -408,7 +408,6 @@
 		6CE3045E19FDB6C600B3F8A6 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cross.png; sourceTree = "<group>"; };
 		6CE3045F19FDB6C600B3F8A6 /* cross@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@2x.png"; sourceTree = "<group>"; };
 		6CE3046019FDB6C600B3F8A6 /* cross@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@3x.png"; sourceTree = "<group>"; };
-		6CE3046419FDB8DD00B3F8A6 /* SilentPickerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SilentPickerView.h; sourceTree = "<group>"; };
 		6CF0374119F6F6C70054D493 /* play_button@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play_button@3x.png"; sourceTree = "<group>"; };
 		6CF0374319F6F6C70054D493 /* record_button_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record_button_on.png; sourceTree = "<group>"; };
 		6CF0374619F6F6C70054D493 /* play_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_button.png; sourceTree = "<group>"; };
@@ -708,7 +707,6 @@
 				6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */,
 				6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */,
 				6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */,
-				6CE3046419FDB8DD00B3F8A6 /* SilentPickerView.h */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -716,7 +714,7 @@
 		6C9BD76819DB557E008CE346 /* Banks */ = {
 			isa = PBXGroup;
 			children = (
-				6CE3043D19FDAA6200B3F8A6 /* init.bnk */,
+				6C0395DB19FEF40F00BF7D0E /* init.bnk */,
 			);
 			name = Banks;
 			sourceTree = "<group>";
@@ -1066,7 +1064,6 @@
 				6CB5E13319C45F0B008B9AC3 /* MainView.xib in Resources */,
 				6C47257C19D0F046008F481F /* white_key_up.png in Resources */,
 				6C47258D19D0F72B008F481F /* black_key_down@2x.png in Resources */,
-				6CE3043E19FDAA6200B3F8A6 /* init.bnk in Resources */,
 				6CF5F24519DC8D1500835C1B /* buttonE@2x.png in Resources */,
 				6C46742319F9D0C600B2DCAF /* spanner@2x.png in Resources */,
 				6C04C69119E1E02600391A7D /* label_decay.png in Resources */,
@@ -1107,6 +1104,7 @@
 				6C04C66119E1D34200391A7D /* label_vol.png in Resources */,
 				6CD81EDA19CB835200B46963 /* ChickenKnob_5way.png in Resources */,
 				6C04C6AA19E1E70000391A7D /* label_glide.png in Resources */,
+				6C0395DC19FEF40F00BF7D0E /* init.bnk in Resources */,
 				6C47258C19D0F72B008F481F /* black_key_up.png in Resources */,
 				6CBF661F19E0BC8D00236261 /* OscWave_Background@2x.png in Resources */,
 				6CF5F25219DC8DDC00835C1B /* buttonB@3x.png in Resources */,

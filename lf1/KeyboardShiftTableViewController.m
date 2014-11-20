@@ -25,11 +25,12 @@
                         @"+1 Octave",
                         @"+2 Octaves"];
     self.keyboardVew = MAIN_VIEW_CONTROLLER.keyboardView;
-    [self.pickerView setSoundsEnabled:NO];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     [self.pickerView selectRow:self.keyboardVew.keyboardShift inComponent:0 animated:NO];
 }
 

@@ -130,7 +130,7 @@
                         <rect key="frame" x="0.0" y="64" width="400" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYE-YT-KhA" customClass="SilentPickerView">
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYE-YT-KhA">
                                 <rect key="frame" x="40" y="7" width="320" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2e5-xz-iFz" id="Ud4-fz-W09"/>
@@ -198,7 +198,7 @@
                         <rect key="frame" x="0.0" y="64" width="400" height="176"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ith-dK-1Hq" customClass="SilentPickerView">
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ith-dK-1Hq">
                                 <rect key="frame" x="40" y="-20" width="320" height="216"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="xdL-6o-gcS"/>
