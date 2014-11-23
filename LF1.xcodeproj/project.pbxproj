@@ -64,12 +64,12 @@
 		6C04C6AB19E1E70000391A7D /* label_glide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6A719E1E70000391A7D /* label_glide@2x.png */; };
 		6C04C6AE19E1FB4600391A7D /* label_cutoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AC19E1FB4600391A7D /* label_cutoff.png */; };
 		6C04C6AF19E1FB4600391A7D /* label_cutoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */; };
+		6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3B1A220A2300464633 /* PGMidi.mm */; };
+		6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */; };
+		6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */; };
 		6C35244319EB0AD200C1BC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C35244219EB0AD200C1BC80 /* Images.xcassets */; };
 		6C36F5DA19FC3F8300DF0FE0 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */; };
 		6C36F5DD19FC449C00DF0FE0 /* MidiInputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */; };
-		6C36F5E719FC728C00DF0FE0 /* PGMidi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5E219FC728C00DF0FE0 /* PGMidi.mm */; };
-		6C36F5E819FC728C00DF0FE0 /* PGMidiAllSources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5E419FC728C00DF0FE0 /* PGMidiAllSources.mm */; };
-		6C36F5E919FC728C00DF0FE0 /* PGMidiFind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5E619FC728C00DF0FE0 /* PGMidiFind.mm */; };
 		6C36F5EC19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5EB19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m */; };
 		6C36F5F019FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5EF19FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m */; };
 		6C406FCE19CC244A0096672F /* Processor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C406FCD19CC244A0096672F /* Processor.m */; };
@@ -279,19 +279,19 @@
 		6C04C6A719E1E70000391A7D /* label_glide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_glide@2x.png"; sourceTree = "<group>"; };
 		6C04C6AC19E1FB4600391A7D /* label_cutoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_cutoff.png; sourceTree = "<group>"; };
 		6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_cutoff@2x.png"; sourceTree = "<group>"; };
+		6C1ADA381A220A2300464633 /* iOSVersionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSVersionDetection.h; sourceTree = "<group>"; };
+		6C1ADA391A220A2300464633 /* PGArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGArc.h; sourceTree = "<group>"; };
+		6C1ADA3A1A220A2300464633 /* PGMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidi.h; sourceTree = "<group>"; };
+		6C1ADA3B1A220A2300464633 /* PGMidi.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidi.mm; sourceTree = "<group>"; };
+		6C1ADA3C1A220A2300464633 /* PGMidiAllSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidiAllSources.h; sourceTree = "<group>"; };
+		6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidiAllSources.mm; sourceTree = "<group>"; };
+		6C1ADA3E1A220A2300464633 /* PGMidiFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidiFind.h; sourceTree = "<group>"; };
+		6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidiFind.mm; sourceTree = "<group>"; };
 		6C35244219EB0AD200C1BC80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LF1/Images.xcassets; sourceTree = SOURCE_ROOT; };
 		6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = ../SettingsTableViewController.h; sourceTree = "<group>"; };
 		6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = ../SettingsTableViewController.m; sourceTree = "<group>"; };
 		6C36F5DB19FC449C00DF0FE0 /* MidiInputTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiInputTableViewController.h; sourceTree = "<group>"; };
 		6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MidiInputTableViewController.m; sourceTree = "<group>"; };
-		6C36F5DF19FC728C00DF0FE0 /* iOSVersionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSVersionDetection.h; sourceTree = "<group>"; };
-		6C36F5E019FC728C00DF0FE0 /* PGArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGArc.h; sourceTree = "<group>"; };
-		6C36F5E119FC728C00DF0FE0 /* PGMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidi.h; sourceTree = "<group>"; };
-		6C36F5E219FC728C00DF0FE0 /* PGMidi.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidi.mm; sourceTree = "<group>"; };
-		6C36F5E319FC728C00DF0FE0 /* PGMidiAllSources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidiAllSources.h; sourceTree = "<group>"; };
-		6C36F5E419FC728C00DF0FE0 /* PGMidiAllSources.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidiAllSources.mm; sourceTree = "<group>"; };
-		6C36F5E519FC728C00DF0FE0 /* PGMidiFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidiFind.h; sourceTree = "<group>"; };
-		6C36F5E619FC728C00DF0FE0 /* PGMidiFind.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidiFind.mm; sourceTree = "<group>"; };
 		6C36F5EA19FD02F800DF0FE0 /* KeyboardShiftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardShiftTableViewController.h; sourceTree = "<group>"; };
 		6C36F5EB19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardShiftTableViewController.m; sourceTree = "<group>"; };
 		6C36F5EE19FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PitchWheelRangeTableViewController.h; sourceTree = "<group>"; };
@@ -680,19 +680,19 @@
 			name = Frames;
 			sourceTree = "<group>";
 		};
-		6C36F5DE19FC728C00DF0FE0 /* PGMidi */ = {
+		6C1ADA021A2209FA00464633 /* PGMidi */ = {
 			isa = PBXGroup;
 			children = (
-				6C36F5DF19FC728C00DF0FE0 /* iOSVersionDetection.h */,
-				6C36F5E019FC728C00DF0FE0 /* PGArc.h */,
-				6C36F5E119FC728C00DF0FE0 /* PGMidi.h */,
-				6C36F5E219FC728C00DF0FE0 /* PGMidi.mm */,
-				6C36F5E319FC728C00DF0FE0 /* PGMidiAllSources.h */,
-				6C36F5E419FC728C00DF0FE0 /* PGMidiAllSources.mm */,
-				6C36F5E519FC728C00DF0FE0 /* PGMidiFind.h */,
-				6C36F5E619FC728C00DF0FE0 /* PGMidiFind.mm */,
+				6C1ADA381A220A2300464633 /* iOSVersionDetection.h */,
+				6C1ADA391A220A2300464633 /* PGArc.h */,
+				6C1ADA3A1A220A2300464633 /* PGMidi.h */,
+				6C1ADA3B1A220A2300464633 /* PGMidi.mm */,
+				6C1ADA3C1A220A2300464633 /* PGMidiAllSources.h */,
+				6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */,
+				6C1ADA3E1A220A2300464633 /* PGMidiFind.h */,
+				6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */,
 			);
-			path = PGMidi;
+			name = PGMidi;
 			sourceTree = "<group>";
 		};
 		6C36F5ED19FD02FD00DF0FE0 /* Settings */ = {
@@ -853,6 +853,7 @@
 		834FA80B18B95FA800923F29 /* LF1 */ = {
 			isa = PBXGroup;
 			children = (
+				6C1ADA021A2209FA00464633 /* PGMidi */,
 				6C36F5ED19FD02FD00DF0FE0 /* Settings */,
 				6C81843A19F2B8BC0008E29C /* LF1.entitlements */,
 				6C9BD76819DB557E008CE346 /* Banks */,
@@ -875,7 +876,6 @@
 				6CD60A2E19E890A0000C3C84 /* PitchbendWheelControl.h */,
 				6CD60A2F19E890A0000C3C84 /* PitchbendWheelControl.m */,
 				6CB5E13219C45F0B008B9AC3 /* MainView.xib */,
-				6C36F5DE19FC728C00DF0FE0 /* PGMidi */,
 				6C01140219C18E6000D3C802 /* Components */,
 				6C01140E19C1A37400D3C802 /* Control Views */,
 				834FA80C18B95FA800923F29 /* Supporting Files */,
@@ -1147,12 +1147,14 @@
 				6C36F5DA19FC3F8300DF0FE0 /* SettingsTableViewController.m in Sources */,
 				6C9BD7A619DB632D008CE346 /* ControlView.m in Sources */,
 				6CD81ECB19CB561100B46963 /* CCRSegmentedRotaryControl.m in Sources */,
+				6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */,
 				6C60601119CC85E7008A0AAA /* PresetController.m in Sources */,
 				6CF53BC919C5D64200C63B1C /* FilterControlView.m in Sources */,
 				6C47256F19D0D505008F481F /* SwitchControl.m in Sources */,
 				6CC18F2219C83625000894AB /* SynthComponent.m in Sources */,
 				6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */,
 				6CC18F2519C842E9000894AB /* Generator.m in Sources */,
+				6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */,
 				6C9A9B5A19C8C04700DFA51A /* LFO.m in Sources */,
 				6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */,
 				6C9BD7A019DB61F1008CE346 /* PresetButton.m in Sources */,
@@ -1160,10 +1162,9 @@
 				834FA81618B95FA800923F29 /* AppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
 				6CC18F2B19C85DA4000894AB /* VCF.m in Sources */,
+				6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */,
 				6C47256819D0CC34008F481F /* PerformanceControlView.m in Sources */,
 				6C36F5DD19FC449C00DF0FE0 /* MidiInputTableViewController.m in Sources */,
-				6C36F5E819FC728C00DF0FE0 /* PGMidiAllSources.mm in Sources */,
-				6C36F5E719FC728C00DF0FE0 /* PGMidi.mm in Sources */,
 				6C9BD7A319DB6296008CE346 /* PresetControlView.m in Sources */,
 				6C406FD119CC5B1F0096672F /* CVComponent.m in Sources */,
 				6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */,
@@ -1171,7 +1172,6 @@
 				834FA83B18B9602A00923F29 /* AudioEngine.mm in Sources */,
 				83AFC397192ABB8E00851413 /* Oscillator.m in Sources */,
 				6CD5B69119C8F411002E835C /* CCRRotaryControl.m in Sources */,
-				6C36F5E919FC728C00DF0FE0 /* PGMidiFind.mm in Sources */,
 				6C406FCE19CC244A0096672F /* Processor.m in Sources */,
 				834FA83818B95FD200923F29 /* MainViewController.mm in Sources */,
 				6C9BD76419DB2E5F008CE346 /* Mixer2.m in Sources */,

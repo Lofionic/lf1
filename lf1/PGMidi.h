@@ -6,8 +6,17 @@
 #import <UIKit/UIKit.h>
 #import <CoreMIDI/CoreMIDI.h>
 
+#import "PGArc.h"
+
 @class PGMidi;
 @class PGMidiSource;
+
+extern NSString * const PGMidiSourceAddedNotification;
+extern NSString * const PGMidiSourceRemovedNotification;
+extern NSString * const PGMidiDestinationAddedNotification;
+extern NSString * const PGMidiDestinationRemovedNotification;
+
+extern NSString * const PGMidiConnectionKey;
 
 
 /// Represents a source/destination for MIDI data
@@ -16,10 +25,10 @@
 /// @see PGMidiDestination
 @interface PGMidiConnection : NSObject
 {
-    PGMidi                  *midi;
-    MIDIEndpointRef          endpoint;
-    NSString                *name;
-    BOOL                     isNetworkSession;
+    PGMidi          *midi;
+    MIDIEndpointRef  endpoint;
+    NSString        *name;
+    BOOL             isNetworkSession;
 }
 @property (nonatomic,readonly) PGMidi          *midi;
 @property (nonatomic,readonly) MIDIEndpointRef  endpoint;
@@ -62,14 +71,10 @@
 ///
 /// @see PGMidiSourceDelegate
 @interface PGMidiSource : PGMidiConnection
-{
-    id<PGMidiSourceDelegate> delegate;
-}
-#if ! __has_feature(objc_arc)
-@property (nonatomic,assign) id<PGMidiSourceDelegate> delegate;
-#else
-@property (nonatomic,strong) id<PGMidiSourceDelegate> delegate;
-#endif
+- (void)addDelegate:(id<PGMidiSourceDelegate>)delegate;
+- (void)removeDelegate:(id<PGMidiSourceDelegate>)delegate;
+
+@property (strong, nonatomic, readonly) NSArray *delegates;
 @end
 
 //==============================================================================
@@ -78,8 +83,9 @@
 @interface PGMidiDestination : PGMidiConnection
 {
 }
+- (void) flushOutput;
 - (void) sendBytes:(const UInt8*)bytes size:(UInt32)size;
-- (void) sendPacketList:(const MIDIPacketList *)packetList;
+- (void) sendPacketList:(MIDIPacketList *)packetList;
 @end
 
 //==============================================================================
@@ -106,22 +112,26 @@
     MIDIClientRef      client;
     MIDIPortRef        outputPort;
     MIDIPortRef        inputPort;
-    id<PGMidiDelegate> delegate;
+    NSString          *virtualEndpointName;
+    MIDIEndpointRef    virtualSourceEndpoint;
+    MIDIEndpointRef    virtualDestinationEndpoint;
+    PGMidiSource      *virtualDestinationSource;
+    PGMidiDestination *virtualSourceDestination;
     NSMutableArray    *sources, *destinations;
 }
 
-#if ! __has_feature(objc_arc)
-@property (nonatomic,assign) id<PGMidiDelegate> delegate;
-#else
-@property (nonatomic,strong) id<PGMidiDelegate> delegate;
-#endif
++ (BOOL)midiAvailable;
 
+@property (nonatomic,assign)   id<PGMidiDelegate> delegate;
 @property (nonatomic,readonly) NSUInteger         numberOfConnections;
 @property (nonatomic,readonly) NSMutableArray    *sources;
 @property (nonatomic,readonly) NSMutableArray    *destinations;
-
-/// Enables or disables CoreMIDI network connections
-- (void) enableNetwork:(BOOL)enabled;
+@property (nonatomic,readonly) PGMidiSource      *virtualDestinationSource;
+@property (nonatomic,readonly) PGMidiDestination *virtualSourceDestination;
+@property (nonatomic,retain)   NSString          *virtualEndpointName;
+@property (nonatomic,assign)   BOOL               networkEnabled;
+@property (nonatomic,assign)   BOOL               virtualSourceEnabled;
+@property (nonatomic,assign)   BOOL               virtualDestinationEnabled;
 
 /// Send a MIDI byte stream to every connected MIDI port
 - (void) sendBytes:(const UInt8*)bytes size:(UInt32)size;

@@ -151,10 +151,12 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 }
 
 -(void)setMidiSource:(PGMidiSource *)midiSource {
-    self.midiSource.delegate = nil;
+    for (id thisDelegate in [self.midiSource delegates]) {
+        [self.midiSource removeDelegate:thisDelegate];
+    }
     
     if (midiSource) {
-        midiSource.delegate = self;
+        [midiSource addDelegate:self];
     }
     
     _midiSource = midiSource;
@@ -321,6 +323,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         
         AudioSignalType output = mixedSignal[i];
         outA[i] = output;
+        //printf("%.2f\n", output);
         //outA[i] = output * 32767.0f;
     }
     
