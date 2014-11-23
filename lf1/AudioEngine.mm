@@ -75,9 +75,6 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     [self publishAsNode];
     [self registerNotifications];
     
-    // Print graph setup
-    CAShow(mGraph);
-    
     // Start AUGraph
     // checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
     
@@ -86,6 +83,9 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     
     // Start MIDI
     [self initializeMidi];
+    
+    // Print graph setup
+    CAShow(mGraph);
 }
 
 
@@ -239,7 +239,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 }
 
 -(void) checkStartStopGraph {
-    // Stops and starts AUGraph with respect in background
+    // Stops and starts AUGraph with respect to in background
     if (self.connected || self.inForeground ) {
         [self setAudioSessionActive];
         //Initialize the graph if it hasn't been already
@@ -251,8 +251,9 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
         }
         [self startAUGraph];
     } else if(!self.inForeground){
-        [self stopAUGraph];
-        [self setAudioSessionInActive];
+        // v1.2 - do not stop audio when in background
+        //[self stopAUGraph];
+        //[self setAudioSessionInActive];
     }
 }
 
