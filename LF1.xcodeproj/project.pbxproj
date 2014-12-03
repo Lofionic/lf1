@@ -101,6 +101,14 @@
 		6C9BD7A019DB61F1008CE346 /* PresetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD79F19DB61F1008CE346 /* PresetButton.m */; };
 		6C9BD7A319DB6296008CE346 /* PresetControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD7A219DB6296008CE346 /* PresetControlView.m */; };
 		6C9BD7A619DB632D008CE346 /* ControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD7A519DB632D008CE346 /* ControlView.m */; };
+		6CA40FD81A2FAA4700EC6B73 /* NewPresetControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FD71A2FAA4700EC6B73 /* NewPresetControlView.xib */; };
+		6CA40FDB1A2FAAF600EC6B73 /* NewPresetControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA40FDA1A2FAAF600EC6B73 /* NewPresetControlView.m */; };
+		6CA40FDD1A2FC4ED00EC6B73 /* LiquidCrystal-Normal.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */; };
+		6CA40FE71A2FD0D200EC6B73 /* store_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FE51A2FD0D200EC6B73 /* store_on.png */; };
+		6CA40FE81A2FD0D200EC6B73 /* store_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FE61A2FD0D200EC6B73 /* store_off.png */; };
+		6CA40FF31A2FD77000EC6B73 /* preset_stepper.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FF01A2FD77000EC6B73 /* preset_stepper.png */; };
+		6CA40FF41A2FD77000EC6B73 /* preset_stepper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FF11A2FD77000EC6B73 /* preset_stepper@2x.png */; };
+		6CA40FF51A2FD77000EC6B73 /* preset_stepper@3x in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FF21A2FD77000EC6B73 /* preset_stepper@3x */; };
 		6CB5E13319C45F0B008B9AC3 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* MainView.xib */; };
 		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
@@ -339,6 +347,15 @@
 		6C9BD7A219DB6296008CE346 /* PresetControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresetControlView.m; sourceTree = "<group>"; };
 		6C9BD7A419DB632D008CE346 /* ControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlView.h; sourceTree = "<group>"; };
 		6C9BD7A519DB632D008CE346 /* ControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlView.m; sourceTree = "<group>"; };
+		6CA40FD71A2FAA4700EC6B73 /* NewPresetControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewPresetControlView.xib; sourceTree = "<group>"; };
+		6CA40FD91A2FAAF600EC6B73 /* NewPresetControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPresetControlView.h; sourceTree = "<group>"; };
+		6CA40FDA1A2FAAF600EC6B73 /* NewPresetControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPresetControlView.m; sourceTree = "<group>"; };
+		6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LiquidCrystal-Normal.otf"; sourceTree = "<group>"; };
+		6CA40FE51A2FD0D200EC6B73 /* store_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store_on.png; sourceTree = "<group>"; };
+		6CA40FE61A2FD0D200EC6B73 /* store_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store_off.png; sourceTree = "<group>"; };
+		6CA40FF01A2FD77000EC6B73 /* preset_stepper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preset_stepper.png; sourceTree = "<group>"; };
+		6CA40FF11A2FD77000EC6B73 /* preset_stepper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preset_stepper@2x.png"; sourceTree = "<group>"; };
+		6CA40FF21A2FD77000EC6B73 /* preset_stepper@3x */ = {isa = PBXFileReference; lastKnownFileType = file; path = "preset_stepper@3x"; sourceTree = "<group>"; };
 		6CB5E13219C45F0B008B9AC3 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
@@ -542,6 +559,9 @@
 				6CD5B68A19C8DED8002E835C /* LFOControlView.xib */,
 				6CD5B68C19C8DFCD002E835C /* LFOControlView.h */,
 				6CD5B68D19C8DFCD002E835C /* LFOControlView.m */,
+				6CA40FD71A2FAA4700EC6B73 /* NewPresetControlView.xib */,
+				6CA40FD91A2FAAF600EC6B73 /* NewPresetControlView.h */,
+				6CA40FDA1A2FAAF600EC6B73 /* NewPresetControlView.m */,
 				6C9BD79C19DB613C008CE346 /* PresetControlView.xib */,
 				6C9BD7A119DB6296008CE346 /* PresetControlView.h */,
 				6C9BD7A219DB6296008CE346 /* PresetControlView.m */,
@@ -722,6 +742,11 @@
 		6C9BD76B19DB60E2008CE346 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				6CA40FF01A2FD77000EC6B73 /* preset_stepper.png */,
+				6CA40FF11A2FD77000EC6B73 /* preset_stepper@2x.png */,
+				6CA40FF21A2FD77000EC6B73 /* preset_stepper@3x */,
+				6CA40FE51A2FD0D200EC6B73 /* store_on.png */,
+				6CA40FE61A2FD0D200EC6B73 /* store_off.png */,
 				6CF5F25919DC8E1900835C1B /* buttonA.png */,
 				6CF5F25A19DC8E1900835C1B /* buttonB.png */,
 				6CF5F25B19DC8E1900835C1B /* buttonC.png */,
@@ -753,6 +778,7 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */,
 				6CE3045E19FDB6C600B3F8A6 /* cross.png */,
 				6CE3045F19FDB6C600B3F8A6 /* cross@2x.png */,
 				6CE3046019FDB6C600B3F8A6 /* cross@3x.png */,
@@ -978,6 +1004,7 @@
 				6CF5F25419DC8DDC00835C1B /* buttonD@3x.png in Resources */,
 				6CE13C6019CA240100AF7954 /* Env_Background.png in Resources */,
 				6CE13C6D19CA38E600AF7954 /* ChickenKnob@2x.png in Resources */,
+				6CA40FDD1A2FC4ED00EC6B73 /* LiquidCrystal-Normal.otf in Resources */,
 				6CF0376119F6F6C70054D493 /* record_button_on@2x.png in Resources */,
 				6CE3045B19FDB5F700B3F8A6 /* plug@3x.png in Resources */,
 				6CBF662619E0C28500236261 /* LFODest_Background.png in Resources */,
@@ -1044,9 +1071,11 @@
 				6CF0376819F6F6C70054D493 /* rewind_button_on@2x.png in Resources */,
 				6C04C64D19E1C5B400391A7D /* Cutoff_background@2x.png in Resources */,
 				6CBF662319E0C0EA00236261 /* OscOct_Background@2x.png in Resources */,
+				6CA40FE71A2FD0D200EC6B73 /* store_on.png in Resources */,
 				6C04C67C19E1D76000391A7D /* label_filterenv.png in Resources */,
 				6C04C63E19E1B8AE00391A7D /* env_frame.png in Resources */,
 				6C04C65619E1D20200391A7D /* label_octave@2x.png in Resources */,
+				6CA40FF51A2FD77000EC6B73 /* preset_stepper@3x in Resources */,
 				6CF5F25519DC8DDC00835C1B /* buttonE@3x.png in Resources */,
 				6C04C69019E1E02600391A7D /* label_sustain@2x.png in Resources */,
 				6C04C68019E1D92100391A7D /* label_ampenv.png in Resources */,
@@ -1064,12 +1093,14 @@
 				6CB5E13319C45F0B008B9AC3 /* MainView.xib in Resources */,
 				6C47257C19D0F046008F481F /* white_key_up.png in Resources */,
 				6C47258D19D0F72B008F481F /* black_key_down@2x.png in Resources */,
+				6CA40FF41A2FD77000EC6B73 /* preset_stepper@2x.png in Resources */,
 				6CF5F24519DC8D1500835C1B /* buttonE@2x.png in Resources */,
 				6C46742319F9D0C600B2DCAF /* spanner@2x.png in Resources */,
 				6C04C69119E1E02600391A7D /* label_decay.png in Resources */,
 				6C47256C19D0D4EC008F481F /* Red_Switch_On.png in Resources */,
 				6CF5F25819DC8DDC00835C1B /* buttonH@3x.png in Resources */,
 				6CF5F24619DC8D1500835C1B /* buttonF@2x.png in Resources */,
+				6CA40FF31A2FD77000EC6B73 /* preset_stepper.png in Resources */,
 				6C47256519D0CB76008F481F /* PerformanceControlView.xib in Resources */,
 				6C04C65019E1C5CA00391A7D /* CutoffKnob.png in Resources */,
 				6C04C69D19E1E35600391A7D /* label_amount.png in Resources */,
@@ -1103,6 +1134,7 @@
 				6CE13C6519CA265400AF7954 /* LFORate_Background@2x.png in Resources */,
 				6C04C66119E1D34200391A7D /* label_vol.png in Resources */,
 				6CD81EDA19CB835200B46963 /* ChickenKnob_5way.png in Resources */,
+				6CA40FE81A2FD0D200EC6B73 /* store_off.png in Resources */,
 				6C04C6AA19E1E70000391A7D /* label_glide.png in Resources */,
 				6C0395DC19FEF40F00BF7D0E /* init.bnk in Resources */,
 				6C47258C19D0F72B008F481F /* black_key_up.png in Resources */,
@@ -1111,6 +1143,7 @@
 				6CF5F24219DC8D1500835C1B /* buttonB@2x.png in Resources */,
 				6CD81ED419CB835200B46963 /* ChickenKnob_2way.png in Resources */,
 				6C04C6A819E1E70000391A7D /* label_gliss.png in Resources */,
+				6CA40FD81A2FAA4700EC6B73 /* NewPresetControlView.xib in Resources */,
 				6CF5F26519DC8E1900835C1B /* buttonE.png in Resources */,
 				6C04C66219E1D34200391A7D /* label_vol@2x.png in Resources */,
 				6CE3044B19FDB30600B3F8A6 /* keyboard@2x.png in Resources */,
@@ -1161,6 +1194,7 @@
 				834FA81218B95FA800923F29 /* main.m in Sources */,
 				834FA81618B95FA800923F29 /* AppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
+				6CA40FDB1A2FAAF600EC6B73 /* NewPresetControlView.m in Sources */,
 				6CC18F2B19C85DA4000894AB /* VCF.m in Sources */,
 				6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */,
 				6C47256819D0CC34008F481F /* PerformanceControlView.m in Sources */,

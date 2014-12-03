@@ -72,7 +72,7 @@
 }
 
 -(void)onTap:(UIGestureRecognizer*)gesture {
-    if (!self.flashing) {
+    if (!self.flashing && gesture.state == UIGestureRecognizerStateBegan) {
         [self.delegate presetButtonWasTapped:self];
     }
 }

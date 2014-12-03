@@ -117,8 +117,11 @@
     [self.performanceControlView initializeParameters];
     
     // Create presets controller view
-    self.presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
+    //self.presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
+    self.presetControlView = [[NewPresetControlView alloc] initWithFrame:CGRectZero];
+    
     self.presetControlView.presetController = self.presetController;
+    [self.presetController restorePresetAtIndex:0];
     [self.presetControlView initializeParameters];
     
     // iPad - add control views

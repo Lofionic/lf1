@@ -48,7 +48,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                 </view>
                 <view contentMode="scaleToFill" id="dDc-zW-m3s" customClass="KeyboardView">
-                    <rect key="frame" x="116" y="470" width="900" height="290"/>
+                    <rect key="frame" x="116" y="470" width="900.00000009229109" height="290"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                 </view>

@@ -4,6 +4,12 @@
 //
 #import "Defines.h"
 #import "PresetController.h"
+@interface PresetController ()
+
+@property (nonatomic) NSInteger currentIndex;
+
+@end
+
 
 @implementation PresetController
 
@@ -46,40 +52,63 @@
 
 -(void)restoreBank {
  
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    self.currentBank = [[userDefaults valueForKey:PRESET_BANK_KEY] mutableCopy];
+    // Load default bank
+    NSLog(@"Loading default bank");
+    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *defaultBankPath = [documentsDirectory stringByAppendingPathComponent:@"default.bnk"];
+    NSData *defaultBankData = [NSData dataWithContentsOfFile:defaultBankPath];
+    if (defaultBankData) {
+        self.currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
+        // Write bank to user defaults
+        [self saveBank];
+    } else {
+        NSLog(@"Default bank not found");
+        [self loadFactoryBank];
+    }
     
-    if (!_currentBank) {
-        // Load default bank
-        NSLog(@"Loading default bank");
-        NSString *defaultBankPath = [[NSBundle mainBundle] pathForResource:@"init" ofType:@"bnk"];
-        NSData *defaultBankData = [NSData dataWithContentsOfFile:defaultBankPath];
-        if (defaultBankData) {
-            self.currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
-            // Write bank to user defaults
-            [self saveBank];
-        } else {
-            NSLog(@"Default bank not found");
-            self.currentBank = [[NSMutableDictionary alloc] init];
-
-            NSMutableArray *presetsArray = [[NSMutableArray alloc] initWithCapacity:8];
-            for (int i = 0; i < 8; i++) {
-                [presetsArray addObject:[[NSDictionary alloc] init]];
-            }
-            [self.currentBank setValue:presetsArray forKey:@"presets"];
-            [self.currentBank setValue:@"Unnamed" forKey:@"bankName"];
-        }
+    NSArray *presets = [self.currentBank objectForKey:@"presets"];
+    if ([presets count] < 100) {
+        [self updateOldBank];
     }
 }
 
+-(void)loadFactoryBank {
+    
+    // Load factory presets
+    NSLog(@"Loading factory bank");
+    NSString *defaultBankPath = [[NSBundle mainBundle] pathForResource:@"init" ofType:@"bnk"];
+    NSData *defaultBankData = [NSData dataWithContentsOfFile:defaultBankPath];
+    if (defaultBankData) {
+        self.currentBank = [NSKeyedUnarchiver unarchiveObjectWithData:defaultBankData];
+        // Write bank to user defaults
+        [self saveBank];
+    } else {
+        NSLog(@"Default bank not found");
+        self.currentBank = [[NSMutableDictionary alloc] init];
+        
+        NSMutableArray *presetsArray = [[NSMutableArray alloc] initWithCapacity:8];
+        for (int i = 0; i < 8; i++) {
+            [presetsArray addObject:[[NSDictionary alloc] init]];
+        }
+        [self.currentBank setValue:presetsArray forKey:@"presets"];
+        [self.currentBank setValue:@"Unnamed" forKey:@"bankName"];
+    }
+}
+
+-(void)updateOldBank {
+    
+    NSLog(@"Updating Old Bank...");
+    NSMutableArray *mutableBankData = [[self.currentBank objectForKey:@"presets"] mutableCopy];
+    for (NSInteger i = [mutableBankData count]; i < 100; i++) {
+        [mutableBankData addObject:[mutableBankData[0] copy]];
+    }
+    [self.currentBank setObject:[NSArray arrayWithArray:mutableBankData] forKey:@"presets"];
+    
+    [self saveBank];
+}
+
 -(void)saveBank {
-
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-
-    [userDefaults setObject:_currentBank forKey:PRESET_BANK_KEY];
-    
-    [userDefaults synchronize];
-    
     [self exportBankToFileNamed:@"default"];
 }
 
@@ -105,7 +134,9 @@
 
 -(void)restorePresetAtIndex:(NSInteger)index {
     
-    [self restoreBank];
+    if (!self.currentBank) {
+        [self restoreBank];
+    }
     
     if (self.currentBank) {
 
@@ -124,6 +155,8 @@
                 NSLog(@"Key Path %@ not found", thisKey);
             }
         }
+        
+        self.currentIndex = index;
     }
 }
 
@@ -133,9 +166,7 @@
     NSString *documentsDirectory = [paths objectAtIndex:0];
     
     if (![[filename pathExtension] isEqualToString:@"bnk"]) {
-        
         filename = [filename stringByAppendingPathExtension:@"bnk"];
-        
     }
     NSString *fullPath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, filename];
     

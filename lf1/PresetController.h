@@ -11,6 +11,7 @@
 @property (nonatomic, weak) UIViewController *viewController;
 @property (nonatomic, strong) NSArray *keyPaths;
 @property (nonatomic, strong) NSMutableDictionary *currentBank;
+@property (nonatomic, readonly) NSInteger currentIndex;
 
 -(instancetype)initWithViewController:(UIViewController*)viewController;
 -(void)storePresetAtIndex:(NSInteger)index;
