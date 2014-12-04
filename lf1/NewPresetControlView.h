@@ -14,9 +14,12 @@
 
 @property (nonatomic, strong) PresetController *presetController;
 @property (nonatomic, strong) IBOutlet UILabel *presetLabel;
-@property (nonatomic, strong) IBOutlet PresetButton *prevButton;
-@property (nonatomic, strong) IBOutlet PresetButton *nextButton;
-@property (nonatomic, strong) IBOutlet PresetButton *storeButton;
+@property (nonatomic, strong) IBOutlet UIStepper *presetStepper;
+@property (nonatomic, strong) IBOutlet UIButton* storeButton;
+
+@property BOOL isStoring;
+@property NSInteger storeIndex;
+@property NSInteger storeTimeout;
 
 @property (nonatomic, strong) IBOutlet UIStepper *stepper;
 

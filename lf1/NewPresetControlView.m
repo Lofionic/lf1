@@ -32,40 +32,85 @@
     
     [self.stepper setBackgroundImage:[UIImage imageNamed:@"preset_stepper"] forState:UIControlStateNormal];
     [self.stepper setTintColor:[UIColor clearColor]];
+    
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(storeLongPressed:)];
+    longPressGestureRecognizer.minimumPressDuration = 1.5;
+    [self.storeButton addGestureRecognizer:longPressGestureRecognizer];
 }
 
 -(void)initializeParameters {
     [self updateLabel];
+    
+    self.isStoring = NO;
 }
 
 -(void)updateLabel {
-    
-    [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", self.presetController.currentIndex]];
-    
+    if (!self.isStoring) {
+        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", self.presetController.currentIndex]];
+        self.storeIndex = self.presetController.currentIndex;
+    } else {
+        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", self.storeIndex]];
+    }
 }
 
--(IBAction)nextPreset:(id)sender {
-    
-    if (self.presetController.currentIndex < 99) {
-        [self.presetController restorePresetAtIndex:self.presetController.currentIndex + 1];
+-(IBAction)storeTapped:(id)sender {
+    if (self.isStoring) {
+        [self confirmStoring];
     }
-    
-    [self updateLabel];
 }
 
--(IBAction)prevPreset:(id)sender {
-    if (self.presetController.currentIndex > 0) {
-        [self.presetController restorePresetAtIndex:self.presetController.currentIndex - 1];
+-(void)storeLongPressed:(UIGestureRecognizer*)gestureRecognizer {
+    if (!self.isStoring) {
+        [self startStoring];
     }
-    
-    [self updateLabel];
+
 }
 
 -(IBAction)preset:(id)sender {
-    UIStepper *stepper = (UIStepper*)sender;
-    [self.presetController restorePresetAtIndex:stepper.value];
+    if (!self.isStoring) {
+        [self.presetController restorePresetAtIndex:self.presetStepper.value];
+    } else {
+        self.storeIndex = self.presetStepper.value;
+        self.storeTimeout = 0;
+    }
     [self updateLabel];
-    
+}
+
+-(void)startStoring {
+    self.isStoring = YES;
+    self.storeTimeout = 0;
+    [self flashLabel];
+    [self updateLabel];
+}
+
+-(void)cancelStoring {
+    self.isStoring = NO;
+    [self.presetStepper setValue:self.presetController.currentIndex];
+    [self updateLabel];
+}
+
+-(void)confirmStoring {
+    [self.presetController storePresetAtIndex:self.storeIndex];
+    [self.presetController restorePresetAtIndex:self.storeIndex];
+    [self cancelStoring];
+}
+
+-(void)flashLabel {
+    if (self.isStoring) {
+        // We are still in storing state
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.presetLabel setHidden:!self.presetLabel.hidden];
+            self.storeTimeout ++;
+            if (self.storeTimeout > 30) {
+                [self performSelectorOnMainThread:@selector(cancelStoring) withObject:nil waitUntilDone:NO];
+            }
+        });
+        [self performSelector:@selector(flashLabel) withObject:nil afterDelay:0.2];
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.presetLabel setHidden:NO];
+        });
+    }
 }
 
 @end

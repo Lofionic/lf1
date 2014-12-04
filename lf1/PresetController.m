@@ -127,7 +127,6 @@
         presetsArray[index] = presetDictionary;
         
         [self.currentBank setObject:presetsArray forKey:@"presets"];
-        
         [self saveBank];
     }
 }
