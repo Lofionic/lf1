@@ -20,6 +20,7 @@
 @property BOOL isStoring;
 @property NSInteger storeIndex;
 @property NSInteger storeTimeout;
+@property NSInteger storeConfirmTimeout;
 
 @property (nonatomic, strong) IBOutlet UIStepper *stepper;
 

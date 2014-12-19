@@ -31,6 +31,9 @@
     [self.presetLabel setFont:[UIFont fontWithName:@"Liquid Crystal" size:20]];
     
     [self.stepper setBackgroundImage:[UIImage imageNamed:@"preset_stepper"] forState:UIControlStateNormal];
+    [self.stepper setBackgroundImage:[UIImage imageNamed:@"preset_stepper_highlight"] forState:UIControlStateHighlighted];
+    //[self.stepper setIncrementImage:[UIImage imageNamed:@"store_on"] forState:UIControlStateNormal];
+    
     [self.stepper setTintColor:[UIColor clearColor]];
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(storeLongPressed:)];
@@ -54,16 +57,15 @@
 }
 
 -(IBAction)storeTapped:(id)sender {
-    if (self.isStoring) {
-        [self confirmStoring];
+    if (!self.isStoring) {
+        [self startStoring];
     }
 }
 
 -(void)storeLongPressed:(UIGestureRecognizer*)gestureRecognizer {
-    if (!self.isStoring) {
-        [self startStoring];
+    if (self.isStoring) {
+        [self confirmStoring];
     }
-
 }
 
 -(IBAction)preset:(id)sender {
@@ -81,6 +83,7 @@
     self.storeTimeout = 0;
     [self flashLabel];
     [self updateLabel];
+    [self.storeButton setImage:[UIImage imageNamed:@"store_on"] forState:UIControlStateNormal];
 }
 
 -(void)cancelStoring {
@@ -93,6 +96,14 @@
     [self.presetController storePresetAtIndex:self.storeIndex];
     [self.presetController restorePresetAtIndex:self.storeIndex];
     [self cancelStoring];
+    
+    self.storeConfirmTimeout = 0;
+    [self.storeButton setEnabled:NO];
+    [self.presetStepper setEnabled:NO];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.presetLabel setHidden:NO];
+        [self flashLabelFast];
+    });
 }
 
 -(void)flashLabel {
@@ -102,6 +113,8 @@
             [self.presetLabel setHidden:!self.presetLabel.hidden];
             self.storeTimeout ++;
             if (self.storeTimeout > 30) {
+                [self.storeButton setImage:[UIImage imageNamed:@"store_off"] forState:UIControlStateNormal];
+
                 [self performSelectorOnMainThread:@selector(cancelStoring) withObject:nil waitUntilDone:NO];
             }
         });
@@ -112,5 +125,22 @@
         });
     }
 }
+
+-(void)flashLabelFast {
+
+    
+    [self.presetLabel setHidden:!self.presetLabel.hidden];
+    self.storeConfirmTimeout ++;
+    if (self.storeConfirmTimeout < 10) {
+        [self performSelector:@selector(flashLabelFast) withObject:nil afterDelay:0.1];
+    } else {
+        [self.storeButton setEnabled:YES];
+        [self.presetStepper setEnabled:YES];
+        [self.presetLabel setHidden:NO];
+        [self.storeButton setImage:[UIImage imageNamed:@"store_off"] forState:UIControlStateNormal];
+
+    }
+}
+
 
 @end
