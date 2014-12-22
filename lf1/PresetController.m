@@ -120,15 +120,10 @@
 -(void)storePresetAtIndex:(NSInteger)index {
 
     if (self.currentBank) {
-        NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self.keyPaths count]];
-        for (NSString *thisKeyPath in self.keyPaths) {
-            NSValue *thisValue = [self.viewController valueForKeyPath:thisKeyPath];
-            [presetDictionary setValue:thisValue forKey:thisKeyPath];
-        }
         
         NSMutableArray *presetsArray = [self.currentBank[@"presets"] mutableCopy];
         
-        presetsArray[index] = presetDictionary;
+        presetsArray[index] = [self dictionaryForCurrentPreset];
         
         [self.currentBank setObject:presetsArray forKey:@"presets"];
         [self saveBank];
@@ -148,16 +143,10 @@
             NSLog(@"Can't load preset %li : out of bounds", (long)index);
             return;
         }
-        NSDictionary *presetDictionary = presetsArray[index];
         
-        for (NSString *thisKey in [presetDictionary allKeys]) {
-            @try {
-                [self.viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
-            }
-            @catch (NSException *e) {
-                NSLog(@"Key Path %@ not found", thisKey);
-            }
-        }
+        [self applyPresetFromDictionary:presetsArray[index]];
+        
+        NSDictionary *presetDictionary = presetsArray[index];
         
         self.currentIndex = index;
     }
@@ -186,13 +175,7 @@
         self.undos = [[NSMutableArray alloc] initWithCapacity:UNDO_STEPS];
     }
     
-    NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self.keyPaths count]];
-    for (NSString *thisKeyPath in self.keyPaths) {
-        NSValue *thisValue = [self.viewController valueForKeyPath:thisKeyPath];
-        [presetDictionary setValue:thisValue forKey:thisKeyPath];
-    }
-    
-    [self.undos addObject:presetDictionary];
+    [self.undos addObject:[self dictionaryForCurrentPreset]];
     
     if ([self.undos count] > UNDO_STEPS) {
         [self.undos removeObjectAtIndex:0];
@@ -206,14 +189,7 @@
     if ([self.undos count] > 0) {
         NSDictionary *presetDictionary = self.undos[[self.undos count] - 1];
         
-        for (NSString *thisKey in [presetDictionary allKeys]) {
-            @try {
-                [self.viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
-            }
-            @catch (NSException *e) {
-                NSLog(@"Key Path %@ not found", thisKey);
-            }
-        }
+        [self applyPresetFromDictionary:presetDictionary];
         
         [self.undos removeObject:presetDictionary];
     }
@@ -231,6 +207,27 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:UNDO_STATE_CHANGE_NOTIFICATON object:self userInfo:nil];
+}
+
+-(NSDictionary*)dictionaryForCurrentPreset {
+    NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self.keyPaths count]];
+    for (NSString *thisKeyPath in self.keyPaths) {
+        NSValue *thisValue = [self.viewController valueForKeyPath:thisKeyPath];
+        [presetDictionary setValue:thisValue forKey:thisKeyPath];
+    }
+    
+    return presetDictionary;
+}
+
+-(void)applyPresetFromDictionary:(NSDictionary*)dictionary {
+    for (NSString *thisKey in [dictionary allKeys]) {
+        @try {
+            [self.viewController setValue:dictionary[thisKey] forKeyPath:thisKey];
+        }
+        @catch (NSException *e) {
+            NSLog(@"Key Path %@ not found", thisKey);
+        }
+    }
 }
 
 @end
