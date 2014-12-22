@@ -78,13 +78,10 @@
 }
 
 -(void)onLongPress:(UIGestureRecognizer*)gesture {
-
     if (!self.flashing && gesture.state == UIGestureRecognizerStateBegan) {
         [self.delegate presetButtonWasLongPressed:self];
     }
-    
 }
-
 
 -(void)drawRect:(CGRect)rect {
     
@@ -104,6 +101,7 @@
         CGContextRestoreGState(ctx);
     }
 }
+
 
 
 @end

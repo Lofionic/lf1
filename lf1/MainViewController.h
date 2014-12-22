@@ -52,4 +52,7 @@
 @property (nonatomic, strong) UIPopoverController *settingsPopoverController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationController;
 
+@property (nonatomic, strong) IBOutlet UIButton *undoButton;
+-(void)updateUndoStatus;
+
 @end

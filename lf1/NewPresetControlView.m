@@ -39,20 +39,23 @@
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(storeLongPressed:)];
     longPressGestureRecognizer.minimumPressDuration = 1.5;
     [self.storeButton addGestureRecognizer:longPressGestureRecognizer];
+    
+    
 }
 
 -(void)initializeParameters {
     [self updateLabel];
+    [self.stepper setMaximumValue:[self.presetController presetCount] - 1];
     
     self.isStoring = NO;
 }
 
 -(void)updateLabel {
     if (!self.isStoring) {
-        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", self.presetController.currentIndex]];
+        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", (long)self.presetController.currentIndex]];
         self.storeIndex = self.presetController.currentIndex;
     } else {
-        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", self.storeIndex]];
+        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", (long)self.storeIndex]];
     }
 }
 
@@ -84,18 +87,23 @@
     [self flashLabel];
     [self updateLabel];
     [self.storeButton setImage:[UIImage imageNamed:@"store_on"] forState:UIControlStateNormal];
+    
+    [self.stepper setMaximumValue:[self.presetController presetCount]];
 }
 
--(void)cancelStoring {
+-(void)endStoring {
     self.isStoring = NO;
     [self.presetStepper setValue:self.presetController.currentIndex];
+    
     [self updateLabel];
+    
+    [self.stepper setMaximumValue:[self.presetController presetCount] - 1];
 }
 
 -(void)confirmStoring {
     [self.presetController storePresetAtIndex:self.storeIndex];
     [self.presetController restorePresetAtIndex:self.storeIndex];
-    [self cancelStoring];
+    [self endStoring];
     
     self.storeConfirmTimeout = 0;
     [self.storeButton setEnabled:NO];
@@ -115,7 +123,7 @@
             if (self.storeTimeout > 30) {
                 [self.storeButton setImage:[UIImage imageNamed:@"store_off"] forState:UIControlStateNormal];
 
-                [self performSelectorOnMainThread:@selector(cancelStoring) withObject:nil waitUntilDone:NO];
+                [self performSelectorOnMainThread:@selector(endStoring) withObject:nil waitUntilDone:NO];
             }
         });
         [self performSelector:@selector(flashLabel) withObject:nil afterDelay:0.2];
@@ -127,8 +135,6 @@
 }
 
 -(void)flashLabelFast {
-
-    
     [self.presetLabel setHidden:!self.presetLabel.hidden];
     self.storeConfirmTimeout ++;
     if (self.storeConfirmTimeout < 10) {
@@ -138,7 +144,6 @@
         [self.presetStepper setEnabled:YES];
         [self.presetLabel setHidden:NO];
         [self.storeButton setImage:[UIImage imageNamed:@"store_off"] forState:UIControlStateNormal];
-
     }
 }
 

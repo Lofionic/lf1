@@ -6,7 +6,9 @@
 #import "Defines.h"
 #import "AudioEngine.h"
 #import <AVFoundation/AVFoundation.h>
+#import <mach/mach_time.h>
 #import "AppDelegate.h"
+
 
 const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
 @implementation AudioEngine {
@@ -165,7 +167,14 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 -(void)midiSource:(PGMidiSource *)input midiReceived:(const MIDIPacketList *)packetList {
     
     MIDIPacket *packet = (MIDIPacket *)packetList->packet;
+    
     for (int i=0; i < packetList->numPackets; i++) {
+        
+        MIDITimeStamp timeStamp = packet->timeStamp;
+        if (timeStamp > mach_absolute_time()) {
+            printf("MEH MEH MEH \n");
+        }
+        
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
@@ -552,7 +561,7 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
 //        
 //        //ae.cvController.pitchbend = inData1 / 127.0;
 //    }
-    
+    printf("%u",(unsigned int)inOffsetSampleFrame);
     Byte midiCommand = inStatus >> 4;
     Byte data1 = inData1 & 0x7F;
     Byte data2 = inData2 & 0x7F;

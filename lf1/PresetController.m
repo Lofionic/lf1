@@ -69,7 +69,7 @@
     
     NSArray *presets = [self.currentBank objectForKey:@"presets"];
     if ([presets count] < 100) {
-        [self updateOldBank];
+        //[self updateOldBank];
     }
 }
 
@@ -110,6 +110,10 @@
 
 -(void)saveBank {
     [self exportBankToFileNamed:@"default"];
+}
+
+-(NSInteger)presetCount {
+    return [[self.currentBank objectForKey:@"presets"] count];
 }
 
 
@@ -157,6 +161,8 @@
         
         self.currentIndex = index;
     }
+    
+    [self clearUndo];
 }
 
 -(void)exportBankToFileNamed:(NSString*)filename {
@@ -173,6 +179,58 @@
     NSData *bankData = [NSKeyedArchiver archivedDataWithRootObject:self.currentBank];
     [bankData writeToFile:fullPath atomically:NO];
     
+}
+
+-(void)storeUndo {
+    if (!self.undos) {
+        self.undos = [[NSMutableArray alloc] initWithCapacity:UNDO_STEPS];
+    }
+    
+    NSMutableDictionary *presetDictionary = [[NSMutableDictionary alloc] initWithCapacity:[self.keyPaths count]];
+    for (NSString *thisKeyPath in self.keyPaths) {
+        NSValue *thisValue = [self.viewController valueForKeyPath:thisKeyPath];
+        [presetDictionary setValue:thisValue forKey:thisKeyPath];
+    }
+    
+    [self.undos addObject:presetDictionary];
+    
+    if ([self.undos count] > UNDO_STEPS) {
+        [self.undos removeObjectAtIndex:0];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UNDO_STATE_CHANGE_NOTIFICATON object:self userInfo:nil];
+    
+}
+
+-(void)recallUndo {
+    if ([self.undos count] > 0) {
+        NSDictionary *presetDictionary = self.undos[[self.undos count] - 1];
+        
+        for (NSString *thisKey in [presetDictionary allKeys]) {
+            @try {
+                [self.viewController setValue:presetDictionary[thisKey] forKeyPath:thisKey];
+            }
+            @catch (NSException *e) {
+                NSLog(@"Key Path %@ not found", thisKey);
+            }
+        }
+        
+        [self.undos removeObject:presetDictionary];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UNDO_STATE_CHANGE_NOTIFICATON object:self userInfo:nil];
+}
+
+-(BOOL)canUndo {
+    return (self.undos && [self.undos count] > 0);
+}
+
+-(void)clearUndo {
+    if (self.undos) {
+        [self.undos removeAllObjects];
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UNDO_STATE_CHANGE_NOTIFICATON object:self userInfo:nil];
 }
 
 @end

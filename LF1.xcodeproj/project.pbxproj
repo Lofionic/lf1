@@ -141,6 +141,10 @@
 		6CD81ED919CB835200B46963 /* ChickenKnob_4way@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81ED119CB835200B46963 /* ChickenKnob_4way@2x.png */; };
 		6CD81EDA19CB835200B46963 /* ChickenKnob_5way.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81ED219CB835200B46963 /* ChickenKnob_5way.png */; };
 		6CD81EDB19CB835200B46963 /* ChickenKnob_5way@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CD81ED319CB835200B46963 /* ChickenKnob_5way@2x.png */; };
+		6CDBB1D81A4824D8005E2143 /* undo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CDBB1D51A4824D8005E2143 /* undo@3x.png */; };
+		6CDBB1D91A4824D8005E2143 /* undo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CDBB1D61A4824D8005E2143 /* undo.png */; };
+		6CDBB1DA1A4824D8005E2143 /* undo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CDBB1D71A4824D8005E2143 /* undo@2x.png */; };
+		6CDBB1DC1A4854D3005E2143 /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CDBB1DB1A4854D3005E2143 /* CoreMIDI.framework */; };
 		6CE13C5419CA13FF00AF7954 /* SmallKnob.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE13C5219CA13FF00AF7954 /* SmallKnob.png */; };
 		6CE13C5519CA13FF00AF7954 /* SmallKnob@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE13C5319CA13FF00AF7954 /* SmallKnob@2x.png */; };
 		6CE13C5719CA1FEF00AF7954 /* Osc2Freq_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE13C5619CA1FEF00AF7954 /* Osc2Freq_Background.png */; };
@@ -400,6 +404,10 @@
 		6CD81ED119CB835200B46963 /* ChickenKnob_4way@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChickenKnob_4way@2x.png"; sourceTree = "<group>"; };
 		6CD81ED219CB835200B46963 /* ChickenKnob_5way.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChickenKnob_5way.png; sourceTree = "<group>"; };
 		6CD81ED319CB835200B46963 /* ChickenKnob_5way@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChickenKnob_5way@2x.png"; sourceTree = "<group>"; };
+		6CDBB1D51A4824D8005E2143 /* undo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@3x.png"; sourceTree = "<group>"; };
+		6CDBB1D61A4824D8005E2143 /* undo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = undo.png; sourceTree = "<group>"; };
+		6CDBB1D71A4824D8005E2143 /* undo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "undo@2x.png"; sourceTree = "<group>"; };
+		6CDBB1DB1A4854D3005E2143 /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		6CE13C5219CA13FF00AF7954 /* SmallKnob.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SmallKnob.png; sourceTree = "<group>"; };
 		6CE13C5319CA13FF00AF7954 /* SmallKnob@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SmallKnob@2x.png"; sourceTree = "<group>"; };
 		6CE13C5619CA1FEF00AF7954 /* Osc2Freq_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Osc2Freq_Background.png; sourceTree = "<group>"; };
@@ -504,6 +512,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CDBB1DC1A4854D3005E2143 /* CoreMIDI.framework in Frameworks */,
 				6C9BD76619DB32DB008CE346 /* AVFoundation.framework in Frameworks */,
 				834FA83D18B960F500923F29 /* AudioToolbox.framework in Frameworks */,
 				834FA83518B95FB100923F29 /* CoreAudio.framework in Frameworks */,
@@ -842,6 +851,9 @@
 				6C46741E19F9D0C600B2DCAF /* spanner.png */,
 				6C46741F19F9D0C600B2DCAF /* spanner@3x.png */,
 				6C46742019F9D0C600B2DCAF /* spanner@2x.png */,
+				6CDBB1D51A4824D8005E2143 /* undo@3x.png */,
+				6CDBB1D61A4824D8005E2143 /* undo.png */,
+				6CDBB1D71A4824D8005E2143 /* undo@2x.png */,
 				6CE3044019FDB16500B3F8A6 /* midi@3x.png */,
 				6CE3044119FDB16500B3F8A6 /* midi@2x.png */,
 				6CE3044219FDB16500B3F8A6 /* midi.png */,
@@ -875,6 +887,7 @@
 		834FA80418B95FA800923F29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CDBB1DB1A4854D3005E2143 /* CoreMIDI.framework */,
 				6C9BD76519DB32DB008CE346 /* AVFoundation.framework */,
 				834FA83C18B960F500923F29 /* AudioToolbox.framework */,
 				834FA83418B95FB100923F29 /* CoreAudio.framework */,
@@ -1005,6 +1018,7 @@
 				6C04C63619E1AE0F00391A7D /* osc_frame.png in Resources */,
 				6C04C65119E1C5CA00391A7D /* CutoffKnob@2x.png in Resources */,
 				6CE13C5519CA13FF00AF7954 /* SmallKnob@2x.png in Resources */,
+				6CDBB1D81A4824D8005E2143 /* undo@3x.png in Resources */,
 				6C47257D19D0F046008F481F /* white_key_down.png in Resources */,
 				6CF5F26819DC8E1900835C1B /* buttonH.png in Resources */,
 				6C04C64519E1C0A300391A7D /* presets_frame@2x.png in Resources */,
@@ -1134,6 +1148,7 @@
 				6CE3046119FDB6C600B3F8A6 /* cross.png in Resources */,
 				6C04C69B19E1E35600391A7D /* label_dest@2x.png in Resources */,
 				6CF5F26119DC8E1900835C1B /* buttonA.png in Resources */,
+				6CDBB1D91A4824D8005E2143 /* undo.png in Resources */,
 				6C47256B19D0D4EC008F481F /* Red_Switch_Off.png in Resources */,
 				6CE13C5719CA1FEF00AF7954 /* Osc2Freq_Background.png in Resources */,
 				6CE13C6C19CA38E600AF7954 /* ChickenKnob.png in Resources */,
@@ -1148,6 +1163,7 @@
 				6CA40FE81A2FD0D200EC6B73 /* store_off.png in Resources */,
 				6C04C6AA19E1E70000391A7D /* label_glide.png in Resources */,
 				6C0395DC19FEF40F00BF7D0E /* init.bnk in Resources */,
+				6CDBB1DA1A4824D8005E2143 /* undo@2x.png in Resources */,
 				6C47258C19D0F72B008F481F /* black_key_up.png in Resources */,
 				6CBF661F19E0BC8D00236261 /* OscWave_Background@2x.png in Resources */,
 				6CF5F25219DC8DDC00835C1B /* buttonB@3x.png in Resources */,

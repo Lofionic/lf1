@@ -3,6 +3,7 @@
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
 #import "Defines.h"
+#import "AppDelegate.h"
 #import "CCRSegmentedRotaryControl.h"
 
 @implementation CCRSegmentedRotaryControl {
@@ -64,6 +65,9 @@
     firstTouchLocation = [thisTouch locationInView:self];
     firstTouchIndex = self.index;
     [self becomeFirstResponder];
+    
+    // Store undo
+    [MAIN_VIEW_CONTROLLER.presetController storeUndo];
 }
 
 -(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
