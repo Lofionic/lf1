@@ -108,6 +108,11 @@
 		6CA40FE81A2FD0D200EC6B73 /* store_off.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FE61A2FD0D200EC6B73 /* store_off.png */; };
 		6CA40FF31A2FD77000EC6B73 /* preset_stepper.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FF01A2FD77000EC6B73 /* preset_stepper.png */; };
 		6CA40FF41A2FD77000EC6B73 /* preset_stepper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CA40FF11A2FD77000EC6B73 /* preset_stepper@2x.png */; };
+		6CAB40DB1A49B86C006E17BD /* guide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40D81A49B86C006E17BD /* guide@2x.png */; };
+		6CAB40DC1A49B86C006E17BD /* guide@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40D91A49B86C006E17BD /* guide@3x.png */; };
+		6CAB40DD1A49B86C006E17BD /* guide.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40DA1A49B86C006E17BD /* guide.png */; };
+		6CAB40E01A49B91C006E17BD /* UserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */; };
+		6CAB40E21A49BD30006E17BD /* userguide.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40E11A49BD30006E17BD /* userguide.html */; };
 		6CB5E13319C45F0B008B9AC3 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* MainView.xib */; };
 		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
@@ -362,6 +367,12 @@
 		6CA40FE61A2FD0D200EC6B73 /* store_off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = store_off.png; sourceTree = "<group>"; };
 		6CA40FF01A2FD77000EC6B73 /* preset_stepper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = preset_stepper.png; sourceTree = "<group>"; };
 		6CA40FF11A2FD77000EC6B73 /* preset_stepper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "preset_stepper@2x.png"; sourceTree = "<group>"; };
+		6CAB40D81A49B86C006E17BD /* guide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide@2x.png"; sourceTree = "<group>"; };
+		6CAB40D91A49B86C006E17BD /* guide@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "guide@3x.png"; sourceTree = "<group>"; };
+		6CAB40DA1A49B86C006E17BD /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
+		6CAB40DE1A49B91C006E17BD /* UserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGuideViewController.h; sourceTree = "<group>"; };
+		6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserGuideViewController.m; sourceTree = "<group>"; };
+		6CAB40E11A49BD30006E17BD /* userguide.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userguide.html; sourceTree = "<group>"; };
 		6CB5E13219C45F0B008B9AC3 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
@@ -742,6 +753,8 @@
 				6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */,
 				6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */,
 				6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */,
+				6CAB40DE1A49B91C006E17BD /* UserGuideViewController.h */,
+				6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -796,6 +809,7 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6CAB40E11A49BD30006E17BD /* userguide.html */,
 				6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */,
 				6CE3045E19FDB6C600B3F8A6 /* cross.png */,
 				6CE3045F19FDB6C600B3F8A6 /* cross@2x.png */,
@@ -842,10 +856,13 @@
 		6CE3043F19FDB14200B3F8A6 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				6CAB40D81A49B86C006E17BD /* guide@2x.png */,
+				6CAB40D91A49B86C006E17BD /* guide@3x.png */,
+				6CAB40DA1A49B86C006E17BD /* guide.png */,
 				6CE3045219FDB5F700B3F8A6 /* wifi@3x.png */,
-				6CE3045319FDB5F700B3F8A6 /* plug@2x.png */,
 				6CE3045419FDB5F700B3F8A6 /* wifi@2x.png */,
 				6CE3045519FDB5F700B3F8A6 /* plug@3x.png */,
+				6CE3045319FDB5F700B3F8A6 /* plug@2x.png */,
 				6CE3045619FDB5F700B3F8A6 /* plug.png */,
 				6CE3045719FDB5F700B3F8A6 /* wifi.png */,
 				6C46741E19F9D0C600B2DCAF /* spanner.png */,
@@ -1028,6 +1045,7 @@
 				6CF5F25419DC8DDC00835C1B /* buttonD@3x.png in Resources */,
 				6CE13C6019CA240100AF7954 /* Env_Background.png in Resources */,
 				6CE13C6D19CA38E600AF7954 /* ChickenKnob@2x.png in Resources */,
+				6CAB40DD1A49B86C006E17BD /* guide.png in Resources */,
 				6CA40FDD1A2FC4ED00EC6B73 /* LiquidCrystal-Normal.otf in Resources */,
 				6CF0376119F6F6C70054D493 /* record_button_on@2x.png in Resources */,
 				6CE3045B19FDB5F700B3F8A6 /* plug@3x.png in Resources */,
@@ -1049,6 +1067,7 @@
 				6CE3045019FDB4DE00B3F8A6 /* pitchbend@2x.png in Resources */,
 				6C04C67D19E1D76000391A7D /* label_filterenv@2x.png in Resources */,
 				6CF0375C19F6F6C70054D493 /* record_button@2x.png in Resources */,
+				6CAB40DB1A49B86C006E17BD /* guide@2x.png in Resources */,
 				6CE3044519FDB16500B3F8A6 /* midi.png in Resources */,
 				6CD5B68B19C8DED8002E835C /* LFOControlView.xib in Resources */,
 				6C04C67619E1D52000391A7D /* label_res.png in Resources */,
@@ -1070,6 +1089,7 @@
 				6C47258F19D0F72B008F481F /* black_key_up@2x.png in Resources */,
 				6C04C63A19E1B54000391A7D /* vcf_frame.png in Resources */,
 				6C04C69A19E1E35600391A7D /* label_dest.png in Resources */,
+				6CAB40E21A49BD30006E17BD /* userguide.html in Resources */,
 				6CF5F25619DC8DDC00835C1B /* buttonF@3x.png in Resources */,
 				6C04C68D19E1E02600391A7D /* label_release.png in Resources */,
 				6C04C69F19E1E35600391A7D /* label_rate@2x.png in Resources */,
@@ -1149,6 +1169,7 @@
 				6C04C69B19E1E35600391A7D /* label_dest@2x.png in Resources */,
 				6CF5F26119DC8E1900835C1B /* buttonA.png in Resources */,
 				6CDBB1D91A4824D8005E2143 /* undo.png in Resources */,
+				6CAB40DC1A49B86C006E17BD /* guide@3x.png in Resources */,
 				6C47256B19D0D4EC008F481F /* Red_Switch_Off.png in Resources */,
 				6CE13C5719CA1FEF00AF7954 /* Osc2Freq_Background.png in Resources */,
 				6CE13C6C19CA38E600AF7954 /* ChickenKnob.png in Resources */,
@@ -1215,6 +1236,7 @@
 				6CC18F2219C83625000894AB /* SynthComponent.m in Sources */,
 				6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */,
 				6CC18F2519C842E9000894AB /* Generator.m in Sources */,
+				6CAB40E01A49B91C006E17BD /* UserGuideViewController.m in Sources */,
 				6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */,
 				6C9A9B5A19C8C04700DFA51A /* LFO.m in Sources */,
 				6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */,
