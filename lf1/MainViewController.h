@@ -13,6 +13,7 @@
 #import "PerformanceControlView.h"
 #import "PresetController.h"
 #import "PresetControlView.h"
+#import "NewPresetControlView.h"
 
 @class AudioEngine;
 
@@ -27,7 +28,7 @@
 @property (nonatomic, strong) FilterControlView *filterView;
 @property (nonatomic, strong) LFOControlView *lfoView;
 @property (nonatomic, strong) PerformanceControlView *performanceControlView;
-@property (nonatomic, strong) PresetControlView *presetControlView;
+@property (nonatomic, strong) NewPresetControlView *presetControlView;
 
 @property (nonatomic, strong) IBOutlet UIScrollView *iPhoneControlsView;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView1;
@@ -50,5 +51,8 @@
 
 @property (nonatomic, strong) UIPopoverController *settingsPopoverController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationController;
+
+@property (nonatomic, strong) IBOutlet UIButton *undoButton;
+-(void)updateUndoStatus;
 
 @end

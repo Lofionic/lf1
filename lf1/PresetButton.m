@@ -36,7 +36,7 @@
     [self addGestureRecognizer: tapGesture];
     
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
-    [longPressGesture setMinimumPressDuration:3];
+    [longPressGesture setMinimumPressDuration:2];
     [self addGestureRecognizer:longPressGesture];
 
 }
@@ -72,19 +72,16 @@
 }
 
 -(void)onTap:(UIGestureRecognizer*)gesture {
-    if (!self.flashing) {
+    if (!self.flashing && gesture.state == UIGestureRecognizerStateBegan) {
         [self.delegate presetButtonWasTapped:self];
     }
 }
 
 -(void)onLongPress:(UIGestureRecognizer*)gesture {
-
     if (!self.flashing && gesture.state == UIGestureRecognizerStateBegan) {
         [self.delegate presetButtonWasLongPressed:self];
     }
-    
 }
-
 
 -(void)drawRect:(CGRect)rect {
     
@@ -104,6 +101,7 @@
         CGContextRestoreGState(ctx);
     }
 }
+
 
 
 @end

@@ -30,7 +30,6 @@
         }
     }
     
-
     self.presetButtons = [NSArray arrayWithArray:buttons];
     
     [self.presetButtons[0] setSpriteSheet:[UIImage imageNamed:@"buttonA"]];

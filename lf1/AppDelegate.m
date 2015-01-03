@@ -11,7 +11,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.midiEngine = [[PGMidi alloc] init];
-    [self.midiEngine enableNetwork:YES];
+    [self.midiEngine setNetworkEnabled:YES];
+    [self.midiEngine setVirtualSourceEnabled:YES];
     
     self.audioEngine = [[AudioEngine alloc] init];
     [self.audioEngine initializeAUGraph];

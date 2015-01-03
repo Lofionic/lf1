@@ -22,4 +22,8 @@
 
 #define MIDI_CHANGE_NOTIFICATION @"Midi_Change_Notification"
 
+#define UNDO_STEPS 25
+
+#define UNDO_STATE_CHANGE_NOTIFICATON @"Undo_State_Change_Notification"
+
 #endif

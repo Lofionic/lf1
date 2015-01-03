@@ -67,6 +67,12 @@
     
     UITapGestureRecognizer *hostIconTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoHost)];
     [self.hostIcon addGestureRecognizer:hostIconTap];
+    
+    [self updateUndoStatus];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(undoStateChanged:)
+                                                 name:UNDO_STATE_CHANGE_NOTIFICATON
+                                               object:nil];
 }
 
 -(void)dealloc {
@@ -117,8 +123,11 @@
     [self.performanceControlView initializeParameters];
     
     // Create presets controller view
-    self.presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
+    //self.presetControlView = [[PresetControlView alloc] initWithFrame:CGRectZero];
+    self.presetControlView = [[NewPresetControlView alloc] initWithFrame:CGRectZero];
+    
     self.presetControlView.presetController = self.presetController;
+    [self.presetController restorePresetAtIndex:0];
     [self.presetControlView initializeParameters];
     
     // iPad - add control views
@@ -213,5 +222,20 @@
     [self.settingsPopoverController presentPopoverFromRect:((UIView*)sender).frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     
 }
+
+-(IBAction)undoTapped:(id)sender {
+    if ([self.presetController canUndo]) {
+        [self.presetController recallUndo];
+    }
+}
+
+-(void)updateUndoStatus {
+    [self.undoButton setEnabled:[self.presetController canUndo]];
+}
+
+-(void)undoStateChanged:(NSNotification*)notification {
+    [self updateUndoStatus];
+}
+
 
 @end

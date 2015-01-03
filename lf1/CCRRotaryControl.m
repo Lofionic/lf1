@@ -4,6 +4,7 @@
 //
 #import "Defines.h"
 #import "CCRRotaryControl.h"
+#import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation CCRRotaryControl {
@@ -88,6 +89,9 @@
     UITouch *thisTouch = [touches anyObject];
     tracking = true;
     previousTrackingTouchLocation = [thisTouch locationInView:self];
+    
+    // Store undo
+    [MAIN_VIEW_CONTROLLER.presetController storeUndo];
     
     [self becomeFirstResponder];
 }

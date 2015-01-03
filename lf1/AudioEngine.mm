@@ -6,7 +6,9 @@
 #import "Defines.h"
 #import "AudioEngine.h"
 #import <AVFoundation/AVFoundation.h>
+#import <mach/mach_time.h>
 #import "AppDelegate.h"
+
 
 const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
 @implementation AudioEngine {
@@ -75,9 +77,6 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     [self publishAsNode];
     [self registerNotifications];
     
-    // Print graph setup
-    CAShow(mGraph);
-    
     // Start AUGraph
     // checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
     
@@ -86,6 +85,9 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     
     // Start MIDI
     [self initializeMidi];
+    
+    // Print graph setup
+    CAShow(mGraph);
 }
 
 
@@ -151,10 +153,12 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 }
 
 -(void)setMidiSource:(PGMidiSource *)midiSource {
-    self.midiSource.delegate = nil;
+    for (id thisDelegate in [self.midiSource delegates]) {
+        [self.midiSource removeDelegate:thisDelegate];
+    }
     
     if (midiSource) {
-        midiSource.delegate = self;
+        [midiSource addDelegate:self];
     }
     
     _midiSource = midiSource;
@@ -163,7 +167,14 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 -(void)midiSource:(PGMidiSource *)input midiReceived:(const MIDIPacketList *)packetList {
     
     MIDIPacket *packet = (MIDIPacket *)packetList->packet;
+    
     for (int i=0; i < packetList->numPackets; i++) {
+        
+        MIDITimeStamp timeStamp = packet->timeStamp;
+        if (timeStamp > mach_absolute_time()) {
+            printf("MEH MEH MEH \n");
+        }
+        
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
@@ -237,7 +248,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
 }
 
 -(void) checkStartStopGraph {
-    // Stops and starts AUGraph with respect in background
+    // Stops and starts AUGraph with respect to in background
     if (self.connected || self.inForeground ) {
         [self setAudioSessionActive];
         //Initialize the graph if it hasn't been already
@@ -249,8 +260,9 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
         }
         [self startAUGraph];
     } else if(!self.inForeground){
-        [self stopAUGraph];
-        [self setAudioSessionInActive];
+        // v1.2 - do not stop audio when in background
+        //[self stopAUGraph];
+        //[self setAudioSessionInActive];
     }
 }
 
@@ -321,6 +333,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         
         AudioSignalType output = mixedSignal[i];
         outA[i] = output;
+        //printf("%.2f\n", output);
         //outA[i] = output * 32767.0f;
     }
     
@@ -548,7 +561,7 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
 //        
 //        //ae.cvController.pitchbend = inData1 / 127.0;
 //    }
-    
+    printf("%u",(unsigned int)inOffsetSampleFrame);
     Byte midiCommand = inStatus >> 4;
     Byte data1 = inData1 & 0x7F;
     Byte data2 = inData2 & 0x7F;

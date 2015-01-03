@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EPH-gI-4xT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="EPH-gI-4xT">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Settings-->
@@ -10,7 +10,7 @@
             <objects>
                 <tableViewController id="kha-BB-zH8" customClass="SettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HJB-gp-QW9">
-                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -99,6 +99,29 @@
                                             <segue destination="t9F-e7-ydG" kind="show" id="VOv-4z-cO7"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="UDF-Hp-zaz" imageView="guD-6s-jD3" rowHeight="60" style="IBUITableViewCellStyleDefault" id="Rpp-QD-5EQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Rpp-QD-5EQ" id="rY4-ix-XQz">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="User Guide" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UDF-Hp-zaz">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="guide.png" id="guD-6s-jD3">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="JrV-y4-tTL" kind="popoverPresentation" popoverAnchorView="Rpp-QD-5EQ" id="mL0-Kn-8LJ">
+                                                <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                            </segue>
+                                        </connections>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -127,11 +150,11 @@
                         <viewControllerLayoutGuide type="bottom" id="NZ3-AG-XVX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TM7-mj-OZe">
-                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYE-YT-KhA">
-                                <rect key="frame" x="40" y="7" width="320" height="162"/>
+                                <rect key="frame" x="40" y="37" width="320" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2e5-xz-iFz" id="Ud4-fz-W09"/>
                                     <outlet property="delegate" destination="2e5-xz-iFz" id="DGb-mh-moa"/>
@@ -157,7 +180,7 @@
             <objects>
                 <tableViewController title="MIDI Input" id="B6G-1W-sLB" customClass="MidiInputTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rha-nO-mTn">
-                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -195,11 +218,11 @@
                         <viewControllerLayoutGuide type="bottom" id="rmc-8C-l6w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M6q-te-Tgc">
-                        <rect key="frame" x="0.0" y="64" width="400" height="176"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ith-dK-1Hq">
-                                <rect key="frame" x="40" y="-20" width="320" height="216"/>
+                                <rect key="frame" x="40" y="10" width="320" height="216"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="xdL-6o-gcS"/>
                                 </constraints>
@@ -221,15 +244,15 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XQm-Vj-hBB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="993" y="866"/>
+            <point key="canvasLocation" x="446" y="876"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NOd-cs-h2Q">
             <objects>
                 <navigationController id="EPH-gI-4xT" sceneMemberID="viewController">
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="240"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="300"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="240"/>
+                    <size key="freeformSize" width="400" height="300"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SXX-JL-Xls">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -245,10 +268,45 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdH-jX-2V5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-107" y="370"/>
+            <point key="canvasLocation" x="-99" y="370"/>
+        </scene>
+        <!--User Guide-->
+        <scene sceneID="nx2-9e-8If">
+            <objects>
+                <viewController title="User Guide" id="JrV-y4-tTL" customClass="UserGuideViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w55-Pv-5WA"/>
+                        <viewControllerLayoutGuide type="bottom" id="Svb-ug-Hkj"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LZs-30-phH">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="236"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTa-Cw-Evu">
+                                <rect key="frame" x="0.0" y="0.0" width="400" height="236"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PTa-Cw-Evu" secondAttribute="trailing" id="6iJ-Cx-Dez"/>
+                            <constraint firstItem="PTa-Cw-Evu" firstAttribute="leading" secondItem="LZs-30-phH" secondAttribute="leading" id="GiR-dM-3c0"/>
+                            <constraint firstItem="PTa-Cw-Evu" firstAttribute="top" secondItem="LZs-30-phH" secondAttribute="top" id="aJ7-TL-hBY"/>
+                            <constraint firstItem="Svb-ug-Hkj" firstAttribute="top" secondItem="PTa-Cw-Evu" secondAttribute="bottom" id="xUC-yp-hc2"/>
+                        </constraints>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="600" height="600"/>
+                    <connections>
+                        <outlet property="webView" destination="PTa-Cw-Evu" id="7d8-bs-W1Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wlh-no-et6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="993" y="876"/>
         </scene>
     </scenes>
     <resources>
+        <image name="guide.png" width="40" height="40"/>
         <image name="keyboard.png" width="40" height="40"/>
         <image name="midi.png" width="40" height="40"/>
         <image name="pitchbend.png" width="40" height="40"/>
