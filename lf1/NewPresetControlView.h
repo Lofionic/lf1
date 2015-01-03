@@ -18,6 +18,7 @@
 @property (nonatomic, strong) IBOutlet UIButton* storeButton;
 
 @property BOOL isStoring;
+@property BOOL isShowingTutorialAlert;
 @property NSInteger storeIndex;
 @property NSInteger storeTimeout;
 @property NSInteger storeConfirmTimeout;

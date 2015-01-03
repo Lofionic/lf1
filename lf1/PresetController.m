@@ -146,8 +146,6 @@
         
         [self applyPresetFromDictionary:presetsArray[index]];
         
-        NSDictionary *presetDictionary = presetsArray[index];
-        
         self.currentIndex = index;
     }
     

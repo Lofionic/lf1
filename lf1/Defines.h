@@ -26,4 +26,7 @@
 
 #define UNDO_STATE_CHANGE_NOTIFICATON @"Undo_State_Change_Notification"
 
+#define PRESET_TUTORIAL_TEXT @"\nYou are now in STORE mode.\n\nUse the up and down keys to navigate to the preset slot you wish to write to, then press and hold STORE again to confirm.\n\nUnused preset slots are indicated with a dot. Up to 100 preset slots are available (0-99)."
+#define USER_DEFAULTS_KEY_1_2_PRESET_TUTORIAL @"1_2_Preset_Tutorial"
+
 #endif

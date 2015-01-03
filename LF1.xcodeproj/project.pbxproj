@@ -64,11 +64,15 @@
 		6C04C6AB19E1E70000391A7D /* label_glide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6A719E1E70000391A7D /* label_glide@2x.png */; };
 		6C04C6AE19E1FB4600391A7D /* label_cutoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AC19E1FB4600391A7D /* label_cutoff.png */; };
 		6C04C6AF19E1FB4600391A7D /* label_cutoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */; };
+		6C08EC6C1A585F65006DDFC2 /* userguide.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6B1A585F65006DDFC2 /* userguide.html */; };
+		6C08EC701A5862B9006DDFC2 /* lcd_bevel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */; };
+		6C08EC711A5862B9006DDFC2 /* lcd_bevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */; };
+		6C08EC721A5862B9006DDFC2 /* lcd_bevel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */; };
+		6C08EC751A586A30006DDFC2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C08EC741A586A30006DDFC2 /* SettingsTableViewController.m */; };
 		6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3B1A220A2300464633 /* PGMidi.mm */; };
 		6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */; };
 		6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */; };
 		6C35244319EB0AD200C1BC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C35244219EB0AD200C1BC80 /* Images.xcassets */; };
-		6C36F5DA19FC3F8300DF0FE0 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */; };
 		6C36F5DD19FC449C00DF0FE0 /* MidiInputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */; };
 		6C36F5EC19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5EB19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m */; };
 		6C36F5F019FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5EF19FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m */; };
@@ -112,7 +116,6 @@
 		6CAB40DC1A49B86C006E17BD /* guide@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40D91A49B86C006E17BD /* guide@3x.png */; };
 		6CAB40DD1A49B86C006E17BD /* guide.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40DA1A49B86C006E17BD /* guide.png */; };
 		6CAB40E01A49B91C006E17BD /* UserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */; };
-		6CAB40E21A49BD30006E17BD /* userguide.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40E11A49BD30006E17BD /* userguide.html */; };
 		6CB5E13319C45F0B008B9AC3 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* MainView.xib */; };
 		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
@@ -299,6 +302,12 @@
 		6C04C6A719E1E70000391A7D /* label_glide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_glide@2x.png"; sourceTree = "<group>"; };
 		6C04C6AC19E1FB4600391A7D /* label_cutoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_cutoff.png; sourceTree = "<group>"; };
 		6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_cutoff@2x.png"; sourceTree = "<group>"; };
+		6C08EC6B1A585F65006DDFC2 /* userguide.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userguide.html; sourceTree = "<group>"; };
+		6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lcd_bevel.png; sourceTree = "<group>"; };
+		6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd_bevel@2x.png"; sourceTree = "<group>"; };
+		6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd_bevel@3x.png"; sourceTree = "<group>"; };
+		6C08EC731A586A30006DDFC2 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		6C08EC741A586A30006DDFC2 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		6C1ADA381A220A2300464633 /* iOSVersionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSVersionDetection.h; sourceTree = "<group>"; };
 		6C1ADA391A220A2300464633 /* PGArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGArc.h; sourceTree = "<group>"; };
 		6C1ADA3A1A220A2300464633 /* PGMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidi.h; sourceTree = "<group>"; };
@@ -308,8 +317,6 @@
 		6C1ADA3E1A220A2300464633 /* PGMidiFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidiFind.h; sourceTree = "<group>"; };
 		6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidiFind.mm; sourceTree = "<group>"; };
 		6C35244219EB0AD200C1BC80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LF1/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = ../SettingsTableViewController.h; sourceTree = "<group>"; };
-		6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = ../SettingsTableViewController.m; sourceTree = "<group>"; };
 		6C36F5DB19FC449C00DF0FE0 /* MidiInputTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiInputTableViewController.h; sourceTree = "<group>"; };
 		6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MidiInputTableViewController.m; sourceTree = "<group>"; };
 		6C36F5EA19FD02F800DF0FE0 /* KeyboardShiftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardShiftTableViewController.h; sourceTree = "<group>"; };
@@ -372,7 +379,6 @@
 		6CAB40DA1A49B86C006E17BD /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
 		6CAB40DE1A49B91C006E17BD /* UserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGuideViewController.h; sourceTree = "<group>"; };
 		6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserGuideViewController.m; sourceTree = "<group>"; };
-		6CAB40E11A49BD30006E17BD /* userguide.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userguide.html; sourceTree = "<group>"; };
 		6CB5E13219C45F0B008B9AC3 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
@@ -751,10 +757,10 @@
 				6C36F5EB19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m */,
 				6C36F5DB19FC449C00DF0FE0 /* MidiInputTableViewController.h */,
 				6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */,
-				6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */,
-				6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */,
 				6CAB40DE1A49B91C006E17BD /* UserGuideViewController.h */,
 				6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */,
+				6C08EC731A586A30006DDFC2 /* SettingsTableViewController.h */,
+				6C08EC741A586A30006DDFC2 /* SettingsTableViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -809,7 +815,10 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6CAB40E11A49BD30006E17BD /* userguide.html */,
+				6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */,
+				6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */,
+				6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */,
+				6C08EC6B1A585F65006DDFC2 /* userguide.html */,
 				6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */,
 				6CE3045E19FDB6C600B3F8A6 /* cross.png */,
 				6CE3045F19FDB6C600B3F8A6 /* cross@2x.png */,
@@ -1088,12 +1097,14 @@
 				6CE13C6119CA240100AF7954 /* Env_Background@2x.png in Resources */,
 				6C47258F19D0F72B008F481F /* black_key_up@2x.png in Resources */,
 				6C04C63A19E1B54000391A7D /* vcf_frame.png in Resources */,
+				6C08EC701A5862B9006DDFC2 /* lcd_bevel.png in Resources */,
 				6C04C69A19E1E35600391A7D /* label_dest.png in Resources */,
-				6CAB40E21A49BD30006E17BD /* userguide.html in Resources */,
+				6C08EC6C1A585F65006DDFC2 /* userguide.html in Resources */,
 				6CF5F25619DC8DDC00835C1B /* buttonF@3x.png in Resources */,
 				6C04C68D19E1E02600391A7D /* label_release.png in Resources */,
 				6C04C69F19E1E35600391A7D /* label_rate@2x.png in Resources */,
 				6CF0377819F711CA0054D493 /* controls_bg@2x.png in Resources */,
+				6C08EC711A5862B9006DDFC2 /* lcd_bevel@2x.png in Resources */,
 				6CE3045C19FDB5F700B3F8A6 /* plug.png in Resources */,
 				6CF0376F19F6F7480054D493 /* pause_button@2x.png in Resources */,
 				6C47258E19D0F72B008F481F /* black_key_down.png in Resources */,
@@ -1204,6 +1215,7 @@
 				6C04C64819E1C2C700391A7D /* eg_amt_background.png in Resources */,
 				6CE3045119FDB4DE00B3F8A6 /* pitchbend.png in Resources */,
 				6CD81ED919CB835200B46963 /* ChickenKnob_4way@2x.png in Resources */,
+				6C08EC721A5862B9006DDFC2 /* lcd_bevel@3x.png in Resources */,
 				6CF5F25119DC8DDC00835C1B /* buttonA@3x.png in Resources */,
 				6CBC50BD1A448C690079303F /* preset_stepper@3x.png in Resources */,
 				6C04C66019E1D34200391A7D /* label_freq@2x.png in Resources */,
@@ -1226,7 +1238,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C36F5F019FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m in Sources */,
-				6C36F5DA19FC3F8300DF0FE0 /* SettingsTableViewController.m in Sources */,
 				6C9BD7A619DB632D008CE346 /* ControlView.m in Sources */,
 				6CD81ECB19CB561100B46963 /* CCRSegmentedRotaryControl.m in Sources */,
 				6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */,
@@ -1242,6 +1253,7 @@
 				6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */,
 				6C9BD7A019DB61F1008CE346 /* PresetButton.m in Sources */,
 				834FA81218B95FA800923F29 /* main.m in Sources */,
+				6C08EC751A586A30006DDFC2 /* SettingsTableViewController.m in Sources */,
 				834FA81618B95FA800923F29 /* AppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
 				6CA40FDB1A2FAAF600EC6B73 /* NewPresetControlView.m in Sources */,
