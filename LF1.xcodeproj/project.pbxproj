@@ -65,6 +65,9 @@
 		6C04C6AE19E1FB4600391A7D /* label_cutoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AC19E1FB4600391A7D /* label_cutoff.png */; };
 		6C04C6AF19E1FB4600391A7D /* label_cutoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */; };
 		6C08EC6C1A585F65006DDFC2 /* userguide.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6B1A585F65006DDFC2 /* userguide.html */; };
+		6C08EC701A5862B9006DDFC2 /* lcd_bevel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */; };
+		6C08EC711A5862B9006DDFC2 /* lcd_bevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */; };
+		6C08EC721A5862B9006DDFC2 /* lcd_bevel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */; };
 		6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3B1A220A2300464633 /* PGMidi.mm */; };
 		6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */; };
 		6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */; };
@@ -300,6 +303,9 @@
 		6C04C6AC19E1FB4600391A7D /* label_cutoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_cutoff.png; sourceTree = "<group>"; };
 		6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_cutoff@2x.png"; sourceTree = "<group>"; };
 		6C08EC6B1A585F65006DDFC2 /* userguide.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userguide.html; sourceTree = "<group>"; };
+		6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lcd_bevel.png; sourceTree = "<group>"; };
+		6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd_bevel@2x.png"; sourceTree = "<group>"; };
+		6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd_bevel@3x.png"; sourceTree = "<group>"; };
 		6C1ADA381A220A2300464633 /* iOSVersionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSVersionDetection.h; sourceTree = "<group>"; };
 		6C1ADA391A220A2300464633 /* PGArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGArc.h; sourceTree = "<group>"; };
 		6C1ADA3A1A220A2300464633 /* PGMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidi.h; sourceTree = "<group>"; };
@@ -809,6 +815,9 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */,
+				6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */,
+				6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */,
 				6C08EC6B1A585F65006DDFC2 /* userguide.html */,
 				6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */,
 				6CE3045E19FDB6C600B3F8A6 /* cross.png */,
@@ -1088,12 +1097,14 @@
 				6CE13C6119CA240100AF7954 /* Env_Background@2x.png in Resources */,
 				6C47258F19D0F72B008F481F /* black_key_up@2x.png in Resources */,
 				6C04C63A19E1B54000391A7D /* vcf_frame.png in Resources */,
+				6C08EC701A5862B9006DDFC2 /* lcd_bevel.png in Resources */,
 				6C04C69A19E1E35600391A7D /* label_dest.png in Resources */,
 				6C08EC6C1A585F65006DDFC2 /* userguide.html in Resources */,
 				6CF5F25619DC8DDC00835C1B /* buttonF@3x.png in Resources */,
 				6C04C68D19E1E02600391A7D /* label_release.png in Resources */,
 				6C04C69F19E1E35600391A7D /* label_rate@2x.png in Resources */,
 				6CF0377819F711CA0054D493 /* controls_bg@2x.png in Resources */,
+				6C08EC711A5862B9006DDFC2 /* lcd_bevel@2x.png in Resources */,
 				6CE3045C19FDB5F700B3F8A6 /* plug.png in Resources */,
 				6CF0376F19F6F7480054D493 /* pause_button@2x.png in Resources */,
 				6C47258E19D0F72B008F481F /* black_key_down.png in Resources */,
@@ -1204,6 +1215,7 @@
 				6C04C64819E1C2C700391A7D /* eg_amt_background.png in Resources */,
 				6CE3045119FDB4DE00B3F8A6 /* pitchbend.png in Resources */,
 				6CD81ED919CB835200B46963 /* ChickenKnob_4way@2x.png in Resources */,
+				6C08EC721A5862B9006DDFC2 /* lcd_bevel@3x.png in Resources */,
 				6CF5F25119DC8DDC00835C1B /* buttonA@3x.png in Resources */,
 				6CBC50BD1A448C690079303F /* preset_stepper@3x.png in Resources */,
 				6C04C66019E1D34200391A7D /* label_freq@2x.png in Resources */,

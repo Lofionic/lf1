@@ -7,6 +7,7 @@
 //
 
 #import "NewPresetControlView.h"
+#import "Defines.h"
 
 @implementation NewPresetControlView
 
@@ -37,10 +38,8 @@
     [self.stepper setTintColor:[UIColor clearColor]];
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(storeLongPressed:)];
-    longPressGestureRecognizer.minimumPressDuration = 1.5;
+    longPressGestureRecognizer.minimumPressDuration = 1;
     [self.storeButton addGestureRecognizer:longPressGestureRecognizer];
-    
-    
 }
 
 -(void)initializeParameters {
@@ -55,7 +54,11 @@
         [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", (long)self.presetController.currentIndex]];
         self.storeIndex = self.presetController.currentIndex;
     } else {
-        [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", (long)self.storeIndex]];
+        if (self.storeIndex >= [self.presetController presetCount]) {
+            [self.presetLabel setText:[NSString stringWithFormat:@"%.2li.", (long)self.storeIndex]];
+        } else {
+            [self.presetLabel setText:[NSString stringWithFormat:@"%.2li", (long)self.storeIndex]];
+        }
     }
 }
 
@@ -87,8 +90,28 @@
     [self flashLabel];
     [self updateLabel];
     [self.storeButton setImage:[UIImage imageNamed:@"store_on"] forState:UIControlStateNormal];
-    
     [self.stepper setMaximumValue:[self.presetController presetCount]];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if (![userDefaults valueForKey:USER_DEFAULTS_KEY_1_2_PRESET_TUTORIAL]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Storing Presets" message:PRESET_TUTORIAL_TEXT preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            [self setIsShowingTutorialAlert:NO];
+            //[userDefaults setValue:@YES forKey:USER_DEFAULTS_KEY_1_2_PRESET_TUTORIAL];
+        }];
+        
+        UIAlertAction *dontShowAgainAction= [UIAlertAction actionWithTitle:@"Don't Show Again" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            [self setIsShowingTutorialAlert:NO];
+            [userDefaults setValue:@YES forKey:USER_DEFAULTS_KEY_1_2_PRESET_TUTORIAL];
+        }];
+        
+        [alertController addAction:okAction];
+        [alertController addAction:dontShowAgainAction];
+        
+        [self setIsShowingTutorialAlert:YES];
+        [self.window.rootViewController presentViewController:alertController animated:YES completion:nil];
+        
+    }
 }
 
 -(void)endStoring {
@@ -119,7 +142,9 @@
         // We are still in storing state
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.presetLabel setHidden:!self.presetLabel.hidden];
-            self.storeTimeout ++;
+            if (!self.isShowingTutorialAlert) {
+                self.storeTimeout ++;
+            }
             if (self.storeTimeout > 30) {
                 [self.storeButton setImage:[UIImage imageNamed:@"store_off"] forState:UIControlStateNormal];
 
@@ -136,7 +161,9 @@
 
 -(void)flashLabelFast {
     [self.presetLabel setHidden:!self.presetLabel.hidden];
-    self.storeConfirmTimeout ++;
+    if (!self.isShowingTutorialAlert) {
+        self.storeConfirmTimeout ++;
+    }
     if (self.storeConfirmTimeout < 10) {
         [self performSelector:@selector(flashLabelFast) withObject:nil afterDelay:0.1];
     } else {
