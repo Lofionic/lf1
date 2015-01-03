@@ -68,11 +68,11 @@
 		6C08EC701A5862B9006DDFC2 /* lcd_bevel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */; };
 		6C08EC711A5862B9006DDFC2 /* lcd_bevel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */; };
 		6C08EC721A5862B9006DDFC2 /* lcd_bevel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */; };
+		6C08EC751A586A30006DDFC2 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C08EC741A586A30006DDFC2 /* SettingsTableViewController.m */; };
 		6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3B1A220A2300464633 /* PGMidi.mm */; };
 		6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */; };
 		6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */; };
 		6C35244319EB0AD200C1BC80 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C35244219EB0AD200C1BC80 /* Images.xcassets */; };
-		6C36F5DA19FC3F8300DF0FE0 /* SettingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */; };
 		6C36F5DD19FC449C00DF0FE0 /* MidiInputTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */; };
 		6C36F5EC19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5EB19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m */; };
 		6C36F5F019FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C36F5EF19FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m */; };
@@ -306,6 +306,8 @@
 		6C08EC6D1A5862B9006DDFC2 /* lcd_bevel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lcd_bevel.png; sourceTree = "<group>"; };
 		6C08EC6E1A5862B9006DDFC2 /* lcd_bevel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd_bevel@2x.png"; sourceTree = "<group>"; };
 		6C08EC6F1A5862B9006DDFC2 /* lcd_bevel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lcd_bevel@3x.png"; sourceTree = "<group>"; };
+		6C08EC731A586A30006DDFC2 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewController.h; sourceTree = "<group>"; };
+		6C08EC741A586A30006DDFC2 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewController.m; sourceTree = "<group>"; };
 		6C1ADA381A220A2300464633 /* iOSVersionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSVersionDetection.h; sourceTree = "<group>"; };
 		6C1ADA391A220A2300464633 /* PGArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGArc.h; sourceTree = "<group>"; };
 		6C1ADA3A1A220A2300464633 /* PGMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidi.h; sourceTree = "<group>"; };
@@ -315,8 +317,6 @@
 		6C1ADA3E1A220A2300464633 /* PGMidiFind.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidiFind.h; sourceTree = "<group>"; };
 		6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PGMidiFind.mm; sourceTree = "<group>"; };
 		6C35244219EB0AD200C1BC80 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LF1/Images.xcassets; sourceTree = SOURCE_ROOT; };
-		6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewController.h; path = ../SettingsTableViewController.h; sourceTree = "<group>"; };
-		6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewController.m; path = ../SettingsTableViewController.m; sourceTree = "<group>"; };
 		6C36F5DB19FC449C00DF0FE0 /* MidiInputTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MidiInputTableViewController.h; sourceTree = "<group>"; };
 		6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MidiInputTableViewController.m; sourceTree = "<group>"; };
 		6C36F5EA19FD02F800DF0FE0 /* KeyboardShiftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardShiftTableViewController.h; sourceTree = "<group>"; };
@@ -757,10 +757,10 @@
 				6C36F5EB19FD02F800DF0FE0 /* KeyboardShiftTableViewController.m */,
 				6C36F5DB19FC449C00DF0FE0 /* MidiInputTableViewController.h */,
 				6C36F5DC19FC449C00DF0FE0 /* MidiInputTableViewController.m */,
-				6C36F5D819FC3F8300DF0FE0 /* SettingsTableViewController.h */,
-				6C36F5D919FC3F8300DF0FE0 /* SettingsTableViewController.m */,
 				6CAB40DE1A49B91C006E17BD /* UserGuideViewController.h */,
 				6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */,
+				6C08EC731A586A30006DDFC2 /* SettingsTableViewController.h */,
+				6C08EC741A586A30006DDFC2 /* SettingsTableViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1238,7 +1238,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C36F5F019FD0C0000DF0FE0 /* PitchWheelRangeTableViewController.m in Sources */,
-				6C36F5DA19FC3F8300DF0FE0 /* SettingsTableViewController.m in Sources */,
 				6C9BD7A619DB632D008CE346 /* ControlView.m in Sources */,
 				6CD81ECB19CB561100B46963 /* CCRSegmentedRotaryControl.m in Sources */,
 				6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */,
@@ -1254,6 +1253,7 @@
 				6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */,
 				6C9BD7A019DB61F1008CE346 /* PresetButton.m in Sources */,
 				834FA81218B95FA800923F29 /* main.m in Sources */,
+				6C08EC751A586A30006DDFC2 /* SettingsTableViewController.m in Sources */,
 				834FA81618B95FA800923F29 /* AppDelegate.m in Sources */,
 				6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */,
 				6CA40FDB1A2FAAF600EC6B73 /* NewPresetControlView.m in Sources */,
