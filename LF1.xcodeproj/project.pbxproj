@@ -64,6 +64,7 @@
 		6C04C6AB19E1E70000391A7D /* label_glide@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6A719E1E70000391A7D /* label_glide@2x.png */; };
 		6C04C6AE19E1FB4600391A7D /* label_cutoff.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AC19E1FB4600391A7D /* label_cutoff.png */; };
 		6C04C6AF19E1FB4600391A7D /* label_cutoff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */; };
+		6C08EC6C1A585F65006DDFC2 /* userguide.html in Resources */ = {isa = PBXBuildFile; fileRef = 6C08EC6B1A585F65006DDFC2 /* userguide.html */; };
 		6C1ADA401A220A2300464633 /* PGMidi.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3B1A220A2300464633 /* PGMidi.mm */; };
 		6C1ADA411A220A2300464633 /* PGMidiAllSources.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3D1A220A2300464633 /* PGMidiAllSources.mm */; };
 		6C1ADA421A220A2300464633 /* PGMidiFind.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6C1ADA3F1A220A2300464633 /* PGMidiFind.mm */; };
@@ -112,7 +113,6 @@
 		6CAB40DC1A49B86C006E17BD /* guide@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40D91A49B86C006E17BD /* guide@3x.png */; };
 		6CAB40DD1A49B86C006E17BD /* guide.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40DA1A49B86C006E17BD /* guide.png */; };
 		6CAB40E01A49B91C006E17BD /* UserGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */; };
-		6CAB40E21A49BD30006E17BD /* userguide.html in Resources */ = {isa = PBXBuildFile; fileRef = 6CAB40E11A49BD30006E17BD /* userguide.html */; };
 		6CB5E13319C45F0B008B9AC3 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CB5E13219C45F0B008B9AC3 /* MainView.xib */; };
 		6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */; };
 		6CBB934719C23BAE00F40AC1 /* EnvelopeControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */; };
@@ -299,6 +299,7 @@
 		6C04C6A719E1E70000391A7D /* label_glide@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_glide@2x.png"; sourceTree = "<group>"; };
 		6C04C6AC19E1FB4600391A7D /* label_cutoff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = label_cutoff.png; sourceTree = "<group>"; };
 		6C04C6AD19E1FB4600391A7D /* label_cutoff@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "label_cutoff@2x.png"; sourceTree = "<group>"; };
+		6C08EC6B1A585F65006DDFC2 /* userguide.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userguide.html; sourceTree = "<group>"; };
 		6C1ADA381A220A2300464633 /* iOSVersionDetection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iOSVersionDetection.h; sourceTree = "<group>"; };
 		6C1ADA391A220A2300464633 /* PGArc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGArc.h; sourceTree = "<group>"; };
 		6C1ADA3A1A220A2300464633 /* PGMidi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PGMidi.h; sourceTree = "<group>"; };
@@ -372,7 +373,6 @@
 		6CAB40DA1A49B86C006E17BD /* guide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = guide.png; sourceTree = "<group>"; };
 		6CAB40DE1A49B91C006E17BD /* UserGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserGuideViewController.h; sourceTree = "<group>"; };
 		6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserGuideViewController.m; sourceTree = "<group>"; };
-		6CAB40E11A49BD30006E17BD /* userguide.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = userguide.html; sourceTree = "<group>"; };
 		6CB5E13219C45F0B008B9AC3 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
@@ -809,7 +809,7 @@
 		6CE06BB619C0AD9E005AB92F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6CAB40E11A49BD30006E17BD /* userguide.html */,
+				6C08EC6B1A585F65006DDFC2 /* userguide.html */,
 				6CA40FDC1A2FC40700EC6B73 /* LiquidCrystal-Normal.otf */,
 				6CE3045E19FDB6C600B3F8A6 /* cross.png */,
 				6CE3045F19FDB6C600B3F8A6 /* cross@2x.png */,
@@ -1089,7 +1089,7 @@
 				6C47258F19D0F72B008F481F /* black_key_up@2x.png in Resources */,
 				6C04C63A19E1B54000391A7D /* vcf_frame.png in Resources */,
 				6C04C69A19E1E35600391A7D /* label_dest.png in Resources */,
-				6CAB40E21A49BD30006E17BD /* userguide.html in Resources */,
+				6C08EC6C1A585F65006DDFC2 /* userguide.html in Resources */,
 				6CF5F25619DC8DDC00835C1B /* buttonF@3x.png in Resources */,
 				6C04C68D19E1E02600391A7D /* label_release.png in Resources */,
 				6C04C69F19E1E35600391A7D /* label_rate@2x.png in Resources */,
