@@ -30,6 +30,7 @@
 @property (nonatomic, strong) PerformanceControlView *performanceControlView;
 @property (nonatomic, strong) NewPresetControlView *presetControlView;
 
+@property BOOL leftHandMode;
 @property (nonatomic, strong) IBOutlet UIScrollView *iPhoneControlsView;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView1;
 @property (nonatomic, strong) IBOutlet UIView *iPadControlsView2;

@@ -33,6 +33,20 @@
        NSFontAttributeName: [UIFont fontWithName:@"Avenir" size:16]
        }
      forState:UIControlStateNormal];
+    
+    self.leftHandSwitch = [[UISwitch alloc] init];
+    [self.leftHandSwitch setOn:[[[NSUserDefaults standardUserDefaults] valueForKey:USER_DEFAULTS_KEY_LEFTHANDMODE] boolValue]];
+    [self.leftHandSwitch addTarget:self
+                            action:@selector(leftHandSwitchChanged)
+                  forControlEvents:UIControlEventValueChanged];
+    [self.leftHandTableViewCell setAccessoryView:self.leftHandSwitch];
+    [self.leftHandTableViewCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+}
+
+-(void)leftHandSwitchChanged {
+    [[NSUserDefaults standardUserDefaults] setValue:@(self.leftHandSwitch.isOn) forKey:USER_DEFAULTS_KEY_LEFTHANDMODE];
+    NSDictionary *dictionary = @{ @"LeftHandModeOn" : @(self.leftHandSwitch.isOn)} ;
+    [[NSNotificationCenter defaultCenter] postNotificationName:LEFT_HAND_MODE_CHANGE_NOTIFICATION object:nil userInfo:dictionary];
 }
 
 -(void)midiChange {

@@ -13,5 +13,7 @@
 @property (nonatomic, strong) IBOutlet UITableViewCell *midiInTableViewCell;
 @property (nonatomic, strong) IBOutlet UITableViewCell *pitchwheelTableViewCell;
 @property (nonatomic, strong) IBOutlet UITableViewCell *keyboardShiftTableViewCell;
+@property (nonatomic, strong) IBOutlet UITableViewCell *leftHandTableViewCell;
+@property (nonatomic, strong) UISwitch *leftHandSwitch;
 
 @end

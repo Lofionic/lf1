@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Settings-->
@@ -10,7 +11,7 @@
             <objects>
                 <tableViewController id="kha-BB-zH8" customClass="SettingsTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HJB-gp-QW9">
-                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="296"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
@@ -99,6 +100,24 @@
                                             <segue destination="t9F-e7-ydG" kind="show" id="VOv-4z-cO7"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="KjA-xR-2Fa" imageView="SwO-RJ-Q5C" rowHeight="60" style="IBUITableViewCellStyleDefault" id="sRW-0M-kLH">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sRW-0M-kLH" id="xtD-si-rLp">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Left-Hand Mode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KjA-xR-2Fa">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" image="lefthand.png" id="SwO-RJ-Q5C">
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="UDF-Hp-zaz" imageView="guD-6s-jD3" rowHeight="60" style="IBUITableViewCellStyleDefault" id="Rpp-QD-5EQ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -133,6 +152,7 @@
                     <navigationItem key="navigationItem" title="Settings" id="gEG-hA-GDj"/>
                     <connections>
                         <outlet property="keyboardShiftTableViewCell" destination="3Jh-EG-SBx" id="U0T-H3-Zoy"/>
+                        <outlet property="leftHandTableViewCell" destination="sRW-0M-kLH" id="nt3-FK-swo"/>
                         <outlet property="midiInTableViewCell" destination="Fxd-Kf-bfa" id="GaP-gI-7Rd"/>
                         <outlet property="pitchwheelTableViewCell" destination="I1e-08-Ov7" id="Uqa-Hs-edu"/>
                     </connections>
@@ -150,11 +170,11 @@
                         <viewControllerLayoutGuide type="bottom" id="NZ3-AG-XVX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="TM7-mj-OZe">
-                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="296"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYE-YT-KhA">
-                                <rect key="frame" x="40" y="37" width="320" height="162"/>
+                                <rect key="frame" x="40" y="67" width="320" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="2e5-xz-iFz" id="Ud4-fz-W09"/>
                                     <outlet property="delegate" destination="2e5-xz-iFz" id="DGb-mh-moa"/>
@@ -180,7 +200,7 @@
             <objects>
                 <tableViewController title="MIDI Input" id="B6G-1W-sLB" customClass="MidiInputTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rha-nO-mTn">
-                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="296"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -218,11 +238,11 @@
                         <viewControllerLayoutGuide type="bottom" id="rmc-8C-l6w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="M6q-te-Tgc">
-                        <rect key="frame" x="0.0" y="64" width="400" height="236"/>
+                        <rect key="frame" x="0.0" y="64" width="400" height="296"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ith-dK-1Hq">
-                                <rect key="frame" x="40" y="10" width="320" height="216"/>
+                                <rect key="frame" x="40" y="40" width="320" height="216"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="xdL-6o-gcS"/>
                                 </constraints>
@@ -250,9 +270,9 @@
         <scene sceneID="NOd-cs-h2Q">
             <objects>
                 <navigationController id="EPH-gI-4xT" sceneMemberID="viewController">
-                    <value key="contentSizeForViewInPopover" type="size" width="400" height="300"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="400" height="360"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="400" height="300"/>
+                    <size key="freeformSize" width="400" height="360"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" translucent="NO" id="SXX-JL-Xls">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -283,17 +303,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTa-Cw-Evu">
-                                <rect key="frame" x="0.0" y="0.0" width="400" height="236"/>
+                                <rect key="frame" x="8" y="8" width="384" height="220"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="PTa-Cw-Evu" secondAttribute="trailing" id="6iJ-Cx-Dez"/>
+                            <constraint firstItem="PTa-Cw-Evu" firstAttribute="leading" secondItem="LZs-30-phH" secondAttribute="leading" constant="8" id="DgY-kF-Bcn"/>
                             <constraint firstItem="PTa-Cw-Evu" firstAttribute="leading" secondItem="LZs-30-phH" secondAttribute="leading" id="GiR-dM-3c0"/>
+                            <constraint firstAttribute="trailing" secondItem="PTa-Cw-Evu" secondAttribute="trailing" constant="8" id="Ocy-ZO-IVd"/>
                             <constraint firstItem="PTa-Cw-Evu" firstAttribute="top" secondItem="LZs-30-phH" secondAttribute="top" id="aJ7-TL-hBY"/>
+                            <constraint firstItem="Svb-ug-Hkj" firstAttribute="top" secondItem="PTa-Cw-Evu" secondAttribute="bottom" constant="8" id="iSr-WQ-0iz"/>
+                            <constraint firstItem="PTa-Cw-Evu" firstAttribute="top" secondItem="LZs-30-phH" secondAttribute="topMargin" constant="8" id="o9b-go-9N2"/>
                             <constraint firstItem="Svb-ug-Hkj" firstAttribute="top" secondItem="PTa-Cw-Evu" secondAttribute="bottom" id="xUC-yp-hc2"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6iJ-Cx-Dez"/>
+                                <exclude reference="GiR-dM-3c0"/>
+                                <exclude reference="aJ7-TL-hBY"/>
+                                <exclude reference="xUC-yp-hc2"/>
+                            </mask>
+                        </variation>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="600" height="600"/>
                     <connections>
@@ -308,6 +340,7 @@
     <resources>
         <image name="guide.png" width="40" height="40"/>
         <image name="keyboard.png" width="40" height="40"/>
+        <image name="lefthand.png" width="40" height="40"/>
         <image name="midi.png" width="40" height="40"/>
         <image name="pitchbend.png" width="40" height="40"/>
     </resources>

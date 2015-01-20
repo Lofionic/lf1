@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		6C01140A19C19C3600D3C802 /* OscillatorControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C01140919C19C3600D3C802 /* OscillatorControlView.xib */; };
 		6C01140D19C19C6500D3C802 /* OscillatorControlView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C01140C19C19C6500D3C802 /* OscillatorControlView.m */; };
+		6C0324841A6F071C00706D81 /* lefthand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C0324811A6F071C00706D81 /* lefthand@3x.png */; };
+		6C0324851A6F071C00706D81 /* lefthand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C0324821A6F071C00706D81 /* lefthand@2x.png */; };
+		6C0324861A6F071C00706D81 /* lefthand.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C0324831A6F071C00706D81 /* lefthand.png */; };
 		6C0395DC19FEF40F00BF7D0E /* init.bnk in Resources */ = {isa = PBXBuildFile; fileRef = 6C0395DB19FEF40F00BF7D0E /* init.bnk */; };
 		6C04C63619E1AE0F00391A7D /* osc_frame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C63419E1AE0F00391A7D /* osc_frame.png */; };
 		6C04C63719E1AE0F00391A7D /* osc_frame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C04C63519E1AE0F00391A7D /* osc_frame@2x.png */; };
@@ -247,6 +250,9 @@
 		6C01140919C19C3600D3C802 /* OscillatorControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OscillatorControlView.xib; sourceTree = "<group>"; };
 		6C01140B19C19C6500D3C802 /* OscillatorControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OscillatorControlView.h; sourceTree = "<group>"; };
 		6C01140C19C19C6500D3C802 /* OscillatorControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OscillatorControlView.m; sourceTree = "<group>"; };
+		6C0324811A6F071C00706D81 /* lefthand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lefthand@3x.png"; sourceTree = "<group>"; };
+		6C0324821A6F071C00706D81 /* lefthand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lefthand@2x.png"; sourceTree = "<group>"; };
+		6C0324831A6F071C00706D81 /* lefthand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lefthand.png; sourceTree = "<group>"; };
 		6C0395DB19FEF40F00BF7D0E /* init.bnk */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = init.bnk; sourceTree = "<group>"; };
 		6C04C63419E1AE0F00391A7D /* osc_frame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = osc_frame.png; sourceTree = "<group>"; };
 		6C04C63519E1AE0F00391A7D /* osc_frame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osc_frame@2x.png"; sourceTree = "<group>"; };
@@ -889,6 +895,9 @@
 				6CE3044C19FDB4DE00B3F8A6 /* pitchbend@3x.png */,
 				6CE3044D19FDB4DE00B3F8A6 /* pitchbend@2x.png */,
 				6CE3044E19FDB4DE00B3F8A6 /* pitchbend.png */,
+				6C0324811A6F071C00706D81 /* lefthand@3x.png */,
+				6C0324821A6F071C00706D81 /* lefthand@2x.png */,
+				6C0324831A6F071C00706D81 /* lefthand.png */,
 			);
 			name = Icons;
 			sourceTree = "<group>";
@@ -927,9 +936,9 @@
 		834FA80B18B95FA800923F29 /* LF1 */ = {
 			isa = PBXGroup;
 			children = (
+				6C81843A19F2B8BC0008E29C /* LF1.entitlements */,
 				6C1ADA021A2209FA00464633 /* PGMidi */,
 				6C36F5ED19FD02FD00DF0FE0 /* Settings */,
-				6C81843A19F2B8BC0008E29C /* LF1.entitlements */,
 				6C9BD76819DB557E008CE346 /* Banks */,
 				6CB5E13419C4659B008B9AC3 /* BuildSettings.h */,
 				6CE1DC8E19F2F12900E117B8 /* Defines.h */,
@@ -1151,6 +1160,7 @@
 				6CF5F24519DC8D1500835C1B /* buttonE@2x.png in Resources */,
 				6C46742319F9D0C600B2DCAF /* spanner@2x.png in Resources */,
 				6C04C69119E1E02600391A7D /* label_decay.png in Resources */,
+				6C0324851A6F071C00706D81 /* lefthand@2x.png in Resources */,
 				6C47256C19D0D4EC008F481F /* Red_Switch_On.png in Resources */,
 				6CF5F25819DC8DDC00835C1B /* buttonH@3x.png in Resources */,
 				6CF5F24619DC8D1500835C1B /* buttonF@2x.png in Resources */,
@@ -1214,11 +1224,13 @@
 				6C04C6A919E1E70000391A7D /* label_gliss@2x.png in Resources */,
 				6C04C64819E1C2C700391A7D /* eg_amt_background.png in Resources */,
 				6CE3045119FDB4DE00B3F8A6 /* pitchbend.png in Resources */,
+				6C0324841A6F071C00706D81 /* lefthand@3x.png in Resources */,
 				6CD81ED919CB835200B46963 /* ChickenKnob_4way@2x.png in Resources */,
 				6C08EC721A5862B9006DDFC2 /* lcd_bevel@3x.png in Resources */,
 				6CF5F25119DC8DDC00835C1B /* buttonA@3x.png in Resources */,
 				6CBC50BD1A448C690079303F /* preset_stepper@3x.png in Resources */,
 				6C04C66019E1D34200391A7D /* label_freq@2x.png in Resources */,
+				6C0324861A6F071C00706D81 /* lefthand.png in Resources */,
 				6C04C66819E1D48100391A7D /* presets_frame.png in Resources */,
 				6CBB934419C23AFC00F40AC1 /* EnvelopeControlView.xib in Resources */,
 				6CE13C5C19CA21BF00AF7954 /* ZeroTen_Background.png in Resources */,
