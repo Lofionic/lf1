@@ -73,6 +73,17 @@
                                              selector:@selector(undoStateChanged:)
                                                  name:UNDO_STATE_CHANGE_NOTIFICATON
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(leftHandModeChanged:)
+                                                 name:LEFT_HAND_MODE_CHANGE_NOTIFICATION
+                                               object:nil];
+}
+
+-(void)leftHandModeChanged:(NSNotification*)note {
+    NSDictionary *dictionary = [note userInfo];
+    self.leftHandMode = [[dictionary valueForKey:@"LeftHandModeOn"] boolValue];
+    [self updateLeftHandMode];
 }
 
 -(void)dealloc {
@@ -137,7 +148,25 @@
     [self.iPadControlsView4 addSubview:_lfoView];
     [self.iPadControlsView5 addSubview:_performanceControlView];
     [self.iPadControlsView6 addSubview:_presetControlView];
+    
+    self.leftHandMode = [[[NSUserDefaults standardUserDefaults] valueForKey:USER_DEFAULTS_KEY_LEFTHANDMODE] boolValue];
+    [self updateLeftHandMode];
+}
 
+-(void)updateLeftHandMode {
+    
+    CGRect controlViewRect = self.iPadControlsView5.frame;
+    CGRect keyboardViewRect = self.keyboardView.frame;
+    if (self.leftHandMode) {
+        controlViewRect = CGRectMake(keyboardViewRect.size.width, controlViewRect.origin.y, controlViewRect.size.width, controlViewRect.size.height);
+        keyboardViewRect = CGRectMake(0, keyboardViewRect.origin.y, keyboardViewRect.size.width, keyboardViewRect.size.height);
+    } else {
+        controlViewRect = CGRectMake(0, controlViewRect.origin.y, controlViewRect.size.width, controlViewRect.size.height);
+        keyboardViewRect = CGRectMake(controlViewRect.size.width, keyboardViewRect.origin.y, keyboardViewRect.size.width, keyboardViewRect.size.height);
+    }
+    
+    [self.iPadControlsView5 setFrame:controlViewRect];
+    [self.keyboardView setFrame:keyboardViewRect];
 }
 
 -(void)viewWillLayoutSubviews {
