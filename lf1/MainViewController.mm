@@ -83,7 +83,7 @@
 -(void)leftHandModeChanged:(NSNotification*)note {
     NSDictionary *dictionary = [note userInfo];
     self.leftHandMode = [[dictionary valueForKey:@"LeftHandModeOn"] boolValue];
-    [self updateLeftHandMode];
+    [self updateLeftHandModeAnimated:YES];
 }
 
 -(void)dealloc {
@@ -150,10 +150,10 @@
     [self.iPadControlsView6 addSubview:_presetControlView];
     
     self.leftHandMode = [[[NSUserDefaults standardUserDefaults] valueForKey:USER_DEFAULTS_KEY_LEFTHANDMODE] boolValue];
-    [self updateLeftHandMode];
+    [self updateLeftHandModeAnimated:NO];
 }
 
--(void)updateLeftHandMode {
+-(void)updateLeftHandModeAnimated:(BOOL)animated {
     
     CGRect controlViewRect = self.iPadControlsView5.frame;
     CGRect keyboardViewRect = self.keyboardView.frame;
@@ -165,8 +165,15 @@
         keyboardViewRect = CGRectMake(controlViewRect.size.width, keyboardViewRect.origin.y, keyboardViewRect.size.width, keyboardViewRect.size.height);
     }
     
-    [self.iPadControlsView5 setFrame:controlViewRect];
-    [self.keyboardView setFrame:keyboardViewRect];
+    if (animated) {
+        [UIView animateWithDuration:0.5 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+            [self.iPadControlsView5 setFrame:controlViewRect];
+            [self.keyboardView setFrame:keyboardViewRect];
+        } completion:nil];
+    } else {
+        [self.iPadControlsView5 setFrame:controlViewRect];
+        [self.keyboardView setFrame:keyboardViewRect];
+    }
 }
 
 -(void)viewWillLayoutSubviews {
