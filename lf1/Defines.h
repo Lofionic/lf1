@@ -22,10 +22,10 @@
 
 #define MIDI_CHANGE_NOTIFICATION @"Midi_Change_Notification"
 
-
 #define USER_DEFAULTS_KEY_LEFTHANDMODE @"leftHandModeOn"
 #define LEFT_HAND_MODE_CHANGE_NOTIFICATION @"Left_Hand_Change_Notification"
 
+#define AUDIOBUS_API_KEY @"audiobusapikeygoeshere"
 
 #define UNDO_STEPS 25
 

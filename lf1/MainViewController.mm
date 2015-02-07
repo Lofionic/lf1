@@ -65,8 +65,10 @@
                                                  name: TRANSPORT_CHANGE_NOTIFICATION_STRING
                                                object: self.audioEngine];
     
-    UITapGestureRecognizer *hostIconTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoHost)];
-    [self.hostIcon addGestureRecognizer:hostIconTap];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateTransportControls)
+                                                 name:ABConnectionsChangedNotification
+                                               object:nil];
     
     [self updateUndoStatus];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -78,6 +80,9 @@
                                              selector:@selector(leftHandModeChanged:)
                                                  name:LEFT_HAND_MODE_CHANGE_NOTIFICATION
                                                object:nil];
+
+    UITapGestureRecognizer *hostIconTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoHost)];
+    [self.hostIcon addGestureRecognizer:hostIconTap];
 }
 
 -(void)leftHandModeChanged:(NSNotification*)note {
@@ -184,12 +189,10 @@
 
 -(void) appHasGoneInBackground {
     self.inForeground = NO;
-
 }
 
 -(void) appHasGoneForeground {
     self.inForeground = YES;
-    
     [self updateTransportControls];
 }
 
@@ -197,18 +200,16 @@
 
 -(void)updateTransportControls {
     if (self.audioEngine) {
-        if ([self.audioEngine isHostConnected]) {
+        if ([self.audioEngine isHostConnected] && ![self.audioEngine.audiobusController connected]) {
+            // We are connected to an IAP host but NOT audiobus
             self.transportView.hidden = NO;
             self.hostIcon.image = [self.audioEngine getAudioUnitIcon];
             self.rewindButon.enabled = !self.audioEngine.isHostPlaying;
             [self.playButton setImage:(self.audioEngine.isHostPlaying ? [UIImage imageNamed:@"pause_button.png"] : [UIImage imageNamed:@"play_button.png"]) forState:UIControlStateNormal];
             [self.recordButton setImage:(self.audioEngine.isHostRecording ? [UIImage imageNamed:@"record_button_on.png"] : [UIImage imageNamed:@"record_button.png"]) forState:UIControlStateNormal];
-
-
         } else {
             self.transportView.hidden = YES;
         }
-        
         [self.view setNeedsDisplay];
     }
 }
