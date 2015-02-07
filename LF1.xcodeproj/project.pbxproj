@@ -101,6 +101,7 @@
 		6C7E9B4719C7793300DAB5B9 /* Envelope.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E9B4619C7793300DAB5B9 /* Envelope.m */; };
 		6C863E5919BF1D170056D43D /* Analog_Oscillator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5819BF1D170056D43D /* Analog_Oscillator.m */; };
 		6C863E5C19BF30B60056D43D /* KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C863E5B19BF30B60056D43D /* KeyboardView.m */; };
+		6C96F9B71A86141D0062997A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6C96F9B61A86141D0062997A /* .gitignore */; };
 		6C9A9B5A19C8C04700DFA51A /* LFO.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9A9B5919C8C04700DFA51A /* LFO.m */; };
 		6C9BD76419DB2E5F008CE346 /* Mixer2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9BD76319DB2E5F008CE346 /* Mixer2.m */; };
 		6C9BD76619DB32DB008CE346 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C9BD76519DB32DB008CE346 /* AVFoundation.framework */; };
@@ -360,6 +361,7 @@
 		6C863E5819BF1D170056D43D /* Analog_Oscillator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Analog_Oscillator.m; sourceTree = "<group>"; };
 		6C863E5A19BF30B60056D43D /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
 		6C863E5B19BF30B60056D43D /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
+		6C96F9B61A86141D0062997A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6C9A9B5819C8C04700DFA51A /* LFO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LFO.h; sourceTree = "<group>"; };
 		6C9A9B5919C8C04700DFA51A /* LFO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LFO.m; sourceTree = "<group>"; };
 		6C9BD76219DB2E5F008CE346 /* Mixer2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mixer2.h; sourceTree = "<group>"; };
@@ -905,6 +907,7 @@
 		834FA7F918B95FA800923F29 = {
 			isa = PBXGroup;
 			children = (
+				6C96F9B61A86141D0062997A /* .gitignore */,
 				834FA80B18B95FA800923F29 /* LF1 */,
 				834FA80418B95FA800923F29 /* Frameworks */,
 				834FA80318B95FA800923F29 /* Products */,
@@ -1214,6 +1217,7 @@
 				6C04C6A819E1E70000391A7D /* label_gliss.png in Resources */,
 				6CA40FD81A2FAA4700EC6B73 /* NewPresetControlView.xib in Resources */,
 				6CF5F26519DC8E1900835C1B /* buttonE.png in Resources */,
+				6C96F9B71A86141D0062997A /* .gitignore in Resources */,
 				6C04C66219E1D34200391A7D /* label_vol@2x.png in Resources */,
 				6CE3044B19FDB30600B3F8A6 /* keyboard@2x.png in Resources */,
 				6CF0376919F6F6C70054D493 /* record_button_on@3x.png in Resources */,
