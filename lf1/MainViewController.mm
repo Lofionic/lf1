@@ -347,15 +347,13 @@
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    [self followOnTwitterWithSuccess: ^{
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        [userDefaults setValue:@YES forKey:USER_DEFAULTS_HAS_ADDED_TWITTTER];
-        [userDefaults synchronize];
-    }];
-}
-
--(void)alertViewCancel:(UIAlertView *)alertView {
-
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        [self followOnTwitterWithSuccess: ^{
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setValue:@YES forKey:USER_DEFAULTS_HAS_ADDED_TWITTTER];
+            [userDefaults synchronize];
+        }];
+    }
 }
 
 -(void)followOnTwitterWithSuccess:(void(^)())successBlock {
