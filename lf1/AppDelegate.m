@@ -4,6 +4,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PresetController.h"
 #import <AVFoundation/AVFoundation.h>
 
 @implementation AppDelegate
@@ -28,6 +29,19 @@
     [self.window setRootViewController:self.mainViewController];
     
     return YES;
+}
+
+-(NSDictionary *)audiobusStateDictionaryForCurrentState {
+    PresetController *presetController = self.mainViewController.presetController;
+    return [presetController getAudiobusPresetDictionary];
+}
+
+-(void)loadStateFromAudiobusStateDictionary:(NSDictionary *)dictionary responseMessage:(NSString *__autoreleasing *)outResponseMessage {
+    PresetController *presetController = self.mainViewController.presetController;
+    [presetController applyAudiobusPresetDictionary:dictionary];
+    
+    NSString *presetName = [dictionary objectForKey:ABStateDictionaryPresetNameKey];
+    *outResponseMessage = [NSString stringWithFormat:@"LF1 restored state for preset '%@'", presetName];
 }
 
 @end

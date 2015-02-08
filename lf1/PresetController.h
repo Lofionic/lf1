@@ -26,4 +26,9 @@
 -(BOOL)canUndo;
 
 -(NSInteger)presetCount;
+
+-(NSDictionary*)getAudiobusPresetDictionary;
+
+-(void)applyAudiobusPresetDictionary:(NSDictionary*)dictionary;
+
 @end

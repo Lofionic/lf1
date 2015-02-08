@@ -564,14 +564,14 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
 
 -(void)initializeAudiobus {
     self.audiobusController = [[ABAudiobusController alloc] initWithApiKey:AUDIOBUS_API_KEY];
-
+    [self.audiobusController setStateIODelegate:APP_DELEGATE];
+    
     AudioComponentDescription audioComponentDescription;
     audioComponentDescription.componentType = kAudioUnitType_RemoteInstrument;
     audioComponentDescription.componentSubType = 'iasp';
     audioComponentDescription.componentManufacturer = 'lfnc';
     audioComponentDescription.componentFlags = 0;
     audioComponentDescription.componentFlagsMask = 0;
-    
     
     self.audiobusSenderPort = [[ABSenderPort alloc] initWithName:@"LF1 Monosynth"
                                                            title:@"LF1 Out"
