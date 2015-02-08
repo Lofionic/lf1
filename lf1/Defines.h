@@ -25,7 +25,9 @@
 #define USER_DEFAULTS_KEY_LEFTHANDMODE @"leftHandModeOn"
 #define LEFT_HAND_MODE_CHANGE_NOTIFICATION @"Left_Hand_Change_Notification"
 
-#define AUDIOBUS_API_KEY @"audiobusapikeygoeshere"
+#define USER_REQUEST_TWITTER_FOLLOW_NOTIFICATION @"Twitter_Follow_Notification"
+
+#define AUDIOBUS_API_KEY @"MCoqKkxGMSoqKkxGMS5MRjEtMS4zLmF1ZGlvYnVzOi8v:CVnSmlJQ7iot8D6qC/EmOPyNoLflIiKYFEoUK/NdGId3lC1PcO4KvIi7yo4lReQ/FaAjXs1eQIXg9IsZf3wiFImoM7720O2oWm4+nmqlsiS8Eqca2gs/MU2ls/k7fVpn"
 
 #define UNDO_STEPS 25
 
@@ -33,5 +35,9 @@
 
 #define PRESET_TUTORIAL_TEXT @"\nYou are now in STORE mode.\n\nUse the up and down keys to navigate to the preset slot you wish to write to, then press and hold STORE again to confirm.\n\nUnused preset slots are indicated with a dot. Up to 100 preset slots are available (0-99)."
 #define USER_DEFAULTS_KEY_1_2_PRESET_TUTORIAL @"1_2_Preset_Tutorial"
+
+#define USER_DEFAULTS_HAS_LAUNCHED_1_3 @"hasStarted1_3"
+#define USER_DEFAULTS_HAS_ADDED_TWITTTER @"hasAddedTwiter"
+
 
 #endif

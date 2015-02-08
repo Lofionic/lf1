@@ -17,7 +17,7 @@
 
 @class AudioEngine;
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <UIAlertViewDelegate>
 
 @property (nonatomic, weak) AudioEngine *audioEngine;
 
@@ -53,7 +53,11 @@
 @property (nonatomic, strong) UIPopoverController *settingsPopoverController;
 @property (nonatomic, strong) UINavigationController *settingsNavigationController;
 
+@property (nonatomic) BOOL shouldShowTwitterPrompt;
+
 @property (nonatomic, strong) IBOutlet UIButton *undoButton;
+
 -(void)updateUndoStatus;
+
 
 @end

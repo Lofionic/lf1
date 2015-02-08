@@ -41,6 +41,9 @@
                   forControlEvents:UIControlEventValueChanged];
     [self.leftHandTableViewCell setAccessoryView:self.leftHandSwitch];
     [self.leftHandTableViewCell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    [self setPreferredContentSize:CGSizeMake(400, 360)];
+    [self setClearsSelectionOnViewWillAppear:YES];
 }
 
 -(void)leftHandSwitchChanged {
@@ -103,6 +106,20 @@
             break;
     }
     self.keyboardShiftTableViewCell.detailTextLabel.text = keyboardShiftString;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if ([tableView cellForRowAtIndexPath:indexPath].tag == 1) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:USER_REQUEST_TWITTER_FOLLOW_NOTIFICATION object:nil];
+    }
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if (![segue.identifier isEqual:@"openGuide"]) {
+        UIViewController *viewController = segue.destinationViewController;
+        [viewController setPreferredContentSize:self.preferredContentSize];
+    }
 }
 
 @end

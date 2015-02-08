@@ -83,6 +83,9 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     // Start MIDI
     [self initializeMidi];
     
+    // Start Audiobus
+    [self initializeAudiobus];
+    
     // Print graph setup
     CAShow(mGraph);
 }
@@ -167,11 +170,6 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
     
     for (int i=0; i < packetList->numPackets; i++) {
         
-        MIDITimeStamp timeStamp = packet->timeStamp;
-        if (timeStamp > mach_absolute_time()) {
-            printf("MEH MEH MEH \n");
-        }
-        
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
@@ -240,7 +238,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
     
     // If the graph is running, stop it
     if (isRunning) {
-            checkError(AUGraphStop(mGraph),"Cannot stop AUGraph");
+        checkError(AUGraphStop(mGraph),"Cannot stop AUGraph");
     }
 }
 
@@ -466,7 +464,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
 // Update the current transport state
 -(void)updateStatefromTransportCallBack{
-    if (self.connected && self.inForeground) {
+    if (self.connected && self.inForeground && ![self.audiobusController audiobusConnected]) {
         if (!callBackInfo) {
             [self getHostCallBackInfo];
         }
@@ -566,20 +564,23 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
 
 -(void)initializeAudiobus {
     self.audiobusController = [[ABAudiobusController alloc] initWithApiKey:AUDIOBUS_API_KEY];
-    
+
     AudioComponentDescription audioComponentDescription;
     audioComponentDescription.componentType = kAudioUnitType_RemoteInstrument;
     audioComponentDescription.componentSubType = 'iasp';
     audioComponentDescription.componentManufacturer = 'lfnc';
+    audioComponentDescription.componentFlags = 0;
+    audioComponentDescription.componentFlagsMask = 0;
     
     
-    self.audiobusSenderPort = [[ABSenderPort alloc] initWithName:@"LF1 Output"
-                                                           title:@"Lofionic LF1 Output"
+    self.audiobusSenderPort = [[ABSenderPort alloc] initWithName:@"LF1 Monosynth"
+                                                           title:@"LF1 Out"
                                        audioComponentDescription:audioComponentDescription
                                                        audioUnit:mOutput];
     
     [self.audiobusSenderPort setIcon:[UIImage imageNamed:@"audiobus_icon"]];
     
+    [self.audiobusController addSenderPort:self.audiobusSenderPort];
     
 }
 
