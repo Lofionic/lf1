@@ -173,9 +173,14 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
-
+        
         if (midiCommand == 0x09) {
-            [self.cvController noteOn:inData1];
+            if (inData2 == 0x00) {
+                // Midi notes of velocity 0 should be considered note-offs
+                [self.cvController noteOff:inData1];
+            } else {
+                [self.cvController noteOn:inData1];
+            }
         } else if (midiCommand == 0x08) {
             [self.cvController noteOff:inData1];
         } else if (midiCommand == 0x0E) {
