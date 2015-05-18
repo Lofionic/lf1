@@ -26,6 +26,11 @@
 + (ABButtonTrigger*)buttonTriggerWithTitle:(NSString*)title icon:(UIImage*)icon block:(ABTriggerPerformBlock)block;
 
 /*!
+ * Designated initializer
+ */
+-(id)init;
+
+/*!
  * Set the title for a given state
  *
  * @param title User-readable title (used for accessibility)

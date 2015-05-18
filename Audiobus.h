@@ -15,11 +15,12 @@
 #import "ABPort.h"
 #import "ABTrigger.h"
 #import "ABButtonTrigger.h"
-#import "ABAnimatedTrigger.h"
 #import "ABMultiStreamBuffer.h"
 #import "ABAudioUnitFader.h"
+#import <AVFoundation/AVFoundation.h>
+#import <Accelerate/Accelerate.h>
 
-#define ABSDKVersionString @"2.1.5"
+#define ABSDKVersionString @"2.1.6.1"
 
 /*!
 @mainpage
@@ -641,6 +642,11 @@
  Remote Instrument nodes have the additional capability of accepting MIDI input over the Inter-App Audio channel and rendering
  audio based on this input. Audiobus itself does not make use of this functionality at this time.
  
+ If you wish to use more than one AudioComponentDescription to publish the port, to provide both Remote Generator and
+ Remote Instrument types for example, you may provide the additional AudioComponentDescription to the sender port via
+ @link ABSenderPort::registerAdditionalAudioComponentDescription: ABSenderPort's registerAdditionalAudioComponentDescription: @endlink
+ method (you will need to call AudioOutputUnitPublish for the additional types yourself).
+ 
  Now it's time to create an ABSenderPort instance. You provide a port name, for internal use, and a port
  title which is displayed to the user. You can localise the port title.
  
@@ -665,7 +671,10 @@
  > @link ABSenderPort::ABSenderPortIsMuted ABSenderPortIsMuted @endlink function. This is very important and
  > both avoids doubling up the audio signal, and lets your app go silent when removed from Audiobus. See the 
  > [Sender Port recipe](@ref Sender-Port-Recipe) and the AB Receiver sample app for details.
-
+ 
+ > If you work with floating-point audio in your app we strongly recommend you restrict values to the range
+ >  -1.0 to 1.0, as a courtesy to developers of downstream apps.
+ 
  Finally, you need to pass in an AudioComponentDescription structure that contains the same details as the
  AudioComponents entry you added earlier.
 

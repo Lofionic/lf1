@@ -376,20 +376,6 @@
 		6C863E5A19BF30B60056D43D /* KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardView.h; sourceTree = "<group>"; };
 		6C863E5B19BF30B60056D43D /* KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardView.m; sourceTree = "<group>"; };
 		6C96F9B61A86141D0062997A /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		6C96F9CC1A8617450062997A /* ABAnimatedTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAnimatedTrigger.h; sourceTree = "<group>"; };
-		6C96F9CD1A8617450062997A /* ABAudiobusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAudiobusController.h; sourceTree = "<group>"; };
-		6C96F9CE1A8617450062997A /* ABAudioUnitFader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAudioUnitFader.h; sourceTree = "<group>"; };
-		6C96F9CF1A8617450062997A /* ABButtonTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABButtonTrigger.h; sourceTree = "<group>"; };
-		6C96F9D01A8617450062997A /* ABCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCommon.h; sourceTree = "<group>"; };
-		6C96F9D11A8617450062997A /* ABFilterPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABFilterPort.h; sourceTree = "<group>"; };
-		6C96F9D21A8617450062997A /* ABLocalPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABLocalPort.h; sourceTree = "<group>"; };
-		6C96F9D31A8617450062997A /* ABMultiStreamBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMultiStreamBuffer.h; sourceTree = "<group>"; };
-		6C96F9D41A8617450062997A /* ABPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABPeer.h; sourceTree = "<group>"; };
-		6C96F9D51A8617450062997A /* ABPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABPort.h; sourceTree = "<group>"; };
-		6C96F9D61A8617450062997A /* ABReceiverPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABReceiverPort.h; sourceTree = "<group>"; };
-		6C96F9D71A8617450062997A /* ABSenderPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSenderPort.h; sourceTree = "<group>"; };
-		6C96F9D81A8617450062997A /* ABTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTrigger.h; sourceTree = "<group>"; };
-		6C96F9D91A8617450062997A /* Audiobus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audiobus.h; sourceTree = "<group>"; };
 		6C96F9DA1A86175A0062997A /* libAudiobus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAudiobus.a; sourceTree = "<group>"; };
 		6C96F9DC1A8617790062997A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6C96F9DE1A8617820062997A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -425,6 +411,20 @@
 		6CAB40DF1A49B91C006E17BD /* UserGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserGuideViewController.m; sourceTree = "<group>"; };
 		6CB5E13219C45F0B008B9AC3 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		6CB5E13419C4659B008B9AC3 /* BuildSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuildSettings.h; sourceTree = "<group>"; };
+		6CB7AC831B0A934A009CA1E8 /* ABAnimatedTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAnimatedTrigger.h; sourceTree = "<group>"; };
+		6CB7AC841B0A934A009CA1E8 /* ABAudiobusController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAudiobusController.h; sourceTree = "<group>"; };
+		6CB7AC851B0A934A009CA1E8 /* ABAudioUnitFader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABAudioUnitFader.h; sourceTree = "<group>"; };
+		6CB7AC861B0A934A009CA1E8 /* ABButtonTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABButtonTrigger.h; sourceTree = "<group>"; };
+		6CB7AC871B0A934A009CA1E8 /* ABCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABCommon.h; sourceTree = "<group>"; };
+		6CB7AC881B0A934A009CA1E8 /* ABFilterPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABFilterPort.h; sourceTree = "<group>"; };
+		6CB7AC891B0A934A009CA1E8 /* ABLocalPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABLocalPort.h; sourceTree = "<group>"; };
+		6CB7AC8A1B0A934A009CA1E8 /* ABMultiStreamBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABMultiStreamBuffer.h; sourceTree = "<group>"; };
+		6CB7AC8B1B0A934A009CA1E8 /* ABPeer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABPeer.h; sourceTree = "<group>"; };
+		6CB7AC8C1B0A934A009CA1E8 /* ABPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABPort.h; sourceTree = "<group>"; };
+		6CB7AC8D1B0A934A009CA1E8 /* ABReceiverPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABReceiverPort.h; sourceTree = "<group>"; };
+		6CB7AC8E1B0A934A009CA1E8 /* ABSenderPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABSenderPort.h; sourceTree = "<group>"; };
+		6CB7AC8F1B0A934A009CA1E8 /* ABTrigger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTrigger.h; sourceTree = "<group>"; };
+		6CB7AC901B0A934A009CA1E8 /* Audiobus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audiobus.h; sourceTree = "<group>"; };
 		6CBB934319C23AFC00F40AC1 /* EnvelopeControlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EnvelopeControlView.xib; sourceTree = "<group>"; };
 		6CBB934519C23BAE00F40AC1 /* EnvelopeControlView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvelopeControlView.h; sourceTree = "<group>"; };
 		6CBB934619C23BAE00F40AC1 /* EnvelopeControlView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvelopeControlView.m; sourceTree = "<group>"; };
@@ -821,20 +821,20 @@
 			isa = PBXGroup;
 			children = (
 				6C96F9DA1A86175A0062997A /* libAudiobus.a */,
-				6C96F9CC1A8617450062997A /* ABAnimatedTrigger.h */,
-				6C96F9CD1A8617450062997A /* ABAudiobusController.h */,
-				6C96F9CE1A8617450062997A /* ABAudioUnitFader.h */,
-				6C96F9CF1A8617450062997A /* ABButtonTrigger.h */,
-				6C96F9D01A8617450062997A /* ABCommon.h */,
-				6C96F9D11A8617450062997A /* ABFilterPort.h */,
-				6C96F9D21A8617450062997A /* ABLocalPort.h */,
-				6C96F9D31A8617450062997A /* ABMultiStreamBuffer.h */,
-				6C96F9D41A8617450062997A /* ABPeer.h */,
-				6C96F9D51A8617450062997A /* ABPort.h */,
-				6C96F9D61A8617450062997A /* ABReceiverPort.h */,
-				6C96F9D71A8617450062997A /* ABSenderPort.h */,
-				6C96F9D81A8617450062997A /* ABTrigger.h */,
-				6C96F9D91A8617450062997A /* Audiobus.h */,
+				6CB7AC831B0A934A009CA1E8 /* ABAnimatedTrigger.h */,
+				6CB7AC841B0A934A009CA1E8 /* ABAudiobusController.h */,
+				6CB7AC851B0A934A009CA1E8 /* ABAudioUnitFader.h */,
+				6CB7AC861B0A934A009CA1E8 /* ABButtonTrigger.h */,
+				6CB7AC871B0A934A009CA1E8 /* ABCommon.h */,
+				6CB7AC881B0A934A009CA1E8 /* ABFilterPort.h */,
+				6CB7AC891B0A934A009CA1E8 /* ABLocalPort.h */,
+				6CB7AC8A1B0A934A009CA1E8 /* ABMultiStreamBuffer.h */,
+				6CB7AC8B1B0A934A009CA1E8 /* ABPeer.h */,
+				6CB7AC8C1B0A934A009CA1E8 /* ABPort.h */,
+				6CB7AC8D1B0A934A009CA1E8 /* ABReceiverPort.h */,
+				6CB7AC8E1B0A934A009CA1E8 /* ABSenderPort.h */,
+				6CB7AC8F1B0A934A009CA1E8 /* ABTrigger.h */,
+				6CB7AC901B0A934A009CA1E8 /* Audiobus.h */,
 			);
 			name = Audiobus;
 			path = ..;

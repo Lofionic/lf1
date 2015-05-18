@@ -53,8 +53,10 @@ extern NSString * const ABConnectionsChangedNotification;
  *
  *  Note that due to the asynchronous nature of Inter-App Audio connections
  *  within Audiobus when connected to peers using the 2.1 Audiobus SDK or above, 
- *  you may see this notification before the @link interAppAudioConnected @endlink or
- *  @link audiobusConnected @endlink properties change to YES.
+ *  you may see this notification before the 
+ *  @link ABAudiobusController::interAppAudioConnected interAppAudioConnected @endlink or
+ *  @link ABAudiobusController::audiobusConnected audiobusConnected @endlink 
+ *  properties change to YES.
  */
 extern NSString * const ABConnectedNotification;
 
