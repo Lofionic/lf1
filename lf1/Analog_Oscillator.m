@@ -63,7 +63,6 @@
         sum /= count;
         squareWaveTable[i] = (AudioSignalType)sum;
     }
-
 }
 
 -(void) renderBuffer:(AudioSignalType*)outA samples:(UInt32)numFrames {

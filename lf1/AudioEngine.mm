@@ -78,13 +78,13 @@ const Float64 kGraphSampleRate = [[AVAudioSession sharedInstance] sampleRate];
     [self registerNotifications];
     
     // Start AUGraph
-    // checkError(AUGraphInitialize(mGraph), "Cannot initialize AUGraph");
-    
     [self checkStartStopGraph];
-    //[self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
     
     // Start MIDI
     [self initializeMidi];
+    
+    // Start Audiobus
+    [self initializeAudiobus];
     
     // Print graph setup
     CAShow(mGraph);
@@ -170,17 +170,17 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
     
     for (int i=0; i < packetList->numPackets; i++) {
         
-        MIDITimeStamp timeStamp = packet->timeStamp;
-        if (timeStamp > mach_absolute_time()) {
-            printf("MEH MEH MEH \n");
-        }
-        
         Byte midiStatus = packet->data[0]; Byte midiCommand = midiStatus >> 4;
         Byte inData1 = packet->data[1] & 0x7F;
         Byte inData2 = packet->data[2] & 0x7F;
-
+        
         if (midiCommand == 0x09) {
-            [self.cvController noteOn:inData1];
+            if (inData2 == 0x00) {
+                // Midi notes of velocity 0 should be considered note-offs
+                [self.cvController noteOff:inData1];
+            } else {
+                [self.cvController noteOn:inData1];
+            }
         } else if (midiCommand == 0x08) {
             [self.cvController noteOff:inData1];
         } else if (midiCommand == 0x0E) {
@@ -243,7 +243,7 @@ void AudioUnitPropertyChangeDispatcher(void *inRefCon, AudioUnit inUnit, AudioUn
     
     // If the graph is running, stop it
     if (isRunning) {
-            checkError(AUGraphStop(mGraph),"Cannot stop AUGraph");
+        checkError(AUGraphStop(mGraph),"Cannot stop AUGraph");
     }
 }
 
@@ -469,7 +469,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
 // Update the current transport state
 -(void)updateStatefromTransportCallBack{
-    if (self.connected && self.inForeground) {
+    if (self.connected && self.inForeground && ![self.audiobusController audiobusConnected]) {
         if (!callBackInfo) {
             [self getHostCallBackInfo];
         }
@@ -549,18 +549,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
 
 void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt32 inData2, UInt32 inOffsetSampleFrame){
     AudioEngine *ae = (__bridge AudioEngine*)userData;
-//    
-//    if (inStatus == 144) {
-//        [ae.cvController noteOn:inData1];
-//    } else if (inStatus == 128) {
-//        [ae.cvController noteOff:inData1];
-//    } else if (inStatus == 224) {
-//        int value = ((inData2 << 7)) + inData1;
-//        [ae.cvController setPitchbend:value / 16383.0];
-//        
-//        
-//        //ae.cvController.pitchbend = inData1 / 127.0;
-//    }
+
     printf("%u",(unsigned int)inOffsetSampleFrame);
     Byte midiCommand = inStatus >> 4;
     Byte data1 = inData1 & 0x7F;
@@ -576,21 +565,35 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
     }
 }
 
+#pragma mark Audiobus
+
+-(void)initializeAudiobus {
+    self.audiobusController = [[ABAudiobusController alloc] initWithApiKey:AUDIOBUS_API_KEY];
+    [self.audiobusController setStateIODelegate:APP_DELEGATE];
+    
+    AudioComponentDescription audioComponentDescription;
+    audioComponentDescription.componentType = kAudioUnitType_RemoteInstrument;
+    audioComponentDescription.componentSubType = 'iasp';
+    audioComponentDescription.componentManufacturer = 'lfnc';
+    audioComponentDescription.componentFlags = 0;
+    audioComponentDescription.componentFlagsMask = 0;
+    
+    self.audiobusSenderPort = [[ABSenderPort alloc] initWithName:@"LF1 Monosynth"
+                                                           title:@"LF1 Out"
+                                       audioComponentDescription:audioComponentDescription
+                                                       audioUnit:mOutput];
+    
+    [self.audiobusSenderPort setIcon:[UIImage imageNamed:@"audiobus_icon"]];
+    
+    [self.audiobusController addSenderPort:self.audiobusSenderPort];
+    
+}
+
 #pragma mark Utility
 
 static void checkError(OSStatus error, const char *operation) {
     if (error == noErr) return;
     char errorString[20];
-    
-//    // See if it appears to be a 4-char-code
-//    *(UInt32 *)(errorString + 1) = CFSwapInt32HostToBig(error);
-//    if (isprint(errorString[1]) && isprint(errorString[2]) && isprint(errorString[3]) && isprint(errorString[4])) {
-//        errorString[0] = errorString[5] = '\'';
-//        errorString[6] = '\0';
-//    } else {
-//        // No, format it as an integer
-//        sprintf(errorString, "%d", (int)error);
-//    }
     
     fprintf(stderr, "Error: %s (%s)\n", operation, errorString); exit(1);
 }

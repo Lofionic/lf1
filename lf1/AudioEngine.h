@@ -18,13 +18,11 @@
 #import <CoreAudio/CoreAudioTypes.h>
 #import <Foundation/Foundation.h>
 #import "PGMidi.h"
+#import "Audiobus.h"
 
 @interface AudioEngine : NSObject <PGMidiDelegate, PGMidiSourceDelegate> {
     AUGraph mGraph;
     AudioUnit mOutput;
-    AudioUnit mConverter;
-    MIDIPortRef inPort;
-    MIDIClientRef client;
     AudioStreamBasicDescription outputASBD;
 }
 
@@ -60,5 +58,8 @@
 
 @property (nonatomic, weak) PGMidi *midi;
 @property (nonatomic, weak) PGMidiSource *midiSource;
+
+@property (nonatomic, strong) ABAudiobusController *audiobusController;
+@property (nonatomic, strong) ABSenderPort *audiobusSenderPort;
 
 @end

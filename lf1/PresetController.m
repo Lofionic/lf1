@@ -228,4 +228,12 @@
     }
 }
 
+-(NSDictionary*)getAudiobusPresetDictionary {
+    return [self dictionaryForCurrentPreset];
+}
+
+-(void)applyAudiobusPresetDictionary:(NSDictionary*)dictionary {
+    [self applyPresetFromDictionary:dictionary];
+}
+
 @end
