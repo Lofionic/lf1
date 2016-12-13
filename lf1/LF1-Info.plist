@@ -14,7 +14,7 @@
 			<key>type</key>
 			<string>auri</string>
 			<key>version</key>
-			<integer>1</integer>
+			<integer>3</integer>
 		</dict>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
@@ -38,7 +38,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.3.2</string>
+	<string>1.3.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -50,7 +50,7 @@
 			<string>com.lofionic.LF1</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>LF1.LF1-1.3.2.audiobus</string>
+				<string>LF1.LF1-1.3.3.audiobus</string>
 			</array>
 		</dict>
 	</array>

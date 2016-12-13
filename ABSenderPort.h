@@ -80,7 +80,7 @@ extern NSString * const ABSenderPortConnectionsChangedNotification;
  *
  *  Sometimes under Inter-App Audio you may wish to publish your audio unit with an additional 
  *  AudioComponentDescription, such as providing both kAudioUnitType_RemoteInstrument and
- *  kAudioUnitType_Generator types.
+ *  kAudioUnitType_RemoteGenerator types.
  *
  *  If you wish to do so, you can use this method to register the additional descriptions 
  *  (additional to the one passed via the init method). Note that this method will not publish
@@ -165,13 +165,12 @@ BOOL ABSenderPortIsMuted(ABSenderPort *senderPort);
 /*!
  * Get average latency
  *
- *  This C function returns the average transmission latency across all connected remote ports. Where appropriate, use
- *  it to offset generated audio to compensate.
+ *  Deprecated: no longer in use.
  *
  * @param senderPort        Sender port.
  * @return Latency, in seconds.
  */
-NSTimeInterval ABSenderPortGetAverageLatency(ABSenderPort *senderPort);
+NSTimeInterval ABSenderPortGetAverageLatency(ABSenderPort *senderPort) __deprecated;
 
 /*!
  * Currently-connected destinations

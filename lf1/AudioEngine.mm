@@ -398,7 +398,7 @@ static OSStatus renderAudio(void *inRefCon, AudioUnitRenderActionFlags *ioAction
         0,
         1};
     
-    checkError(AudioOutputUnitPublish(&desc, CFSTR("LF1 Monosynth"), 1, mOutput) , "Cannot publish to inter-app audio" );
+    checkError(AudioOutputUnitPublish(&desc, CFSTR("LF1 Monosynth"), 3, mOutput) , "Cannot publish to inter-app audio" );
     
     [self setupMidiCallBacks:&mOutput userData:(__bridge void*)self];
 }
@@ -570,6 +570,7 @@ void MIDIEventProcCallBack(void *userData, UInt32 inStatus, UInt32 inData1, UInt
 -(void)initializeAudiobus {
     self.audiobusController = [[ABAudiobusController alloc] initWithApiKey:AUDIOBUS_API_KEY];
     [self.audiobusController setStateIODelegate:APP_DELEGATE];
+    [self.audiobusController setConnectionPanelPosition:ABConnectionPanelPositionLeft];
     
     AudioComponentDescription audioComponentDescription;
     audioComponentDescription.componentType = kAudioUnitType_RemoteInstrument;

@@ -7,6 +7,7 @@
 //
 
 #import "ABTrigger.h"
+#import <UIKit/UIKit.h>
 
 /*!
  * Button trigger
@@ -83,5 +84,21 @@
  * @return Color for state
  */
 - (UIColor*)colorForState:(ABTriggerState)state;
+
+/*!
+ * Add a block to be called in response to events within Audiobus Remote
+ *
+ *  This method allows your app to react to UIControlEventTouchDown, UIControlEventTouchUpInside
+ *  and UIControlEventTouchUpOutside events originating from Audiobus Remote.
+ *
+ *  This method must only used with triggers that have been added using ABAudiobusController's
+ *  @link ABAudiobusController::addRemoteTrigger: addRemoteTrigger: @endlink and
+ *  @link ABAudiobusController::addRemoteTriggerMatrix:rows:cols: addRemoteTriggerMatrix:rows:cols: @endlink
+ *  methods.
+ *
+ * @param block The block executed if control event occurs.
+ * @param controlEvents The UIControlEvents for which the block shall be executed.
+ */
+- (void)addBlock:(ABTriggerPerformBlock)block forRemoteControlEvents:(UIControlEvents)controlEvents;
 
 @end

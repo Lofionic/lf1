@@ -1091,6 +1091,7 @@
 				TargetAttributes = {
 					834FA80118B95FA800923F29 = {
 						DevelopmentTeam = NK7M84AH48;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1479,6 +1480,8 @@
 				CODE_SIGN_ENTITLEMENTS = LF1/LF1.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = NK7M84AH48;
+				ENABLE_BITCODE = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LF1/LF1-Prefix.pch";
@@ -1488,6 +1491,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lofionic.LF1;
 				PRODUCT_NAME = LF1;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
@@ -1503,6 +1507,8 @@
 				CODE_SIGN_ENTITLEMENTS = LF1/LF1.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = NK7M84AH48;
+				ENABLE_BITCODE = YES;
 				GCC_ENABLE_FLOATING_POINT_LIBRARY_CALLS = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LF1/LF1-Prefix.pch";
@@ -1512,6 +1518,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lofionic.LF1;
 				PRODUCT_NAME = LF1;
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
