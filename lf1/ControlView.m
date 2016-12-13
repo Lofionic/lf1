@@ -30,6 +30,8 @@
     UIImage *frame = [UIImage imageNamed:@"control_frame"];
     frame = [frame resizableImageWithCapInsets:UIEdgeInsetsMake(30, 15, 15, 15)];
     [self.backgroundView setImage:frame];
+    
+    [super awakeFromNib];
 }
 
 -(void)layoutSubviews {

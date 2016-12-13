@@ -38,6 +38,8 @@
     self.backgroundColor = [UIColor redColor];
     self.keyboardShift = 2;
     [self initKeys];
+    
+    [super awakeFromNib];
 }
 
 -(void)initKeys {

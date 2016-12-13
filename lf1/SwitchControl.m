@@ -14,6 +14,7 @@
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggle)];
     [self addGestureRecognizer:gesture];
     
+    [super awakeFromNib];
 }
 
 @synthesize value = _value;

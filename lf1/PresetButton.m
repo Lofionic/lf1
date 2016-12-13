@@ -39,6 +39,7 @@
     [longPressGesture setMinimumPressDuration:2];
     [self addGestureRecognizer:longPressGesture];
 
+    [super awakeFromNib];
 }
 
 -(void)flash {

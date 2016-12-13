@@ -22,6 +22,8 @@
     self.spriteSize = CGSizeMake(60 * SCREEN_SCALE, 150 * SCREEN_SCALE);
     self.value = 0.5;
     self.backgroundColor = [UIColor clearColor];
+    
+    [super awakeFromNib];
 }
 
 - (void)drawRect:(CGRect)rect
