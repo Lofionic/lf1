@@ -11,8 +11,8 @@
 #import "LFOControlView.h"
 #import "OscillatorControlView.h"
 #import "VCF.h"
-#import "analog_oscillator.h"
-#import "oscillator.h"
+#import "Analog_Oscillator.h"
+#import "Oscillator.h"
 #import "Mixer2.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <CoreAudio/CoreAudioTypes.h>

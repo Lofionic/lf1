@@ -3,7 +3,7 @@
 //  Copyright (c) 2014 Lofionic. All rights reserved.
 //
 
-#import "oscillator.h"
+#import "Oscillator.h"
 
 @interface Analog_Oscillator : Oscillator
 
